@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>今是昨非的博客</title>
+  <title>Xcode 12.x添加iOS 10.x模拟器 | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS技术分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="今是昨非的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Xcode 12.x添加iOS 10.x模拟器背景笔者昨天遇到个问题，有用户反馈在iOS 10.3.1的手机上，有个网页打开白屏。但是问题是笔者手头都没有10.x版本的手机，所以想安装模拟器来尝试复现。 然而，笔者发现电脑上的Xcode版本是12.5.1，已经不支持iOS 10.3.1的模拟器下载了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode 12.x添加iOS 10.x模拟器">
+<meta property="og:url" content="http://yoursite.com/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="iOS技术分享">
+<meta property="og:description" content="Xcode 12.x添加iOS 10.x模拟器背景笔者昨天遇到个问题，有用户反馈在iOS 10.3.1的手机上，有个网页打开白屏。但是问题是笔者手头都没有10.x版本的手机，所以想安装模拟器来尝试复现。 然而，笔者发现电脑上的Xcode版本是12.5.1，已经不支持iOS 10.3.1的模拟器下载了。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13768655005/0.png">
+<meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13768695301/0.png">
+<meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13768819374/0.png">
+<meta property="article:published_time" content="2021-07-15T07:44:00.000Z">
+<meta property="article:modified_time" content="2021-07-15T08:47:43.313Z">
 <meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://inews.gtimg.com/newsapp_ls/0/13768655005/0.png">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -164,16 +172,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Xcode 12.x添加iOS 10.x模拟器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Xcode 12.x添加iOS 10.x模拟器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/">Xcode 12.x添加iOS 10.x模拟器</a>
+    <h1 class="article-title" itemprop="name">
+      Xcode 12.x添加iOS 10.x模拟器
     </h1>
   
 
@@ -188,750 +194,50 @@
       
         <h1 id="Xcode-12-x添加iOS-10-x模拟器"><a href="#Xcode-12-x添加iOS-10-x模拟器" class="headerlink" title="Xcode 12.x添加iOS 10.x模拟器"></a>Xcode 12.x添加iOS 10.x模拟器</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>笔者昨天遇到个问题，有用户反馈在iOS 10.3.1的手机上，有个网页打开白屏。但是问题是笔者手头都没有10.x版本的手机，所以想安装模拟器来尝试复现。</p>
 <p>然而，笔者发现电脑上的Xcode版本是12.5.1，已经不支持iOS 10.3.1的模拟器下载了。</p>
-        
-          <a class="article-more-a" href="/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS StatusBar设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/30/iOS%20StatusBar%E8%AE%BE%E7%BD%AE/">iOS StatusBar 设置</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/30/iOS%20StatusBar%E8%AE%BE%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-06-30T07:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-StatusBar-设置"><a href="#iOS-StatusBar-设置" class="headerlink" title="iOS StatusBar 设置"></a>iOS StatusBar 设置</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近遇到设置StatusBar的问题，在NavigationController出来的界面设置StatusBar后一直不生效，印象中遇到过此类的问题，但是没有记录总结，还是花费了一点时间来找到原因，所以赶紧记录一下。</p>
-        
-          <a class="article-more-a" href="/2021/06/30/iOS%20StatusBar%E8%AE%BE%E7%BD%AE/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/30/iOS%20StatusBar%E8%AE%BE%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CocoaPod 私有库Spec编辑注意事项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/07/CocoaPod%20%E7%A7%81%E6%9C%89%E5%BA%93Spec%E7%BC%96%E8%BE%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">CocoaPod 私有库Spec依赖.a写法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/07/CocoaPod%20%E7%A7%81%E6%9C%89%E5%BA%93Spec%E7%BC%96%E8%BE%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="archive-article-date">
-  	<time datetime="2021-06-07T02:33:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CocoaPod-私有库Spec编辑注意事项"><a href="#CocoaPod-私有库Spec编辑注意事项" class="headerlink" title="CocoaPod 私有库Spec编辑注意事项"></a>CocoaPod 私有库Spec编辑注意事项</h1><p>CocoaPod 私有库Spec依赖.a写法</p>
-<p>PodSpec详细描述如下，</p>
-        
-          <a class="article-more-a" href="/2021/06/07/CocoaPod%20%E7%A7%81%E6%9C%89%E5%BA%93Spec%E7%BC%96%E8%BE%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/07/CocoaPod%20%E7%A7%81%E6%9C%89%E5%BA%93Spec%E7%BC%96%E8%BE%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 包大小优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/">正经分析iOS包大小优化</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2021-05-27T05:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>本文发表在《搜狐技术产品》公众号<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_Mvl0FGriKsvAyRheU2Z7w">正经分析iOS包大小优化</a></strong></p>
-<h1 id="iOS-包大小分析优化"><a href="#iOS-包大小分析优化" class="headerlink" title="iOS 包大小分析优化"></a>iOS 包大小分析优化</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>包大小优化是项目开发中不可避免会遇到的，网上关于包大小优化的文章很多，每篇文章说的都不尽相同，笔者曾经根据网上的文章做过包大小优化，但效果不尽人意；因此笔者想根据已有的文章、知识结合自己的理解、实践，做一份总结梳理，整理自己的包大小优化逻辑，不光要知道怎么做可以让包大小变化，还要知道为什么这么做能产生效果，所以就有了这篇文章。</p>
-        
-          <a class="article-more-a" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 工作日——过滤法定节假日日历提醒的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/">iOS 工作日——过滤法定节假日日历提醒的实现</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2021-05-14T08:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-工作日——过滤法定节假日日历提醒的实现"><a href="#iOS-工作日——过滤法定节假日日历提醒的实现" class="headerlink" title="iOS 工作日——过滤法定节假日日历提醒的实现"></a>iOS 工作日——过滤法定节假日日历提醒的实现</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>笔者五一之前补班的时候，闹钟没响，早上差点迟到了。笔者闹钟设置的是周一到周五，iPhone没有法定节假日的设置，也没有补休的设置。。。。笔者就想要解决这个痛点，梦想着，要是做出来了，发布到商店，从此走上人生巅峰，赢取白。。。。</p>
-        
-          <a class="article-more-a" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何让iOS推送播放语音" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/">如何让iOS推送播放语音</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/" class="archive-article-date">
-  	<time datetime="2021-05-13T04:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>本文发表在《搜狐技术产品》公众号<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Gpu4sw0Zn4IBS-k5wvF__g">如何让iOS推送播放语音</a></strong></p>
-<h2 id="iOS-推送播放语音"><a href="#iOS-推送播放语音" class="headerlink" title="iOS 推送播放语音"></a>iOS 推送播放语音</h2><h3 id="一：背景"><a href="#一：背景" class="headerlink" title="一：背景"></a>一：背景</h3><p>iOS 推送播放语音的需求调研，即收到推送后，播放推送的文案，文案的内容不固定。类似于支付宝和微信的收款到账语音。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://littleliang.xyz/page/3/">只有iOS10以上才支持app被唤醒后在后台/锁屏状态下播放音频。所以iOS10以下的设备，在收到VoIP Push后只能在local push上设定一段固定铃声，这也是为什么iOS10以下只有“微信支付收款到账”。</a></li>
-<li>iOS 12.0之前，后台播放音频未被限制，直接使用Notification Service Extension (iOS 10.0以后才支持) 功能使用系统提供的功能AVSpeechSynthesizer即可。</li>
-<li>iOS 12.0之后，Notification Service Extension后台播放音频功能被限制，所以播放实现起来比较困难。<ul>
-<li>如果要上架商店，只有播放固定的音频，或固定拼接的音频，通过设置通知的声音或者发送本地通知设置本地通知的声音来播放</li>
-<li>如果无需上架商店，可以手动打开Notification Service Extension的后台播放，
-        
-          <a class="article-more-a" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS mach-o文件分析多余的类和方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/">iOS mach-o文件分析多余的类和方法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-05-12T02:33:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="mach-o文件分析多余的类和方法-md"><a href="#mach-o文件分析多余的类和方法-md" class="headerlink" title="mach-o文件分析多余的类和方法.md"></a>mach-o文件分析多余的类和方法.md</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近做包大小优化，在做项目代码优化时，其中有一个过程是分析Mach-O文件，看网上很多文章都说通过otool分析Mach-O，获取__objc_classrefs、__objc_classlist等，然后找出无用类和无用方法。</p>
-        
-          <a class="article-more-a" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 添加桌面快捷方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">iOS APP添加桌面快捷方式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-05-06T05:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-APP添加桌面快捷方式"><a href="#iOS-APP添加桌面快捷方式" class="headerlink" title="iOS APP添加桌面快捷方式"></a>iOS APP添加桌面快捷方式</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>新接到一个需求，需要APP内的某些功能，能够把入口添加到桌面，点击桌面到入口可以直接跳转APP对应界面（类似于下面这张示例图），于是就做了一番调研。</p>
-<p>其实很多APP目前都已经实现了类似的功能，比如支付宝、云闪付等等，其中的每一个独立功能都可以单独添加到桌面，所以网上有很多实现的方法，笔者做的是整理和试错。</p>
-        
-          <a class="article-more-a" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 删除SceneDelegate和Storyboard" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/">iOS 删除新创建项目中的SceneDelegate</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/" class="archive-article-date">
-  	<time datetime="2021-04-21T05:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-删除新创建项目中的SceneDelegate"><a href="#iOS-删除新创建项目中的SceneDelegate" class="headerlink" title="iOS 删除新创建项目中的SceneDelegate"></a>iOS 删除新创建项目中的SceneDelegate</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Xcode 11之后新建工程，默认为有SceneDelegate，但是SceneDelegate是从iOS 13之后才有的，如果最低兼容版本到iOS 13以下，需要怎么做呢？</p>
-        
-          <a class="article-more-a" href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS fastlane打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/">iOS 自动打包</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2021-04-19T11:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-自动打包"><a href="#iOS-自动打包" class="headerlink" title="iOS 自动打包"></a>iOS 自动打包</h1><h2 id="使用FastLane打包"><a href="#使用FastLane打包" class="headerlink" title="使用FastLane打包"></a>使用FastLane打包</h2><h3 id="安装-fastlane"><a href="#安装-fastlane" class="headerlink" title="安装 fastlane"></a>安装 fastlane</h3><ul>
-<li><p>通过HomeBrew安装<br>  brew install fastlane</p>
-</li>
-<li><p>通过Bundler安装</p>
+<span id="more"></span>
+
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载iOS-10-3-1模拟器"><a href="#下载iOS-10-3-1模拟器" class="headerlink" title="下载iOS 10.3.1模拟器"></a>下载iOS 10.3.1模拟器</h3><p>然后笔者搜索后发现，Xcode 12.4还是支持下载iOS 10.3.1的模拟器的，于是去<a target="_blank" rel="noopener" href="https://developer.apple.com/download/all/">Xcode 下载网站</a>，下载了Xcode 12.4，然后<code>CMD + ,</code>打开Xcode的偏好设置，在Components选项卡中，找到iOS 10.3.1 Simulator并下载，如下图。</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13768655005/0.png" alt="wecom20210715-161409.png"></p>
+<h3 id="添加iOS-10-3-1模拟器"><a href="#添加iOS-10-3-1模拟器" class="headerlink" title="添加iOS 10.3.1模拟器"></a>添加iOS 10.3.1模拟器</h3><p>通常添加模拟器，是选中Xcode，通过顶部菜单的Window -&gt; Device and Simulators，选中Simulators，点击左下角的+，添加模拟器，如下图</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13768695301/0.png" alt="screen shot 2021-07-15 at 16.19.20.png"></p>
+<p>会发现，即使下载了iOS 10.3.1模拟器，依旧不能添加，下载了却不能添加。</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13768819374/0.png" alt="x5ltb.png"></p>
+<p>于是笔者接着查找，终于仅有的一篇真理文章<a target="_blank" rel="noopener" href="https://hiraku.tw/2021/04/6428/">在 Xcode 12 執行低版本的 iOS 模擬器</a>蹦了出来，按照文章的说法是，模拟器runtime版本的Framework中map文件，里面设定各版本对应的Mac OS系统上限，所以会导致添加不了。</p>
+<p>解决方法就是：修改模拟器的Info.plist中对应的CFBundleIdentifier，绕过map文件即可。</p>
+<blockquote>
+<p>具體作法很簡單，關閉模擬器跟 Xcode，然後舉例來說我要強制執行 10.3 模擬器，就編輯 /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 10.3.simruntime/Contents/Info.plist，把 CFBundleIdentifier 從 com.apple.CoreSimulator.SimRuntime.iOS-10-3 改成 com.apple.CoreSimulator.SimRuntime.iOS-10-3-1，透過後面加一個 -1 的方式，把讓版本限制檢查的函數找不到該 bundle name，然後再打開 Xcode 就可以加入了！</p>
+</blockquote>
+<p>笔者实践经验：</p>
 <ol>
-<li>安装 bundler</li>
-<li>然后在项目根目录下创建./Gemfile文件，编辑内容</li>
+<li>修改Plist可以拷贝出来修改后再拷贝进去替换</li>
+<li>修改后确实可以添加10.3的模拟器，mac 11.4系统，可以正常运行操作。</li>
+<li>Mac 12.0 beta系统，即macOC Moterey，即使修改后添加成功了，也运行不了。</li>
 </ol>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/#more">more >></a>
-        
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://hiraku.tw/2021/04/6428/">在 Xcode 12 執行低版本的 iOS 模擬器</a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -955,16 +261,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/06/30/iOS%20StatusBar%E8%AE%BE%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS StatusBar 设置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -984,12 +349,14 @@
 
 
 
+  
+  
+  
 
   
+
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &gt;&gt;</a>
-    </nav>
+
   
 
 
@@ -1012,8 +379,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
