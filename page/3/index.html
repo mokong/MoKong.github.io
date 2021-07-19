@@ -166,6 +166,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Embedded binary is not signed with the same certificate as the parent app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/">Embedded binary is not signed with the same certificate as the parent app</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/" class="archive-article-date">
+  	<time datetime="2019-09-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Embedded-binary-is-not-signed-with-the-same-certificate-as-the-parent-app"><a href="#Embedded-binary-is-not-signed-with-the-same-certificate-as-the-parent-app" class="headerlink" title="Embedded binary is not signed with the same certificate as the parent app"></a>Embedded binary is not signed with the same certificate as the parent app</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Xcode 10之后New Build System变为默认，编译之后一直报错，<br>报错信息：Embedded binary is not signed with the same certificate as the parent app. Verify the embedded binary target’s code sign settings match the parent app’s.</p>
+        
+          <a class="article-more-a" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-批量图片压缩 &amp; 替换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -831,84 +907,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Namespacing Swift code with nested types" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/">Swift代码中的嵌套命名法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift代码中的嵌套命名法"><a href="#Swift代码中的嵌套命名法" class="headerlink" title="Swift代码中的嵌套命名法"></a>Swift代码中的嵌套命名法</h1><p>Swift支持与其他类型嵌套命名，尽管它还没有专用的命名关键词。下面我们来看看，如何使用类型嵌套来优化我们代码的结构。</p>
-<p>大多数Swift开发者习惯于用类型在结构上的实际名字累命名。例如：PostTextFormatterOption(一个Text Formatter类型的用于format Posts的Option)。这可能是因为我们在Objective-C &amp; C中，养成的别无选择的可怕命名习惯，被我们带到了Swift里。</p>
-<p>下面我们用上面提到的类型作为例子，来看下Post、PostTextFormatter以及PostTextFormatterOption的实现：</p>
-        
-          <a class="article-more-a" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/">展开全文 >></a>
         </p>
       
 
