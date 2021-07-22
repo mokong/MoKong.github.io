@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://z3.ax1x.com/2021/07/22/W0qASA.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/07/22/W0qEQI.png">
 <meta property="article:published_time" content="2021-07-22T01:20:00.000Z">
-<meta property="article:modified_time" content="2021-07-22T07:45:38.996Z">
+<meta property="article:modified_time" content="2021-07-22T07:58:35.129Z">
 <meta property="article:author" content="今是昨非">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Flutter">
@@ -227,14 +227,38 @@
 
 <h2 id="Image的属性"><a href="#Image的属性" class="headerlink" title="Image的属性"></a>Image的属性</h2><p>Image的常用属性如下：</p>
 <ul>
-<li>alignment: 图片相对于父视图的对齐方式，当图片大小小于父视图大小时可看出效果</li>
+<li>alignment: 图片相对于父视图的对齐方式，当图片大小小于父视图大小时可看出效果<ul>
+<li>topLeft：顶部左对齐</li>
+<li>topCenter：顶部居中对齐</li>
+<li>topRight：顶部右对齐</li>
+<li>centerLeft：中间左对齐</li>
+<li>center：中间对齐</li>
+<li>centerRight：中间右对齐</li>
+<li>bottomLeft：底部左对齐</li>
+<li>bottomCenter：底部居中对齐</li>
+<li>bottomRight：底部右对齐</li>
+</ul>
+</li>
 <li>color: 不为空时，根据colorBlendMode来对图片对每个像素进行混合</li>
 <li>colorBlendMode: 图片混合模式</li>
 <li>filterQuality: 图片渲染对质量</li>
-<li>fit: 图片显示模式</li>
+<li>fit: 图片显示模式<ul>
+<li>BoxFit.fill，图片充满整个父视图区域，可能会被拉伸</li>
+<li>BoxFit.contain，图片按照原始比例显示，可能会留有边距</li>
+<li>BoxFit.cover，图片充满整个父视图且保持原比例，可能会裁切</li>
+<li>BoxFit.fitwidth，按宽度充满父视图，保持比例</li>
+<li>BoxFit.fitHeight，按高度充满父视图，保持比例</li>
+<li>BoxFit.scaleDown</li>
+</ul>
+</li>
 <li>height: 图片宽度</li>
 <li>width: 图片高度</li>
-<li>repeat: 图片重复模式</li>
+<li>repeat: 图片重复模式<ul>
+<li>ImageRepeat.repeat，各个方向都重复，铺满父视图</li>
+<li>ImageRepeat.repeatX，横向重复铺满父视图</li>
+<li>ImageRepeat.repeatY，纵向重复铺满父视图</li>
+</ul>
+</li>
 </ul>
 <p>代码如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&#x27;Text Widget&#x27;</span>,</span><br><span class="line">      <span class="attr">home</span>: Scaffold(</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Container(</span><br><span class="line">            child: <span class="keyword">new</span> Image.network(</span><br><span class="line">              <span class="string">&#x27;https://inews.gtimg.com/newsapp_ls/0/13792660143/0.jpeg&#x27;</span>,</span><br><span class="line">              <span class="attr">alignment</span>: Alignment.center,</span><br><span class="line">              <span class="attr">filterQuality</span>: FilterQuality.low,</span><br><span class="line">              <span class="comment">// scale: 1.0,</span></span><br><span class="line">              <span class="comment">// fit: BoxFit.scaleDown,</span></span><br><span class="line">              <span class="comment">// repeat: ImageRepeat.repeatY,</span></span><br><span class="line">              <span class="comment">// color: Colors.greenAccent,</span></span><br><span class="line">              <span class="comment">// colorBlendMode: BlendMode.colorDodge,</span></span><br><span class="line">            ),</span><br><span class="line">            <span class="attr">width</span>: <span class="number">300.0</span>,</span><br><span class="line">            <span class="attr">height</span>: <span class="number">200.0</span>,</span><br><span class="line">            <span class="attr">color</span>: Colors.lightBlue,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
