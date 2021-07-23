@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>今是昨非的博客</title>
+  <title>Flutter组件基础——ListView | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享、生活感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="今是昨非的博客">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="Flutter组件基础——ListViewListView是滚动列表，类似于iOS中ScrollView，可横向、纵向滚动，内容不限。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter组件基础——ListView">
+<meta property="og:url" content="http://yoursite.com/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:description" content="Flutter组件基础——ListViewListView是滚动列表，类似于iOS中ScrollView，可横向、纵向滚动，内容不限。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13800257847/0.png">
+<meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13800887788/0.png">
+<meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13801432672/0.png">
+<meta property="article:published_time" content="2021-07-22T08:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-23T05:45:32.555Z">
 <meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Flutter">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://inews.gtimg.com/newsapp_ls/0/13800257847/0.png">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -164,532 +172,107 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-iOS 包大小优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Flutter组件基础——ListView" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/">正经分析iOS包大小优化</a>
+    <h1 class="article-title" itemprop="name">
+      Flutter组件基础——ListView
     </h1>
   
 
         
-        <a href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2021-05-27T05:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-27</time>
+        <a href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/" class="archive-article-date">
+  	<time datetime="2021-07-22T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>本文发表在《搜狐技术产品》公众号<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_Mvl0FGriKsvAyRheU2Z7w">正经分析iOS包大小优化</a></strong></p>
-<h1 id="iOS-包大小分析优化"><a href="#iOS-包大小分析优化" class="headerlink" title="iOS 包大小分析优化"></a>iOS 包大小分析优化</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>包大小优化是项目开发中不可避免会遇到的，网上关于包大小优化的文章很多，每篇文章说的都不尽相同，笔者曾经根据网上的文章做过包大小优化，但效果不尽人意；因此笔者想根据已有的文章、知识结合自己的理解、实践，做一份总结梳理，整理自己的包大小优化逻辑，不光要知道怎么做可以让包大小变化，还要知道为什么这么做能产生效果，所以就有了这篇文章。</p>
-        
-          <a class="article-more-a" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+        <h1 id="Flutter组件基础——ListView"><a href="#Flutter组件基础——ListView" class="headerlink" title="Flutter组件基础——ListView"></a>Flutter组件基础——ListView</h1><p>ListView是滚动列表，类似于iOS中ScrollView，可横向、纵向滚动，内容不限。</p>
+<span id="more"></span>
 
 
+<h2 id="ListView的使用"><a href="#ListView的使用" class="headerlink" title="ListView的使用"></a>ListView的使用</h2><p>ListView的使用很简单，但是需要多多练习；</p>
+<p>ListView的使用，通过设置children来实现，children中的Item为Widget对象。</p>
+<h3 id="纵向滚动"><a href="#纵向滚动" class="headerlink" title="纵向滚动"></a>纵向滚动</h3><p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">    @override</span><br><span class="line">    Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> MaterialApp(</span><br><span class="line">            title: <span class="string">&#x27;ListView Learn&#x27;</span>,</span><br><span class="line">            <span class="attr">home</span>: Scaffold(</span><br><span class="line">                appBar: <span class="keyword">new</span> AppBar(</span><br><span class="line">                    title: <span class="keyword">new</span> Text(<span class="string">&#x27;ListView Widget&#x27;</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="attr">body</span>: <span class="keyword">new</span> ListView(</span><br><span class="line">                    children: &lt;Widget&gt;[</span><br><span class="line">                      Container(</span><br><span class="line">                        height: <span class="number">50</span>,</span><br><span class="line">                        <span class="attr">color</span>: Colors.orangeAccent,</span><br><span class="line">                        <span class="attr">child</span>: <span class="keyword">const</span> Center(</span><br><span class="line">                          child: Text(<span class="string">&#x27;Entry A&#x27;</span>),</span><br><span class="line">                        ),</span><br><span class="line">                      ),</span><br><span class="line">                      Container(</span><br><span class="line">                        height: <span class="number">50</span>,</span><br><span class="line">                        <span class="attr">color</span>: Colors.lightGreenAccent,</span><br><span class="line">                        <span class="attr">child</span>: <span class="keyword">const</span> Center(</span><br><span class="line">                          child: Text(<span class="string">&#x27;Entry B&#x27;</span>),</span><br><span class="line">                        ),</span><br><span class="line">                      ),</span><br><span class="line">                      <span class="keyword">new</span> ListTile(</span><br><span class="line">                        leading: <span class="keyword">new</span> Icon(Icons.access_time),</span><br><span class="line">                        <span class="attr">title</span>: <span class="keyword">new</span> Text(<span class="string">&#x27;access_time&#x27;</span>),</span><br><span class="line">                      ),</span><br><span class="line">                      <span class="keyword">new</span> Image.network(</span><br><span class="line">                          <span class="string">&#x27;https://inews.gtimg.com/newsapp_ls/0/13792660143/0.jpeg&#x27;</span>)</span><br><span class="line">                    ],</span><br><span class="line">                )</span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>效果如下：</p>
+<img src="https://inews.gtimg.com/newsapp_ls/0/13800257847/0.png"  style="width:200px" />
 
-  
-    <article id="post-iOS 工作日——过滤法定节假日日历提醒的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/">iOS 工作日——过滤法定节假日日历提醒的实现</a>
-    </h1>
-  
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-23 at 09.04.14.png](https://inews.gtimg.com/newsapp_ls/0/13800257847/0.png) -->
 
-        
-        <a href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2021-05-14T08:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-工作日——过滤法定节假日日历提醒的实现"><a href="#iOS-工作日——过滤法定节假日日历提醒的实现" class="headerlink" title="iOS 工作日——过滤法定节假日日历提醒的实现"></a>iOS 工作日——过滤法定节假日日历提醒的实现</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>笔者五一之前补班的时候，闹钟没响，早上差点迟到了。笔者闹钟设置的是周一到周五，iPhone没有法定节假日的设置，也没有补休的设置。。。。笔者就想要解决这个痛点，梦想着，要是做出来了，发布到商店，从此走上人生巅峰，赢取白。。。。</p>
-        
-          <a class="article-more-a" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">more >></a>
-        
-      
+<h3 id="横向滚动"><a href="#横向滚动" class="headerlink" title="横向滚动"></a>横向滚动</h3><p><code>ListView</code>的<code>scrollDirection</code>控制滑动方向</p>
+<p>代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> ListView(scrollDirection: Axis.horizontal, <span class="attr">children</span>: [</span><br><span class="line">      <span class="keyword">new</span> Container(</span><br><span class="line">        width: <span class="number">180.0</span>,</span><br><span class="line">        <span class="attr">color</span>: Colors.lightBlue,</span><br><span class="line">      ),</span><br><span class="line">      <span class="keyword">new</span> Container(</span><br><span class="line">        width: <span class="number">180.0</span>,</span><br><span class="line">        <span class="attr">color</span>: Colors.lightGreen,</span><br><span class="line">      ),</span><br><span class="line">      <span class="keyword">new</span> Container(</span><br><span class="line">        width: <span class="number">180.0</span>,</span><br><span class="line">        <span class="attr">color</span>: Colors.orange,</span><br><span class="line">      ),</span><br><span class="line">      <span class="keyword">new</span> Container(</span><br><span class="line">        width: <span class="number">180.0</span>,</span><br><span class="line">        <span class="attr">color</span>: Colors.orangeAccent,</span><br><span class="line">      )</span><br><span class="line">    ]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">        title: <span class="string">&#x27;Text Widget&#x27;</span>,</span><br><span class="line">        <span class="attr">home</span>: Scaffold(</span><br><span class="line">          body: Center(</span><br><span class="line">            child: Container(</span><br><span class="line">              height: <span class="number">200.0</span>,</span><br><span class="line">              <span class="attr">child</span>: MyList(),</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<p>效果如下：</p>
+<img src="https://inews.gtimg.com/newsapp_ls/0/13800887788/0.png"  style="width:200px" />
 
-      
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-23 at 11.20.02.png](https://inews.gtimg.com/newsapp_ls/0/13800887788/0.png) -->
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何让iOS推送播放语音" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/">如何让iOS推送播放语音</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/" class="archive-article-date">
-  	<time datetime="2021-05-13T04:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>本文发表在《搜狐技术产品》公众号<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Gpu4sw0Zn4IBS-k5wvF__g">如何让iOS推送播放语音</a></strong></p>
-<h2 id="iOS-推送播放语音"><a href="#iOS-推送播放语音" class="headerlink" title="iOS 推送播放语音"></a>iOS 推送播放语音</h2><h3 id="一：背景"><a href="#一：背景" class="headerlink" title="一：背景"></a>一：背景</h3><p>iOS 推送播放语音的需求调研，即收到推送后，播放推送的文案，文案的内容不固定。类似于支付宝和微信的收款到账语音。</p>
+<p>注意写法的不同，在这里自定义了一个<code>MyList</code>的Widget，然后在<code>MyApp</code>中使用<code>MyList</code>，就避免了在父视图嵌套太多的问题。</p>
+<h3 id="动态列表-ListView-builder"><a href="#动态列表-ListView-builder" class="headerlink" title="动态列表 ListView.builder()"></a>动态列表 ListView.builder()</h3><p>使用动态列表需要先来看一下List类型，</p>
+<p><strong>List类型</strong></p>
+<p>List是集合类型，声明有几种方式，使用方式可以参考Swift中的Array</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://littleliang.xyz/page/3/">只有iOS10以上才支持app被唤醒后在后台/锁屏状态下播放音频。所以iOS10以下的设备，在收到VoIP Push后只能在local push上设定一段固定铃声，这也是为什么iOS10以下只有“微信支付收款到账”。</a></li>
-<li>iOS 12.0之前，后台播放音频未被限制，直接使用Notification Service Extension (iOS 10.0以后才支持) 功能使用系统提供的功能AVSpeechSynthesizer即可。</li>
-<li>iOS 12.0之后，Notification Service Extension后台播放音频功能被限制，所以播放实现起来比较困难。<ul>
-<li>如果要上架商店，只有播放固定的音频，或固定拼接的音频，通过设置通知的声音或者发送本地通知设置本地通知的声音来播放</li>
-<li>如果无需上架商店，可以手动打开Notification Service Extension的后台播放，
-        
-          <a class="article-more-a" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS mach-o文件分析多余的类和方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/">iOS mach-o文件分析多余的类和方法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-05-12T02:33:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="mach-o文件分析多余的类和方法-md"><a href="#mach-o文件分析多余的类和方法-md" class="headerlink" title="mach-o文件分析多余的类和方法.md"></a>mach-o文件分析多余的类和方法.md</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近做包大小优化，在做项目代码优化时，其中有一个过程是分析Mach-O文件，看网上很多文章都说通过otool分析Mach-O，获取__objc_classrefs、__objc_classlist等，然后找出无用类和无用方法。</p>
-        
-          <a class="article-more-a" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 添加桌面快捷方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">iOS APP添加桌面快捷方式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-05-06T05:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-APP添加桌面快捷方式"><a href="#iOS-APP添加桌面快捷方式" class="headerlink" title="iOS APP添加桌面快捷方式"></a>iOS APP添加桌面快捷方式</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>新接到一个需求，需要APP内的某些功能，能够把入口添加到桌面，点击桌面到入口可以直接跳转APP对应界面（类似于下面这张示例图），于是就做了一番调研。</p>
-<p>其实很多APP目前都已经实现了类似的功能，比如支付宝、云闪付等等，其中的每一个独立功能都可以单独添加到桌面，所以网上有很多实现的方法，笔者做的是整理和试错。</p>
-        
-          <a class="article-more-a" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 删除SceneDelegate和Storyboard" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/">iOS 删除新创建项目中的SceneDelegate</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/" class="archive-article-date">
-  	<time datetime="2021-04-21T05:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-删除新创建项目中的SceneDelegate"><a href="#iOS-删除新创建项目中的SceneDelegate" class="headerlink" title="iOS 删除新创建项目中的SceneDelegate"></a>iOS 删除新创建项目中的SceneDelegate</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Xcode 11之后新建工程，默认为有SceneDelegate，但是SceneDelegate是从iOS 13之后才有的，如果最低兼容版本到iOS 13以下，需要怎么做呢？</p>
-        
-          <a class="article-more-a" href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS fastlane打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/">iOS 自动打包</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2021-04-19T11:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-自动打包"><a href="#iOS-自动打包" class="headerlink" title="iOS 自动打包"></a>iOS 自动打包</h1><h2 id="使用FastLane打包"><a href="#使用FastLane打包" class="headerlink" title="使用FastLane打包"></a>使用FastLane打包</h2><h3 id="安装-fastlane"><a href="#安装-fastlane" class="headerlink" title="安装 fastlane"></a>安装 fastlane</h3><ul>
-<li><p>通过HomeBrew安装<br>  brew install fastlane</p>
-</li>
-<li><p>通过Bundler安装</p>
-<ol>
-<li>安装 bundler</li>
-<li>然后在项目根目录下创建./Gemfile文件，编辑内容</li>
-</ol>
-</li>
+<li><code>var myList = List()</code>: 非固定长度的数组</li>
+<li><code>var myList = List(2)</code>: 长度为2的数组</li>
+<li><code>var myList = List&lt;String&gt;()</code>: 创建一个String类型的数组</li>
+<li><code>var myList = [1, 2, 3]</code>: 创建一个1、2、3的数组</li>
 </ul>
-        
-          <a class="article-more-a" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/#more">more >></a>
-        
+<p>也可以使用<code>generate</code>方法来生成List元素，比如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">new</span> List&lt;<span class="built_in">String</span>&gt;.generate(<span class="number">1000</span>,, <span class="function">(<span class="params">i</span>) =&gt;</span> <span class="string">&quot;Item $i&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>动态列表</strong></p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  final List&lt;<span class="built_in">String</span>&gt; entries = &lt;<span class="built_in">String</span>&gt;[<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>];</span><br><span class="line">  final List colors = [</span><br><span class="line">    Colors.orangeAccent,</span><br><span class="line">    Colors.lightBlueAccent,</span><br><span class="line">    Colors.cyanAccent</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> ListView.builder(</span><br><span class="line">      padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">8</span>),</span><br><span class="line">      <span class="attr">itemCount</span>: entries.length,</span><br><span class="line">      <span class="attr">itemBuilder</span>: (BuildContext context, int index) &#123;</span><br><span class="line">        <span class="keyword">return</span> Container(</span><br><span class="line">          height: <span class="number">50</span>,</span><br><span class="line">          <span class="attr">color</span>: colors[index],</span><br><span class="line">          <span class="attr">child</span>: Center(</span><br><span class="line">            child: Text(<span class="string">&#x27;Entry $&#123;entries[index]&#125;&#x27;</span>),</span><br><span class="line">          ),</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">        title: <span class="string">&#x27;List Build Learn&#x27;</span>,</span><br><span class="line">        <span class="attr">home</span>: Scaffold(</span><br><span class="line">          appBar: <span class="keyword">new</span> AppBar(</span><br><span class="line">            title: <span class="keyword">new</span> Text(<span class="string">&#x27;List Build Learn&#x27;</span>),</span><br><span class="line">          ),</span><br><span class="line">          <span class="attr">body</span>: Center(</span><br><span class="line">            child: Container(</span><br><span class="line">              child: MyList(),</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<img src="https://inews.gtimg.com/newsapp_ls/0/13801432672/0.png"  style="width:200px" />
+
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-23 at 13.38.38.png](https://inews.gtimg.com/newsapp_ls/0/13801432672/0.png) -->
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/ListView-class.html">ListView Dev Doc</a><br><a target="_blank" rel="noopener" href="https://jspang.com/detailed?id=42#toc21">Flutter免费视频第二季-常用组件</a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢，一起进步<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay_receive.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat_receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -704,7 +287,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
         		</li>
       		
 		</ul>
@@ -713,16 +296,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Image/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Flutter组件基础——Image</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -742,249 +384,14 @@
 
 
 
-
-  
-    <article id="post-RN布局" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/21/RN%E5%B8%83%E5%B1%80/">RN布局</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/21/RN%E5%B8%83%E5%B1%80/" class="archive-article-date">
-  	<time datetime="2020-09-21T00:53:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="RN布局"><a href="#RN布局" class="headerlink" title="RN布局"></a>RN布局</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>今年以来，公司新来的总监力推ReactNative，目标是做大前端，H5选用React，客户端用ReactNative，所以我要再<strong>“复习”</strong>一下网页布局。顺便把内容记录到自己的博客中，用宝儿姐的话来说：“机智的一bi”。</p>
-        
-          <a class="article-more-a" href="/2020/09/21/RN%E5%B8%83%E5%B1%80/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ReactNative</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/21/RN%E5%B8%83%E5%B1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-定时器不走的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/19/%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8D%E8%B5%B0%E7%9A%84%E9%97%AE%E9%A2%98/">iOS NSTimer不走的问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/08/19/%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8D%E8%B5%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-08-19T01:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="iOS-NSTimer不走的问题"><a href="#iOS-NSTimer不走的问题" class="headerlink" title="iOS NSTimer不走的问题"></a>iOS NSTimer不走的问题</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>这个版本上线后，突然发现埋点数据直线下降，调试后发现是定时器上传的方法没有走，但是定时器的方法本期并没有修改过。代码如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (BOOL)initTimer() &#123;</span><br><span class="line">        self.uploadTimer = [NSTimer scheduledTimerWithTimeInterval:timerInterval target:self selector:@selector(handleUpload) userInfo:nil repeats:YES];</span><br><span class="line">		[[NSRunLoop currentRunLoop] addTimer:self.uploadTimer forMode:NSRunLoopCommonModes];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2020/08/19/%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8D%E8%B5%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/19/%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8D%E8%B5%B0%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 14 beta4崩溃修改" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/10/iOS%2014%20beta4%E5%B4%A9%E6%BA%83%E4%BF%AE%E6%94%B9/">iOS beta4崩溃修改</a>
-    </h1>
-  
-
-        
-        <a href="/2020/08/10/iOS%2014%20beta4%E5%B4%A9%E6%BA%83%E4%BF%AE%E6%94%B9/" class="archive-article-date">
-  	<time datetime="2020-08-10T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="iOS-beta4崩溃修改"><a href="#iOS-beta4崩溃修改" class="headerlink" title="iOS beta4崩溃修改"></a>iOS beta4崩溃修改</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>升级iOSBeta4后，有用户反馈使用我们APP时会崩溃，有登录的、查看详情的，都会出现崩溃。我们查看Bugly数据也发现崩溃率上升了0.02%，直接超出了指定的崩溃指标。虽然是由于升级beta版系统导致的，但还是要排查出具体原因，然后尽快适配。所以我说一下我发现的哪个API导致的，供大家参考一下。</p>
-        
-          <a class="article-more-a" href="/2020/08/10/iOS%2014%20beta4%E5%B4%A9%E6%BA%83%E4%BF%AE%E6%94%B9/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/10/iOS%2014%20beta4%E5%B4%A9%E6%BA%83%E4%BF%AE%E6%94%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &gt;&gt;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1019,8 +426,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
