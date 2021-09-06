@@ -6,14 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>iOS 虚拟位置原理与预防 | 今是昨非的博客</title>
+  <title>iOS 虚拟定位原理与预防 | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS 虚拟位置原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越功能（笔者曾经使用过ZUK K2，就是系统自带的位置穿越），会认为iOS上虚拟位置比较困难。笔者没调研之前也是这么认为，之前已知的模拟位置是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟位置。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟位置比较困">
+  <meta name="description" content="iOS 虚拟定位原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS 虚拟位置原理与预防">
+<meta property="og:title" content="iOS 虚拟定位原理与预防">
 <meta property="og:url" content="http://yoursite.com/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="iOS 虚拟位置原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越功能（笔者曾经使用过ZUK K2，就是系统自带的位置穿越），会认为iOS上虚拟位置比较困难。笔者没调研之前也是这么认为，之前已知的模拟位置是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟位置。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟位置比较困">
+<meta property="og:description" content="iOS 虚拟定位原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13846925548/0.png">
 <meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13846939343/0.png">
@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13849414536/0.png">
 <meta property="og:image" content="https://inews.gtimg.com/newsapp_ls/0/13851091768/0.png">
 <meta property="article:published_time" content="2021-08-04T05:43:00.000Z">
-<meta property="article:modified_time" content="2021-08-06T09:55:58.576Z">
+<meta property="article:modified_time" content="2021-09-06T08:12:37.760Z">
 <meta property="article:author" content="今是昨非">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="iOS">
@@ -191,7 +191,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS 虚拟位置原理与预防
+      iOS 虚拟定位原理与预防
     </h1>
   
 
@@ -204,45 +204,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="iOS-虚拟位置原理与预防"><a href="#iOS-虚拟位置原理与预防" class="headerlink" title="iOS 虚拟位置原理与预防"></a>iOS 虚拟位置原理与预防</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越功能（笔者曾经使用过ZUK K2，就是系统自带的位置穿越），会认为iOS上虚拟位置比较困难。笔者没调研之前也是这么认为，之前已知的模拟位置是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟位置。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟位置比较困难。</p>
+        <h1 id="iOS-虚拟定位原理与预防"><a href="#iOS-虚拟定位原理与预防" class="headerlink" title="iOS 虚拟定位原理与预防"></a>iOS 虚拟定位原理与预防</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。</p>
 <span id="more"></span>
 
-<p>然而经过调研之后，笔者发现，iOS的虚拟定位不没有那么困难，甚至相比于安卓更简单。下面就来介绍一下iOS中几种虚拟定位的方法。</p>
-<h2 id="虚拟位置的几种办法及原理"><a href="#虚拟位置的几种办法及原理" class="headerlink" title="虚拟位置的几种办法及原理"></a>虚拟位置的几种办法及原理</h2><p>笔者调研后，发现iOS上面虚拟位置大致可有4中情况：</p>
+<p>然而经过调研之后，笔者发现，iOS的虚拟定位没有那么困难，甚至相比于安卓更简单。下面就来介绍一下iOS中几种虚拟定位的方法。</p>
+<h2 id="虚拟定位的几种办法及原理"><a href="#虚拟定位的几种办法及原理" class="headerlink" title="虚拟定位的几种办法及原理"></a>虚拟定位的几种办法及原理</h2><p>笔者调研后，发现iOS上面虚拟定位大致可有4中情况：</p>
 <ul>
-<li>使用Xcode通过GPX文件模拟位置</li>
-<li>使用爱思助手中的虚拟位置功能直接模拟位置</li>
-<li>通过外接设备，比如蓝牙和手机连接，发送虚拟定位数据来模拟位置</li>
-<li>越狱设备中通过hook定位方法，来模拟位置</li>
+<li>使用Xcode通过GPX文件虚拟定位</li>
+<li>使用爱思助手中的虚拟定位功能直接虚拟定位</li>
+<li>通过外接设备，比如蓝牙和手机连接，发送虚拟定位数据来虚拟定位</li>
+<li>越狱设备中通过hook定位方法，来虚拟定位</li>
 </ul>
 <p>下面就来一个个分析实践：</p>
-<h3 id="使用Xcode通过GPX文件模拟位置"><a href="#使用Xcode通过GPX文件模拟位置" class="headerlink" title="使用Xcode通过GPX文件模拟位置"></a>使用Xcode通过GPX文件模拟位置</h3><p>使用Xcode通过GPX文件模拟位置，iOS开发一般比较熟悉，操作步骤是：</p>
+<h3 id="使用Xcode通过GPX文件虚拟定位"><a href="#使用Xcode通过GPX文件虚拟定位" class="headerlink" title="使用Xcode通过GPX文件虚拟定位"></a>使用Xcode通过GPX文件虚拟定位</h3><p>使用Xcode通过GPX文件虚拟定位，iOS开发一般比较熟悉，操作步骤是：</p>
 <p>新创建一个iOS项目，然后添加文件，选择创建GPX文件</p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13846925548/0.png" alt="wecom20210804-151237.png"></p>
 <p>编辑其中内容，把<code>lat</code>、<code>lon</code>改为要模拟的经纬度，如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;wpt lat=&quot;31.2416&quot; lon=&quot;121.333&quot;&gt;</span><br><span class="line">         &lt;name&gt;Shanghai&lt;/name&gt;</span><br><span class="line">    &lt;/wpt&gt;</span><br><span class="line">&lt;/gpx&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>然后选择<code>Product</code> -&gt; <code>Scheme</code> -&gt; <code>Edit Scheme</code>，选中<code>Options</code> tab，勾选<code>Allow Location Simulation</code>，然后运行即可模拟位置</p>
+<p>然后选择<code>Product</code> -&gt; <code>Scheme</code> -&gt; <code>Edit Scheme</code>，选中<code>Options</code> tab，勾选<code>Allow Location Simulation</code>，然后运行即可虚拟定位</p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13846939343/0.png" alt="wecom20210804-152202.png"></p>
-<p><strong>注意：</strong> 通常情况下，使用Xcode运行模拟位置，运行停止后，经纬度会恢复成原来的。但是当运行了项目，然后直接拔掉数据线(是运行状态下拔掉)，手机的经纬度就会一直是模拟的经纬度，想要恢复需要重启手机或者等待2～5天自动恢复。</p>
+<p><strong>注意：</strong> 通常情况下，使用Xcode运行虚拟定位，运行停止后，经纬度会恢复成原来的。但是当运行了项目，然后直接拔掉数据线(是运行状态下拔掉)，手机的经纬度就会一直是模拟的经纬度，想要恢复需要重启手机或者等待2～5天自动恢复。</p>
 <p><strong>原理：</strong> 调用iOS设备中的<code>com.apple.dt.simulatelocation</code>服务，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46572309"><code>com.apple.dt.simulatelocation</code>服务是苹果在Xcode 6、iOS 8.0之后提供的为设备模拟GPS位置的调试功能，原理是通过usb获取设备句柄后开启设备内的服务(“<code>com.apple.dt.simulatelocation</code>“)，再通过固定坐标或GPX文件进行位置模拟。</a></p>
-<h3 id="使用爱思助手中的虚拟位置功能直接模拟位置"><a href="#使用爱思助手中的虚拟位置功能直接模拟位置" class="headerlink" title="使用爱思助手中的虚拟位置功能直接模拟位置"></a>使用爱思助手中的虚拟位置功能直接模拟位置</h3><p>这个方法最是简单，笔者之前不知道有这种方法，下载一个爱思助手，打开，连接手机到电脑，选择<code>工具箱</code>tab下的<code>虚拟定位</code></p>
+<h3 id="使用爱思助手中的虚拟定位功能直接虚拟定位"><a href="#使用爱思助手中的虚拟定位功能直接虚拟定位" class="headerlink" title="使用爱思助手中的虚拟定位功能直接虚拟定位"></a>使用爱思助手中的虚拟定位功能直接虚拟定位</h3><p>这个方法最是简单，笔者之前不知道有这种方法，下载一个爱思助手，打开，连接手机到电脑，选择<code>工具箱</code>tab下的<code>虚拟定位</code></p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13846970127/0.png" alt="wecom20210804-142320@2x.png"></p>
 <p>然后输入要定位的位置搜索，点击修改定位即可</p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13846970132/0.png" alt="wecom20210804-142450@2x.png"></p>
-<p><strong>注意：</strong> 这种虚拟定位的方法，真的是简单，对开发来说就很上头了，开发需要尤其注意，如何检测这种虚拟定位方法防止被模拟对打卡类软件来说，是不得不面对的，就目前而言，笔者尝试后发现<code>钉钉</code>、<code>企业微信</code>，均没有对此类方法检测处理。</p>
+<p><strong>注意：</strong> 这种虚拟定位的方法，真的是简单。就目前而言，笔者尝试后发现<code>钉钉</code>、<code>企业微信</code>，均没有对此类方法检测处理。</p>
 <p><strong>原理：</strong> 通过<a target="_blank" rel="noopener" href="https://github.com/libimobiledevice/libimobiledevice">libimobiledevice</a>的service模块开启com.apple.dt.simulatelocation服务，然后实现脱离通过Xcode来模拟定位。<a target="_blank" rel="noopener" href="https://github.com/libimobiledevice/libimobiledevice">libimobiledevice</a>是开源的跨平台调用iOS协议的库。</p>
-<h3 id="通过外接设备，发送虚拟定位数据来模拟位置"><a href="#通过外接设备，发送虚拟定位数据来模拟位置" class="headerlink" title="通过外接设备，发送虚拟定位数据来模拟位置"></a>通过外接设备，发送虚拟定位数据来模拟位置</h3><p>通过外接设备，发送虚拟定位这个方法笔者之前完全都没了解到，不得不说，真的是双击666，人民智慧无限强大，其中代表是位移精灵。笔者没有购买外设，所以也没办法尝试，但是可以附上一个视频，供大家参考：</p>
+<h3 id="通过外接设备，发送虚拟定位数据来虚拟定位"><a href="#通过外接设备，发送虚拟定位数据来虚拟定位" class="headerlink" title="通过外接设备，发送虚拟定位数据来虚拟定位"></a>通过外接设备，发送虚拟定位数据来虚拟定位</h3><p>通过外接设备，发送虚拟定位这个方法笔者之前完全都没了解到，不得不说，真的是双击666，人民智慧无限强大，其中代表是位移精灵。笔者没有购买外设，所以也没办法尝试，但是可以附上一个视频，供大家参考：</p>
 <p>视频链接：<a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=17675944846390412165">https://haokan.baidu.com/v?pd=wisenatural&amp;vid=17675944846390412165</a></p>
 <p><strong>原理：</strong> 通过MFi（Made For iOS）认证厂商，可以获得MFI Accessory Interface Specification文档，其中提供了很多隐藏功能，包含时间通讯、音乐数据通讯、定位功能等等。其中定位功能的使用只需要照着文档，按照协议格式发送对应位置数据，即可。<a target="_blank" rel="noopener" href="https://usermanual.wiki/Document/MFiAccessoryInterfaceSpecificationR18NoRestriction.1631705096.pdf">MFI Accessory Interface Specification</a>地址见：<a target="_blank" rel="noopener" href="https://usermanual.wiki/Document/MFiAccessoryInterfaceSpecificationR18NoRestriction.1631705096.pdf">https://usermanual.wiki/Document/MFiAccessoryInterfaceSpecificationR18NoRestriction.1631705096.pdf</a></p>
 <p>文档中搜索<code>Locaiton</code>即可看到定位相关信息，如下：</p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13847282969/0.png" alt="wecom20210804-165553.png"></p>
-<h3 id="越狱设备中通过hook定位方法，来模拟位置"><a href="#越狱设备中通过hook定位方法，来模拟位置" class="headerlink" title="越狱设备中通过hook定位方法，来模拟位置"></a>越狱设备中通过hook定位方法，来模拟位置</h3><p>越狱设备模拟位置，是越狱之后使用具备虚拟定位功能的越狱插件。在上帝模式下，越狱插件可以随意劫持系统函数。比如：<a target="_blank" rel="noopener" href="http://article.docway.net/details?id=60d5e03bcbb464046e3508b6">GPS定位管家，能够管理每个iOS应用的GPS位置。</a>。</p>
+<h3 id="越狱设备中通过hook定位方法，来虚拟定位"><a href="#越狱设备中通过hook定位方法，来虚拟定位" class="headerlink" title="越狱设备中通过hook定位方法，来虚拟定位"></a>越狱设备中通过hook定位方法，来虚拟定位</h3><p>越狱设备虚拟定位，是越狱之后使用具备虚拟定位功能的越狱插件。在上帝模式下，越狱插件可以随意劫持系统函数。比如：<a target="_blank" rel="noopener" href="http://article.docway.net/details?id=60d5e03bcbb464046e3508b6">GPS定位管家，能够管理每个iOS应用的GPS位置。</a>。</p>
 <p><strong>原理：</strong> 越狱后，通过注入库，hook了CLLocationManager中的定位代理方法，从而篡改正常定位信息。</p>
 <p>总结如下：</p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13847379681/0.png" alt="wecom20210804-171650.png"></p>
-<h2 id="虚拟位置几种方法的检测"><a href="#虚拟位置几种方法的检测" class="headerlink" title="虚拟位置几种方法的检测"></a>虚拟位置几种方法的检测</h2><p>作为开发，知道了有哪些模拟位置的，还不够，还需要知道怎么这些模拟位置的方法怎么解决。尤其是OA应用和游戏应用的开发，需要特别注意。下面就来一步步看下：</p>
-<h3 id="使用Xcode通过GPX文件模拟位置的检测-和-使用爱思助手中的虚拟位置功能直接模拟位置的检测"><a href="#使用Xcode通过GPX文件模拟位置的检测-和-使用爱思助手中的虚拟位置功能直接模拟位置的检测" class="headerlink" title="使用Xcode通过GPX文件模拟位置的检测 和 使用爱思助手中的虚拟位置功能直接模拟位置的检测"></a>使用Xcode通过GPX文件模拟位置的检测 和 使用爱思助手中的虚拟位置功能直接模拟位置的检测</h3><p>使用Xcode通过GPX模拟位置和使用爱思助手模拟位置的，其最终的原理是一样的，都是通过调用com.apple.simulatelocation服务，从而实现模拟位置。</p>
+<h2 id="虚拟定位几种方法的检测"><a href="#虚拟定位几种方法的检测" class="headerlink" title="虚拟定位几种方法的检测"></a>虚拟定位几种方法的检测</h2><p>作为开发，知道了有哪些虚拟定位的，还不够，还需要知道怎么这些虚拟定位的方法怎么解决。尤其是OA应用和游戏应用的开发，需要特别注意。下面就来一步步看下：</p>
+<h3 id="使用Xcode通过GPX文件虚拟定位的检测-和-使用爱思助手中的虚拟定位功能直接虚拟定位的检测"><a href="#使用Xcode通过GPX文件虚拟定位的检测-和-使用爱思助手中的虚拟定位功能直接虚拟定位的检测" class="headerlink" title="使用Xcode通过GPX文件虚拟定位的检测 和 使用爱思助手中的虚拟定位功能直接虚拟定位的检测"></a>使用Xcode通过GPX文件虚拟定位的检测 和 使用爱思助手中的虚拟定位功能直接虚拟定位的检测</h3><p>使用Xcode通过GPX虚拟定位和使用爱思助手虚拟定位的，其最终的原理是一样的，都是通过调用com.apple.simulatelocation服务，从而实现虚拟定位。</p>
 <p>笔者统计了一下，网上说的验证方式大致有两种：</p>
 <ul>
 <li>根据特征值判断<ul>
@@ -377,15 +377,15 @@
 <p>正常定位时，Wi-Fi打开时，结果为4；Wi-Fi关闭时，结果为6；结果如下：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Wi-Fi打开时，结果为4；Wi-Fi关闭时，结果为6；移动网络也关闭时，结果为6；</span></span><br><span class="line">定位来源类型：<span class="number">4</span></span><br></pre></td></tr></table></figure>
 
-<p>使用虚拟位置时，结果如下：</p>
+<p>使用虚拟定位时，结果如下：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定位来源类型：<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<p>但是，当使用第三方地图定位时，不论是虚拟位置，还是正常定位，结果如下：</p>
+<p>但是，当使用第三方地图定位时，不论是虚拟定位，还是正常定位，结果如下：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定位来源类型：<span class="number">0</span></span><br></pre></td></tr></table></figure>
 
-<p>笔者这边对比结果如下：使用系统定位时，虚拟位置和正常定位结果不同，可以区分；使用第三方系统定位时，虚拟位置和正常定位结果相同，无法区分。</p>
-<h3 id="通过外接设备，发送虚拟定位数据来模拟位置的检测"><a href="#通过外接设备，发送虚拟定位数据来模拟位置的检测" class="headerlink" title="通过外接设备，发送虚拟定位数据来模拟位置的检测"></a>通过外接设备，发送虚拟定位数据来模拟位置的检测</h3><p>这种模拟位置的笔者没有设备实践，但通过网上的资料，可以看出外接设备是通过蓝牙和手机连接，故而笔者推测，也可以根据<code>CLLocation</code>的私有属性<code>_internal</code>中的type来判断。因为type=3的定义是蓝牙等外部设备模拟定位生成的定位数据，所以这种模拟位置应该可以通过此type值区分。</p>
-<h3 id="越狱设备中通过hook定位方法，来模拟位置的检测"><a href="#越狱设备中通过hook定位方法，来模拟位置的检测" class="headerlink" title="越狱设备中通过hook定位方法，来模拟位置的检测"></a>越狱设备中通过hook定位方法，来模拟位置的检测</h3><p>这种方法，笔者目前调研到的有两种，一种是直接针对越狱设备，判断出iPhone已越狱，就提示，从而避免；另外一种是判断代理方法是否被hook，以及代理方法被hook的实现是否在APP中。</p>
+<p>笔者这边对比结果如下：使用系统定位时，虚拟定位和正常定位结果不同，可以区分；使用第三方系统定位时，虚拟定位和正常定位结果相同，无法区分。</p>
+<h3 id="通过外接设备，发送虚拟定位数据来虚拟定位的检测"><a href="#通过外接设备，发送虚拟定位数据来虚拟定位的检测" class="headerlink" title="通过外接设备，发送虚拟定位数据来虚拟定位的检测"></a>通过外接设备，发送虚拟定位数据来虚拟定位的检测</h3><p>这种虚拟定位的笔者没有设备实践，但通过网上的资料，可以看出外接设备是通过蓝牙和手机连接，故而笔者推测，也可以根据<code>CLLocation</code>的私有属性<code>_internal</code>中的type来判断。因为type=3的定义是蓝牙等外部设备模拟定位生成的定位数据，所以这种虚拟定位应该可以通过此type值区分。</p>
+<h3 id="越狱设备中通过hook定位方法，来虚拟定位的检测"><a href="#越狱设备中通过hook定位方法，来虚拟定位的检测" class="headerlink" title="越狱设备中通过hook定位方法，来虚拟定位的检测"></a>越狱设备中通过hook定位方法，来虚拟定位的检测</h3><p>这种方法，笔者目前调研到的有两种，一种是直接针对越狱设备，判断出iPhone已越狱，就提示，从而避免；另外一种是判断代理方法是否被hook，以及代理方法被hook的实现是否在APP中。</p>
 <p>方法一：判断设备是否已越狱，参考<a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/7c6b8027253c4a97196d359840f638d9.html">用代码判断iOS 系统是否越狱的方法</a></p>
 <p>判断设备已越狱有下面几种方法</p>
 <ol>
@@ -409,11 +409,12 @@
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13849141373/0.png" alt="wecom20210805-085332@2x.png"></p>
 <p><img src="https://inews.gtimg.com/newsapp_ls/0/13849414536/0.png" alt="wecom20210805-103558@2x.png"></p>
 <p>从上面的结果对比，发现未使用<code>MethodSwizzling</code>方法的<code>dli_fname</code>为<code>/usr/lib/libobjc.A.dylib</code>，<code>dli_sname</code><br>为<code>_objc_msgForward</code>；而使用了<code>MethodSwizzling</code>方法的<code>dli_fname</code>为<code>/private/var/containers/Bundle/Application/0106942C-7D3F-45A9-BB1B-2C0FBD994744/xxx.app/xxx</code>，<code>dli_sname</code>为<code>-[UIView(MSCorner)ms_layoutSubviews]</code>，可以看出，从<code>dli_sname</code>可以判断方法是否被hook过，从<code>dli_fname</code>可以知道方法的implemention是否在项目的module中。（笔者手头没有越狱的手机，也没有做过砸壳注入，大家如果有兴趣可以验证一下试试。）</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://inews.gtimg.com/newsapp_ls/0/13851091768/0.png" alt="ios_虚拟位置的方法.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>笔者验证的结果，通过特征值中的海拔和海拔精度可以判断出使用爱思助手或者 Xcode 模拟定位，通过 type 可以区分不同定位来源。为了准确，笔者通过海拔、海拔精度、type 三个字段结合起来判断。</p>
 <p>笔者写了一个检测的代码，仓库地址如下：<a target="_blank" rel="noopener" href="https://github.com/mokong/DetectFakeLocation">https://github.com/mokong/DetectFakeLocation</a></p>
-<p>原理是：使用<code>swizzlemethod</code> hook了<code>CLLocationManager</code>的<code>startUpdatingLocation</code>方法，以及<code>CLLocationManagerDelegate</code>的<code>locationManager:didUpdateLocations:</code>方法，然后检测越狱、海拔和海拔精度、定位类型，根据这几个方面判断是否是虚拟位置。</p>
+<p>原理是：使用<code>swizzlemethod</code> hook了<code>CLLocationManager</code>的<code>startUpdatingLocation</code>方法，以及<code>CLLocationManagerDelegate</code>的<code>locationManager:didUpdateLocations:</code>方法，然后检测越狱、海拔和海拔精度、定位类型，根据这几个方面判断是否是虚拟定位。</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13851091768/0.png" alt="ios_虚拟定位的方法.png"></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://article.docway.net/details?id=60d5e03bcbb464046e3508b6">iOS 虚拟位置监测</a></li>
+<li><a target="_blank" rel="noopener" href="http://article.docway.net/details?id=60d5e03bcbb464046e3508b6">iOS 虚拟定位监测</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7c213781c4b8">苹果虚拟定位技术原理和检测</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46572309">免越狱虚拟定位外挂的调试小记与检测方案 | B1nGzL 著</a></li>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1800531">iOS防黑产虚假定位检测技术</a></li>
