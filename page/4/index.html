@@ -172,6 +172,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-如何让iOS推送播放语音" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/">如何让iOS推送播放语音</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/" class="archive-article-date">
+  	<time datetime="2021-05-13T04:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本文发表在《搜狐技术产品》公众号<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Gpu4sw0Zn4IBS-k5wvF__g">如何让iOS推送播放语音</a></strong></p>
+<h2 id="iOS-推送播放语音"><a href="#iOS-推送播放语音" class="headerlink" title="iOS 推送播放语音"></a>iOS 推送播放语音</h2><h3 id="一：背景"><a href="#一：背景" class="headerlink" title="一：背景"></a>一：背景</h3><p>iOS 推送播放语音的需求调研，即收到推送后，播放推送的文案，文案的内容不固定。类似于支付宝和微信的收款到账语音。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://littleliang.xyz/page/3/">只有iOS10以上才支持app被唤醒后在后台/锁屏状态下播放音频。所以iOS10以下的设备，在收到VoIP Push后只能在local push上设定一段固定铃声，这也是为什么iOS10以下只有“微信支付收款到账”。</a></li>
+<li>iOS 12.0之前，后台播放音频未被限制，直接使用Notification Service Extension (iOS 10.0以后才支持) 功能使用系统提供的功能AVSpeechSynthesizer即可。</li>
+<li>iOS 12.0之后，Notification Service Extension后台播放音频功能被限制，所以播放实现起来比较困难。<ul>
+<li>如果要上架商店，只有播放固定的音频，或固定拼接的音频，通过设置通知的声音或者发送本地通知设置本地通知的声音来播放</li>
+<li>如果无需上架商店，可以手动打开Notification Service Extension的后台播放，
+        
+          <a class="article-more-a" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-iOS mach-o文件分析多余的类和方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -872,82 +959,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ProtocolBuf Swift 使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/">ProtocolBuf Swift 使用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-10-06T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ProtocolBuf-Swift-使用"><a href="#ProtocolBuf-Swift-使用" class="headerlink" title="ProtocolBuf Swift 使用"></a>ProtocolBuf Swift 使用</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>Mac安装<a target="_blank" rel="noopener" href="https://github.com/apple/swift-protobuf">swift-protobuf</a></p>
-        
-          <a class="article-more-a" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/">展开全文 >></a>
         </p>
       
 
