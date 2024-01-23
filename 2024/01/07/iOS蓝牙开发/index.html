@@ -15,18 +15,18 @@
 <meta property="og:site_name" content="今是昨非的博客">
 <meta property="og:description" content="一文学会iOS蓝牙开发背景最近做APP对接蓝牙设备开发，这里分享一下iOS对接蓝牙设备中需要注意的东西，大致包含下面这些方面：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/%E8%93%9D%E7%89%99%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
-<meta property="og:image" content="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/addCoreBluetoothFramework.png">
-<meta property="og:image" content="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/bluetoothBackgroundModes.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/%E8%93%9D%E7%89%99%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/addCoreBluetoothFramework.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/bluetoothBackgroundModes.png">
 <meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/17/16a2962d7cd2bafa~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.png">
-<meta property="og:image" content="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/bluetoothcrash.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/bluetoothcrash.jpg">
 <meta property="article:published_time" content="2024-01-07T12:22:00.000Z">
-<meta property="article:modified_time" content="2024-01-22T11:40:00.542Z">
+<meta property="article:modified_time" content="2024-01-23T11:38:34.030Z">
 <meta property="article:author" content="今是昨非">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="iOS蓝牙">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/%E8%93%9D%E7%89%99%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/%E8%93%9D%E7%89%99%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -222,13 +222,12 @@
 <h2 id="蓝牙开发的大致流程"><a href="#蓝牙开发的大致流程" class="headerlink" title="蓝牙开发的大致流程"></a>蓝牙开发的大致流程</h2><p>首先来了解一下蓝牙开发的流程，总结如下：</p>
 <p>Xcode配置蓝牙权限 -&gt; 启动蓝牙 -&gt; 扫描周围蓝牙 -&gt; 连接指定蓝牙 -&gt; 校验是否连接成功 -&gt; 蓝牙读&#x2F;写 -&gt; 断开连接</p>
 <p>流程图如下：</p>
-<p><img src="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/%E8%93%9D%E7%89%99%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="蓝牙权限"></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/%E8%93%9D%E7%89%99%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="蓝牙流程图"></p>
 <h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><h3 id="1-配置Xcode蓝牙权限"><a href="#1-配置Xcode蓝牙权限" class="headerlink" title="1. 配置Xcode蓝牙权限"></a>1. 配置Xcode蓝牙权限</h3><ol>
-<li><p>General Tab下，<code>Frameworks,Libraries, and Embedded Content</code>中添加 CoreBluetooth.framework，如下图：</p>
-<p> <img src="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/addCoreBluetoothFramework.png" alt="addCoreBluetoothFramework"></p>
+<li><p>General Tab下，<code>Frameworks,Libraries, and Embedded Content</code>中添加 CoreBluetooth.framework，如下图：<br><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/addCoreBluetoothFramework.png" alt="addCoreBluetoothFramework"></p>
 </li>
 <li><p>Signing &amp; Capabilities Tab下，<code>Background Modes</code>中，勾选<code>Uses Bluetooth LE accessories</code>，如下图：</p>
-<p><img src="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/bluetoothBackgroundModes.png" alt="bluetoothBackgroundModes"></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/bluetoothBackgroundModes.png" alt="bluetoothBackgroundModes"></p>
 </li>
 <li><p>Info Tab 下，<code>Custom iOS Target Properties</code>中，添加<code>Privacy - Bluetooth Peripheral Usage Description</code>和<code>Privacy - Bluetooth Always Usage Description</code></p>
 </li>
@@ -293,8 +292,7 @@
 
 <h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ul>
 <li><p>蓝牙初始化崩溃，Assertion failure in -[CBCentralManager initWithDelegate:queue:options:], CBCentralManage…</p>
-<p>  是因为新建项目没有开启蓝牙权限，将 Project -&gt; Target -&gt; Signing &amp; Capabilities中Background Modes下<code>Use Bluetooth LE accessories</code>勾选上即可，如下图所示: </p>
-<p>  <img src="https://github.com/mokong/mokongBlog/blob/master/source/assets/img/bluetoothcrash.jpg" alt="蓝牙权限"></p>
+<p>  是因为新建项目没有开启蓝牙权限，将 Project -&gt; Target -&gt; Signing &amp; Capabilities中Background Modes下<code>Use Bluetooth LE accessories</code>勾选上即可，如下图所示:<br>  <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/bluetoothcrash.jpg" alt="bluetoothcrash"></p>
 </li>
 <li><p>多台设备切换连接错乱</p>
 <p>多台设备来回切换时发现有错乱的情况，即原来是连接的蓝牙设备1，然后针对蓝牙设备2发送指令，结果指令操作到了蓝牙设备1上，起初以为是没有调用断开连接的方法，或者断开的时间不够久。排查后发现是因为用了<code>retrieveConnectedPeripheralsWithServices</code>导致的。每次断开连接后，再次连接时，通过<code>retrieveConnectedPeripheralsWithServices</code>获取到的第一个设备仍是刚刚断开连接的设备，所以再次连接时，就连接了错误的蓝牙设备。</p>
@@ -577,11 +575,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+                <a href="javascript:void(0)" class="js-tag color1">Algorithem</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Algorithem</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
