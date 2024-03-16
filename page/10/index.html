@@ -172,6 +172,406 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS虚拟位置调研与预防" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/">iOS 虚拟定位原理与预防</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/" class="archive-article-date">
+  	<time datetime="2021-08-04T05:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS-虚拟定位原理与预防"><a href="#iOS-虚拟定位原理与预防" class="headerlink" title="iOS 虚拟定位原理与预防"></a>iOS 虚拟定位原理与预防</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。</p>
+        
+          <a class="article-more-a" href="/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iOS 启动时间优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/">iOS 启动时间优化</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2021-08-02T08:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS-启动时间优化——相关"><a href="#iOS-启动时间优化——相关" class="headerlink" title="iOS 启动时间优化——相关"></a>iOS 启动时间优化——相关</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>iOS的启动时间优化有很多相关的文章，本来不打算写，但是总归是自己整理一遍印象更深刻。这里打算从原理-实践-面试相关三个方面来入手。首先要理解APP启动的原理，启动做了什么？然后针对启动过程中的事件哪些是开发可以进行优化的，去实践？最后则是，面试相关，与启动优化相关的面试有很多，笔者打算列举一下，分别涉及到启动的哪些问题。</p>
+        
+          <a class="article-more-a" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Flutter页面导航——一般页面导航和返回" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/">Flutter布局基础——页面导航和返回</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/" class="archive-article-date">
+  	<time datetime="2021-07-30T08:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Flutter布局基础——页面导航和传值"><a href="#Flutter布局基础——页面导航和传值" class="headerlink" title="Flutter布局基础——页面导航和传值"></a><a target="_blank" rel="noopener" href="https://mokong.github.io/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/">Flutter布局基础——页面导航和传值</a></h1><p>说到导航，最常见就是类似于iOS中导航控制器的push和pop效果，同样Flutter中也有类似的效果，使用的就是<code>Navigator</code>组件。</p>
+        
+          <a class="article-more-a" href="/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iOS RC4加密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/29/iOS%20RC4%E5%8A%A0%E5%AF%86/">iOS RC4加密</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/29/iOS%20RC4%E5%8A%A0%E5%AF%86/" class="archive-article-date">
+  	<time datetime="2021-07-29T05:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS-RC4加密"><a href="#iOS-RC4加密" class="headerlink" title="iOS RC4加密"></a><a target="_blank" rel="noopener" href="https://mokong.github.io/2021/07/29/iOS%20RC4%E5%8A%A0%E5%AF%86/">iOS RC4加密</a></h1><p>iOS RC4加密的实现，要注意加密后生成字符串的步骤，有些要求是base64加密后输出，有些要求是字节数组转16进制字符串输出，所以要特别注意。</p>
+        
+          <a class="article-more-a" href="/2021/07/29/iOS%20RC4%E5%8A%A0%E5%AF%86/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/29/iOS%20RC4%E5%8A%A0%E5%AF%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Flutter组件基础——TextButton" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/27/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94TextButton/">Flutter组件基础——Button</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/27/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94TextButton/" class="archive-article-date">
+  	<time datetime="2021-07-27T06:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Flutter组件基础——Button"><a href="#Flutter组件基础——Button" class="headerlink" title="Flutter组件基础——Button"></a><a target="_blank" rel="noopener" href="https://mokong.github.io/2021/07/27/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94TextButton/">Flutter组件基础——Button</a></h1><p>Flutter中常用的Button有<code>ElevatedButton</code>、<code>TextButton</code>、<code>OutlinedButton</code>，之前可能还有<code>RaisedButton</code>、<code>FlatButton</code>、<code>OutlineButton</code>，但是已被废弃，参考<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/64179998/raisedbutton-vs-elevatedbutton-flatbutton-vs-textbutton-and-outlinebutton-vs-ou">RaisedButton vs ElevatedButton, FlatButton vs TextButton and OutlineButton vs OutlinedButton</a></p>
+        
+          <a class="article-more-a" href="/2021/07/27/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94TextButton/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/27/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94TextButton/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Flutter布局基础——Card" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -572,409 +972,9 @@
 
 
   
-    <article id="post-Flutter组件基础——ListView" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/">Flutter组件基础——ListView</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/" class="archive-article-date">
-  	<time datetime="2021-07-22T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Flutter组件基础——ListView"><a href="#Flutter组件基础——ListView" class="headerlink" title="Flutter组件基础——ListView"></a><a target="_blank" rel="noopener" href="https://mokong.github.io/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/">Flutter组件基础——ListView</a></h1><p>ListView是滚动列表，类似于iOS中ScrollView，可横向、纵向滚动，内容不限。</p>
-        
-          <a class="article-more-a" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Flutter组件基础——Image" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Image/">Flutter组件基础——Image</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Image/" class="archive-article-date">
-  	<time datetime="2021-07-22T01:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Flutter组件基础——Image"><a href="#Flutter组件基础——Image" class="headerlink" title="Flutter组件基础——Image"></a>Flutter组件基础——Image</h1><p>Image是Flutter中的图片组件，类似于iOS中的UIImageView，可加载资源图片、网络图片、本地图片等，可设置拉伸方式，重复模式等。</p>
-        
-          <a class="article-more-a" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Image/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Image/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 键盘删除键响应" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/">iOS 键盘删除键响应</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/" class="archive-article-date">
-  	<time datetime="2021-07-20T11:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-键盘删除键响应"><a href="#iOS-键盘删除键响应" class="headerlink" title="iOS 键盘删除键响应"></a>iOS 键盘删除键响应</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>背景是，实现一个分享到微信，多选加输入框，点击键盘删除键，删除多选选中对象的东西。</p>
-        
-          <a class="article-more-a" href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Flutter组件基础——Container" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/">Flutter组件基础——Container</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/" class="archive-article-date">
-  	<time datetime="2021-07-19T09:21:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Flutter组件基础——Container"><a href="#Flutter组件基础——Container" class="headerlink" title="Flutter组件基础——Container"></a>Flutter组件基础——Container</h1><p>Container是容器组件，类似于H5中的<div>标签，亦或者iOS中的UIView，是布局的基础控件。</p>
-        
-          <a class="article-more-a" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Flutter组件基础——Text" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/">Flutter组件基础——Text</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/" class="archive-article-date">
-  	<time datetime="2021-07-19T05:53:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Flutter组件基础——Text"><a href="#Flutter组件基础——Text" class="headerlink" title="Flutter组件基础——Text"></a><a target="_blank" rel="noopener" href="https://mokong.github.io/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/">Flutter组件基础——Text</a></h1><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="文本组件：Text-Widget"><a href="#文本组件：Text-Widget" class="headerlink" title="文本组件：Text Widget"></a>文本组件：Text Widget</h3><p>Text是文本组件，类似于iOS中UILabel，用于文本的展示，是布局的基础控件之一。</p>
-        
-          <a class="article-more-a" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/11/">Next &gt;&gt;</a>
+      <a class="extend prev" rel="prev" href="/page/9/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/11/">Next &gt;&gt;</a>
     </nav>
   
 
@@ -1085,11 +1085,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Algorithem</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+                <a href="javascript:void(0)" class="js-tag color1">Algorithem</a>
               </li>
              
               <li class="article-tag-list-item">

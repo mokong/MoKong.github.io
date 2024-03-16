@@ -172,6 +172,400 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS 14适配——查找哪些SDK使用剪切板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/12/iOS%2014%E9%80%82%E9%85%8D%E2%80%94%E2%80%94%E6%9F%A5%E6%89%BE%E5%93%AA%E4%BA%9BSDK%E4%BD%BF%E7%94%A8%E5%89%AA%E5%88%87%E6%9D%BF/">iOS14适配一查找哪些SDK使用剪切板</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/12/iOS%2014%E9%80%82%E9%85%8D%E2%80%94%E2%80%94%E6%9F%A5%E6%89%BE%E5%93%AA%E4%BA%9BSDK%E4%BD%BF%E7%94%A8%E5%89%AA%E5%88%87%E6%9D%BF/" class="archive-article-date">
+  	<time datetime="2020-07-12T04:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iOS14适配一查找哪些SDK使用剪切板"><a href="#iOS14适配一查找哪些SDK使用剪切板" class="headerlink" title="iOS14适配一查找哪些SDK使用剪切板"></a>iOS14适配一查找哪些SDK使用剪切板</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>iOS14公测版发出之后，我们app出现了从后台唤起会弹出 读取剪切板的 提示，安全要求要赶紧查，全局搜索了我们APP，发现并没有读取剪切板的代码，比窦娥还冤，只能是第三方SDK的问题了，但是项目里集成了十几个第三方SDK，一个个排查删除，万一两个SDK都有，这个排列组合可能性就太多了。</p>
+        
+          <a class="article-more-a" href="/2020/07/12/iOS%2014%E9%80%82%E9%85%8D%E2%80%94%E2%80%94%E6%9F%A5%E6%89%BE%E5%93%AA%E4%BA%9BSDK%E4%BD%BF%E7%94%A8%E5%89%AA%E5%88%87%E6%9D%BF/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/12/iOS%2014%E9%80%82%E9%85%8D%E2%80%94%E2%80%94%E6%9F%A5%E6%89%BE%E5%93%AA%E4%BA%9BSDK%E4%BD%BF%E7%94%A8%E5%89%AA%E5%88%87%E6%9D%BF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iOS 13 适配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/">iOS 13 适配</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/" class="archive-article-date">
+  	<time datetime="2019-10-07T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iOS-13-适配"><a href="#iOS-13-适配" class="headerlink" title="iOS 13 适配"></a>iOS 13 适配</h2><p>转自<a target="_blank" rel="noopener" href="https://blog.csdn.net/Han_Laomo/article/details/101111427">iOS 13采坑记录</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8183d086b931">iOS 13适配总结</a></p>
+<ol>
+<li>UIViewController Present出来的样式修改<blockquote>
+<p>iOS 13默认的modalPresentationStyle是UIModalPresentationAutomatic，可能不符合我们的要求，改回之前的模式要用UIModalPresentationFullScreen.</p>
+</blockquote>
+</li>
+</ol>
+        
+          <a class="article-more-a" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ProtocolBuf Swift 使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/">ProtocolBuf Swift 使用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2019-10-06T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="ProtocolBuf-Swift-使用"><a href="#ProtocolBuf-Swift-使用" class="headerlink" title="ProtocolBuf Swift 使用"></a>ProtocolBuf Swift 使用</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>Mac安装<a target="_blank" rel="noopener" href="https://github.com/apple/swift-protobuf">swift-protobuf</a></p>
+        
+          <a class="article-more-a" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mapping architecture armv7 to i386" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/">Mapping architecture armv7 to i386</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/" class="archive-article-date">
+  	<time datetime="2019-09-28T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近项目里升级后，编译警告多了起来，看起来好碍眼，就想着改掉，先从Debug warning: Mapping architecture armv7 to i386.这个开始。</p>
+        
+          <a class="article-more-a" href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Embedded binary is not signed with the same certificate as the parent app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/">Embedded binary is not signed with the same certificate as the parent app</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/" class="archive-article-date">
+  	<time datetime="2019-09-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Embedded-binary-is-not-signed-with-the-same-certificate-as-the-parent-app"><a href="#Embedded-binary-is-not-signed-with-the-same-certificate-as-the-parent-app" class="headerlink" title="Embedded binary is not signed with the same certificate as the parent app"></a>Embedded binary is not signed with the same certificate as the parent app</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Xcode 10之后New Build System变为默认，编译之后一直报错，<br>报错信息：Embedded binary is not signed with the same certificate as the parent app. Verify the embedded binary target’s code sign settings match the parent app’s.</p>
+        
+          <a class="article-more-a" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-批量图片压缩 &amp; 替换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -553,401 +947,9 @@
 
 
   
-    <article id="post-随笔-昨日见闻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/15/%E9%9A%8F%E7%AC%94-%E6%98%A8%E6%97%A5%E8%A7%81%E9%97%BB/">昨日见闻</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/15/%E9%9A%8F%E7%AC%94-%E6%98%A8%E6%97%A5%E8%A7%81%E9%97%BB/" class="archive-article-date">
-  	<time datetime="2018-12-15T02:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本来应该昨晚写日记的，但是晚上是在太冷，完全不想动，但昨天遇到的事情又确实想要记录，所以今天补录到博客里。</p>
-<p>昨天去参加互联网周末的杭州余杭长乐林场活动。</p>
-        
-          <a class="article-more-a" href="/2018/12/15/%E9%9A%8F%E7%AC%94-%E6%98%A8%E6%97%A5%E8%A7%81%E9%97%BB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/15/%E9%9A%8F%E7%AC%94-%E6%98%A8%E6%97%A5%E8%A7%81%E9%97%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Using errors as control flow in Swift" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/">在Swift中使用error来控制流程</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/" class="archive-article-date">
-  	<time datetime="2018-12-11T06:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="此文是翻译"><a href="#此文是翻译" class="headerlink" title="此文是翻译"></a><strong>此文是翻译</strong></h2><p>原文链接：<a target="_blank" rel="noopener" href="https://www.swiftbysundell.com/posts/using-errors-as-control-flow-in-swift">Using errors as control flow in Swift</a></p>
-<p>app和项目里管理控制流会对代码的执行速度，代码的调试复杂度有重大的影响。代码的控制流本质上是函数和声明的执行顺序，及代码执行路径。</p>
-<p>尽管Swift提供了很多工具定义控制流——例如if, else, while 及 optional；这周，我们来看一下，如何通过Swift编译时错误来抛出和处理model，来让控制流程更容易管理。</p>
-        
-          <a class="article-more-a" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于沟通2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/">关于沟通2</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/" class="archive-article-date">
-  	<time datetime="2018-12-09T06:26:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>选择积极自信的沟通方式与他人沟通，摒弃攻击性、退让性以及消极性的沟通</li>
-<li>沟通时尽量采用第一人称</li>
-<li>避免沟通到几个障碍：唱反调、泼凉水、回答“绝”句</li>
-<li>巧妙的运用感官系统来和他人建立和谐关系</li>
-<li>理性到回应他人到语言攻击
-        
-          <a class="article-more-a" href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Namespacing Swift code with nested types" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/">Swift代码中的嵌套命名法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift代码中的嵌套命名法"><a href="#Swift代码中的嵌套命名法" class="headerlink" title="Swift代码中的嵌套命名法"></a>Swift代码中的嵌套命名法</h1><p>Swift支持与其他类型嵌套命名，尽管它还没有专用的命名关键词。下面我们来看看，如何使用类型嵌套来优化我们代码的结构。</p>
-<p>大多数Swift开发者习惯于用类型在结构上的实际名字累命名。例如：PostTextFormatterOption(一个Text Formatter类型的用于format Posts的Option)。这可能是因为我们在Objective-C &amp; C中，养成的别无选择的可怕命名习惯，被我们带到了Swift里。</p>
-<p>下面我们用上面提到的类型作为例子，来看下Post、PostTextFormatter以及PostTextFormatterOption的实现：</p>
-        
-          <a class="article-more-a" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Simple Swift dependency injection with functions" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/Simple%20Swift%20dependency%20injection%20with%20functions/">简单的Swift函数的依赖注入</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/06/Simple%20Swift%20dependency%20injection%20with%20functions/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="简单的Swift函数的依赖注入"><a href="#简单的Swift函数的依赖注入" class="headerlink" title="简单的Swift函数的依赖注入"></a>简单的Swift函数的依赖注入</h1><p>本文是翻译，原文链接：<a target="_blank" rel="noopener" href="https://www.swiftbysundell.com/posts/simple-swift-dependency-injection-with-functions">Simple Swift dependency injection with functions</a></p>
-<p>依赖注入是一种很好的解耦代码的手段，使代码变得易于测试。比起来对象自己创建自己的依赖，从外部注入，使得我们可以设置不同的场景————例如在生产中 vs 在测试中。</p>
-<p>在Swift中，大多数时候，我们用协议来实现依赖注入。例如，我们写一个简单的卡片游戏，用Randomizer(随机性发生器)画一个随机的卡片，如下所示：</p>
-        
-          <a class="article-more-a" href="/2018/12/06/Simple%20Swift%20dependency%20injection%20with%20functions/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/Simple%20Swift%20dependency%20injection%20with%20functions/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/12/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/14/">Next &gt;&gt;</a>
+      <a class="extend prev" rel="prev" href="/page/12/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/14/">Next &gt;&gt;</a>
     </nav>
   
 
@@ -1058,11 +1060,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Algorithem</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+                <a href="javascript:void(0)" class="js-tag color1">Algorithem</a>
               </li>
              
               <li class="article-tag-list-item">
