@@ -8,17 +8,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 技术 | 今是昨非的博客</title>
+  <title>yilia 接入 google adsense | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享、生活感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="今是昨非的博客">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF/page/12/index.html">
+  <meta name="description" content="yilia 接入 google adsense背景昨天看 V2 上有个老哥说，自己离职一个月，收益怎么怎么样，然后看到里面有个 Google Adsense 的收益，想到给自己的 blog 也添加一下，虽然是个小网站，但是还是想试试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yilia 接入 google adsense">
+<meta property="og:url" content="http://yoursite.com/2024/04/11/yilia%E6%8E%A5%E5%85%A5googleadsense/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:description" content="yilia 接入 google adsense背景昨天看 V2 上有个老哥说，自己离职一个月，收益怎么怎么样，然后看到里面有个 Google Adsense 的收益，想到给自己的 blog 也添加一下，虽然是个小网站，但是还是想试试。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-170457.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-170803.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-171244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-171322.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-171600.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-172036.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-172222.png">
+<meta property="article:published_time" content="2024-04-11T08:19:00.000Z">
+<meta property="article:modified_time" content="2024-04-11T11:45:40.688Z">
 <meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-170457.png">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -172,36 +183,93 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-yilia接入googleadsense" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      yilia 接入 google adsense
+    </h1>
+  
+
+        
+        <a href="/2024/04/11/yilia%E6%8E%A5%E5%85%A5googleadsense/" class="archive-article-date">
+  	<time datetime="2024-04-11T08:19:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="yilia-接入-google-adsense"><a href="#yilia-接入-google-adsense" class="headerlink" title="yilia 接入 google adsense"></a>yilia 接入 google adsense</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>昨天看 V2 上有个老哥说，自己离职一个月，收益怎么怎么样，然后看到里面有个 Google Adsense 的收益，想到给自己的 blog 也添加一下，虽然是个小网站，但是还是想试试。</p>
+<span id="more"></span>
+
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="开通-Google-Adsense"><a href="#开通-Google-Adsense" class="headerlink" title="开通 Google Adsense"></a>开通 Google Adsense</h3><p>Google搜索 Google Adsense，我已经有谷歌账号了，但是没有开通google adsense，打开按照步骤绑定即可，选国家就按照实际的选，选中国也是支持的。</p>
+<h3 id="配置-Google-Adsense"><a href="#配置-Google-Adsense" class="headerlink" title="配置 Google Adsense"></a>配置 Google Adsense</h3><p>然后会出现一个添加广告代码的逻辑，提示把这段代码放在每个页面的<head>中，这里我的博客是用 hexo 搭建的，我以为自己的主题是 Next，按照关键字 “hexo next 主题添加 Google adsense”，搜索出来的方法放在<code>themes\next\layout\_partials\head.swig</code>中任意一个script块下，然后重新发布，点击网页上的验证，结果不通过。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script <span class="keyword">async</span> src=<span class="string">&quot;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7385964127964154&quot;</span></span><br><span class="line">     crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后去<code>_config.yml</code>中，查看，确认自己的主题，发现是：<code>yilia</code>，如下图所示</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-170457.png" alt="yiliaConfig"></p>
+<p>按照关键字<code>yilia 接入 google adsense</code>搜索，查找到<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66052182">hexo yilia 主题添加 google 广告</a>这篇文章，然后按照步骤，把校验代码添加到<code>\hexo\themes\yilia\layout\_partial\head.ejs</code>的<head></head>标签中，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-170803.png" alt="yiliaVerify"></p>
+<p>然后重新发布，过一会儿再次点击网页上的验证按钮，就可以看到验证成功啦，如下图：</p>
+<blockquote>
+<p>Ps: 这里我看到网上都说要隔一天，但是我这边实践大概就不到一个小时，就可以验证了。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-171244.png" alt="验证通过后效果"></p>
+<h3 id="添加-Google-Adsense"><a href="#添加-Google-Adsense" class="headerlink" title="添加 Google Adsense"></a>添加 Google Adsense</h3><p>然后就是在网站中接入 Google Adsense 的广告了，具体步骤如下，点击<code>Ads</code>，选择<code>By ad Unit</code>，然后选择<code>Display Ads</code>，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-171322.png" alt="添加 Goolge Adsense 步骤"></p>
+<p>再接下来的界面是选择广告的形状，有<code>Square</code>、<code>Horizontal</code>、<code>Vertical</code>几种类型，可以切换看不同的预览效果，至于选择什么样的形状，取决于自己要添加的位置，比如如果加在侧边，则可以选择<code>Vertical</code>或者<code>Square</code>类型的；加在文章中间部分，则可以选择<code>Square</code>或者<code>Horizontal</code>类型；我这里选择是加在文章底部，不影响阅读，所以选择了<code>Horizontal</code>类型。</p>
+<p>类型选择之后，输入广告的名字，主要是用于区分添加的广告。选择广告的尺寸，我这里用默认的<code>Responsive</code>，然后点击 Create。如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-171600.png" alt="选择广告类型"></p>
+<p>接下来就会出现的广告代码，复制代码，然后粘贴到<code>\hexo\themes\yilia\layout\_partial\article.ejs</code>中，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-172036.png" alt="广告插入位置1"></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/screenshot-20240411-172222.png" alt="广告插入位置2"></p>
+<p>最后再次发布，然后隔的久一点，去查看效果。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66052182">hexo yilia 主题添加 google 广告</a></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢，一起进步<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay_receive.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat_receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/" class="archive-article-date">
-  	<time datetime="2019-10-07T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/">iOS 13 适配</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -213,382 +281,127 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-10-06T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/">ProtocolBuf Swift 使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/" class="archive-article-date">
-  	<time datetime="2019-09-28T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/">Mapping architecture armv7 to i386</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/" class="archive-article-date">
-  	<time datetime="2019-09-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/">Embedded binary is not signed with the same certificate as the parent app</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/15/%E6%89%B9%E9%87%8F%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%20&%20%E6%9B%BF%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2019-09-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/15/%E6%89%B9%E9%87%8F%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%20&%20%E6%9B%BF%E6%8D%A2/">批量图片压缩 &amp; 替换</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/08/CocoaPods%E7%A7%81%E6%9C%89%E5%BA%93%E7%94%9F%E6%88%90/" class="archive-article-date">
-  	<time datetime="2019-09-08T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/08/CocoaPods%E7%A7%81%E6%9C%89%E5%BA%93%E7%94%9F%E6%88%90/">CocoaPods私有库生成</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/02/iOS-IconFont%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-05-02T07:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/02/iOS-IconFont%E7%9A%84%E4%BD%BF%E7%94%A8/">iOS使用IconFont</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/03/Xcode%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0-JSON%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2019-01-03T05:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/03/Xcode%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0-JSON%E6%A0%BC%E5%BC%8F%E5%8C%96/">Xcode插件的实现-JSON格式化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/02/%E7%94%A8%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BAss/" class="archive-article-date">
-  	<time datetime="2019-01-02T10:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/02/%E7%94%A8%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BAss/">用搬瓦工搭建ss</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/" class="archive-article-date">
-  	<time datetime="2018-12-11T06:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/">在Swift中使用error来控制流程</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2024/04/11/yilia%E6%8E%A5%E5%85%A5googleadsense/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/04/11/Mac%20M2%E5%AE%89%E8%A3%85%20Picgo%E6%89%93%E4%B8%8D%E5%BC%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Mac M2芯片安装Picgo 打不开
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2024/03/26/%E7%BD%91%E7%BB%9C%E8%B4%A7%E8%BF%90%E5%B9%B3%E5%8F%B0SDK%E5%88%9D%E5%A7%8B%E5%8C%96%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/%E6%8A%80%E6%9C%AF/page/11/">&lt;&lt; Prev</a><a class="page-number" href="/tags/%E6%8A%80%E6%9C%AF/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/%E6%8A%80%E6%9C%AF/page/10/">10</a><a class="page-number" href="/tags/%E6%8A%80%E6%9C%AF/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/tags/%E6%8A%80%E6%9C%AF/page/13/">13</a><a class="page-number" href="/tags/%E6%8A%80%E6%9C%AF/page/14/">14</a><a class="page-number" href="/tags/%E6%8A%80%E6%9C%AF/page/15/">15</a><a class="extend next" rel="next" href="/tags/%E6%8A%80%E6%9C%AF/page/13/">Next &gt;&gt;</a>
-    </nav>
+  
+
+  
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7385964127964154"
+     crossorigin="anonymous"></script>
+<!-- blog bottom ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7385964127964154"
+     data-ad-slot="6494179944"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
   
 
 
@@ -624,9 +437,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
