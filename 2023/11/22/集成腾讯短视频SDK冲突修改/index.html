@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="今是昨非的博客">
 <meta property="og:description" content="集成腾讯短视频SDK记录有需求是录制一段视频并上传，服务端可见。最后才用集成腾讯SDK的方式，走了一些弯路，这里记录一下。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/assets/img/image-1.png">
+<meta property="og:image" content="http://yoursite.com/Users/wdl/Desktop/mokongBlog/source/assests/cf3ff5d35df2e67b907b7d79af280753.png">
 <meta property="article:published_time" content="2023-11-22T08:27:00.000Z">
-<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:modified_time" content="2024-05-03T07:15:38.174Z">
 <meta property="article:author" content="今是昨非">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/assets/img/image-1.png">
+<meta name="twitter:image" content="http://yoursite.com/Users/wdl/Desktop/mokongBlog/source/assests/cf3ff5d35df2e67b907b7d79af280753.png">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -206,7 +206,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-force_load</span><br><span class="line">&quot;$&#123;PODS_CONFIGURATION_BUILD_DIR&#125;/WCDBOptimizedSQLCipher/libWCDBOptimizedSQLCipher.a&quot;</span><br></pre></td></tr></table></figure>
 
 <p>如下：</p>
-<p><img src="/../assets/img/image-1.png" alt="Alt text"></p>
+<p><img src="/Users/wdl/Desktop/mokongBlog/source/assests/cf3ff5d35df2e67b907b7d79af280753.png"></p>
 <p>然后是，发现按照上面步骤集成后，安装包大小从 27M到 156M。。。再次排查后，发现，整个 UGCKit 模块不需要添加，因为我们的录制并没有用 UGCKit 封装好的类，而是自定义的类，用的是<code>TXLiteAVSDK_UGC.framework</code> 的功能，整个 UGCKit 模块移除后，就又变为 27M左右 的大小。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/584/11638">文档中心 &gt; 短视频 SDK &gt; 不含 UI 集成方案 &gt; SDK 集成 &gt; SDK 集成(XCode)</a></li>
