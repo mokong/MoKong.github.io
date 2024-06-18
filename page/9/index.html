@@ -174,6 +174,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Swift 后缀表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/01/06/Swift%20%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Swift后缀表达式(逆波兰式)转换计算</a>
+    </h1>
+  
+
+        
+        <a href="/2022/01/06/Swift%20%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2022-01-06T01:26:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Swift后缀表达式-逆波兰式-转换计算"><a href="#Swift后缀表达式-逆波兰式-转换计算" class="headerlink" title="Swift后缀表达式(逆波兰式)转换计算"></a>Swift后缀表达式(逆波兰式)转换计算</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在开发《挑战24点》的过程中遇到了一个问题，即，如何计算常用数学表达式的结果，即，给定字符串<code>8 - (6 + 4 / 2 - 1) * 2</code>，怎么计算得到结果，并且得到计算的过程。</p>
+<p>网上查资料发现，大部分都是类似系统计算器的处理，在遇到第二个运算符时，就把前一步的操作结果计算出来。这样的处理方式并不适用于笔者想要解决的问题。  </p>
+<p>进一步搜索后发现，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%89%8D%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F">前缀表达式</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/2725244">中缀表达式</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%80%86%E6%B3%A2%E5%85%B0%E5%BC%8F/128437?fromtitle=%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F&fromid=6160580">后缀表达式</a>的概念，给定的字符串<code>8 - (6 + 4 / 2 - 1) * 2</code>属于中缀表达式，而想要计算机得出结果，可以转为前缀表达式或者后缀表达式，然后再对转换后的表达式进行计算。  </p>
+        
+          <a class="article-more-a" href="/2022/01/06/Swift%20%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/06/Swift%20%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-iOS 录音 &amp;&amp; 播放实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -904,86 +986,6 @@
 
 
   
-    <article id="post-iOS在文件中访问Document Directory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/30/iOS%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AEDocument%20Directory/">iOS 在文件中访问 Document Directory</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/30/iOS%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AEDocument%20Directory/" class="archive-article-date">
-  	<time datetime="2021-08-30T05:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-在文件中访问-Document-Directory"><a href="#iOS-在文件中访问-Document-Directory" class="headerlink" title="iOS 在文件中访问 Document Directory"></a><a target="_blank" rel="noopener" href="https://mokong.github.io/2021/08/30/iOS-%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AE-Document-Directory/">iOS 在文件中访问 Document Directory</a></h1><p>iOS 11之后，在 Plist 中设置<code>LSSupportsOpeningDocumentsInPlace</code>为 YES，且<code>UIFileSharingEnabled</code>为 YES，可以从系统的<code>Files</code>应用中访问应用的 Documents 目录。</p>
-        
-          <a class="article-more-a" href="/2021/08/30/iOS%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AEDocument%20Directory/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/30/iOS%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AEDocument%20Directory/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/10/">Next &gt;&gt;</a>
@@ -1131,6 +1133,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ReactNative</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ideas</a>
               </li>
              
               <li class="article-tag-list-item">
