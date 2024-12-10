@@ -6,17 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>今是昨非的博客</title>
+  <title>全平台抓包工具Reqable使用 | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享、生活感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="今是昨非的博客">
-<meta property="og:url" content="http://yoursite.com/page/16/index.html">
+  <meta name="description" content="背景在iOS开发中，经常会遇到需要抓包的情况，比如查看网络请求、查看接口返回的数据等。而在iOS开发中，常用的抓包工具有Charles、Proxyman等，这些并非不好用，尤其是Proxyman，使用起来非常方便。但是需要付费，免费的只能查看3个域名；而且这些工具使用的时候需要手动进入网络中设置代理，比较麻烦。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全平台抓包工具Reqable使用">
+<meta property="og:url" content="http://yoursite.com/2024/12/04/%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Reqable%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:description" content="背景在iOS开发中，经常会遇到需要抓包的情况，比如查看网络请求、查看接口返回的数据等。而在iOS开发中，常用的抓包工具有Charles、Proxyman等，这些并非不好用，尤其是Proxyman，使用起来非常方便。但是需要付费，免费的只能查看3个域名；而且这些工具使用的时候需要手动进入网络中设置代理，比较麻烦。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-03-12.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-15-40.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-18-50.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-23-19.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-43-53.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-30-40.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-35-20.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-35-53.jpg">
+<meta property="article:published_time" content="2024-12-04T10:37:00.000Z">
+<meta property="article:modified_time" content="2024-12-10T06:52:25.340Z">
 <meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-03-12.jpg">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -170,340 +183,99 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Using @autoclosure when designing Swift APIs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-全平台抓包工具Reqable使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/Using%20@autoclosure%20when%20designing%20Swift%20APIs/">使用@autoclosure来设计Swift API</a>
+    <h1 class="article-title" itemprop="name">
+      全平台抓包工具Reqable使用
     </h1>
   
 
         
-        <a href="/2018/12/06/Using%20@autoclosure%20when%20designing%20Swift%20APIs/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
+        <a href="/2024/12/04/%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Reqable%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2024-12-04T10:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-12-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用-autoclosure来设计Swift-API"><a href="#使用-autoclosure来设计Swift-API" class="headerlink" title="使用@autoclosure来设计Swift API"></a>使用@autoclosure来设计Swift API</h1><h2 id="此文是翻译"><a href="#此文是翻译" class="headerlink" title="此文是翻译"></a><strong>此文是翻译</strong></h2><p>原文链接：<a target="_blank" rel="noopener" href="https://www.swiftbysundell.com/posts/using-autoclosure-when-designing-swift-apis">Using @autoclosure when designing Swift APIs</a></p>
-<p>Swift @autoclosure 属性用于在闭包中定义一个“被包裹”的参数。主要用于延迟执行一段（潜在的耗时、占资源大）代码到真正需要的时候，而不是在参数传递时就执行。</p>
-<p>在Swift标准库中就有一个例子，Assert函数的使用。由于asserts仅仅在debug模式下触发，所以没必要在release模式下执行代码。这时就用到了@autoclosure：</p>
-        
-          <a class="article-more-a" href="/2018/12/06/Using%20@autoclosure%20when%20designing%20Swift%20APIs/#more">more >></a>
-        
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在iOS开发中，经常会遇到需要抓包的情况，比如查看网络请求、查看接口返回的数据等。而在iOS开发中，常用的抓包工具有Charles、Proxyman等，这些并非不好用，尤其是Proxyman，使用起来非常方便。但是需要付费，免费的只能查看3个域名；而且这些工具使用的时候需要手动进入网络中设置代理，比较麻烦。</p>
+<span id="more"></span>
+
+<p>无意中发现了Requable，优点是：全平台可用，且抓包功能免费，没有广告；最好用的是可以在手机上一键连接电脑，不需要进入网络设置代理，非常方便。<br>优点：</p>
+<ul>
+<li>全平台，iPhone、Mac、Windows、Android都有APP</li>
+<li>抓包免费，不限制域名数量</li>
+<li>可以在手机上一键连接电脑，不需要进入网络设置代理</li>
+<li>可以查看请求头、请求体、响应头、响应体，设置断点，拦截修改返回和相应；（免费版最多生效3个）</li>
+</ul>
+<p>缺点：<br>VPN的开启和关闭标识不够明显，在使用过程中容易被误操作。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>以Mac版本来看，如下图，主要有以下几个部分：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-03-12.jpg"></p>
+<ol>
+<li><p>区域1，导航部分，在这里可以看到所有的域名，可以选择对指定的域名置顶或添加书签，单击选中时后面会有绿色的勾，代表过滤这个域名；选中多个，则过滤多个；没有选中则代表都显示。</p>
+</li>
+<li><p>区域2，IP部分，在这里可以编辑对应的端口；和切换显示IP（手机代理和电脑代理）；同时有手机协同的二维码，这个功能的使用是，选中电脑的IP，然后点击手机的那个标志，会生成一个二维码，然后手机打开Requable，点击左上角，然后扫一扫，如果和电脑在同一网络下，就可以连接成功，手机连接过一次后，会自动记录和电脑的连接，下次只需要从手机上打开即可。Ps：需要注意的是，手机上提示连接成功后，需要区分，手机代理是否开启，如下图：</p>
+<center>
+<figure>
+   ![](https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-14-02.jpg)
+
+<p>   <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-15-40.jpg"></p>
+<p>   <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-18-50.jpg"></p>
+</center>
+</figure></li>
+<li><p>区域3，功能区域，里面有是否代理电脑；断点；以及重写；经常用的是重写请求或者重写返回，如下图所示，这里不付费的话，最多同时生效3条规则，但是规则可以删除和编辑。如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-23-19.jpg"></p>
+<p>同时，针对其他APP代理时，苹果服务访问失败的问题，在SSL代理中，默认跳过了苹果的域名，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-43-53.jpg"></p>
+</li>
+<li><p>区域4，就是启动和清空。需要区分是否启动，如果和手机协同时，需要注意电脑和手机都要启动，才可以抓到请求。</p>
+</li>
+</ol>
+<p>最终，效果如下，比如手机上打开腾讯地图，如果想要查看某一条请求，可以选中这条请求，然后双击，对应的请求和相应窗口就会出现，可以切换窗口的显示方式（横或者竖），效果如下图。<br><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-30-40.jpg"></p>
+<p>而如果想要操作对应的请求，则可以在对应请求上右键即可，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-35-20.jpg"></p>
+<p>另外，Requable还提供了查看历史抓包记录的功能，免费的只能查看3天，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/Xnip2024-12-10_14-35-53.jpg"></p>
+<p>上面这些都是电脑端APP的功能。就像之前说的，手机可以转发到电脑上查看代理请求，方便快捷。同时手机端也可以自己查看抓包，功能和Stream类似。</p>
+
       
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/Using%20@autoclosure%20when%20designing%20Swift%20APIs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢，一起进步<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay_receive.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat_receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Using the builder pattern in Swift" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/Using%20the%20builder%20pattern%20in%20Swift/">在Swift中使用构建者模式</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/06/Using%20the%20builder%20pattern%20in%20Swift/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="在Swift中使用构建者模式"><a href="#在Swift中使用构建者模式" class="headerlink" title="在Swift中使用构建者模式"></a>在Swift中使用构建者模式</h1><p>和编程中其他的抽象和模式一样，构建者模式的目的是减少以保持可变状态——从而使对象更简单、且更容易预测。对象变得“少状态”，就会容易测试和调试——因为他们逻辑只存在单纯的输入输出。</p>
-<p>尽管构建者模式在java中十分常见，然而在苹果平台上却很少遇到（至少和构建对象不同）。这周，我们来看一下，构建者</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/Using%20the%20builder%20pattern%20in%20Swift/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于沟通" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/">关于沟通</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/" class="archive-article-date">
-  	<time datetime="2018-08-23T05:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="关于沟通的反思"><a href="#关于沟通的反思" class="headerlink" title="关于沟通的反思"></a>关于沟通的反思</h1><p>中午回去休息的时候，突然发现自己上午说话好难听。</p>
-<p>事情是，测试说我和安卓有个地方计算的不一样，然后要给我提Bug，然后我电脑当时正卡，本来就心情不太好，然后一听要给我提Bug，立马就炸了；</p>
-        
-          <a class="article-more-a" href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-铃铛子简笔画训练营第二期+第一次作业" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/">铃铛子简笔画训练营</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/" class="archive-article-date">
-  	<time datetime="2017-02-21T15:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="绘画-2017-02-21"><a href="#绘画-2017-02-21" class="headerlink" title="绘画 2017.02.21"></a>绘画 2017.02.21</h1><p>上周脑袋一热，感觉自己平时没什么兴趣爱好，然后又看了一大段鸡汤文，然后一冲动，就报了简笔画训练营。。。。</p>
-        
-          <a class="article-more-a" href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS-自动打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/">iOS 自动打包</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2017-02-20T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-自动打包"><a href="#iOS-自动打包" class="headerlink" title="iOS 自动打包"></a>iOS 自动打包</h1><p>使用脚本实现自动打包，网上搜了好多，但是偶比较笨，一直发现不知道怎么使用，看了好久，<br>终于改了个可以使用的，但是最后发现不能用xcrun导出；宝宝心里苦，但宝宝不说😂；接着改，最后终于被我捣鼓成功了，分享给大家一下</p>
-        
-          <a class="article-more-a" href="/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/#more">more >></a>
-        
-      
-
       
     </div>
     <div class="article-info article-info-index">
@@ -518,7 +290,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iOS自动打包</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
         		</li>
       		
 		</ul>
@@ -527,16 +299,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2024/12/04/%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Reqable%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2024/11/19/%E5%9B%BD%E8%A1%8CXcode%20%E4%BD%BF%E7%94%A8%20AI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">国行Mac 开启 Xcode inteligence 提示</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -556,394 +387,14 @@
 
 
 
-
-  
-    <article id="post-坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/29/%E5%9D%91/">iOS开发之坑1</a>
-    </h1>
-  
-
-        
-        <a href="/2016/12/29/%E5%9D%91/" class="archive-article-date">
-  	<time datetime="2016-12-28T23:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS开发之坑1"><a href="#iOS开发之坑1" class="headerlink" title="iOS开发之坑1"></a>iOS开发之坑1</h1><p>iOS 10 之后，switch的setOn方法调用之后，并没有按照文档上说的不发送action</p>
-        
-          <a class="article-more-a" href="/2016/12/29/%E5%9D%91/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/29/%E5%9D%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我看过的美剧（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/11/%E6%88%91%E7%9C%8B%E8%BF%87%E7%9A%84%E7%BE%8E%E5%89%A7%EF%BC%88%E4%B8%80%EF%BC%89/">美剧推荐</a>
-    </h1>
-  
-
-        
-        <a href="/2016/07/11/%E6%88%91%E7%9C%8B%E8%BF%87%E7%9A%84%E7%BE%8E%E5%89%A7%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2016-07-11T14:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="美剧"><a href="#美剧" class="headerlink" title="美剧"></a>美剧</h1><p>最近剧荒了，所以想让大家分享一点好看的美剧，我先来说一下自己喜欢的：</p>
-        
-          <a class="article-more-a" href="/2016/07/11/%E6%88%91%E7%9C%8B%E8%BF%87%E7%9A%84%E7%BE%8E%E5%89%A7%EF%BC%88%E4%B8%80%EF%BC%89/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/07/11/%E6%88%91%E7%9C%8B%E8%BF%87%E7%9A%84%E7%BE%8E%E5%89%A7%EF%BC%88%E4%B8%80%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-半透明黑色背景的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/01/%E5%8D%8A%E9%80%8F%E6%98%8E%E9%BB%91%E8%89%B2%E8%83%8C%E6%99%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/">半透明效果的实现</a>
-    </h1>
-  
-
-        
-        <a href="/2016/06/01/%E5%8D%8A%E9%80%8F%E6%98%8E%E9%BB%91%E8%89%B2%E8%83%8C%E6%99%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2016-06-01T15:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类似下图这样一个半透明效果的实现："><a href="#类似下图这样一个半透明效果的实现：" class="headerlink" title="类似下图这样一个半透明效果的实现："></a>类似下图这样一个半透明效果的实现：</h1><p><img src="http://upload-images.jianshu.io/upload_images/1208479-15f3607b1fbd1617.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image1.png"></p>
-        
-          <a class="article-more-a" href="/2016/06/01/%E5%8D%8A%E9%80%8F%E6%98%8E%E9%BB%91%E8%89%B2%E8%83%8C%E6%99%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/06/01/%E5%8D%8A%E9%80%8F%E6%98%8E%E9%BB%91%E8%89%B2%E8%83%8C%E6%99%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-推送处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/13/%E6%8E%A8%E9%80%81%E5%A4%84%E7%90%86/">推送处理</a>
-    </h1>
-  
-
-        
-        <a href="/2016/05/13/%E6%8E%A8%E9%80%81%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2016-05-13T15:04:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="我这两天都在改这么个东西："><a href="#我这两天都在改这么个东西：" class="headerlink" title="我这两天都在改这么个东西："></a>我这两天都在改这么个东西：</h1><blockquote>
-<p>需要根据推送消息，在下方的tabbar上显示提示红点。即：接收到推送消息，当点击推送消息时，跳转对应界面；点击程序图标进入程序时，显示提示的小红点。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2016/05/13/%E6%8E%A8%E9%80%81%E5%A4%84%E7%90%86/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/13/%E6%8E%A8%E9%80%81%E5%A4%84%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS开发遇到的问题（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/10/iOS%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/">开发中遇到的问题（二）</a>
-    </h1>
-  
-
-        
-        <a href="/2016/05/10/iOS%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2016-05-10T15:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="开发中遇到的问题，分享给大家，有则改之，无则加勉。"><a href="#开发中遇到的问题，分享给大家，有则改之，无则加勉。" class="headerlink" title="开发中遇到的问题，分享给大家，有则改之，无则加勉。"></a>开发中遇到的问题，分享给大家，有则改之，无则加勉。</h1><h2 id="1-UIScrollView加了category之后导致的手写输入时崩溃的问题——-UIKBBlurredKeyView-candidateList"><a href="#1-UIScrollView加了category之后导致的手写输入时崩溃的问题——-UIKBBlurredKeyView-candidateList" class="headerlink" title="1. UIScrollView加了category之后导致的手写输入时崩溃的问题—— [UIKBBlurredKeyView candidateList]"></a>1. UIScrollView加了category之后导致的手写输入时崩溃的问题—— [UIKBBlurredKeyView candidateList]</h2><p>上周更新的应用，这周上线了，然后昨天旁边的同事告诉我说，友盟上的崩溃信息，崩溃率1%点多了，赶紧查查吧。<br>看了一下发现大部分的崩溃都是这个日志：[UIKBBlurredKeyView candidateList]: unrecognized selector sent to instance…，于是搜了一下</p>
-        
-          <a class="article-more-a" href="/2016/05/10/iOS%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/10/iOS%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/15/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/17/">Next &gt;&gt;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -978,8 +429,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
