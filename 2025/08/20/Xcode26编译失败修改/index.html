@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>今是昨非的博客</title>
+  <title>Xcode 26编译失败修改 | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享、生活感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="今是昨非的博客">
-<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+  <meta name="description" content="背景电脑升级MacOS 26.0，新增了一个SDK后，Xcode26 Beta5和Beta6，编译项都报错，提示：Assertion failed: (it !&#x3D; _dylibToOrdinal.end()), function dylibToOrdinal, file OutputFile.cpp, line 5196.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode 26编译失败修改">
+<meta property="og:url" content="http://yoursite.com/2025/08/20/Xcode26%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:description" content="背景电脑升级MacOS 26.0，新增了一个SDK后，Xcode26 Beta5和Beta6，编译项都报错，提示：Assertion failed: (it !&#x3D; _dylibToOrdinal.end()), function dylibToOrdinal, file OutputFile.cpp, line 5196.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-20T06:17:00.000Z">
+<meta property="article:modified_time" content="2025-08-20T06:44:06.951Z">
 <meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
@@ -170,518 +174,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-WidgetKit崩溃" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Xcode26编译失败修改" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/22/WidgetKit%E5%B4%A9%E6%BA%83/">使用WidgetKit打包出的APP低版本崩溃</a>
+    <h1 class="article-title" itemprop="name">
+      Xcode 26编译失败修改
     </h1>
   
 
         
-        <a href="/2022/11/22/WidgetKit%E5%B4%A9%E6%BA%83/" class="archive-article-date">
-  	<time datetime="2022-11-22T01:32:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-22</time>
+        <a href="/2025/08/20/Xcode26%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" class="archive-article-date">
+  	<time datetime="2025-08-20T06:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-08-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>APP添加了WidgetKit功能，APP最低版本是10.0，用户反馈安装后，打开就闪退，这里记录一下原因：</p>
-        
-          <a class="article-more-a" href="/2022/11/22/WidgetKit%E5%B4%A9%E6%BA%83/#more">more >></a>
-        
-      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>电脑升级MacOS 26.0，新增了一个SDK后，Xcode26 Beta5和Beta6，编译项都报错，提示：Assertion failed: (it != _dylibToOrdinal.end()), function dylibToOrdinal, file OutputFile.cpp, line 5196.</p>
+<span id="more"></span>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><ol>
+<li>在StackOverFlow上有看到说<code>ENABLE_DEBUG_DYLIB=NO</code>，尝试后无效果</li>
+<li>在<a target="_blank" rel="noopener" href="https://developer.apple.com/forums/thread/788064">Xcode 26 Link Error</a>中看到，Apple官方人员的回复，要添加<code>-Xlinker -dead_strip -Xlinker -allow_dead_duplicates</code>.</li>
+</ol>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h3 id="通过-Other-Linker-Flags-修改"><a href="#通过-Other-Linker-Flags-修改" class="headerlink" title="通过 Other Linker Flags 修改"></a>通过 Other Linker Flags 修改</h3><p>进入 Target 的 Build Settings 标签：<br>选中 Target → Build Settings → 搜索 Other Linker Flags。<br>手动修改链接参数：<br>点击 Other Linker Flags，首先移除</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-ld64 </span><br><span class="line">-ld_classic</span><br></pre></td></tr></table></figure>
 
-      
+<p>然后添加</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-Xlinker </span><br><span class="line">-dead_strip</span><br><span class="line">-Xlinker </span><br><span class="line">-allow_dead_duplicates</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/22/WidgetKit%E5%B4%A9%E6%BA%83/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Xcode 14编译的APP低版本崩溃" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/11/Xcode%2014%E7%BC%96%E8%AF%91%E7%9A%84APP%E4%BD%8E%E7%89%88%E6%9C%AC%E5%B4%A9%E6%BA%83/">Xcode14编译的APP低版本崩溃</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/11/Xcode%2014%E7%BC%96%E8%AF%91%E7%9A%84APP%E4%BD%8E%E7%89%88%E6%9C%AC%E5%B4%A9%E6%BA%83/" class="archive-article-date">
-  	<time datetime="2022-10-11T01:32:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>测试说iOS 12的手机上安装Xcode14.0.2导出的新包后，打开就崩溃，但是在系统版本高的手机上就没有问题。</p>
-        
-          <a class="article-more-a" href="/2022/10/11/Xcode%2014%E7%BC%96%E8%AF%91%E7%9A%84APP%E4%BD%8E%E7%89%88%E6%9C%AC%E5%B4%A9%E6%BA%83/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/10/11/Xcode%2014%E7%BC%96%E8%AF%91%E7%9A%84APP%E4%BD%8E%E7%89%88%E6%9C%AC%E5%B4%A9%E6%BA%83/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CreateML使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/28/CreateML%E4%BD%BF%E7%94%A8/">iOS CreateML的使用</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/28/CreateML%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2022-09-28T05:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CreateML使用"><a href="#CreateML使用" class="headerlink" title="CreateML使用"></a>CreateML使用</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>业务需求，想要通过拍照识别照片中指定物体的数量或者物体的种类。而这种物体的模型网上没有训练好的，需要从头开始。所以调研了苹果的createML的实现方案，具体操作如下：</p>
-        
-          <a class="article-more-a" href="/2022/09/28/CreateML%E4%BD%BF%E7%94%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/28/CreateML%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Xcode14新建项目PodInit失败" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/27/Xcode14%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AEPodInit%E5%A4%B1%E8%B4%A5/">Xcode 14新建项目 Pod init失败</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/27/Xcode14%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AEPodInit%E5%A4%B1%E8%B4%A5/" class="archive-article-date">
-  	<time datetime="2022-09-27T05:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Xcode-14新建项目-Pod-init失败"><a href="#Xcode-14新建项目-Pod-init失败" class="headerlink" title="Xcode 14新建项目 Pod init失败"></a>Xcode 14新建项目 Pod init失败</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>使用Xcode 14.0(14A309)新建了一个项目，然后运行<code>Pod init</code>，就报错，<code>[Xcodeproj] Unknown object version (56). (RuntimeError)</code>和<code>can&#39;t modify frozen String (FrozenError)</code>。</p>
-        
-          <a class="article-more-a" href="/2022/09/27/Xcode14%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AEPodInit%E5%A4%B1%E8%B4%A5/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/27/Xcode14%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AEPodInit%E5%A4%B1%E8%B4%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-手把手教你创建支付宝 Widget2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget2/">手把手教你创建widget2</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/26/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget2/" class="archive-article-date">
-  	<time datetime="2022-09-26T02:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="手把手教你创建widget2"><a href="#手把手教你创建widget2" class="headerlink" title="手把手教你创建widget2"></a>手把手教你创建widget2</h1><p>接上篇<a target="_blank" rel="noopener" href="https://morganwang.cn/2022/05/06/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget/">iOS Widget</a>，这里介绍下WidgetBundle的用法和怎么做一个支付宝类似的 widget，上篇里把<code>WidgetBundle</code>写成了<code>WidgetGroup</code>，我的错。</p>
-        
-          <a class="article-more-a" href="/2022/09/26/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/26/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Flutter 组件——Tabbar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/">Flutter组件——Tabbar</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/" class="archive-article-date">
-  	<time datetime="2022-09-23T06:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Flutter组件——Tabbar"><a href="#Flutter组件——Tabbar" class="headerlink" title="[Flutter组件——Tabbar]"></a>[Flutter组件——Tabbar]</h1><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>Tabar使用，设置<code>indicator</code>的样式，长短，设置tab选中和未选中的样式，根据数组创建Tabbar。</p>
-        
-          <a class="article-more-a" href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Flutter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Xcode14编译失败修改" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/">Xcode14编译失败修改</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" class="archive-article-date">
-  	<time datetime="2022-09-14T01:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>升级Xcode 14后，项目编译失败修改，共修改了两种编译错误：</p>
-<ul>
-<li>一种是bundle code sign error，<code>Xcode 14 needs selected Development Team for Pod Bundles</code></li>
-<li>一种是<code>Module compiled with Swift 5.6.1 cannot be imported by the Swift 5.7 compiler</code></li>
+<p>最终解决了问题。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/79677312/ld-assertion-failed-it-dylibtoordinal-end-function-dylibtoordinal-fi">ld: Assertion failed: (it != _dylibToOrdinal.end()), function dylibToOrdinal, file OutputFile.cpp, line 5184</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/forums/thread/788064">Xcode 26 Link Error</a></li>
 </ul>
-        
-          <a class="article-more-a" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/#more">more >></a>
-        
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢，一起进步<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay_receive.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat_receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -705,16 +269,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2025/08/20/Xcode26%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2025/08/11/Xcode26%E5%B4%A9%E6%BA%83%E4%BF%AE%E6%94%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Xcode 26崩溃修改</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -734,261 +357,14 @@
 
 
 
-
-  
-    <article id="post-iOS编译时间优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/07/iOS%E7%BC%96%E8%AF%91%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/">iOS 编译时间优化</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/07/iOS%E7%BC%96%E8%AF%91%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2022-09-07T01:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>目前App项目不大，但是清空后重新编译时间需要200多秒，感觉不太合理，所以，就着手排查了一下。</p>
-<p>通常的编译时间优化都是分为三个部分</p>
-<ul>
-<li>Xcode编译设置的优化</li>
-<li>代码或函数编译时间的优化</li>
-<li>三方库编译时间的优化</li>
-</ul>
-<p>这里就根据上面三个部分来一一排查。</p>
-        
-          <a class="article-more-a" href="/2022/09/07/iOS%E7%BC%96%E8%AF%91%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/07/iOS%E7%BC%96%E8%AF%91%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Carthage使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/05/Carthage%E4%BD%BF%E7%94%A8/">Carthage使用</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/05/Carthage%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2022-09-05T06:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前一直用<code>CocoaPods</code>，这次做编译时间优化时，把某些Pod依赖的库改为了<code>Carthage</code>依赖的，这里记录一下<code>Carthage</code>的使用。</p>
-        
-          <a class="article-more-a" href="/2022/09/05/Carthage%E4%BD%BF%E7%94%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/05/Carthage%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-依赖MapManagerSDK崩溃记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/05/%E4%BE%9D%E8%B5%96MapManagerSDK%E5%B4%A9%E6%BA%83%E8%AE%B0%E5%BD%95/">MapManagerSDK集成记录</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/05/%E4%BE%9D%E8%B5%96MapManagerSDK%E5%B4%A9%E6%BA%83%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-09-05T00:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近集成<code>MapManager</code>SDK，遇到了几个问题这里记录一下：</p>
-<p>问题一：</p>
-<p>对接文档中提示的导入GMObjC算法SDK方式如下，导入后编译不通过，提示：<code>&quot;sm2_plaintext_size&quot; Too many arguments to function call, expected 3, have 4</code></p>
-        
-          <a class="article-more-a" href="/2022/09/05/%E4%BE%9D%E8%B5%96MapManagerSDK%E5%B4%A9%E6%BA%83%E8%AE%B0%E5%BD%95/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/05/%E4%BE%9D%E8%B5%96MapManagerSDK%E5%B4%A9%E6%BA%83%E8%AE%B0%E5%BD%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&lt;&lt; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/">Next &gt;&gt;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1023,8 +399,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
