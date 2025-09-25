@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Xcode 26 接入QWen | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如阿里云百炼等会失败，所以需要手动修改下，这里以阿里云百炼为例。 第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。">
+  <meta name="description" content="背景Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如QWen等会失败，所以需要手动修改下，这里以阿里云百炼为例。 第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xcode 26 接入QWen">
 <meta property="og:url" content="http://yoursite.com/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="背景Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如阿里云百炼等会失败，所以需要手动修改下，这里以阿里云百炼为例。 第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。">
+<meta property="og:description" content="背景Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如QWen等会失败，所以需要手动修改下，这里以阿里云百炼为例。 第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110333.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110458.png">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112557.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112943.png">
 <meta property="article:published_time" content="2025-09-25T02:06:00.000Z">
-<meta property="article:modified_time" content="2025-09-25T03:36:53.657Z">
+<meta property="article:modified_time" content="2025-09-25T03:37:36.755Z">
 <meta property="article:author" content="今是昨非">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="iOS">
@@ -207,7 +207,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如阿里云百炼等会失败，所以需要手动修改下，这里以阿里云百炼为例。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如QWen等会失败，所以需要手动修改下，这里以阿里云百炼为例。</p>
 <h2 id="第一步，注册阿里云百炼账号"><a href="#第一步，注册阿里云百炼账号" class="headerlink" title="第一步，注册阿里云百炼账号"></a>第一步，注册阿里云百炼账号</h2><p>首先需要一个<a target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/?spm=5176.29597918.J_SEsSjsNv72yRuRFS2VknO.2.5aa67b085LwSAg&tab=api#/api">阿里云百炼</a>的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。</p>
 <span id="more"></span>
 
@@ -355,6 +355,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5%E6%B7%B7%E5%85%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Xcode 26接入混元
+        
+      </div>
+    </a>
   
   
     <a href="/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/" id="article-nav-older" class="article-nav-link-wrap">
