@@ -6,17 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 今是昨非的博客</title>
+  <title>Xcode 26 接入QWen | 今是昨非的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享、生活感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="今是昨非的博客">
-<meta property="og:url" content="http://yoursite.com/archives/page/16/index.html">
+  <meta name="description" content="背景Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如阿里云百炼等会失败，所以需要手动修改下，这里以阿里云百炼为例。 第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode 26 接入QWen">
+<meta property="og:url" content="http://yoursite.com/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/index.html">
 <meta property="og:site_name" content="今是昨非的博客">
-<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:description" content="背景Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如阿里云百炼等会失败，所以需要手动修改下，这里以阿里云百炼为例。 第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110458.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110752.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111141.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111404.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111508.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111633.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111620.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112305.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112557.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112943.png">
+<meta property="article:published_time" content="2025-09-25T02:06:00.000Z">
+<meta property="article:modified_time" content="2025-09-25T03:36:53.657Z">
 <meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="分享">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110333.png">
   
     <link rel="alternative" href="/atom.xml" title="今是昨非的博客" type="application/atom+xml">
   
@@ -170,350 +187,92 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Xcode 26接入QWen" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Xcode 26 接入QWen
+    </h1>
+  
+
+        
+        <a href="/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/" class="archive-article-date">
+  	<time datetime="2025-09-25T02:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-09-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Xcode 26 新增了对第三方大模型的支持，但是直接添加国内的Provider，比如阿里云百炼等会失败，所以需要手动修改下，这里以阿里云百炼为例。</p>
+<h2 id="第一步，注册阿里云百炼账号"><a href="#第一步，注册阿里云百炼账号" class="headerlink" title="第一步，注册阿里云百炼账号"></a>第一步，注册阿里云百炼账号</h2><p>首先需要一个<a target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/?spm=5176.29597918.J_SEsSjsNv72yRuRFS2VknO.2.5aa67b085LwSAg&tab=api#/api">阿里云百炼</a>的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。注册并开通对应的model，默认会提供免费使用，需要注意续费的问题。</p>
+<span id="more"></span>
+
+<h2 id="第二步，添加Provider到Xcode-26"><a href="#第二步，添加Provider到Xcode-26" class="headerlink" title="第二步，添加Provider到Xcode 26"></a>第二步，添加Provider到Xcode 26</h2><p>然后打开Xcode 26，打开设置，选中”Intelligence”，点击添加，如下图</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110333.png" alt="image.png"></p>
+<p>然后会进入输入信息界面，共有4个信息需要输入，URL、API Key、API Key Header、Description，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110458.png" alt="image.png"></p>
+<p>URL：<code>https://dashscope.aliyuncs.com/compatible-mode/</code><br>API Key：==Bear 你自己的APIKey==<br>API KeyHeader: ==Authorization==<br>Description: 这个名字自己定义</p>
+<p>这里需要注意的是，如果按照阿里云百炼上提示的，URL配置为 <code>https://dashscope.aliyuncs.com/compatible-mode/v1</code>，点击Save的时候就保存不了，<strong>所以需要去掉v1。</strong></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110752.png" alt="image.png"></p>
+<p>点击Save之后，能看到自己开通的所有Models列表，说明成功，如下图。</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111141.png" alt="image.png"></p>
+<h2 id="第三步，使用抓包修改请求"><a href="#第三步，使用抓包修改请求" class="headerlink" title="第三步，使用抓包修改请求"></a>第三步，使用抓包修改请求</h2><p>此时切换左侧的导航到New Conversaion界面，如下图，需要选择一个模型</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111404.png" alt="image.png"></p>
+<p>选择后，直接聊天，会发现提示报错，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111508.png" alt="image.png"></p>
+<p>此时通过抓包工具可以看到：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111633.png" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111620.png" alt="image.png"></p>
+<p>报错提示是tools相关的，所以直接把tools改为null即可。通过<code>ProxyMan</code>或者<code>Surge</code>都可以实现。</p>
+<p>比如使用<code>Surge</code>的步骤是，找到Scripts，然后添加文件内容如下，链接:<a target="_blank" rel="noopener" href="https://github.com/mokong/Xcode_QWen_modify/blob/main/Surge/Xcode-AliYun.js">Xcode_QWen_modify/Surge/Xcode-AliYun.js at main · mokong/Xcode_QWen_modify · GitHub</a></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112305.png" alt="image.png"></p>
+<p>使用<code>ProxyMan</code>的步骤也是，找到Scripts，然后修改内容，如下图，链接：<a target="_blank" rel="noopener" href="https://github.com/mokong/Xcode_QWen_modify/blob/main/ProxyMan/Xcode_AliYun.js">Xcode_QWen_modify/ProxyMan/Xcode_AliYun.js at main · mokong/Xcode_QWen_modify · GitHub</a></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112557.png" alt="image.png"></p>
+<p>替换tools为null后，再次切换到Xcode 26，在Conversation下输入内容，就看到可以正常使用了，如下图</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112943.png" alt="image.png"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢，一起进步<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay_receive.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat_receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/" class="archive-article-date">
-  	<time datetime="2018-12-11T06:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/">在Swift中使用error来控制流程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/" class="archive-article-date">
-  	<time datetime="2018-12-09T06:26:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/">关于沟通2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/Namespacing%20Swift%20code%20with%20nested%20types/">Swift代码中的嵌套命名法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/06/Simple%20Swift%20dependency%20injection%20with%20functions/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/Simple%20Swift%20dependency%20injection%20with%20functions/">简单的Swift函数的依赖注入</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/06/Using%20@autoclosure%20when%20designing%20Swift%20APIs/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/Using%20@autoclosure%20when%20designing%20Swift%20APIs/">使用@autoclosure来设计Swift API</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/06/Using%20the%20builder%20pattern%20in%20Swift/" class="archive-article-date">
-  	<time datetime="2018-12-06T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/Using%20the%20builder%20pattern%20in%20Swift/">在Swift中使用构建者模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/" class="archive-article-date">
-  	<time datetime="2018-08-23T05:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/">关于沟通</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/" class="archive-article-date">
-  	<time datetime="2017-02-21T15:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/">铃铛子简笔画训练营</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2017-02-20T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/">iOS 自动打包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -523,76 +282,115 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iOS自动打包</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/29/%E5%9D%91/" class="archive-article-date">
-  	<time datetime="2016-12-28T23:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/29/%E5%9D%91/">iOS开发之坑1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">分享</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于我用CodeBuddy开发了几个APP的体验</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/15/">&lt;&lt; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/14/">14</a><a class="page-number" href="/archives/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/archives/page/17/">17</a><a class="page-number" href="/archives/page/18/">18</a><a class="extend next" rel="next" href="/archives/page/17/">Next &gt;&gt;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -628,8 +426,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

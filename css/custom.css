@@ -1,0 +1,89 @@
+/* 博客整体字体与背景 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f7f9fb;
+  color: #333;
+  line-height: 1.7;
+}
+
+/* 文章卡片化 */
+.article {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 28px;
+  transition: all 0.25s ease;
+}
+
+.article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* 文章标题 */
+.article-title a {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+  transition: color 0.2s ease;
+}
+
+.article-title a:hover {
+  color: #0078d7;
+  /* 高亮主色，可改 */
+}
+
+/* 摘要 */
+.article-entry {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* 时间与 meta 信息 */
+.article-meta {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+/* 标签美化 */
+.article-tag-list a {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0 4px 4px 0;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  background: #eef3f8;
+  color: #0078d7;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.article-tag-list a:hover {
+  background: #0078d7;
+  color: #fff;
+}
+
+/* 左侧导航栏 */
+#header {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+}
+
+#header h1 a {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #0078d7;
+}
+
+/* 页脚 */
+#footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 32px;
+  padding: 16px;
+}

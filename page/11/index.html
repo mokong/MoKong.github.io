@@ -172,6 +172,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS 接入 HTTPDNS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/23/iOS%20%E6%8E%A5%E5%85%A5%20HTTPDNS/">iOS 接入 HTTPDNS</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/23/iOS%20%E6%8E%A5%E5%85%A5%20HTTPDNS/" class="archive-article-date">
+  	<time datetime="2021-11-23T07:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近开发水印相机，遇到了用户网络正常，但是上传超时、上传失败的问题。通过听云后台看到接口错误记录中，用户的 localDNS 为空，于是就有了接入 HTTPDNS 的需求。</p>
+        
+          <a class="article-more-a" href="/2021/11/23/iOS%20%E6%8E%A5%E5%85%A5%20HTTPDNS/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/23/iOS%20%E6%8E%A5%E5%85%A5%20HTTPDNS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-上传图片失败问题的排查" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -861,86 +941,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 启动时间优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/">iOS 启动时间优化</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2021-08-02T08:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-启动时间优化——相关"><a href="#iOS-启动时间优化——相关" class="headerlink" title="iOS 启动时间优化——相关"></a>iOS 启动时间优化——相关</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>iOS的启动时间优化有很多相关的文章，本来不打算写，但是总归是自己整理一遍印象更深刻。这里打算从原理-实践-面试相关三个方面来入手。首先要理解APP启动的原理，启动做了什么？然后针对启动过程中的事件哪些是开发可以进行优化的，去实践？最后则是，面试相关，与启动优化相关的面试有很多，笔者打算列举一下，分别涉及到启动的哪些问题。</p>
-        
-          <a class="article-more-a" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/">展开全文 >></a>
         </p>
       
 

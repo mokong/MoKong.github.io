@@ -172,6 +172,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS 13 适配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/">iOS 13 适配</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/" class="archive-article-date">
+  	<time datetime="2019-10-07T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iOS-13-适配"><a href="#iOS-13-适配" class="headerlink" title="iOS 13 适配"></a>iOS 13 适配</h2><p>转自<a target="_blank" rel="noopener" href="https://blog.csdn.net/Han_Laomo/article/details/101111427">iOS 13采坑记录</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8183d086b931">iOS 13适配总结</a></p>
+<ol>
+<li>UIViewController Present出来的样式修改<blockquote>
+<p>iOS 13默认的modalPresentationStyle是UIModalPresentationAutomatic，可能不符合我们的要求，改回之前的模式要用UIModalPresentationFullScreen.</p>
+</blockquote>
+</li>
+</ol>
+        
+          <a class="article-more-a" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/07/iOS%2013%20%E9%80%82%E9%85%8D/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ProtocolBuf Swift 使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -833,84 +915,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/15/%E9%9A%8F%E7%AC%94-%E6%98%A8%E6%97%A5%E8%A7%81%E9%97%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Using errors as control flow in Swift" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/">在Swift中使用error来控制流程</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/" class="archive-article-date">
-  	<time datetime="2018-12-11T06:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="此文是翻译"><a href="#此文是翻译" class="headerlink" title="此文是翻译"></a><strong>此文是翻译</strong></h2><p>原文链接：<a target="_blank" rel="noopener" href="https://www.swiftbysundell.com/posts/using-errors-as-control-flow-in-swift">Using errors as control flow in Swift</a></p>
-<p>app和项目里管理控制流会对代码的执行速度，代码的调试复杂度有重大的影响。代码的控制流本质上是函数和声明的执行顺序，及代码执行路径。</p>
-<p>尽管Swift提供了很多工具定义控制流——例如if, else, while 及 optional；这周，我们来看一下，如何通过Swift编译时错误来抛出和处理model，来让控制流程更容易管理。</p>
-        
-          <a class="article-more-a" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/11/Using%20errors%20as%20control%20flow%20in%20Swift/">展开全文 >></a>
         </p>
       
 
