@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>制作自己表情包 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景浏览 X 的时候，看到一篇制作马年表情包的文章，突然想起来自己之前也有把家里狗狗制作成表情包的念头，当时因为太复杂放弃了。看到文章使用 AI 生成图片，就想再试试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作自己表情包">
+<meta property="og:url" content="http://morganwang.cn/2026/01/16/%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E8%A1%A8%E6%83%85%E5%8C%85/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="背景浏览 X 的时候，看到一篇制作马年表情包的文章，突然想起来自己之前也有把家里狗狗制作成表情包的念头，当时因为太复杂放弃了。看到文章使用 AI 生成图片，就想再试试">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2026-01-16T02:21:00.000Z">
+<meta property="article:modified_time" content="2026-01-22T03:14:17.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="生活">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="分享">
+<meta property="article:tag" content="learning">
+<meta property="article:tag" content="ideas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "制作自己表情包",
+  "url": "http://morganwang.cn/2026/01/16/%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E8%A1%A8%E6%83%85%E5%8C%85/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2026-01-16T02:21:00.000Z",
+  "dateModified": "2026-01-22T03:14:17.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2026/01/16/%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E8%A1%A8%E6%83%85%E5%8C%85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '制作自己表情包',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">189</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">制作自己表情包</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">制作自己表情包</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-16T02:21:00.000Z" title="发表于 2026-01-16 10:21:00">2026-01-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-22T03:14:17.000Z" title="更新于 2026-01-22 11:14:17">2026-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>浏览 X 的时候，看到一篇制作马年表情包的文章，突然想起来自己之前也有把家里狗狗制作成表情包的念头，当时因为太复杂放弃了。看到文章使用 AI 生成图片，就想再试试</p>
+<span id="more"></span>
+
+
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>参考<a target="_blank" rel="noopener" href="https://veryjack.com/technique/wechat_sticker/"># 谁不想拥有专属的微信表情包呢</a>，一步步操作，很简单，最终制作成功，步骤如下：</p>
+<h2 id="批量生成表情包"><a href="#批量生成表情包" class="headerlink" title="批量生成表情包"></a>批量生成表情包</h2><p>Gemini Banana Pro 的提示词如下，你可以根据要生成的对象，适当修改，同时附上一张图片/照片：</p>
+<blockquote>
+<p>为我生成图中角色的绘制 Q 版的，LINE 风格的半身像表情包，注意头饰要正确<br>彩色手绘风格，使用 6x4 布局，涵盖各种各样的常用聊天语句，或是一些有关的娱乐 meme<br>其他需求：不要原图复制。所有标注为手写简体中文。<br>生成的图片需为 4K 分辨率 16:9</p>
+</blockquote>
+<p>⚠️ 需要注意的是，有时候中文会写成不认识的词，可能需要检查修改</p>
+<p>⚠️ 为了保存高清图片，记得点击 Gemini 生成图片右上角的下载按钮哦，右键保存的图片分辨率较低。</p>
+<h2 id="生成一个裁切工具"><a href="#生成一个裁切工具" class="headerlink" title="生成一个裁切工具"></a>生成一个裁切工具</h2><p>生成了 6x4 的表情包，但还需要一张张裁切也太麻烦了。那就用 AI 生成一个图片裁切工具吧，gemini 提示词如下：</p>
+<blockquote>
+<p>写一个web工具可以裁剪图片, 图片是 7x4 的表情包, 最后打包成 zip</p>
+</blockquote>
+<p>⚠️ 注意，这个工具需要根据上面实际生成图片的布局来实现，比如生成的是 7x4 的，就需要让 AI 生成 7*4 的裁剪工具；这一步只要文字都在图标上即可，最终上传到表情包平台，还可以选择范围。</p>
+<h2 id="生成表情包横幅"><a href="#生成表情包横幅" class="headerlink" title="生成表情包横幅"></a>生成表情包横幅</h2><p>在微信表情开放平台提交表情包时，会需要提交一个表情包横幅。我们可以继续在生成表情包的对话下面，添加简单的提示词，比如：</p>
+<blockquote>
+<p>以生成表情包里的的Q版角色，再帮我生成一个“横幅”图片，内容表现该角色的可爱搞怪，用于上传至微信表情开放平台，比例为750x400，文字内容为“捣蛋的小黄来咯”。横幅尽量避免使用白色或与白色接近的背景或边缘，以免和微信详情页底色混在一起。</p>
+</blockquote>
+<p>生成的图片如果分辨率过高（Gemini Banana Pro 会生成4k的图片），可以去 <a target="_blank" rel="noopener" href="https://squoosh.app/">https://squoosh.app/</a> 压缩一下，压缩到 750 x 400 即可。</p>
+<h2 id="抠图生成背景透明的封面和图标"><a href="#抠图生成背景透明的封面和图标" class="headerlink" title="抠图生成背景透明的封面和图标"></a>抠图生成背景透明的封面和图标</h2><p>在微信表情开放平台提交表情包时，封面和图标一项目中要求背景为透明。所以，我们可以选择一张已经生成的表情包（或者是再生成一张其他的图片），使用豆包的抠图功能，得到一张背景透明的 png 图片。</p>
+<h2 id="赞赏引导图和致谢图"><a href="#赞赏引导图和致谢图" class="headerlink" title="赞赏引导图和致谢图"></a>赞赏引导图和致谢图</h2><p>如果想开启表情的打赏功能，你还需要准备一个赞赏引导图和致谢图，以及填写艺术家资料。</p>
+<p>同样在生成表情包的对话下面，输入提示词，引导图提示词可参考：</p>
+<blockquote>
+<p>以生成表情包里的的Q版角色再帮我生成一个赞赏引导图，要求750*560 像素，避免使用白色或与白色接近的背景或边缘，以免和微信详情页底色混在一起。引导图内容为“呜呜，咪咪想吃猫条了”这样的形象。</p>
+</blockquote>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>封面和图标中图片要求背景为透明；</li>
+<li>表情横幅、赞赏引导图、赞赏致谢图、艺术家横幅都要求避免使用白色或与白色接近的背景或边缘；</li>
+<li>表情包文字中不要出现人名，比如“葛优躺”就不行；</li>
+</ul>
+<p>如果不符合规范，审核会不通过。根据我这次的经验，前一天提交，第二天下午就能审核结束。</p>
+<h2 id="注册并提交微信表情包"><a href="#注册并提交微信表情包" class="headerlink" title="注册并提交微信表情包"></a>注册并提交微信表情包</h2><p>在准备好了各种素材后，就可以去微信表情开放平台（<a target="_blank" rel="noopener" href="https://sticker.weixin.qq.com/">https://sticker.weixin.qq.com</a>）注册并提交你的作品了。</p>
+<p><code>提交作品</code> – <code>表情专辑</code>，按照要求上传素材并填写信息即可。</p>
+<h2 id="更进一步"><a href="#更进一步" class="headerlink" title="更进一步"></a>更进一步</h2><p>如果还想制作动态表情，你可以考虑将裁切后的图片喂给 Grok，让其生成动态小视频，然后再用工具将视频转为 gif 文件。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://veryjack.com/technique/wechat_sticker/"># 谁不想拥有专属的微信表情包呢</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2026/01/16/%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E8%A1%A8%E6%83%85%E5%8C%85/">http://morganwang.cn/2026/01/16/%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E8%A1%A8%E6%83%85%E5%8C%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/%E5%88%86%E4%BA%AB/">分享</a><a class="post-meta__tags" href="/tags/learning/">learning</a><a class="post-meta__tags" href="/tags/ideas/">ideas</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/20/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">关于 AI 与开发</div></div><div class="info-2"><div class="info-item-1">背景最近看到了很多 AI 与开发的话题，比如 # AI 不能帮你背 D 绩效、# 如何看待在线笔试中使用 AI 作弊、# 我们真的应该完全放弃《古法编程》？、# 大家都来分享一下自己的 vibe coding 技巧等等，我也想分享一下我自己的看法。    思考参考 # 大家都来分享一下自己的 vibe coding 技巧 # AI 不能帮你背 D 绩效 # 如何看待在线笔试中使用 AI 作弊 # 我们真的应该完全放弃《古法编程》？  </div></div></div></a><a class="pagination-related" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="鸿蒙截图生成工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">鸿蒙截图生成工具</div></div><div class="info-2"><div class="info-item-1">背景开发鸿蒙APP，没有鸿蒙手机，使用鸿蒙模拟器截图出来的，却不符合9:16，不能直接上传商店，所以开发了一个工具，用于把不符合的截图转为自定义比例的截图。    使用下载GitHub - mokong/HMScreenShopHelper，直接下载，打开index.html即可使用。可以自定义比例或像素，不会压缩图片，而是在周边添加对应背景色然后生成新的图片。 截图如下:  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/07/11/SafariFreeMedium%E6%8F%92%E4%BB%B6/" title="SafariFreeMedium插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-11</div><div class="info-item-2">SafariFreeMedium插件</div></div><div class="info-2"><div class="info-item-1">背景在阅读上篇 Flutter状态管理中，引用的几篇文章都需要是Medium 会员才能查看的。没有付费的每个月免费只能查看几次，所以就想有没有不付费查看这个的方法，就去搜索了一下。     实现搜索之后，找到了这篇Freedium · GitHub，查看后发现里面有个简单的方法，就是把 host 替换为````freedium.cfd然后重定向。 刚好自己有账号，为了在 Safari 中便于使用，就自己写了一个插件，效果如下：  参考 Freedium · GitHub  </div></div></div></a><a class="pagination-related" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="鸿蒙截图生成工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-13</div><div class="info-item-2">鸿蒙截图生成工具</div></div><div class="info-2"><div class="info-item-1">背景开发鸿蒙APP，没有鸿蒙手机，使用鸿蒙模拟器截图出来的，却不符合9:16，不能直接上传商店，所以开发了一个工具，用于把不符合的截图转为自定义比例的截图。    使用下载GitHub - mokong/HMScreenShopHelper，直接下载，打开index.html即可使用。可以自定义比例或像素，不会压缩图片，而是在周边添加对应背景色然后生成新的图片。 截图如下:  </div></div></div></a><a class="pagination-related" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-21</div><div class="info-item-2">连夜开发了一个 Mac 上久坐提醒工具</div></div><div class="info-2"><div class="info-item-1">背景看到# Mac 端，定时提醒休息，求安利想到自己也需要一个类似的提醒，所以连夜让AI开发了一个，哈哈哈，附加了喝水和提肛提醒（被指到的要提肛10下）。。。      实现界面如下，目前还在审核中。。。    参考</div></div></div></a><a class="pagination-related" href="/2024/07/09/Flutter%20%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/" title="Flutter 状态管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-09</div><div class="info-item-2">Flutter 状态管理</div></div><div class="info-2"><div class="info-item-1">背景我之前对 Flutter 的状态管理一直比较头大，最近看到了一篇Flutter state management for minimalists | by Suragch | Medium文章，感觉文章真的很好，把为什么要进行状态管理以及什么是状态管理说的很通透，推荐大家看原文，这里是自己总结一下。      什么是状态管理老实说，之前看 Flutter 相关的文章和视频的时候，有些上来就推荐用 Bloc 的就很懵，没有前因后果，就告诉我要用这个东西，这东西用了有什么好处？这东西上手难度如何，这东西是必备的吗？和其他的状态管理库（比如GetX）对比有什么优点，等等之类的都不清楚，所以一直很难深入学习。 来看下图： 我本人是 iOS APP 开发，所以对于 MVVM 很熟悉，对比上图，UI Layer 是 View，Service Layer是 Model，所以 State Management Layer 就是 ViewModel，这样解释对比，我就对状态管理有了直观的理解，只是换了个名称，其实就是 ViewModel。 为什么要状态管理那为什么要状态管理呢？其实理解了上面，...</div></div></div></a><a class="pagination-related" href="/2026/01/20/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-20</div><div class="info-item-2">关于 AI 与开发</div></div><div class="info-2"><div class="info-item-1">背景最近看到了很多 AI 与开发的话题，比如 # AI 不能帮你背 D 绩效、# 如何看待在线笔试中使用 AI 作弊、# 我们真的应该完全放弃《古法编程》？、# 大家都来分享一下自己的 vibe coding 技巧等等，我也想分享一下我自己的看法。    思考参考 # 大家都来分享一下自己的 vibe coding 技巧 # AI 不能帮你背 D 绩效 # 如何看待在线笔试中使用 AI 作弊 # 我们真的应该完全放弃《古法编程》？  </div></div></div></a><a class="pagination-related" href="/2024/06/18/%E6%8F%90%E9%86%92%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6%E6%9C%89%E6%95%88%E6%9C%9F%E7%9A%84%20Mac%20APP%20%E5%BC%80%E5%8F%91/" title="提醒描述文件有效期的 Mac APP 开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-18</div><div class="info-item-2">提醒描述文件有效期的 Mac APP 开发</div></div><div class="info-2"><div class="info-item-1">背景之前有写过使用Python实现提醒iOS描述文件有效期，这篇文章介绍一下使用SwiftUI通过Mac APP实现提醒描述文件有效期。     实现原理是： 打开描述文件所在的文件夹，遍历读取文件内容，过滤掉后缀不为.mobileprovision的文件，然后读取文件内容（这里不需要再存储为其他格式，因为可以直接读取内容），从文件中读取指定的字段，然后根据ExpirationDate字段判断是否过期。 想要实现的功能：  不同有效期期显示不同颜色——已完成 筛选过期的、临近过期的、正常的描述文件——已完成 添加到期提醒到日历——已完成 筛选同一个 BundleID 重复的描述文件——未完成 一键删除所有过期的描述文件——已完成  代码放在了ScanProfileInfo，感兴趣的下载运行即可。 样式如下： </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">189</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E8%A1%A8%E6%83%85%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">批量生成表情包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E8%A3%81%E5%88%87%E5%B7%A5%E5%85%B7"><span class="toc-number">4.</span> <span class="toc-text">生成一个裁切工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E8%A1%A8%E6%83%85%E5%8C%85%E6%A8%AA%E5%B9%85"><span class="toc-number">5.</span> <span class="toc-text">生成表情包横幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A0%E5%9B%BE%E7%94%9F%E6%88%90%E8%83%8C%E6%99%AF%E9%80%8F%E6%98%8E%E7%9A%84%E5%B0%81%E9%9D%A2%E5%92%8C%E5%9B%BE%E6%A0%87"><span class="toc-number">6.</span> <span class="toc-text">抠图生成背景透明的封面和图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9E%E8%B5%8F%E5%BC%95%E5%AF%BC%E5%9B%BE%E5%92%8C%E8%87%B4%E8%B0%A2%E5%9B%BE"><span class="toc-number">7.</span> <span class="toc-text">赞赏引导图和致谢图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">8.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%B9%B6%E6%8F%90%E4%BA%A4%E5%BE%AE%E4%BF%A1%E8%A1%A8%E6%83%85%E5%8C%85"><span class="toc-number">9.</span> <span class="toc-text">注册并提交微信表情包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5"><span class="toc-number">10.</span> <span class="toc-text">更进一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">11.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google Antigravity 登录不了解决">Google Antigravity 登录不了解决</a><time datetime="2026-01-22T02:38:00.000Z" title="发表于 2026-01-22 10:38:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T13:45:00.000Z" title="发表于 2026-01-21 21:45:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/20/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-20T11:41:00.000Z" title="发表于 2026-01-20 19:41:00">2026-01-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/16/%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E8%A1%A8%E6%83%85%E5%8C%85/" title="制作自己表情包">制作自己表情包</a><time datetime="2026-01-16T02:21:00.000Z" title="发表于 2026-01-16 10:21:00">2026-01-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="鸿蒙截图生成工具">鸿蒙截图生成工具</a><time datetime="2025-10-13T07:24:00.000Z" title="发表于 2025-10-13 15:24:00">2025-10-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
