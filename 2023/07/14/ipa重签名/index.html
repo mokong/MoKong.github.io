@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iPA重签名 + 香色闺阁、微信重签名实战 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景换手机之后，原来的香色闺阁不能下载，转移的时候就丢失了。又最近看到有人截屏iPhone上装了两个微信，一个是自己重签名的；想到自己有开发者账号，但是还没试过重签名APP，是不是可以通过重签名来安装香色闺阁，以及实现多开微信？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iPA重签名 + 香色闺阁、微信重签名实战">
+<meta property="og:url" content="http://morganwang.cn/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="背景换手机之后，原来的香色闺阁不能下载，转移的时候就丢失了。又最近看到有人截屏iPhone上装了两个微信，一个是自己重签名的；想到自己有开发者账号，但是还没试过重签名APP，是不是可以通过重签名来安装香色闺阁，以及实现多开微信？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2023-07-14T08:37:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iPA重签名 + 香色闺阁、微信重签名实战",
+  "url": "http://morganwang.cn/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2023-07-14T08:37:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iPA重签名 + 香色闺阁、微信重签名实战',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">iPA重签名 + 香色闺阁、微信重签名实战</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">iPA重签名 + 香色闺阁、微信重签名实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-14T08:37:00.000Z" title="发表于 2023-07-14 16:37:00">2023-07-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>换手机之后，原来的香色闺阁不能下载，转移的时候就丢失了。又最近看到有人截屏iPhone上装了两个微信，一个是自己重签名的；想到自己有开发者账号，但是还没试过重签名APP，是不是可以通过重签名来安装香色闺阁，以及实现多开微信？</p>
+<span id="more"></span>
+
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>说干就干，首先从简单的开始，先来尝试重签名香色闺阁，再尝试微信，因为香色闺阁的包内容比微信的少很多，文件容易找，相对简单，步骤如下：</p>
+<h3 id="重签名香色闺阁"><a href="#重签名香色闺阁" class="headerlink" title="重签名香色闺阁"></a>重签名香色闺阁</h3><p>首先从网上搜素下载香色闺阁的 ipa 包，没有的可以从这里<a target="_blank" rel="noopener" href="https://github.com/mokong/yuedu/blob/main/original_iPA/yuedu.ipa">yuedu.ipa</a>下载。</p>
+<p>然后将 ipa 改为 zip，然后解压，会出现一个 Payload 文件夹，里面有一个<code>StandarReader.app</code>的文件。选中<code>StandarReader.app</code>，右键显示包内容，可以看到APP包中的所有内容，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230714-174131.png" alt="ipa解压"></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230714-174206.png" alt="显示包内容"></p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230714-174305.png" alt="package content"></p>
+<p>重签名就是用自己的账号新建一个APP（bundleID自己定义），运行到手机上，找到运行的包(<code>xxx/DriveData/xxx/Build/Products/Debug-iphoneos/xxx.app</code>)或者通过打包的方式，使用<code>AdHoc</code>方式生成一个iPA（用于获取到描述文件和<code>Entitlements.plist</code>），这里需要注意选择的描述文件包含要安装的设备，然后把待签名的iPA中的<code>bundleID</code>、证书和描述文件，替换成自己创建的APP的。</p>
+<p>所以通常需要修改的有以下内容：</p>
+<ul>
+<li>Info.plist 中的 bundleID</li>
+<li>embedded.mobileprovision 签名文件</li>
+<li>_CodeSignature中的内容</li>
+<li>因为普通账号不能对插件进行签名，在包内容路径中找到Watch和PlugIns文件夹直接删除</li>
+<li>重签 framework</li>
+</ul>
+<p>而针对香色闺阁的 ipa 来说，没有插件，没有 framework，所以需要修改的文件有：<code>Info.plist</code>、<code>embedded.mobileprovision</code>、<code>_CodeSignature</code>中的内容，下面具体来看如何修改：</p>
+<h4 id="修改Info-plist中的bundleID"><a href="#修改Info-plist中的bundleID" class="headerlink" title="修改Info.plist中的bundleID"></a>修改Info.plist中的bundleID</h4><p>找到<code>Payload/StandarReader.app</code>中的Info.plist，用 Xcode 打开，或者其他编辑器打开，找到<code>Bundle identifier</code>，可以看到香色闺阁的bundleID为<code>com.appbox.StandarReader</code>，替换<code>com.appbox.StandarReader</code>为自己创建APP的bundleID， 如下图：</p>
+<p>Ps: 如果不是Xcode打开可以直接搜索替换</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230714-181407.png" alt="替换bundleID"></p>
+<h4 id="替换embedded-mobileprovision"><a href="#替换embedded-mobileprovision" class="headerlink" title="替换embedded.mobileprovision"></a>替换<code>embedded.mobileprovision</code></h4><p>从自己新建APP的iPA中获取到新的<code>embedded.mobileprovision</code>，步骤同上：改为zip -&gt; 解压缩 -&gt; 查看包内容，找到<code>embedded.mobileprovision</code>拷贝出来，可以放到要替换的<code>Payload</code>目录的外层，如下图:</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230714-180247.png" alt="新的embedded.mobileprovision"></p>
+<p>然后用这个新的替换原APP中<code>embedded.mobileprovision</code>，可以通过命令行，如下：</p>
+<ol>
+<li>删除原APP中的描述文件 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf Payload/xxx.app/embedded.mobileprovision</span><br></pre></td></tr></table></figure></li>
+<li>把新的描述文件，放入xxx.app中 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp embedded.mobileprovision Payload/xxx.app/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="重新签名"><a href="#重新签名" class="headerlink" title="重新签名"></a>重新签名</h4><p>从自己创建的APP的<code>embedded.mobileprovision</code>中获取<code>Entitlements.plist</code>，<em>注意是自己创建的APP中获取，而不是香色闺阁的包中获取</em>，然后删除香色闺阁包中的<code>_CodeSignature</code>，再用生成的<code>Entitlements.plist</code>给香色闺阁包生成新的签名，具体步骤如下：</p>
+<ol>
+<li>生成<code>Entitlements.plist</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/libexec/PlistBuddy -x -c <span class="string">&quot;print:Entitlements &quot;</span> /dev/stdin &lt;&lt;&lt; $(security cms -D -i xxx.app/embedded.mobileprovision) &gt; Entitlements.plist</span><br></pre></td></tr></table></figure></li>
+<li>删除香色闺阁包中的<code>_CodeSignature</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf Payload/xxx.app/_CodeSignature/</span><br></pre></td></tr></table></figure></li>
+<li>用新的<code>Entitlements.plist</code>给香色闺阁包生成新的签名<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 首先获取证书名称</span><br><span class="line">security find-identity -v -p codesigning</span><br><span class="line">// 选择创建APP时使用的证书进行签名</span><br><span class="line">codesign -f -s <span class="string">&quot;证书名称&quot;</span> --entitlements entitlements.plist Payload/xxx.app</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="打包，安装"><a href="#打包，安装" class="headerlink" title="打包，安装"></a>打包，安装</h4><p>将<code>Payload</code>文件夹在压缩为<code>ipa</code>文件，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r xxx.ipa Payload/</span><br></pre></td></tr></table></figure>
+
+<p>最后安装，可以选中Xcode，然后选择 Windows -&gt; Device And Simulators，或者选中Xcode后使用快捷键<code>Shift+CMD+2</code>打开，选中设备，点击<code>+</code>，选择生成的ipa，即可安装。</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230717-092647.png" alt="Xcode安装ipa"></p>
+<h3 id="重签名微信"><a href="#重签名微信" class="headerlink" title="重签名微信"></a>重签名微信</h3><p>第一步，获取微信的 ipa 文件，要注意下载 ipa 的可用性，要不然辛苦半天最后发现不能用，误以为是步骤有问题，有可能是包的问题。。。笔者最终可用的是从这里下载的<a target="_blank" rel="noopener" href="https://ipa.store/3073.html">微信 ipa</a></p>
+<p>ipa 下载完成后，和上面步骤类似，改为.zip，解压，获取到Payload/WeChat.app，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230717-163712.png" alt="WeChat_app"></p>
+<p>用自己的账号新建一个APP（bundleID自己定义），运行到手机上，找到运行的包(<code>xxx/DriveData/xxx/Build/Products/Debug-iphoneos/xxx.app</code>)或者通过打包的方式，使用<code>AdHoc</code>方式生成一个iPA（用于获取到描述文件和<code>Entitlements.plist</code>），这里需要注意选择的描述文件包含要安装的设备，然后把待签名的iPA中的<code>bundleID</code>、证书和描述文件，替换成自己创建的APP的。</p>
+<h4 id="修改-info-plist-的-bundleIdentifier"><a href="#修改-info-plist-的-bundleIdentifier" class="headerlink" title="修改 info.plist 的 bundleIdentifier"></a>修改 info.plist 的 bundleIdentifier</h4><p>然后查看WeChat.app的包内容，找到<code>info.plist</code>，并替换其中的<code>bundleIdentifier</code>为自己创建的(WeChat.app中内容很多，可以按修改日期排序，会相对容易找到要修改的文件)，如下图：<br><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230717-164527.png" alt="微信bundleID修改"></p>
+<h4 id="替换embedded-mobileprovision-1"><a href="#替换embedded-mobileprovision-1" class="headerlink" title="替换embedded.mobileprovision"></a>替换<code>embedded.mobileprovision</code></h4><p>从自己创建的APP中获取到<code>embedded.mobileprovision</code>，然后替换<code>WeChat.app</code>中的<code>embedded.mobileprovision</code>，可以直接复制替换。</p>
+<h4 id="重签名Frameworks"><a href="#重签名Frameworks" class="headerlink" title="重签名Frameworks"></a>重签名Frameworks</h4><p>对比上面的香色闺阁，这里多了重签名Frameworks的步骤，需要把<code>Frameworks</code>中的所有库，都用自己的证书重新签名一下，<code>Frameworks</code>中内容如下图（这里可能有非官方的库，一并签名了，不影响）：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230717-165700.png" alt="Frameworks内容"></p>
+<p>重签名的命令如下，重复执行，直到<code>Frameworks</code>下所有库都签名完成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codesign -fs <span class="string">&quot;你的证书&quot;</span> xxx.framework</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230717-170142.png" alt="替换framework签名"></p>
+<h3 id="删除Plugins"><a href="#删除Plugins" class="headerlink" title="删除Plugins"></a>删除Plugins</h3><p>笔者下载的这个版本的<code>WeChat.app</code>的Content中未找到<code>Plugins</code>的内容，故而不需要处理</p>
+<h4 id="替换签名"><a href="#替换签名" class="headerlink" title="替换签名"></a>替换签名</h4><p>从自己创建的APP中获取到的<code>embedded.mobileprovision</code>生成<code>Entitlements.plist</code>，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/libexec/PlistBuddy -x -c <span class="string">&quot;print:Entitlements &quot;</span> /dev/stdin &lt;&lt;&lt; $(security cms -D -i xxx.app/embedded.mobileprovision) &gt; Entitlements.plist</span><br></pre></td></tr></table></figure>
+
+<p>然后删除<code>WeChat.app</code>中的<code>_CodeSignature</code>，再用生成的<code>Entitlements.plist</code>，给<code>WeChat.app</code>重签名，命令如下，执行时注意<code>Entitlements.plist</code>和<code>WeChat.app</code>的路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codesign -fs <span class="string">&quot;你的证书&quot;</span> --no-strict --entitlements=Entitlements.plist Payload/WeChat.app/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230717-170443.png" alt="重签名WeChat.app"></p>
+<p> 然后压缩<code>/Payload/WeChat.app</code>，生成<code>xxx.ipa</code>，命令如下：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r xxx.ipa Payload/</span><br></pre></td></tr></table></figure>
+
+<p> 最后使用 Xcode 安装 xxx.ipa 到手机，步骤如下：<br> 选中Xcode，<code>Shipt+CMD+2</code>打开窗口，然后选中设备，点击”+”，选择<code>xxx.ipa</code>，等待安装</p>
+<p> 最后安装后效果如下：</p>
+<!-- ![最终](https://raw.githubusercontent.com/mokong/BlogImages/main/img/202307171734346.png) -->
+<!-- ![最终效果](https://raw.githubusercontent.com/mokong/BlogImages/main/img/RPReplay_Final1689585448.MP4) -->
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/RPReplay_Final1689585448%20(1).gif" alt="最终效果"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下，ipa重签名是用自己的证书和描述文件替换对应包中的证书和描述文件的过程，总的步骤如下：</p>
+<ul>
+<li>找到可用的 ipa</li>
+<li>新建项目，编译或者打包，获取到对应的<code>embeded.mobileprovision</code></li>
+<li>修改替换包的<code>bundleIdentifier</code>为自己创建项目的<code>bundleIdentifier</code></li>
+<li>用自己的<code>embeded.mobileprovision</code>更新替换包中的</li>
+<li>重签名<code>Frameworks</code></li>
+<li>删除<code>Plugins</code></li>
+<li>用自己的<code>embeded.mobileprovision</code>生成<code>Entitlements.plist</code>，然后重签名<code>xxx.app</code></li>
+<li>最后打包<code>xxx.app</code>成<code>xxx.ipa</code>，安装</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903998110040077">iOS逆向 应用重签名+微信重签名实战</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7031729444914102303">iOS ipa重签名</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/">http://morganwang.cn/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/07/21/%E8%BD%AF%E8%80%83-%E7%B3%BB%E7%BB%9F/" title="软考分享"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">软考分享</div></div><div class="info-2"><div class="info-item-1">背景为了落户，3月份的时候报名了软考-系统集成项目管理工程师，昨天出结果，过了，这里记录分享一下。   过程首先是选择考什么，然后是考虑怎么考。 考什么的要针对自己的实际情况，我选择来选择去，最后选择了系统集成项目管理工程师，因为我的目标是落户，中级的软考就满足条件了；高级的可以等中级考过之后，再来考。 然后是怎么考的问题，没考虑自学，所以要选择报班，看了希赛网、51CTO之类的，发现都要几千，贵了。后来看有人推荐江山老师，说软考中级的就找江山老师的视频看一下，软考高级的花一百多再买视频学习，我就去搜了一下，发现只要中级的只要99，而且一个月内可以退款，就买了，打算先试试看。 书籍，江山老师推荐买书，我花重金（39）买了一本书，买回来就没打开过，太厚了，不推荐购买。 学习步骤： 我是每天上下班路上，看买的视频，从精讲开始，然后是真题，然后是计算题，最后是冲刺视频；精讲的只看了一遍，有大致的印象，真题也看了一遍，计算题看了两边，然后是打印了一份十几页的资料，背了一下，最后是冲刺的视频，看了一遍。 再有就是刷题，江山老师有自己的小程序，但是我用的另一个《软考真题王》的小程序，感觉不错...</div></div></div></a><a class="pagination-related" href="/2023/06/29/meiju_Flutter/" title="Flutter版本的海外剧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Flutter版本的海外剧</div></div><div class="info-2"><div class="info-item-1">背景前阵子抓包，有两个海外剧的接口，最近有时间，打算温习一下 Flutter，就用来写了一个简单的 APP，包含轮播图、下拉刷新、上拉加载以及播放功能。   效果如下：                 运行时需要注意 Flutter 版本的问题，可能需要修改 播放器的 package 中的代码，直接Google 搜索，修改即可，如有疑问可以联系我。 代码放在 Github 上，地址是：meiju_flutter </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" title="iOS APP添加桌面快捷方式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-06</div><div class="info-item-2">iOS APP添加桌面快捷方式</div></div><div class="info-2"><div class="info-item-1">iOS APP添加桌面快捷方式背景新接到一个需求，需要APP内的某些功能，能够把入口添加到桌面，点击桌面到入口可以直接跳转APP对应界面（类似于下面这张示例图），于是就做了一番调研。 其实很多APP目前都已经实现了类似的功能，比如支付宝、云闪付等等，其中的每一个独立功能都可以单独添加到桌面，所以网上有很多实现的方法，笔者做的是整理和试错。       实现首先，添加到桌面功能的操作流程是： 客户端打开APP -&gt; 进入到对应到APP功能模块 -&gt; 点击添加快捷方式到桌面按钮 -&gt; 跳转浏览器，并加载引导页面，点击分享，选择添加到主屏幕 -&gt; 从主屏幕点击刚刚添加到快捷功能，跳转到APP的对应界面。  根据笔者了解到的信息，目前实现这种功能，大致可以分为两种实现方式：  方法一：H5提供网页，每个不同的功能提供不同的网页，服务端返回这些网页的URL，客户端配置打开URL Scheme，然后使用Safari直接加载URL，加载的网页中根据进入方式的不同，自动重定向打开APP的URL Scheme。  方法二：H5提供通用的网页，客户端替换通用网页中的内容，比如...</div></div></div></a><a class="pagination-related" href="/2024/07/31/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Swift 面试题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-31</div><div class="info-item-2">Swift 面试题</div></div><div class="info-2"><div class="info-item-1">背景被问到的面试题，这里记录一下。   问题Swift 中 Struct 和 Class 的区别Swift 中 为什么 String、Array、Dictionary 用 Struct 实现Swift 中写时复制的原理Swift 中变量作用域有哪些，区别是什么Swift中 Protocol 如何声明可空MVP 的优点是什么RxSwift 中冷信号和热信号的区别RxSwift 中 CombineLatest、zip、merge的区别Git 中 rebase和 merge 的区别，rebased的 commitID 会改变吗SwiftUI 中 View 传值方式有哪些什么情况下触发 layoutSubviews 答案Swift 中 Struct 和 Class 的区别Struct是值类型，Class 是引用类型；Struct和 Class 都可以有属性和方法，但是 let 修饰的 Struct 不能更改，Class 修饰的可以更改；Struct方法中修改属性需要在方法前添加 mutating 关键字。Struct和 Class 都可以实现协议。Struct不能被继承，Class 可以...</div></div></div></a><a class="pagination-related" href="/2024/11/19/Xcode%20%E4%BD%BF%E7%94%A8%E5%85%8D%E8%B4%B9%20Codeium%20%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/" title="Xcode使用免费的Codeium代码补全插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-19</div><div class="info-item-2">Xcode使用免费的Codeium代码补全插件</div></div><div class="info-2"><div class="info-item-1">背景在使用Xcode开发iOS应用时，经常需要编写大量的代码，而代码补全是提高开发效率的重要工具。Codeium是一款免费的代码补全插件，它可以帮助快速编写代码，提高开发效率。    如果有付费Copilot的，可以直接使用CopilotForXcode，之前公司有企业付费，所以用的这个工具，换公司后，不能用了，所以就想找一个免费的，虽然CopilotForXcode也包含有Codeium，但是却一直用不了。所以就想找一个能用Codeium的，参考 Codeium in Xcode ，起始项目是从CopilotForXcode中引出的，只为专门使用Codeium创建的，所以安装步骤和使用跟CopilotForXcode几乎一样。 使用安装步骤可以参考CodeiumForXcode，大致共有下面几个地方。  System Preferences ——&gt; Privacy &amp; Security ——&gt; Accessibility中，将Codeium添加到列表中。如下图：  General ——&gt; Login Items &amp; Extensions 中，将...</div></div></div></a><a class="pagination-related" href="/2024/03/16/Pod%20%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8/" title="Pod 私有库相互引用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-16</div><div class="info-item-2">Pod 私有库相互引用</div></div><div class="info-2"><div class="info-item-1">私有库的相互引用文章是转载自OC和Swift混合开发(Pod私有库的相互引用)，在这里记录一下，方便以后查看。   概述：该文档主要介绍OC和Swift混合开发相互调用，包括3大类情况和12种具体情形。 三大类情况：  主工程内的混合互调，  主工程和Pod三方库之间的混合互调，  Pod三方库和其他Pod三方库之间的混合互调。   十二种情形：  主工程内的OC 调用 主工程内的OC：#import “NSObject.h”   导入头文件直接调用。   主工程内的OC 调用 主工程内的Swift：   1. 主工程中创建.pch文件，在TARGETS -&gt; Build Setting -&gt; 搜索pch -&gt; 设置.pch文件的路径，     2. 在.pch文件中添加 ：       例如：#import “xxxxx_Swift.h”        (该文件命名规则为：”工程名_Swift.h”，该文件为系统自动生成) ，    3. 编译之后才可自动识别需要调用的Swift的文件 。  主工程内的OC 调用 OC的Pod三方库：     #import ...</div></div></div></a><a class="pagination-related" href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/" title="iOS 键盘删除键响应"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-20</div><div class="info-item-2">iOS 键盘删除键响应</div></div><div class="info-2"><div class="info-item-1">iOS 键盘删除键响应背景背景是，实现一个分享到微信，多选加输入框，点击键盘删除键，删除多选选中对象的东西。    实现由于UITextField没有删除键的代理，所以笔者最开始的想法是，通过textField:shouldChangeCharactersInRange:replacementString:来实现监听，当当前字符串为空且要替换字符串为空时，说明是点击的删除按钮，通过Block方法回掉出去，代码如下： 12345678910- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string &#123;    if ((textField.text.length == 0) &amp;&amp; (string.length == 0)) &#123;        if (self.deleteBackwardBlock) &#123;            self.deleteBa...</div></div></div></a><a class="pagination-related" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/" title="正经分析iOS包大小优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-27</div><div class="info-item-2">正经分析iOS包大小优化</div></div><div class="info-2"><div class="info-item-1">本文发表在《搜狐技术产品》公众号正经分析iOS包大小优化 iOS 包大小分析优化背景包大小优化是项目开发中不可避免会遇到的，网上关于包大小优化的文章很多，每篇文章说的都不尽相同，笔者曾经根据网上的文章做过包大小优化，但效果不尽人意；因此笔者想根据已有的文章、知识结合自己的理解、实践，做一份总结梳理，整理自己的包大小优化逻辑，不光要知道怎么做可以让包大小变化，还要知道为什么这么做能产生效果，所以就有了这篇文章。   分析想要优化安装包大小，首先需要弄清楚影响安装包大小的因素有哪些？之前笔者优化包大小直接闷着头就去瘦身，瘦来瘦去也没瘦出个名堂，而且还跟别人说不清楚自己做了什么，为什么这么做？ 后来总结出来，做事之前要先思考、分析、最后再去做，要思考的是影响这件事的因素有哪些，一一列举出来，查漏补缺；然后针对这些因素进行分析，分析哪些因素是人为可控的，哪些因素是不能改变的，针对可控的部分要怎么优化，不可控的部分是否能避免，最好可以使用思维导图工具，一一记录；然后按照思维导图的整理出来的数据，按步骤去执行。 回过头来，针对安装包大小，首先分析影响安装包大小的因素，有：Xcode的设置、资...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E7%AD%BE%E5%90%8D%E9%A6%99%E8%89%B2%E9%97%BA%E9%98%81"><span class="toc-number">2.1.</span> <span class="toc-text">重签名香色闺阁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9Info-plist%E4%B8%AD%E7%9A%84bundleID"><span class="toc-number">2.1.1.</span> <span class="toc-text">修改Info.plist中的bundleID</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2embedded-mobileprovision"><span class="toc-number">2.1.2.</span> <span class="toc-text">替换embedded.mobileprovision</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E7%AD%BE%E5%90%8D"><span class="toc-number">2.1.3.</span> <span class="toc-text">重新签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85%EF%BC%8C%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.4.</span> <span class="toc-text">打包，安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E7%AD%BE%E5%90%8D%E5%BE%AE%E4%BF%A1"><span class="toc-number">2.2.</span> <span class="toc-text">重签名微信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-info-plist-%E7%9A%84-bundleIdentifier"><span class="toc-number">2.2.1.</span> <span class="toc-text">修改 info.plist 的 bundleIdentifier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2embedded-mobileprovision-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">替换embedded.mobileprovision</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E7%AD%BE%E5%90%8DFrameworks"><span class="toc-number">2.2.3.</span> <span class="toc-text">重签名Frameworks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4Plugins"><span class="toc-number">2.3.</span> <span class="toc-text">删除Plugins</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E7%AD%BE%E5%90%8D"><span class="toc-number">2.3.1.</span> <span class="toc-text">替换签名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

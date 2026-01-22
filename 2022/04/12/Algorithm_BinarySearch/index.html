@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Algorithem_BinarySearch | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Algorithem_BinarySearchBinarySearchGiven an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algorithem_BinarySearch">
+<meta property="og:url" content="http://morganwang.cn/2022/04/12/Algorithm_BinarySearch/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="Algorithem_BinarySearchBinarySearchGiven an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2022-04-12T02:57:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Algorithem">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Algorithem_BinarySearch",
+  "url": "http://morganwang.cn/2022/04/12/Algorithm_BinarySearch/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2022-04-12T02:57:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2022/04/12/Algorithm_BinarySearch/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Algorithem_BinarySearch',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Algorithem_BinarySearch</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Algorithem_BinarySearch</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-12T02:57:00.000Z" title="发表于 2022-04-12 10:57:00">2022-04-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Algorithem-BinarySearch"><a href="#Algorithem-BinarySearch" class="headerlink" title="Algorithem_BinarySearch"></a>Algorithem_BinarySearch</h1><h3 id="BinarySearch"><a href="#BinarySearch" class="headerlink" title="BinarySearch"></a>BinarySearch</h3><p>Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.</p>
+<p>You must write an algorithm with O(log n) runtime complexity.</p>
+<span id="more"></span>
+
+<p><strong>Constraints:</strong><br>All the integers in nums are unique.<br>nums is sorted in ascending order.</p>
+<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>一开始我的想法是，从每次数组的中间 middleIndex 开始查找，比较数组中间的数字和 target 的大小，target 大则取 从middleIndex到数组结尾截取数组生成新的数组；target 小则取从0到 middleIndex 的生成新的数组；相等则直接返回 index；然后用新生成的数组再比较，递归调用自身；但这种方法，每次递归需要记录递归开始的位置，然后最后查找到的时候，才能用查找到的 index加或减开始的位置。</p>
+<p>官方算法：</p>
+<ul>
+<li>从 数组中间 开始查找，声明 left、right 代表要查找的数组起始位置和结束位置</li>
+<li>使用 while，left &lt;= right为条件，然后遍历<ul>
+<li>middleIndex = left + (right - left) / 2</li>
+<li>target &lt; middleNum，则说明 targert 在left 到 middle-1之间；</li>
+<li>target &gt; middleNum，则说明 target 在 middle + 1到 right 之间；</li>
+<li>target == middleNum，则直接返回 middleIndex 即可。</li>
+</ul>
+</li>
+</ul>
+<p>边界值测试：</p>
+<ul>
+<li>如果有一个元素，则，left=0，right=0，left=right，middleIndex=0，判断nums[middleIndex]是否等于target</li>
+<li>如果有两个元素，则，left=0，right=1，left&lt;right，middleIndex=0，判断 nums[middleIndex]和 target 大小<ul>
+<li> 如果 target &lt; nums[middleIndex]，right = middleIndex-1=-1，left &gt; right，不满足循环条件，说明数组没有此元素，返回-1</li>
+<li> 如果 target &gt; nums[middleIndex]，left = middleIndex+1=1，left = right，继续遍历下一次，left=1，right=1，middleIndex=1，判断 nums[middleIndex]和 target 大小</li>
+<li> 如果 target = nums[middleIndex]，则返回 middleIndex 即可。</li>
+</ul>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">search</span>(<span class="keyword">_</span> <span class="params">nums</span>: [<span class="type">Int</span>], <span class="keyword">_</span> <span class="params">target</span>: <span class="type">Int</span>)</span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> count <span class="operator">=</span> nums.count</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> left <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">var</span> right <span class="operator">=</span> count <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> findIndex <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (left <span class="operator">&lt;=</span> right) &#123;</span><br><span class="line">            findIndex <span class="operator">=</span> left <span class="operator">+</span> (right <span class="operator">-</span> left) <span class="operator">/</span> <span class="number">2</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> num <span class="operator">=</span> nums[findIndex]</span><br><span class="line">            <span class="keyword">if</span> target <span class="operator">&lt;</span> num &#123;</span><br><span class="line">                right <span class="operator">=</span> findIndex <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> target <span class="operator">&gt;</span> num &#123;</span><br><span class="line">                left <span class="operator">=</span> findIndex <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> findIndex</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="operator">-</span><span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="FirstBadVersion"><a href="#FirstBadVersion" class="headerlink" title="FirstBadVersion"></a>FirstBadVersion</h2><h3 id="FirstBadVersion-1"><a href="#FirstBadVersion-1" class="headerlink" title="FirstBadVersion"></a>FirstBadVersion</h3><p>You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.</p>
+<p>Suppose you have n versions [1, 2, …, n] and you want to find out the first bad one, which causes all the following ones to be bad.</p>
+<p>You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.</p>
+<h4 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h4><p>一开始我的想法是：类似BinarySearch，先从中间值开始，如果中间的是 BadVersion，则继续往前取中间；如果中间的不是 BadVersion，则继续往后取中间。但是结束的条件，一直没有理解清楚。</p>
+<p>官方算法：</p>
+<ul>
+<li>从 数组中间 开始查找，声明 left、right 代表要查找的数组起始位置和结束位置</li>
+<li>使用 while，left &lt; right为条件，然后遍历<ul>
+<li>middleIndex = left + (right - left) / 2</li>
+<li>middleIndex 是 BadVersion，则说明第一个 BadVersion 在left 到 middleIndex之间，这里需要注意的是当前 middleIndex 可能是第一个 BadVersion，所以取得时候需要包含 middleIndex</li>
+<li>middleIndex 不是 BadVersion，则说明  第一个 BadVersion 在 middleIndex + 1到 right 之间；</li>
+</ul>
+</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Scenario #1: isBadVersion(mid) =&gt; false</span><br><span class="line"></span><br><span class="line"> 1 2 3 4 5 6 7 8 9</span><br><span class="line"> G G G G G G B B B       G = Good, B = Bad</span><br><span class="line"> |       |       |</span><br><span class="line">left    mid    right</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Scenario #1详解：</p>
+<ul>
+<li>left=1, right=9; left &lt; right; middle = 5, isBadVersion(5) = false，说明5是好的，坏的版本在6~9之间；把 left赋值为6</li>
+<li>left=6, right=9; left &lt; right; middle = 7, isBadVersion(7) = true，说明7是坏的，坏的版本在6~7之间；把right赋值为7</li>
+<li>left=6, right=7; left &lt; right; middle = 6, isBadVersion(6) = false, 说明6是好的，坏的版本在7~7之间；把 left 赋值为7</li>
+<li>left=7, right=7; left = right; 不满足循环条件，最终 left=7，7即是第一个坏的版本；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Scenario #2: isBadVersion(mid) =&gt; true</span><br><span class="line"></span><br><span class="line"> 1 2 3 4 5 6 7 8 9</span><br><span class="line"> G G G B B B B B B       G = Good, B = Bad</span><br><span class="line"> |       |       |</span><br><span class="line">left    mid    right</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Scenario #2详解：</p>
+<ul>
+<li>left=1, right=9; left &lt; right; middle = 5, isBadVersion(5) = true，说明5是坏的，坏的版本在left~5之间；把 right赋值为5</li>
+<li>left=1, right=5; left &lt; right; middle = 3, isBadVersion(3) = false，说明3是好的，坏的版本在4~right之间；把left赋值为4</li>
+<li>left=4, right=5; left &lt; right; middle = 4, isBadVersion(4) = true, 说明4是坏的，坏的版本在left~4之间；把 right 赋值为4</li>
+<li>left=4, right=4; left = right; 不满足循环条件，最终 left=4，4即是第一个坏的版本；</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The knows API is defined in the parent class VersionControl.</span></span><br><span class="line"><span class="comment"> *     func isBadVersion(_ version: Int) -&gt; Bool&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> : <span class="title">VersionControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">firstBadVersion</span>(<span class="keyword">_</span> <span class="params">n</span>: <span class="type">Int</span>)</span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> left <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> right <span class="operator">=</span> n</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> left <span class="operator">&lt;</span> right &#123;</span><br><span class="line">            <span class="keyword">let</span> middle <span class="operator">=</span> left <span class="operator">+</span> (right <span class="operator">-</span> left) <span class="operator">/</span> <span class="number">2</span></span><br><span class="line">            <span class="keyword">let</span> isBad <span class="operator">=</span> isBadVersion(middle) </span><br><span class="line">            <span class="keyword">if</span> isBad &#123;</span><br><span class="line">                right <span class="operator">=</span> middle</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                left <span class="operator">=</span> middle <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Search-Insert-Position"><a href="#Search-Insert-Position" class="headerlink" title="Search Insert Position"></a>Search Insert Position</h2><h3 id="Search-Insert-Position-1"><a href="#Search-Insert-Position-1" class="headerlink" title="Search Insert Position"></a>Search Insert Position</h3><p>Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.</p>
+<p>You must write an algorithm with O(log n) runtime complexity.</p>
+<h4 id="解法-2"><a href="#解法-2" class="headerlink" title="解法"></a>解法</h4><p>这个解法和 BinarySearch 逻辑一样，唯一不同的是，BinarySearch查找不到返回-1，而这个查找不到相等的最后返回的是 left 的位置。</p>
+<p>代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchInsert</span>(<span class="keyword">_</span> <span class="params">nums</span>: [<span class="type">Int</span>], <span class="keyword">_</span> <span class="params">target</span>: <span class="type">Int</span>)</span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> left <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">var</span> right <span class="operator">=</span> nums.count <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> middle <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> left <span class="operator">&lt;=</span> right &#123;</span><br><span class="line">            middle <span class="operator">=</span> left <span class="operator">+</span> (right <span class="operator">-</span> left) <span class="operator">/</span> <span class="number">2</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> middleNum <span class="operator">=</span> nums[middle]</span><br><span class="line">            <span class="keyword">if</span> target <span class="operator">&lt;</span> middleNum &#123;</span><br><span class="line">                <span class="comment">// means target in left..&lt;middle</span></span><br><span class="line">                right <span class="operator">=</span> middle <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> target <span class="operator">&gt;</span> middleNum &#123;</span><br><span class="line">                <span class="comment">// means targets in middle..&lt;right</span></span><br><span class="line">                left <span class="operator">=</span> middle <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// equal return middleNum</span></span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2022/04/12/Algorithm_BinarySearch/">http://morganwang.cn/2022/04/12/Algorithm_BinarySearch/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/Algorithem/">Algorithem</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2022/04/13/Algorithm_Sort/" title="Algorithem_Sort"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Algorithem_Sort</div></div><div class="info-2"><div class="info-item-1">Algorithem_SortGiven an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.   QuickSort实现逻辑：取指定位置的 index 的值key，比较index和 index之前的数字，如果前面的数字大于后面的数字，则交换位置; 比如： 123456789[ 8 3 5 1 4 2 ]从 index为1开始，当前元素3，前面元素8，8 &gt; 3，故而交换位置，数组还为[ 3 8 5 1 4 2 ]然后 index 为2，当前元素为5，前面元素为8，8&gt;5，故而交换位置，数组为[ 3 5 8 1 4 2 ]然后 index 为3，当前元素为1，前面元素为8，8&gt;1，故而交换位置，数组为[ 3 5 1 8 4 2 ]；5&gt;1，故而交换位置，数组为[ 3 1 5 8 4 2 ]；3&gt;1，故而交换位置，数组为[ 1 3 5 8 4 2...</div></div></div></a><a class="pagination-related" href="/2022/04/08/2022%E5%B9%B404%E6%9C%88%E7%BB%8F%E5%8E%86/" title="2022年04月经历"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2022年04月经历</div></div><div class="info-2"><div class="info-item-1">我住在上海青浦，想记录一下这次的经历。从来没想过有一天需要担心的事情：今天吃什么，家里东西够不够，今天哪里能买到菜。 由于公司在浦东，浦东街道分批排查疫情的缘故，03🈷24号开始居家办公，并没有感觉到疫情对青浦这边的影响。而后的突然通知公司里有个无症状感染者，虽然和我不在同一楼层，但公司受到影响，所以仍继续居家办公，彼时只是稍微感觉有些紧迫，但并未太在意。再接下来，就是收到浦东4天（2022年03月28日——2022年04月01日）、浦西4天（2022年04月01日——2022年04月05日）的通知，这时还在感叹终于舍得封闭了，由于还是居家办公，所以打算等浦西封闭前一天去买菜。 但是  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/04/24/Algorithem_%20Matrix/" title="Algorithem_Matrix"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-24</div><div class="info-item-2">Algorithem_Matrix</div></div><div class="info-2"><div class="info-item-1">Algorithem_Matrix题目Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1.    Example 1:  12Input: mat = [[0,0,0],[0,1,0],[0,0,0]]Output: [[0,0,0],[0,1,0],[0,0,0]]  Example 2:  12Input: mat = [[0,0,0],[0,1,0],[1,1,1]]Output: [[0,0,0],[0,1,0],[1,2,1]]  解法</div></div></div></a><a class="pagination-related" href="/2022/04/18/Algorithem_TwoPointers1/" title="Algorithem_TwoPointersOfLinked List"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-18</div><div class="info-item-2">Algorithem_TwoPointersOfLinked List</div></div><div class="info-2"><div class="info-item-1">Algorithem_TwoPointersOfLinked List876. Middle of the Linked ListGiven the head of a singly linked list, return the middle node of the linked list. If there are two middle nodes, return the second middle node.   Example 1: 123Input: head = [1,2,3,4,5]Output: [3,4,5]Explanation: The middle node of the list is node 3.  Example 2: 123Input: head = [1,2,3,4,5,6]Output: [4,5,6]Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.   解法单看例子，感觉是获取数组中间位置到末尾，这个...</div></div></div></a><a class="pagination-related" href="/2022/04/13/Algorithm_Sort/" title="Algorithem_Sort"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-13</div><div class="info-item-2">Algorithem_Sort</div></div><div class="info-2"><div class="info-item-1">Algorithem_SortGiven an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.   QuickSort实现逻辑：取指定位置的 index 的值key，比较index和 index之前的数字，如果前面的数字大于后面的数字，则交换位置; 比如： 123456789[ 8 3 5 1 4 2 ]从 index为1开始，当前元素3，前面元素8，8 &gt; 3，故而交换位置，数组还为[ 3 8 5 1 4 2 ]然后 index 为2，当前元素为5，前面元素为8，8&gt;5，故而交换位置，数组为[ 3 5 8 1 4 2 ]然后 index 为3，当前元素为1，前面元素为8，8&gt;1，故而交换位置，数组为[ 3 5 1 8 4 2 ]；5&gt;1，故而交换位置，数组为[ 3 1 5 8 4 2 ]；3&gt;1，故而交换位置，数组为[ 1 3 5 8 4 2...</div></div></div></a><a class="pagination-related" href="/2022/04/14/Algorithem_ReverseArray/" title="Algorithem_ReverseArray"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-14</div><div class="info-item-2">Algorithem_ReverseArray</div></div><div class="info-2"><div class="info-item-1">Algorithem_ReverseArrayGiven an array, rotate the array to the right by k steps, where k is non-negative.   Example 1: 12345678Input: nums = [1,2,3,4,5,6,7], k = 3Output: [5,6,7,1,2,3,4]Explanation:rotate 1 steps to the right: [7,1,2,3,4,5,6]rotate 2 steps to the right: [6,7,1,2,3,4,5]rotate 3 steps to the right: [5,6,7,1,2,3,4]   Example 2: 1234567Input: nums = [-1,-100,3,99], k = 2Output: [3,99,-1,-100]Explanation: rotate 1 steps to the right: [99,-1,-100,3]rotate 2 steps to the right: [3,9...</div></div></div></a><a class="pagination-related" href="/2022/04/24/Algorithem_PermutationInString/" title="Algorithem_PermutationInString"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-24</div><div class="info-item-2">Algorithem_PermutationInString</div></div><div class="info-2"><div class="info-item-1">Algorithem_PermutationInStringGiven two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise. In other words, return true if one of s1’s permutations is the substring of s2.    Example 1: 1234Input: s1 = &quot;ab&quot;, s2 = &quot;eidbaooo&quot;Output: trueExplanation: s2 contains one permutation of s1 (&quot;ba&quot;).  Example 2: 12Input: s1 = &quot;ab&quot;, s2 = &quot;eidboaoo&quot;Output: false  解法首先理解 Permutation的意思，题目需要的是 s2包含 s1中字符串的任意一种排列，就返回 true，否则返...</div></div></div></a><a class="pagination-related" href="/2022/04/15/Algorithem_ReverseWords/" title="Algorithem_ReverseWords"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-15</div><div class="info-item-2">Algorithem_ReverseWords</div></div><div class="info-2"><div class="info-item-1">Algorithem_ReverseWordsReverse Words in a String IIIGiven a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.    Example 1: 12Input: s = &quot;Let&#x27;s take LeetCode contest&quot;Output: &quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;  Example 2: 12Input: s = &quot;God Ding&quot;Output: &quot;doG gniD&quot;  解法一逻辑：把字符串根据空格切割成数组，然后遍历数组，对数组中字符串调用 reversed 方法，最后在使用空格join为字符串返回 代码如下： 12345678910111213class Solution &#...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Algorithem-BinarySearch"><span class="toc-number">1.</span> <span class="toc-text">Algorithem_BinarySearch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BinarySearch"><span class="toc-number">1.0.1.</span> <span class="toc-text">BinarySearch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">解法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FirstBadVersion"><span class="toc-number">1.1.</span> <span class="toc-text">FirstBadVersion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FirstBadVersion-1"><span class="toc-number">1.1.1.</span> <span class="toc-text">FirstBadVersion</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-1"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">解法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Search-Insert-Position"><span class="toc-number">1.2.</span> <span class="toc-text">Search Insert Position</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-Insert-Position-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">Search Insert Position</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">解法</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

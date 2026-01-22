@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>今是昨非的博客 - 悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="技术分享、生活感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="今是昨非的博客">
+<meta property="og:url" content="http://morganwang.cn/page/12/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:author" content="今是昨非">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/page/12/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '今是昨非的博客',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">今是昨非的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/10/gitignore%E6%B7%BB%E5%8A%A0%20Pod%E4%B8%89%E6%96%B9%E5%BA%93/" title="gitignore 添加 Pod 三方库">gitignore 添加 Pod 三方库</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-09-10T08:02:00.000Z" title="发表于 2021-09-10 16:02:00">2021-09-10</time></span></div><div class="content">背景最近项目遇到了一个问题，排查了好久，最后发现是Pod 依赖的私有组件的代码有问题，导致了打包的时候线上包出现了问题。   笔者的项目按照功能抽象出了私有组件，使用 Pod 的方式导入项目，但是 Pod的内容是不提交到 git 的，即每次 Pod 修改，在 主项目的git变更中看不到。于是就遇到了这个问题。 先在主项目中调试的时候，修改了 Pod库的内容。然后把修改内容同步到了 Pod 库单独的项目。但是最后打包的时候 Pod 库的内容却是老的。因为项目里依赖的 Pod 库指定了版本，而更新 Pod库单独的项目时，只同步到了分支上，没有更新新的 Tag。于是再次更新主项目的库时，这个库的内容就又变回了老的。 Ps：理论上来说，放入 Pod 库的内容不应该被频繁修改，是抽出的基础库之类的。但是实际开发中，为了组件化，有些功能组件也会作为私有库使用 Pod 依赖，这些库可能是频繁变更的。 基于这点，笔者感觉还是把 Pod 中的内容，放入主项目的 .git 中比较好，方便看出修改，能够避免出现上面的问题。 修改笔者直接进入项目工程所在目录，编辑.gitignore文件，移出文件中 #...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/03/iOS%2015%E5%AF%BC%E8%88%AA%E6%A0%8F%E8%AE%BE%E7%BD%AE/" title="iOS 15导航栏设置">iOS 15导航栏设置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-09-03T02:38:00.000Z" title="发表于 2021-09-03 10:38:00">2021-09-03</time></span></div><div class="content">iOS 15导航栏设置背景使用Xcode 13.0运行项目到iOS 15的手机上，出现导航栏黑色。但是在低版本Xcode 运行到手机就没有问题。   修改设置方法需修改，参考barTintColor not working in iOS 15 原来设置导航栏代码不变，新增设置UINavigationBarAppearance实例对象的属性，然后赋值到全局的 navigationBar 或者单个页面的 navigaitonBar 属性中，取决于项目的设置是全局 NavigationBar 还是单个页面设置(可参考iOS StatusBar 设置)。 代码如下： 123456789101112131415161718- (void)updateNavigationBarColor:(UIColor *)color &#123;    UINavigationBar *bar = self.navigationController.navigationBar;    if (@available(iOS 13.0, *)) &#123;        UINavigationBarAp...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/30/iOS%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AEDocument%20Directory/" title="iOS 在文件中访问 Document Directory">iOS 在文件中访问 Document Directory</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-30T05:31:00.000Z" title="发表于 2021-08-30 13:31:00">2021-08-30</time></span></div><div class="content">iOS 在文件中访问 Document DirectoryiOS 11之后，在 Plist 中设置LSSupportsOpeningDocumentsInPlace为 YES，且UIFileSharingEnabled为 YES，可以从系统的Files应用中访问应用的 Documents 目录。   如下： 从系统的文件打开，查看我的 iPhone如下，开启了此功能的应用可以从这里面看到      注意：此目录是 APP 的Documents目录，所以 APP 删除后，目录就消失了。 参考： iOS文件共享  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/27/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" title="问题记录">问题记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-27T01:51:00.000Z" title="发表于 2021-08-27 09:51:00">2021-08-27</time></span></div><div class="content">问题记录背景昨天，遇到三个神奇的问题，这里记录一下  SDWebImage图片加载之后黑色的问题，安卓显示正常 WKWebview 加载 vnd.ms-excel 文件，加载xlsx 文件，预览不了 用户反馈拍照唤起相机黑屏    图片黑色的问题测试反馈的是，拍摄了一张图片，上传之后，安卓可以加载出来，iOS显示是黑色，其他图片正常； 最开始笔者以为是 SDWebImage加载这张图片失败了，断点调试后，发现图片加载成功并没有失败，但是显示是黑色。然后笔者取到照片的链接在 Chrome 中打开，发现图片是可以显示的；在 Safari 中打开，是黑色的；且从 Chrome 中右键保存到本地，预览中打开也是黑色。这张图片的在 Mac OS 和 iOS 中渲染都是黑色的。 WKWebview加载xlsx 文件，预览不了的问题笔者这边的情况是，打开了一个网页，网页中的有个按钮，点击之后的链接，正常在电脑浏览器上打开是下载，在 iOS 的 WKWebview中打开是预览。 笔者最开始以为是 WKWebview 加载 xlsx 文件的问题，查了很多方法尝试后均失败。 出现的问题是，其他 .x...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/18/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94%E8%87%AA%E5%AE%9A%E4%B9%89%20BottomNavigationBar/" title="Flutter布局基础——自定义BottomNavigationBar">Flutter布局基础——自定义BottomNavigationBar</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-18T08:42:00.000Z" title="发表于 2021-08-18 16:42:00">2021-08-18</time></span></div><div class="content">Flutter布局基础——自定义BottomNavigationBar背景这里我们来尝试实现一个不规则的 BottomNavigationBar，首先了解两个系统组件: floatingActionButton和BottomAppBar   floatingActionButtonfloatingActionButton用于创建一个浮动的按钮，有两种样式：一种是圆形的纯图标的；一种是椭圆的带有图标或文案的。 示例如下： 123456789101112131415161718192021222324252627282930313233343536373839404142void main() =&gt; runApp(const MyApp());/// This is the main application widget.class MyApp extends StatelessWidget &#123;  const MyApp(&#123;Key? key&#125;) : super(key: key);  static const String _title = &#x...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/18/Flutter%20%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94BottomNavigationBar/" title="Flutter布局基础——BottomNavigationBar">Flutter布局基础——BottomNavigationBar</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-18T01:52:00.000Z" title="发表于 2021-08-18 09:52:00">2021-08-18</time></span></div><div class="content">Flutter布局基础——BottomNavigationBar背景Flutter中BottomNavigationBar类似于 iOS 中的UITabbarController，是导航控制器的一种，常用于首页 Tab 切换。   BottomNavigationBar的 type 属性，默认值会根据items的个数而定；当items个数小于4个时，默认值为BottomNavigationBarType.fixed；当items个数大于等于4个，默认值为BottomNavigationBarType.shifting。 两种效果对比如下：左侧为BottomNavigationBarType.fixed，右侧为BottomNavigationBarType.shifting            常用属性如下：  backgroundColor: 背景色 currentIndex: 当前选中哪一个 fixedColor: 选中 Item 的颜色 iconSize: 图片大小 items: 子元素 onTap: 点击事件 selectedFontSize: 选中字体大小 select...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/09/%E5%85%B3%E4%BA%8EVR%E7%9A%84%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95/" title="关于VR的一个想法">关于VR的一个想法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-09T00:47:00.000Z" title="发表于 2021-08-09 08:47:00">2021-08-09</time></span></div><div class="content">早上听书，突然有一个想法，把推理小说中的密室给做出来，做成真实的密室，亦或者做成玩具模型，考虑到太难实现，想到是否可以用VR来做，推理小说的密室，每个人选一个角色用来重现推理小说的过程，比如，   绫辻行人“馆系列”作品 再然后，想到，除了这些复杂的推理小说之外，把线下简单的密室场景，如果搬到VR中，在线联机，有人扮演凶手，有人扮演推理小说家，是不是会比线下的密室会吸引更多的人 或者把经典电影的片段做成可以体验的VR的形式，比如泰坦尼克号从沉船开始到结束的一段，Jack和Rose两个角色可供体验，是不是会有很多人愿意体验 参考小说：《绫辻行人-钟表馆事件》电视剧：《私家侦探第五季-第二集》里关于VR实验室的实现 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/" title="iOS 虚拟定位原理与预防">iOS 虚拟定位原理与预防</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T05:43:00.000Z" title="发表于 2021-08-04 13:43:00">2021-08-04</time></span></div><div class="content">iOS 虚拟定位原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。   然而经过调研之后，笔者发现，iOS的虚拟定位没有那么困难，甚至相比于安卓更简单。下面就来介绍一下iOS中几种虚拟定位的方法。 虚拟定位的几种办法及原理笔者调研后，发现iOS上面虚拟定位大致可有4中情况：  使用Xcode通过GPX文件虚拟定位 使用爱思助手中的虚拟定位功能直接虚拟定位 通过外接设备，比如蓝牙和手机连接，发送虚拟定位数据来虚拟定位 越狱设备中通过hook定位方法，来虚拟定位  下面就来一个个分析实践： 使用Xcode通过GPX文件虚拟定位使用Xcode通过GPX文件虚拟定位，iOS开发一般比较熟悉，操作步骤是： 新创建一个iOS项目，然后添加文件，选择创建GPX文件  编辑...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" title="iOS 启动时间优化">iOS 启动时间优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-02T08:06:00.000Z" title="发表于 2021-08-02 16:06:00">2021-08-02</time></span></div><div class="content">iOS 启动时间优化——相关背景iOS的启动时间优化有很多相关的文章，本来不打算写，但是总归是自己整理一遍印象更深刻。这里打算从原理-实践-面试相关三个方面来入手。首先要理解APP启动的原理，启动做了什么？然后针对启动过程中的事件哪些是开发可以进行优化的，去实践？最后则是，面试相关，与启动优化相关的面试有很多，笔者打算列举一下，分别涉及到启动的哪些问题。   启动原理启动分为冷启动和热启动。冷启动指的是APP进程被杀掉后，从零打开；热启动指的是，APP进入后台，再切换到前台唤起到过程。这里通常说的启动优化，指的是冷启动优化。(Ps: 这里某些版本会出现，刚杀掉的APP，立即再次打开，会直接闪退的问题，是系统的Bug）。 冷启动的过程分为main函数之前（pre-main）和main函数之后两个阶段。 pre-main阶段就如很多文章说的： pre-main阶段的过程分为dylibs loading ——&gt; rebase/binding ——&gt; ObjC setup ——&gt; initializer四个部分。每个部分吧啦吧啦…但每次问到这个时候，死记硬背出来真的累人...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/" title="Flutter布局基础——页面导航和返回">Flutter布局基础——页面导航和返回</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-30T08:27:00.000Z" title="发表于 2021-07-30 16:27:00">2021-07-30</time></span></div><div class="content">Flutter布局基础——页面导航和传值说到导航，最常见就是类似于iOS中导航控制器的push和pop效果，同样Flutter中也有类似的效果，使用的就是Navigator组件。   下面，来看一下在Flutter中，导航效果Navigator.push和Navigator.pop的使用。 简单使用代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849class MyApp extends StatelessWidget &#123;  @override  Widget build(BuildContext context) &#123;    return MaterialApp(      title: &#x27;导航演示1&#x27;,      home: new FirstScreen(),    );  &#125;&#125;class FirstScreen extends StatelessWidget &#123;  @o...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/11/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#content-inner">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/#content-inner">19</a><a class="extend next" rel="next" href="/page/13/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Algorithem/" style="font-size: 1.39em; color: #99a4b4">Algorithem</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">算法</a> <a href="/tags/learning/" style="font-size: 1.16em; color: #999b9e">learning</a> <a href="/tags/ReactNative/" style="font-size: 1.1em; color: #999">ReactNative</a> <a href="/tags/%E5%88%86%E4%BA%AB/" style="font-size: 1.33em; color: #99a2af">分享</a> <a href="/tags/iOS%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/" style="font-size: 1.1em; color: #999">iOS自动打包</a> <a href="/tags/books/" style="font-size: 1.1em; color: #999">books</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.39em; color: #99a4b4">生活</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 1.5em; color: #99a9bf">技术</a> <a href="/tags/movies/" style="font-size: 1.1em; color: #999">movies</a> <a href="/tags/iOS/" style="font-size: 1.44em; color: #99a7ba">iOS</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.27em; color: #99a0a9">随笔</a> <a href="/tags/Flutter/" style="font-size: 1.39em; color: #99a4b4">Flutter</a> <a href="/tags/ideas/" style="font-size: 1.21em; color: #999ea4">ideas</a> <a href="/tags/iOS%E8%93%9D%E7%89%99/" style="font-size: 1.1em; color: #999">iOS蓝牙</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              十二月 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              十一月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/08/">
+            <span class="card-archive-list-date">
+              八月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              七月 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">188</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-22T02:58:43.012Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."])
+}
+typedJSFn.run(subtitleType)</script></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

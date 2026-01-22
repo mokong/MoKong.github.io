@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>今是昨非的博客 - 悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="技术分享、生活感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="今是昨非的博客">
+<meta property="og:url" content="http://morganwang.cn/page/7/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:author" content="今是昨非">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/page/7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '今是昨非的博客',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">今是昨非的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/10/11/Xcode%2014%E7%BC%96%E8%AF%91%E7%9A%84APP%E4%BD%8E%E7%89%88%E6%9C%AC%E5%B4%A9%E6%BA%83/" title="Xcode14编译的APP低版本崩溃">Xcode14编译的APP低版本崩溃</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-11T01:32:00.000Z" title="发表于 2022-10-11 09:32:00">2022-10-11</time></span></div><div class="content">背景测试说iOS 12的手机上安装Xcode14.0.2导出的新包后，打开就崩溃，但是在系统版本高的手机上就没有问题。   调试后发现，崩溃日志是dyld: Library not loaded: /usr/lib/swift/libswiftCoreGraphics.dylib，具体如下：  dyld: Library not loaded: /usr/lib/swift/libswiftCoreGraphics.dylib  Referenced from: /private/var/containers/Bundle/Application/55730273-D9D6-4C42-9335-7A56F92B7F2C/xxx.app/Frameworks/FSPagerView.framework/FSPagerView  Reason: image not founds  搜索后发现，开发者社区中有此问题的记录，xcode14:Library not loaded: /usr/lib/swift/libswiftCoreGraphics.dylib，解决方案是：  If yo...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/28/CreateML%E4%BD%BF%E7%94%A8/" title="iOS CreateML的使用">iOS CreateML的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-28T05:25:00.000Z" title="发表于 2022-09-28 13:25:00">2022-09-28</time></span></div><div class="content">CreateML使用背景业务需求，想要通过拍照识别照片中指定物体的数量或者物体的种类。而这种物体的模型网上没有训练好的，需要从头开始。所以调研了苹果的createML的实现方案，具体操作如下：   需求是：通过拍照识别照片中指定物体的数量，实现方案大致有几种：  通过第三方平台，训练数据，生成模型，提供前端使用 自己搭建平台，训练数据，生成模型，提供前端使用 通过苹果的CreateML工具，训练数据，生成模型，供iOS使用或转换成其他模型使用  对比可以发现，通过苹果的CreateML工具，可以省去搭建平台的过程。下面来看看怎么使用CreateML。 使用CreateML的整体流程是：  有大量的样本 标注所有的样本 用这些样本训练生成模型 验证模型的识别率 测试模型效果 导出模型供使用    需求是通过拍照识别照片中指定物体的数量，所以对我来说样本就是照片，下面就来看下怎么生成CreateML训练需求的标注信息。 使用样本照片标注首先要有大量的样本照片，这里由于是调研测试，所以选取20张照片，照片来源是百度图片。。。麻烦的是照片标注，由于苹果CreateML训练需要指定格式的J...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/27/Xcode14%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AEPodInit%E5%A4%B1%E8%B4%A5/" title="Xcode 14新建项目 Pod init失败">Xcode 14新建项目 Pod init失败</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-27T05:44:00.000Z" title="发表于 2022-09-27 13:44:00">2022-09-27</time></span></div><div class="content">Xcode 14新建项目 Pod init失败背景使用Xcode 14.0(14A309)新建了一个项目，然后运行Pod init，就报错，[Xcodeproj] Unknown object version (56). (RuntimeError)和can&#39;t modify frozen String (FrozenError)。    排查一开始看报错以为是cocoapods出问题了，最坏的打算是重装CocoaPods，但是先去搜索一下，看是否是其他原因导致的，或者有没有遇到同样错误的。 搜索can&#39;t modify frozen String (FrozenError)，搜出来都是m1芯片怎么怎么的，但是我的电脑不是m1芯片的，所以不是这个问题。 搜can&#39;t modify frozen String (FrozenError)，发现了pod init cause RuntimeError - [Xcodeproj] Unknown object version 和 RuntimeError - [Xcodeproj] Unknown object ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/26/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget2/" title="手把手教你创建widget2">手把手教你创建widget2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-26T02:51:00.000Z" title="发表于 2022-09-26 10:51:00">2022-09-26</time></span></div><div class="content">手把手教你创建widget2接上篇iOS Widget，这里介绍下WidgetBundle的用法和怎么做一个支付宝类似的 widget，上篇里把WidgetBundle写成了WidgetGroup，我的错。   WidgetBundle 的用法再来回顾一下什么情况下使用 WidgetBundle，上篇里介绍了supportedFamilies，可以设置Widget 不同的尺寸，比如Small、Meidum、Large等，但是如果想要多个同尺寸的 Widget ，比如：想要两个Small尺寸的 Widget ，类似于下面东方财富 Widget 的效果，就需要用WidgetBundle，设置多个Widget。                   WidgetBundle的使用不难，下面来看下，上篇最后的代码（可以去https://github.com/mokong/WidgetAllInOne下载，打开 Tutorial2），只显示了一个 Medium 尺寸的 Widget，这里修改为使用WidgetBundle显示两个Medium尺寸的 Widget。 新建SwiftUIView，...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/" title="Flutter组件——Tabbar">Flutter组件——Tabbar</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-23T06:56:00.000Z" title="发表于 2022-09-23 14:56:00">2022-09-23</time></span></div><div class="content">[Flutter组件——Tabbar]使用Tabar使用，设置indicator的样式，长短，设置tab选中和未选中的样式，根据数组创建Tabbar。    代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677import &#x27;package:flutter/material.dart&#x27;;class TabbarDemo extends StatefulWidget &#123;  TabbarDemo(&#123;Key? key&#125;) : super(key: key);  _TabbarDemoState createState() =&gt; _TabbarDemoState();&#125;class _TabbarDemoState extends State&lt;TabbarDemo&gt; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" title="Xcode14编译失败修改">Xcode14编译失败修改</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-14T01:20:00.000Z" title="发表于 2022-09-14 09:20:00">2022-09-14</time></span></div><div class="content">背景升级Xcode 14后，项目编译失败修改，共修改了两种编译错误：  一种是bundle code sign error，Xcode 14 needs selected Development Team for Pod Bundles 一种是Module compiled with Swift 5.6.1 cannot be imported by the Swift 5.7 compiler    其中第一种比较容易解决，第二种稍微麻烦点，解决方案如下： 解决Xcode 14 bundle code sign error这个的解决方案，直接Google，第一个stackoverflow的链接是Xcode 14 needs selected Development Team for Pod Bundles，这里面给出的解决方法是，在Podfile里增加下面代码，然后运行Pod install，设置Pod库的DEVELOPMENT_TEAM是开发者账号的team。 笔者有两个项目，其中一个是Swift为主，用下面的设置方法试了，可以解决。要注意的是如果项目有多个target，ta...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/07/iOS%E7%BC%96%E8%AF%91%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" title="iOS 编译时间优化">iOS 编译时间优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-07T01:05:00.000Z" title="发表于 2022-09-07 09:05:00">2022-09-07</time></span></div><div class="content">背景目前App项目不大，但是清空后重新编译时间需要200多秒，感觉不太合理，所以，就着手排查了一下。 通常的编译时间优化都是分为三个部分  Xcode编译设置的优化 代码或函数编译时间的优化 三方库编译时间的优化  这里就根据上面三个部分来一一排查。   实现Xcode编译设置的优化使用的是Xcode 13.4，网上搜到的，关于Xcode设置New Build System，及Build Settings中设置Debug Information Format的都不需要设置了，默认已经是合理的。至于Optimization Level的设置，设置后，虽然编译速度可以提升，但是对于Debug不友好，所以，这里也不做设置。故而针对这项优化什么都没有处理。 代码或函数编译时间的优化这方面主要是针对Swift，首先把编译耗时的方法显示出来，在Build Settings中Other Swift Flags添加如下设置，意思是显示编译超过200ms的函数或者类型检查超过300ms的函数显示warning，这里200ms是自己设定，可针对项目的真实情况设置： 1234-Xfrontend -w...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/05/Carthage%E4%BD%BF%E7%94%A8/" title="Carthage使用">Carthage使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-05T06:46:00.000Z" title="发表于 2022-09-05 14:46:00">2022-09-05</time></span></div><div class="content">背景之前一直用CocoaPods，这次做编译时间优化时，把某些Pod依赖的库改为了Carthage依赖的，这里记录一下Carthage的使用。   使用安装使用brew安装，简单方便 1brew install carthage  使用在项目所在文件夹，即.xcodeproj所在的文件夹下，创建Cartfile 1touch Cartfile  然后打开Cartfile 1open Cartfile -a Xcode  添加要依赖的第三方库，注意依赖版本的指定，指定版本和指定范围的写法，如下： 1234567891011github &quot;krzyzanowskim/CryptoSwift&quot; ~&gt; 1.4.0github &quot;evgenyneu/keychain-swift&quot; ~&gt; 19.0github &quot;ibireme/YYKit&quot;github &quot;ReactiveX/RxSwift&quot; &quot;6.5.0&quot;github &quot;onevcat/Kingfisher&quot; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/09/05/%E4%BE%9D%E8%B5%96MapManagerSDK%E5%B4%A9%E6%BA%83%E8%AE%B0%E5%BD%95/" title="MapManagerSDK集成记录">MapManagerSDK集成记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-05T00:43:00.000Z" title="发表于 2022-09-05 08:43:00">2022-09-05</time></span></div><div class="content">背景最近集成MapManagerSDK，遇到了几个问题这里记录一下： 问题一： 对接文档中提示的导入GMObjC算法SDK方式如下，导入后编译不通过，提示：&quot;sm2_plaintext_size&quot; Too many arguments to function call, expected 3, have 4   pod &#39;GMObjC&#39;,&#39;3.0.0&#39; 问题二： 导入MapManager后，QMUI库或者其他第三方库，原本正常的，现在报错编译不通过。 问题三： 上面都解决了，编译成功，一启动就崩溃。 解决：问题一&quot;sm2_plaintext_size&quot; Too many arguments to function call, expected 3, have 4的解决很简单，改为pod &#39;GMObjC&#39;，安装最新版即可。 问题二，查看后，发现报错的地方是属性或者方法中使用了debug或者release定义变量。但是为什么之前没有问题，导入MapManagerSDK后，就报错了呢？仔细排查后发现...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/08/26/%E5%BD%95%E9%9F%B3%E5%B4%A9%E6%BA%83%E6%8E%92%E6%9F%A5/" title="一次诡异的录音崩溃排查">一次诡异的录音崩溃排查</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-26T02:07:00.000Z" title="发表于 2022-08-26 10:07:00">2022-08-26</time></span></div><div class="content">背景上午突然有用户反馈，使用录音功能崩溃。起初以为是最近更新的APP新版本有问题，赶紧去排查。   排查首先在测试手机上，测试环境调试，发现并没有崩溃，长出了一口气，说明不是所有用户都有，不是新版本改出来的问题。 然后去听云后台看日志，发现崩溃的地方是初始化AVAudioRecorder的方法——[[AVAudioRecorder alloc] initWithURL:url settings:recordSettings error:&amp;error];。很费解，只是简单的初始化方法，为什么会导致崩溃呢？ 一开始猜测会不会是用户录音权限没开，导致开始录音的时候崩溃。尝试后发现如果权限关闭，在进入录音页面前就会提示权限未开启，去开启权限，并不能进入到录音步骤。 然后怀疑会不会是初始化的url为空，又或者机型不支持设置recordSettings中的某些参数？搜索后，发现有url为空崩溃的条目，所以这里大概率也是初始化的url为空。 继续排查，发现初始化的url，是本地的缓存文件夹中Audio文件夹，并且文件名字是取日期+时分秒用于避免重复，格式为yyyyMMdd_HHmmss...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#content-inner">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/#content-inner">19</a><a class="extend next" rel="next" href="/page/8/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Algorithem/" style="font-size: 1.39em; color: #99a4b4">Algorithem</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">算法</a> <a href="/tags/learning/" style="font-size: 1.16em; color: #999b9e">learning</a> <a href="/tags/ReactNative/" style="font-size: 1.1em; color: #999">ReactNative</a> <a href="/tags/%E5%88%86%E4%BA%AB/" style="font-size: 1.33em; color: #99a2af">分享</a> <a href="/tags/iOS%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/" style="font-size: 1.1em; color: #999">iOS自动打包</a> <a href="/tags/books/" style="font-size: 1.1em; color: #999">books</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.39em; color: #99a4b4">生活</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 1.5em; color: #99a9bf">技术</a> <a href="/tags/movies/" style="font-size: 1.1em; color: #999">movies</a> <a href="/tags/iOS/" style="font-size: 1.44em; color: #99a7ba">iOS</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.27em; color: #99a0a9">随笔</a> <a href="/tags/Flutter/" style="font-size: 1.39em; color: #99a4b4">Flutter</a> <a href="/tags/ideas/" style="font-size: 1.21em; color: #999ea4">ideas</a> <a href="/tags/iOS%E8%93%9D%E7%89%99/" style="font-size: 1.1em; color: #999">iOS蓝牙</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              十二月 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              十一月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/08/">
+            <span class="card-archive-list-date">
+              八月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              七月 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">188</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-22T02:58:43.012Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."])
+}
+typedJSFn.run(subtitleType)</script></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

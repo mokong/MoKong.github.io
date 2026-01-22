@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Mapping architecture armv7 to i386 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最近项目里升级后，编译警告多了起来，看起来好碍眼，就想着改掉，先从Debug warning: Mapping architecture armv7 to i386.这个开始。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mapping architecture armv7 to i386">
+<meta property="og:url" content="http://morganwang.cn/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="最近项目里升级后，编译警告多了起来，看起来好碍眼，就想着改掉，先从Debug warning: Mapping architecture armv7 to i386.这个开始。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2019-09-28T02:57:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mapping architecture armv7 to i386",
+  "url": "http://morganwang.cn/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2019-09-28T02:57:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Mapping architecture armv7 to i386',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Mapping architecture armv7 to i386</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Mapping architecture armv7 to i386</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-09-28T02:57:00.000Z" title="发表于 2019-09-28 10:57:00">2019-09-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>最近项目里升级后，编译警告多了起来，看起来好碍眼，就想着改掉，先从Debug warning: Mapping architecture armv7 to i386.这个开始。</p>
+<span id="more"></span>
+
+<p>看了警告之后，知道是对应target下的Build Settings里architecture的问题，然后去检查对应target下，发现today widget、iwatch widget里Valid Architectures的Release跟Debug不一致，然后就手动修改为 $(ARCHS_STANDARD)，编译，done，完美解决。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/">http://morganwang.cn/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/10/06/ProtocolBuf%20Swift%20%E4%BD%BF%E7%94%A8/" title="ProtocolBuf Swift 使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">ProtocolBuf Swift 使用</div></div><div class="info-2"><div class="info-item-1">ProtocolBuf Swift 使用环境搭建Mac安装swift-protobuf   1brew install swift-protobuf  使用Podfile集成Xcode再Podfile里添加 1pod &#x27;SwiftProtobuf&#x27;  然后在此目录下打开terminal运行 1Pod install  使用新建BookInfo.proto 1234567syntax = &quot;proto3&quot;;message BookInfo &#123;   int64 id = 1;   string title = 2;   string author = 3;&#125;  在此文件同目录下执行下面命令，生成.swift文件 1protoc --swift_out=. BookInfo.proto  将.swift文件拖入工程，编译一下，使用 123456789101112131415161718192021// Create a BookInfo object and populate it:var info = BookInfo()i...</div></div></div></a><a class="pagination-related" href="/2019/09/28/Embedded%20binary%20is%20not%20signed%20with%20the%20same%20certificate%20as%20the%20parent%20app/" title="Embedded binary is not signed with the same certificate as the parent app"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Embedded binary is not signed with the same certificate as the parent app</div></div><div class="info-2"><div class="info-item-1">Embedded binary is not signed with the same certificate as the parent app背景Xcode 10之后New Build System变为默认，编译之后一直报错，报错信息：Embedded binary is not signed with the same certificate as the parent app. Verify the embedded binary target’s code sign settings match the parent app’s.   eg:  但是在Legacy Build System下就没有问题。刚开始直接粗暴的改回Legacy Build System，一直没来得及查具体原因，最近得空了，仔细查了一下。 过程搜到的好多人说，是因为keyChain里证书的信任状态不对，要用系统默认，不能强制始终信任。but，我检查了之后，我的证书确实是系统默认的状态。 在stackoverflow上iOS error “Embedded binary is not signed ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/12/04/%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Reqable%E4%BD%BF%E7%94%A8/" title="全平台抓包工具Reqable使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-04</div><div class="info-item-2">全平台抓包工具Reqable使用</div></div><div class="info-2"><div class="info-item-1">背景在iOS开发中，经常会遇到需要抓包的情况，比如查看网络请求、查看接口返回的数据等。而在iOS开发中，常用的抓包工具有Charles、Proxyman等，这些并非不好用，尤其是Proxyman，使用起来非常方便。但是需要付费，免费的只能查看3个域名；而且这些工具使用的时候需要手动进入网络中设置代理，比较麻烦。   无意中发现了Requable，优点是：全平台可用，且抓包功能免费，没有广告；最好用的是可以在手机上一键连接电脑，不需要进入网络设置代理，非常方便。优点：  全平台，iPhone、Mac、Windows、Android都有APP 抓包免费，不限制域名数量 可以在手机上一键连接电脑，不需要进入网络设置代理 可以查看请求头、请求体、响应头、响应体，设置断点，拦截修改返回和相应；（免费版最多生效3个）  缺点：VPN的开启和关闭标识不够明显，在使用过程中容易被误操作。 使用以Mac版本来看，如下图，主要有以下几个部分：   区域1，导航部分，在这里可以看到所有的域名，可以选择对指定的域名置顶或添加书签，单击选中时后面会有绿色的勾，代表过滤这个域名；选中多个，则过滤多个；没有选...</div></div></div></a><a class="pagination-related" href="/2024/11/19/%E5%9B%BD%E8%A1%8CXcode%20%E4%BD%BF%E7%94%A8%20AI/" title="国行Mac 开启 Xcode inteligence 提示"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-19</div><div class="info-item-2">国行Mac 开启 Xcode inteligence 提示</div></div><div class="info-2"><div class="info-item-1">背景电脑国行 Mac M1，内存 16G，版本 Sequoia 15.1，Xcode 16.1，在Xcode 设置中，Text Editing 下，Editing Tab下，能看到有个设置Predictive code completion，但是默认是关闭的， 国行的提示不支持，这里说的是怎么开启这个，亲测开启成功。   最终效果如下：    步骤参考XcodeLLMEligible，我用的是不 disable sip 的方式。 首先，在终端中，输入下面命令： 12345678# Override XcodeLLM onlycurl -L https://raw.githubusercontent.com/Kyle-Ye/XcodeLLMEligible/release/0.2/scripts/override.sh | bash -s -- install override xcodellm# Override Apple Intelligence onlycurl -L https://raw.githubusercontent.com/Kyle-Ye/XcodeLLMEli...</div></div></div></a><a class="pagination-related" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" title="iOS 启动时间优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-02</div><div class="info-item-2">iOS 启动时间优化</div></div><div class="info-2"><div class="info-item-1">iOS 启动时间优化——相关背景iOS的启动时间优化有很多相关的文章，本来不打算写，但是总归是自己整理一遍印象更深刻。这里打算从原理-实践-面试相关三个方面来入手。首先要理解APP启动的原理，启动做了什么？然后针对启动过程中的事件哪些是开发可以进行优化的，去实践？最后则是，面试相关，与启动优化相关的面试有很多，笔者打算列举一下，分别涉及到启动的哪些问题。   启动原理启动分为冷启动和热启动。冷启动指的是APP进程被杀掉后，从零打开；热启动指的是，APP进入后台，再切换到前台唤起到过程。这里通常说的启动优化，指的是冷启动优化。(Ps: 这里某些版本会出现，刚杀掉的APP，立即再次打开，会直接闪退的问题，是系统的Bug）。 冷启动的过程分为main函数之前（pre-main）和main函数之后两个阶段。 pre-main阶段就如很多文章说的： pre-main阶段的过程分为dylibs loading ——&gt; rebase/binding ——&gt; ObjC setup ——&gt; initializer四个部分。每个部分吧啦吧啦…但每次问到这个时候，死记硬背出来真的累人...</div></div></div></a><a class="pagination-related" href="/2024/07/09/Flutter%20%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/" title="Flutter 状态管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-09</div><div class="info-item-2">Flutter 状态管理</div></div><div class="info-2"><div class="info-item-1">背景我之前对 Flutter 的状态管理一直比较头大，最近看到了一篇Flutter state management for minimalists | by Suragch | Medium文章，感觉文章真的很好，把为什么要进行状态管理以及什么是状态管理说的很通透，推荐大家看原文，这里是自己总结一下。      什么是状态管理老实说，之前看 Flutter 相关的文章和视频的时候，有些上来就推荐用 Bloc 的就很懵，没有前因后果，就告诉我要用这个东西，这东西用了有什么好处？这东西上手难度如何，这东西是必备的吗？和其他的状态管理库（比如GetX）对比有什么优点，等等之类的都不清楚，所以一直很难深入学习。 来看下图： 我本人是 iOS APP 开发，所以对于 MVVM 很熟悉，对比上图，UI Layer 是 View，Service Layer是 Model，所以 State Management Layer 就是 ViewModel，这样解释对比，我就对状态管理有了直观的理解，只是换了个名称，其实就是 ViewModel。 为什么要状态管理那为什么要状态管理呢？其实理解了上面，...</div></div></div></a><a class="pagination-related" href="/2019/09/08/CocoaPods%E7%A7%81%E6%9C%89%E5%BA%93%E7%94%9F%E6%88%90/" title="CocoaPods私有库生成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-08</div><div class="info-item-2">CocoaPods私有库生成</div></div><div class="info-2"><div class="info-item-1">CocoaPods私有库生成</div></div></div></a><a class="pagination-related" href="/2024/06/07/Safari%20%E8%8E%B7%E5%8F%96%20Bing%20Rewards%20%E6%8F%92%E4%BB%B6/" title="Safari 获取 Bing Rewards 插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-07</div><div class="info-item-2">Safari 获取 Bing Rewards 插件</div></div><div class="info-2"><div class="info-item-1">背景Bing Rewards 可以兑换天猫礼品卡、中国石化礼品卡、肯德基电子券、盒马礼品卡、苹果礼品卡等。level 1 的时候每天至多获取 30 积分，level 2 的可以电脑端 90积分、手机端60 积分。每天150 积分点着太累了，就想着有没有一键的便捷操作。    找到了一个通过 Chrome 插件Rewards-Search-Automator: Chrome / Edge extension for automatic Bing Search，来实现的，除去其中的 Mobile 不生效，外加搜索完成跳转开发者的网站，别的还好，可以自己下载代码，修改去掉跳转开发者网站的逻辑。 但是就是还有个问题，在 iPhone 上用不了，所以手机端的 60 积分还是不能一键获取，所以就想到了，借鉴这个做个 Safari 插件，然后就可以在iPhone上用了。 实现逻辑很简单，iPhone 使用 Bing 搜索，然后抓包出请求，然后提取出关键的form，再封装到 Safari Extension 中，当 popup 出来的时候，触发搜索。添加生成随机字符串的逻辑，每隔 6 秒，重新搜...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

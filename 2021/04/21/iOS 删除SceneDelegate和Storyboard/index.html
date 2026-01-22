@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iOS 删除新创建项目中的SceneDelegate | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="iOS 删除新创建项目中的SceneDelegate背景Xcode 11之后新建工程，默认为有SceneDelegate，但是SceneDelegate是从iOS 13之后才有的，如果最低兼容版本到iOS 13以下，需要怎么做呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 删除新创建项目中的SceneDelegate">
+<meta property="og:url" content="http://morganwang.cn/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="iOS 删除新创建项目中的SceneDelegate背景Xcode 11之后新建工程，默认为有SceneDelegate，但是SceneDelegate是从iOS 13之后才有的，如果最低兼容版本到iOS 13以下，需要怎么做呢？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2021-04-21T05:23:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iOS 删除新创建项目中的SceneDelegate",
+  "url": "http://morganwang.cn/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2021-04-21T05:23:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iOS 删除新创建项目中的SceneDelegate',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">iOS 删除新创建项目中的SceneDelegate</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">iOS 删除新创建项目中的SceneDelegate</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-21T05:23:00.000Z" title="发表于 2021-04-21 13:23:00">2021-04-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="iOS-删除新创建项目中的SceneDelegate"><a href="#iOS-删除新创建项目中的SceneDelegate" class="headerlink" title="iOS 删除新创建项目中的SceneDelegate"></a>iOS 删除新创建项目中的SceneDelegate</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Xcode 11之后新建工程，默认为有SceneDelegate，但是SceneDelegate是从iOS 13之后才有的，如果最低兼容版本到iOS 13以下，需要怎么做呢？</p>
+<span id="more"></span>
+
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>首先来看一下，SceneDelegate是什么，为什么会有SceneDelegate</p>
+<p>官方说明：</p>
+<blockquote>
+<p>A UISceneSession object manages a unique runtime instance of your scene. When the user adds a new scene to your app, or when you request one programmatically, the system creates a session object to track that scene. The session contains a unique identifier and the configuration details of the scene. UIKit maintains the session information for the lifetime of the scene itself, destroying the session in response to the user closing the scene in the app switcher.<br>You do not create session objects directly. UIKit creates sessions in response to user interactions with your app. You can also ask UIKit to create a new scene and session programmatically by calling the requestSceneSessionActivation(_:userActivity:options:errorHandler:) method of UIApplication. UIKit initializes the session with default configuration data based on the contents of your app’s Info.plist file.</p>
+</blockquote>
+<p>翻译解释：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/53e3252dc07e">在iOS 13（及以后版本）上，SceneDelegate将负责AppDelegate的某些功能。 最重要的是，window（窗口）的概念已被scene（场景）的概念所代替。 一个应用程序可以具有不止一个场景，而一个场景现在可以作为您应用程序的用户界面和内容的载体（背景）。</a></p>
+</blockquote>
+<p>Xcode 11新创建的项目涉及到SceneDelegate的地方如下：</p>
+<ol>
+<li>AppDelegate类中两个“scene sessions”方法：application(<em>:configurationForConnecting:options:) 和 application(</em>:didDiscardSceneSessions:)</li>
+<li>一个SceneDelegate类，其中包括生命周期事件，例如active，resign和disconnect。</li>
+<li>Info.plist文件中提供了”Application Scene Manifest“配置项，用于配置App的场景，包括它们的场景配置名，delegate类名和storyboard入口</li>
+</ol>
+<p>那不需要SceneDelegate，要怎么处理？<br>两种方法，<br>a. 一种是直接把SceneDelegate相关的删除<br>b. 另外一种则是根据系统版本判断兼容</p>
+<p>方法一：删除SceneDelegate</p>
+<ol>
+<li>把AppDelegate中UISceneSession Lifecycle的两个代理方法删除，添加window属性，在application:didFinishLaunchingWithOptions:方法中初始化window，设置根视图</li>
+<li>删除SceneDelegate文件</li>
+<li>选中target，切换到info，删除Application Scene Manifest这行</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/// AppDelegate.Swift</span><br><span class="line"></span><br><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">@main</span><br><span class="line">class AppDelegate: UIResponder, UIApplicationDelegate &#123;</span><br><span class="line"></span><br><span class="line">    var window: UIWindow?</span><br><span class="line"></span><br><span class="line">    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&gt; Bool &#123;</span><br><span class="line">        // Override point for customization after application launch.</span><br><span class="line">        </span><br><span class="line">        self.window = UIWindow(frame: UIScreen.main.bounds)</span><br><span class="line">        self.window?.backgroundColor = UIColor.white</span><br><span class="line">        </span><br><span class="line">        self.window?.rootViewController = HXBaseViewController()</span><br><span class="line">        self.window?.makeKeyAndVisible()</span><br><span class="line">        </span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/04/21/AYslwW2Kb9Zeitn.png" alt="WeCom20210421-115403@2x.png"></p>
+<p>方法二：根据系统版本判断兼容，但是这种方法要注意，iOS 13之后有些程序状态的处理要在SeceneDelegate中</p>
+<ol>
+<li>首先在SceneDelegate中加入@available(iOS 13, *)的声明，</li>
+<li>然后把AppDelgate中UISceneSession Lifecycle的两个代理方法写到单独的Extension中，然后声明@avaiable(iOS 13, *)，</li>
+<li>AppDelegate的启动方法中也需要修改，编译即可</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// SceneDelegate.swift</span><br><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">@available(iOS 13, *)</span><br><span class="line">class SceneDelegate: UIResponder, UIWindowSceneDelegate &#123;</span><br><span class="line">    xxx</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class AppDelegate: UIResponder, UIApplicationDelegate &#123;</span><br><span class="line"></span><br><span class="line">    var window: UIWindow?</span><br><span class="line"></span><br><span class="line">    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&gt; Bool &#123;</span><br><span class="line">        // Override point for customization after application launch.</span><br><span class="line">        </span><br><span class="line">        if #available(iOS 13.0, *) &#123;</span><br><span class="line">            // 不需要处理，走SceneDelegate</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            // 初始化UIWindow</span><br><span class="line">            window = UIWindow.init()</span><br><span class="line">            window?.frame = UIScreen.main.bounds</span><br><span class="line">            window?.makeKeyAndVisible()</span><br><span class="line">            window?.rootViewController = UIStoryboard.init(name: &quot;Main&quot;, bundle: nil).instantiateInitialViewController()</span><br><span class="line">        &#125;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@available(iOS 13, *)</span><br><span class="line">extension AppDelegate &#123;</span><br><span class="line">    // MARK: UISceneSession Lifecycle</span><br><span class="line"></span><br><span class="line">    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -&gt; UISceneConfiguration &#123;</span><br><span class="line">        // Called when a new scene session is being created.</span><br><span class="line">        // Use this method to select a configuration to create the new scene with.</span><br><span class="line">        return UISceneConfiguration(name: &quot;Default Configuration&quot;, sessionRole: connectingSceneSession.role)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set&lt;UISceneSession&gt;) &#123;</span><br><span class="line">        // Called when the user discards a scene session.</span><br><span class="line">        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.</span><br><span class="line">        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/53e3252dc07e">iOS13 Scene Delegate详解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38735568/article/details/101266408?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">iOS 13 SceneDelegate适配</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/">http://morganwang.cn/2021/04/21/iOS%20%E5%88%A0%E9%99%A4SceneDelegate%E5%92%8CStoryboard/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/05/06/iOS%20%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" title="iOS APP添加桌面快捷方式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">iOS APP添加桌面快捷方式</div></div><div class="info-2"><div class="info-item-1">iOS APP添加桌面快捷方式背景新接到一个需求，需要APP内的某些功能，能够把入口添加到桌面，点击桌面到入口可以直接跳转APP对应界面（类似于下面这张示例图），于是就做了一番调研。 其实很多APP目前都已经实现了类似的功能，比如支付宝、云闪付等等，其中的每一个独立功能都可以单独添加到桌面，所以网上有很多实现的方法，笔者做的是整理和试错。       实现首先，添加到桌面功能的操作流程是： 客户端打开APP -&gt; 进入到对应到APP功能模块 -&gt; 点击添加快捷方式到桌面按钮 -&gt; 跳转浏览器，并加载引导页面，点击分享，选择添加到主屏幕 -&gt; 从主屏幕点击刚刚添加到快捷功能，跳转到APP的对应界面。  根据笔者了解到的信息，目前实现这种功能，大致可以分为两种实现方式：  方法一：H5提供网页，每个不同的功能提供不同的网页，服务端返回这些网页的URL，客户端配置打开URL Scheme，然后使用Safari直接加载URL，加载的网页中根据进入方式的不同，自动重定向打开APP的URL Scheme。  方法二：H5提供通用的网页，客户端替换通用网页中的内容，比如...</div></div></div></a><a class="pagination-related" href="/2021/04/19/iOS%20fastlane%E6%89%93%E5%8C%85/" title="iOS 自动打包"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS 自动打包</div></div><div class="info-2"><div class="info-item-1">iOS 自动打包使用FastLane打包安装 fastlane 通过HomeBrew安装  brew install fastlane  通过Bundler安装  安装 bundler 然后在项目根目录下创建./Gemfile文件，编辑内容      1234// 安装 bundler$ gem install bundler   12345//然后在项目根目录下创建./Gemfile文件，编辑内容source &quot;https://rubygems.org&quot;gem &quot;fastlane&quot;  编辑Gemfile文件： 123456source &quot;https://rubygems.org&quot;gem &quot;fastlane&quot;, &quot;2.180.1&quot;# 如果使用Cocoapods，需要添加下面这行gem &quot;cocoapods&quot;   通过ruby gems安装  1sudo gem install fastlane  fastlane安装成功后，安装两个插件，用于版本号管理和打包成功...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/07/31/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Swift 面试题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-31</div><div class="info-item-2">Swift 面试题</div></div><div class="info-2"><div class="info-item-1">背景被问到的面试题，这里记录一下。   问题Swift 中 Struct 和 Class 的区别Swift 中 为什么 String、Array、Dictionary 用 Struct 实现Swift 中写时复制的原理Swift 中变量作用域有哪些，区别是什么Swift中 Protocol 如何声明可空MVP 的优点是什么RxSwift 中冷信号和热信号的区别RxSwift 中 CombineLatest、zip、merge的区别Git 中 rebase和 merge 的区别，rebased的 commitID 会改变吗SwiftUI 中 View 传值方式有哪些什么情况下触发 layoutSubviews 答案Swift 中 Struct 和 Class 的区别Struct是值类型，Class 是引用类型；Struct和 Class 都可以有属性和方法，但是 let 修饰的 Struct 不能更改，Class 修饰的可以更改；Struct方法中修改属性需要在方法前添加 mutating 关键字。Struct和 Class 都可以实现协议。Struct不能被继承，Class 可以...</div></div></div></a><a class="pagination-related" href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/" title="iOS 键盘删除键响应"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-20</div><div class="info-item-2">iOS 键盘删除键响应</div></div><div class="info-2"><div class="info-item-1">iOS 键盘删除键响应背景背景是，实现一个分享到微信，多选加输入框，点击键盘删除键，删除多选选中对象的东西。    实现由于UITextField没有删除键的代理，所以笔者最开始的想法是，通过textField:shouldChangeCharactersInRange:replacementString:来实现监听，当当前字符串为空且要替换字符串为空时，说明是点击的删除按钮，通过Block方法回掉出去，代码如下： 12345678910- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string &#123;    if ((textField.text.length == 0) &amp;&amp; (string.length == 0)) &#123;        if (self.deleteBackwardBlock) &#123;            self.deleteBa...</div></div></div></a><a class="pagination-related" href="/2022/06/11/iOS%20The%20'Pods-App'%20target%20has%20transitive%20dependencies%20that%20include%20static%20binaries/" title="The &#39;Pods-App&#39; target has transitive dependencies that include static binaries"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-11</div><div class="info-item-2">The &#39;Pods-App&#39; target has transitive dependencies that include static binaries</div></div><div class="info-2"><div class="info-item-1">The ‘Pods-App’ target has transitive dependencies that include static binaries:修改背景最近遇到了两次次这个问题，都是Swift项目Pod添加库开启了use_frameworks!，安装某些OC库时报错；花了好久时间解决，突然想起来之前OC项目安装Swift库也遇到了这个问题，但是之前没有记录，所以这次遇到时没有印象；这次记录下来，分享给大家：   解决方案之前遇到的是OC代码安装ZLPhotoBrowser的Swift库，开启了use_frameworks!，和其他第三方库一起安装时，可以理解为，除了ZLPhotoBrowser是动态库，其他的第三方库默认都使用static_framework或者static_library。 Pod文件末尾添加下面代码： 12345678910111213141516171819use_frameworks!...dynamic_frameworks = [&#x27;ZLPhotoBrowser&#x27;]pre_install do |installer|  ...</div></div></div></a><a class="pagination-related" href="/2022/09/26/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget2/" title="手把手教你创建widget2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-26</div><div class="info-item-2">手把手教你创建widget2</div></div><div class="info-2"><div class="info-item-1">手把手教你创建widget2接上篇iOS Widget，这里介绍下WidgetBundle的用法和怎么做一个支付宝类似的 widget，上篇里把WidgetBundle写成了WidgetGroup，我的错。   WidgetBundle 的用法再来回顾一下什么情况下使用 WidgetBundle，上篇里介绍了supportedFamilies，可以设置Widget 不同的尺寸，比如Small、Meidum、Large等，但是如果想要多个同尺寸的 Widget ，比如：想要两个Small尺寸的 Widget ，类似于下面东方财富 Widget 的效果，就需要用WidgetBundle，设置多个Widget。                   WidgetBundle的使用不难，下面来看下，上篇最后的代码（可以去https://github.com/mokong/WidgetAllInOne下载，打开 Tutorial2），只显示了一个 Medium 尺寸的 Widget，这里修改为使用WidgetBundle显示两个Medium尺寸的 Widget。 新建SwiftUIView，...</div></div></div></a><a class="pagination-related" href="/2021/11/23/iOS%20%E6%8E%A5%E5%85%A5%20HTTPDNS/" title="iOS 接入 HTTPDNS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-23</div><div class="info-item-2">iOS 接入 HTTPDNS</div></div><div class="info-2"><div class="info-item-1">背景最近开发水印相机，遇到了用户网络正常，但是上传超时、上传失败的问题。通过听云后台看到接口错误记录中，用户的 localDNS 为空，于是就有了接入 HTTPDNS 的需求。  实践由于项目中网络请求使用的 AFNetworking 框架，接入第三方 HTTPDNS 后，需要修改 AFNetworking 中的内容，才能让请求走IP。 大致流程是接入 SDK——&gt;注册 SDK——&gt;获取 IP——&gt;存储——&gt;使用。这里可依据个人情况，在启动时进行 SDK注册，获取 IP 有两种方式，一是只在 APP 启动时获取一次，然后存储起来，APP使用过程中不需要更新。二是在 每次某个接口使用时都获取。 下面详细来看看接入的过程 阿里 HTTPDNS 按照快速入门中的步骤进行配置 添加域名，注意阿里的添加域名，可以添加全匹配和二级域名的方式   参考iOS SDK 接入进行接入 使用 CocoaPods 接入  这里到要骂人的地方了，按照阿里自己的官方文档上面写的 CocoaPod 安装的SDK不是最新的  12345source &#x27;https://gith...</div></div></div></a><a class="pagination-related" href="/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/" title="Xcode 12.x添加iOS 10.x模拟器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-15</div><div class="info-item-2">Xcode 12.x添加iOS 10.x模拟器</div></div><div class="info-2"><div class="info-item-1">Xcode 12.x添加iOS 10.x模拟器背景笔者昨天遇到个问题，有用户反馈在iOS 10.3.1的手机上，有个网页打开白屏。但是问题是笔者手头都没有10.x版本的手机，所以想安装模拟器来尝试复现。 然而，笔者发现电脑上的Xcode版本是12.5.1，已经不支持iOS 10.3.1的模拟器下载了。   步骤下载iOS 10.3.1模拟器然后笔者搜索后发现，Xcode 12.4还是支持下载iOS 10.3.1的模拟器的，于是去Xcode 下载网站，下载了Xcode 12.4，然后CMD + ,打开Xcode的偏好设置，在Components选项卡中，找到iOS 10.3.1 Simulator并下载，如下图。  添加iOS 10.3.1模拟器通常添加模拟器，是选中Xcode，通过顶部菜单的Window -&gt; Device and Simulators，选中Simulators，点击左下角的+，添加模拟器，如下图  会发现，即使下载了iOS 10.3.1模拟器，依旧不能添加，下载了却不能添加。  于是笔者接着查找，终于仅有的一篇真理文章在 Xcode 12 執行低版本的 i...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS-%E5%88%A0%E9%99%A4%E6%96%B0%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84SceneDelegate"><span class="toc-number">1.</span> <span class="toc-text">iOS 删除新创建项目中的SceneDelegate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

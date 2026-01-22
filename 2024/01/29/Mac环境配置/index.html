@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Mac环境配置和常用软件 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景分享一下Mac常用的软件和习惯配置，用于备份:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac环境配置和常用软件">
+<meta property="og:url" content="http://morganwang.cn/2024/01/29/Mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="背景分享一下Mac常用的软件和习惯配置，用于备份:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2024-01-29T01:28:00.000Z">
+<meta property="article:modified_time" content="2024-04-11T11:46:45.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mac环境配置和常用软件",
+  "url": "http://morganwang.cn/2024/01/29/Mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2024-01-29T01:28:00.000Z",
+  "dateModified": "2024-04-11T11:46:45.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2024/01/29/Mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Mac环境配置和常用软件',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Mac环境配置和常用软件</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Mac环境配置和常用软件</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-29T01:28:00.000Z" title="发表于 2024-01-29 09:28:00">2024-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-11T11:46:45.000Z" title="更新于 2024-04-11 19:46:45">2024-04-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>分享一下Mac常用的软件和习惯配置，用于备份:</p>
+<span id="more"></span>
+
+<p>软件：</p>
+<p>浏览器：</p>
+<ul>
+<li>Safari<ul>
+<li>Userscripts</li>
+<li>AdGuard</li>
+<li>GenerateQR</li>
+<li>JSONFormat</li>
+</ul>
+</li>
+<li>Chrome<ul>
+<li>2FAS</li>
+<li>AdGuard AdBlocker</li>
+<li>Bitwarden</li>
+<li>JSON Viewer</li>
+<li>MetaMask</li>
+<li>Proxy SwitchyOmega</li>
+<li>QR Code Generator</li>
+<li>SimpRead</li>
+<li>Speechify Text To Speech Voice Reader</li>
+<li>Tampermonkey</li>
+<li>uBlock</li>
+</ul>
+</li>
+<li>Edge: WorkSpace 便捷管理标签，插件同上</li>
+<li>Brave: 垂直标签页</li>
+</ul>
+<p>工具：</p>
+<ul>
+<li>Qmenu：右键工具，用于设置右键新建什么类型的文件、右键选择用什么工具打开</li>
+<li>Xnip：截图标注工具，快捷键触发方便</li>
+<li>PicGo：图片云盘工具</li>
+<li>Bob：英文翻译，选中使用快捷键，支持配置翻译平台</li>
+<li>The Unarchiver</li>
+<li>Warp：命令行工具，带提示，能选中复制粘贴删除</li>
+<li>Tencent Lemon：缓存清理，磁盘清理，开机启动项清理</li>
+<li>Bitwarden</li>
+<li>WPSOffice</li>
+<li>LICEcap</li>
+<li>Raycast：替代Spotlight，使用插件如下：<ul>
+<li>Color Picker</li>
+<li>CLipboard History</li>
+<li>Google Traslate</li>
+<li>Format JSON</li>
+<li>base64</li>
+</ul>
+</li>
+</ul>
+<p>开发：</p>
+<ul>
+<li>Xcode</li>
+<li>SQLPro for SQLLite</li>
+<li>Copilot for Xcode</li>
+<li>Github Desktop</li>
+<li>Visual Studio Code：编辑器，使用插件如下：<ul>
+<li>Prettify JSON</li>
+<li>Path Intellisense</li>
+<li>Prettier-Code formatter</li>
+<li>Markdown All in One</li>
+<li>Flutter</li>
+<li>Dart</li>
+<li>Color Highlight</li>
+<li>ESLint</li>
+<li>fluuter-stylizer</li>
+<li>Git Graph</li>
+<li>GitLens-Git supercharged</li>
+</ul>
+</li>
+<li>DevEncoStudio</li>
+</ul>
+<p>网络：</p>
+<ul>
+<li>secoclient</li>
+<li>Hiddify</li>
+<li>ClashX：科学上网</li>
+<li>proxyman: 抓包工具</li>
+<li>Cloudflarewrap: 代理</li>
+<li>Postman</li>
+</ul>
+<p>沟通：</p>
+<ul>
+<li>Wecom\Wechat</li>
+<li>Feishu</li>
+<li>Telegram</li>
+</ul>
+<p>环境配置：</p>
+<ul>
+<li>Xcode 配置快捷打开命令行：<a target="_blank" rel="noopener" href="https://github.com/JeaSungLEE/Awesome-Xcode-Behaviors">Awesome-Xcode-Behaviors</a></li>
+<li>System Preferences -&gt; Keyboard -&gt; Keyboard Shortcuts -&gt; Services -&gt; Files and Folders -&gt; Open folder with Warp -&gt; 设置快捷键 Control + `，即可快速从 finder 打开 Warp<br>  如图：<br>  <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/openWarpInFinder.png" alt="openWarpInFinder"></li>
+<li></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2024/01/29/Mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">http://morganwang.cn/2024/01/29/Mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/01/30/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%A1%8C/" title="快速打开命令行"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">快速打开命令行</div></div><div class="info-2"><div class="info-item-1">快速打开命令行作为经常用Mac的开发，通常会有一个需求，需要在文件夹Finder中快速打开命令行，且进入当前文件夹。而如果使用 Xcode 的话，通常还会有另一个需求，即在 Xcode 中快速打开命令行，进入当前项目。   Ps：下面演示的命令行工具，使用的是Warp，但是系统的 Terminal也支持 在文件夹 Finder中快速打开命令行打开系统设置，找到Keyboard，然后点击Keyboard Shortcuts，如下图:  然后找到Services，展开Files and Folders，勾选Open folder with Warp，在右侧的none的位置双击，输入快捷键，然后点击完成，以后就可以通过这个快捷键快速打开Warp了，如下图：  随便打开任意目录的文件夹，然后按刚刚输入的快捷键，就会发现，从当前目录快速唤起了Warp，且进入的就是当前文件夹。 在Xcode中快速打开命令行在Xcode中快速打开命令行，是通过使用Awesome-Xcode-Behaviors  首先下载Awesome-Xcode-Behaviors，并解压到指定文件夹， 然后进入此文件夹，授...</div></div></div></a><a class="pagination-related" href="/2024/01/07/iOS%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/" title="一文学会iOS蓝牙开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">一文学会iOS蓝牙开发</div></div><div class="info-2"><div class="info-item-1">一文学会iOS蓝牙开发背景最近做APP对接蓝牙设备开发，这里分享一下iOS对接蓝牙设备中需要注意的东西，大致包含下面这些方面：    Xcode蓝牙权限 如何扫描蓝牙设备、获取Mac地址 不同蓝牙设备切换 写入蓝牙命令 data转16进制字符串 16进制转String crc算法 数据异或计算，字符串异或 负数异或计算     依次写入多个命令  蓝牙开发的大致流程首先来了解一下蓝牙开发的流程，总结如下： Xcode配置蓝牙权限 -&gt; 启动蓝牙 -&gt; 扫描周围蓝牙 -&gt; 连接指定蓝牙 -&gt; 校验是否连接成功 -&gt; 蓝牙读/写 -&gt; 断开连接 流程图如下：  具体步骤1. 配置Xcode蓝牙权限 General Tab下，Frameworks,Libraries, and Embedded Content中添加 CoreBluetooth.framework，如下图：  Signing &amp; Capabilities Tab下，Background Modes中，勾选Uses Bluetooth LE accessories，如下图：   ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/01/30/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%A1%8C/" title="快速打开命令行"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-30</div><div class="info-item-2">快速打开命令行</div></div><div class="info-2"><div class="info-item-1">快速打开命令行作为经常用Mac的开发，通常会有一个需求，需要在文件夹Finder中快速打开命令行，且进入当前文件夹。而如果使用 Xcode 的话，通常还会有另一个需求，即在 Xcode 中快速打开命令行，进入当前项目。   Ps：下面演示的命令行工具，使用的是Warp，但是系统的 Terminal也支持 在文件夹 Finder中快速打开命令行打开系统设置，找到Keyboard，然后点击Keyboard Shortcuts，如下图:  然后找到Services，展开Files and Folders，勾选Open folder with Warp，在右侧的none的位置双击，输入快捷键，然后点击完成，以后就可以通过这个快捷键快速打开Warp了，如下图：  随便打开任意目录的文件夹，然后按刚刚输入的快捷键，就会发现，从当前目录快速唤起了Warp，且进入的就是当前文件夹。 在Xcode中快速打开命令行在Xcode中快速打开命令行，是通过使用Awesome-Xcode-Behaviors  首先下载Awesome-Xcode-Behaviors，并解压到指定文件夹， 然后进入此文件夹，授...</div></div></div></a><a class="pagination-related" href="/2018/12/15/%E9%9A%8F%E7%AC%94-%E6%98%A8%E6%97%A5%E8%A7%81%E9%97%BB/" title="昨日见闻"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-12-15</div><div class="info-item-2">昨日见闻</div></div><div class="info-2"><div class="info-item-1">本来应该昨晚写日记的，但是晚上是在太冷，完全不想动，但昨天遇到的事情又确实想要记录，所以今天补录到博客里。 昨天去参加互联网周末的杭州余杭长乐林场活动。   计划永远赶不上变化，提前预留足够的时间还是好的因为要早上7:20集合，所以我定了3个闹钟；6：00起床，6:30出门，7:00上地铁。早上5点多起来去了个厕所，然后就等闹钟响，结果等我醒来才发现已经6:10分了，6:00的闹钟没响，因为我设置的就寝时间的问题。然后爬起来洗漱之后，出门已经是6:45了，路上买了个煎饼，到地铁站还不到7:00，然而地铁刚刚出发，下一班诡异的地铁空的，不开门，然后等我上车已经7:05了；不过好在我留的时间还算足够，没有吃到。 保持平常心我其实特别不喜欢自我介绍，因为容易紧张，而且不知道说什么。但由于参加的单身活动，所以自我介绍又是少不了的。我当时就感觉或许我不应该出来，又要搞砸了——整段垮掉。。。领队开了个好头，给了个模版，介绍自己名字、职业、哪里的人、兴趣爱好的话，美剧也算。就想自己要说什么，知道自己要说什么之后，再想怎么说。然后我开始试着调整，反正又没人认识，怕什么，而且又不是一定要在这次活动...</div></div></div></a><a class="pagination-related" href="/2018/08/23/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A/" title="关于沟通"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-08-23</div><div class="info-item-2">关于沟通</div></div><div class="info-2"><div class="info-item-1">关于沟通的反思中午回去休息的时候，突然发现自己上午说话好难听。 事情是，测试说我和安卓有个地方计算的不一样，然后要给我提Bug，然后我电脑当时正卡，本来就心情不太好，然后一听要给我提Bug，立马就炸了；   这个地方，最开始过需求的时候，产品都没有提到有这个东西；然后测试写测试用例的时候，提出来了，产品去确认了两三次才知道有这个东西，然后通知开发做，但是具体算的逻辑根本就没有说。 所以我立马就给怼回去了，让给产品提Bug，做个需求变更再做。早上晨会的时候，产品说自己说过，然后就吵起来了。事实是产品文档没写，也没说过这个东西，安卓做的时候，问测试要的另一个东西才这么早，也没告诉我。 我当时真的就炸了，感觉血液往脑袋上涌，就差动手了。 中午吃过去趴床上休息的时候，想想，发现自己完全能不生气，不嘲讽，好好的沟通，然后选择了一种让所有人都不舒服的方式；这固然是习惯使然，另一方面也是自己缺乏正确的沟通的表现。 沟通这个问题，我很早就注意到，知道正确的是什么，但是每次话脱口而出，然后就一发不可收拾。到最后，所有人都记得，我脾气不好，然后评其他东西的时候，就没人愿意帮。然后...</div></div></div></a><a class="pagination-related" href="/2018/12/09/%E5%85%B3%E4%BA%8E%E6%B2%9F%E9%80%9A2/" title="关于沟通2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-12-09</div><div class="info-item-2">关于沟通2</div></div><div class="info-2"><div class="info-item-1"> 选择积极自信的沟通方式与他人沟通，摒弃攻击性、退让性以及消极性的沟通 沟通时尽量采用第一人称 避免沟通到几个障碍：唱反调、泼凉水、回答“绝”句 巧妙的运用感官系统来和他人建立和谐关系 理性到回应他人到语言攻击  A. 小王，我今天没时间，你必须在下午下班前帮我把这个文件送到分公司B. 小王，我本来不想麻烦你，但是我有个文件要送到分公司，而我又没时间，所以。。。当然，如果你没时间，那就算了C. 小王，我有个文件要在下午下班前送到分公司，而我恰好没时间，如果你能帮我，我会非常感谢你。这是个很重要紧急到文件D. 小王，我想你肯定不是那种忘恩负义的人，我经常帮你，这次你得帮帮我了，把这个文件送到分公司去 提出请求四步法：  提出请求前的准备工作 开场白（简单明了的话和真诚的态度） 帮忙的理由，确认请求的结果 结束请求，表示感谢  </div></div></div></a><a class="pagination-related" href="/2023/08/14/%E4%B8%80%E7%82%B9%E6%83%B3%E6%B3%95%E5%BC%80%E5%8F%91%E5%8E%86%E7%A8%8B/" title="一点想法APP开发历程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-14</div><div class="info-item-2">一点想法APP开发历程</div></div><div class="info-2"><div class="info-item-1">起源2022年9月6号的时候，看到一张图片，立马收藏起来，但是不知道APP的名字，一直放在相册里收藏，打算空了自己做一个。到2023年6月21号，在逛V2的过程中看到有人问：有没有推荐的时间轴/时光回忆类的 app 或者 web 服务，最好还能控制个人数据隐私？我马上想到了这张图片，就回复了一下，于是想起来自己打算做的念头。   照片如下：   落地之前APP都是Swift开发，这个决定打算用SwiftUI练手，7月10号开始动手，界面刚开始就照着上面的照片做，列表做好了之后，再逛即刻的时候，突然发现了这个APP的名字是《好事发生》。。。赶紧下载下来收藏了起来，还加入了群。由于找到了组织，自己这个APP也就没了开发的理由，就又搁置了。 但是总感觉有些意犹未尽，《好事发生》APP定位的是好事分享，然后通过微信群增加用户活跃，总感觉和我一开始想做的不是一个东西。后面地铁上班的路上有了感觉，明确了，我要做的是一款记录琐碎想法的APP，比如上班路上、跑步的时候、洗澡的时候、散步的时候、听歌的时候，有时候会有些多愁善感的想法、或者突然冒出来的奇思妙想，因为之前自己有很多这样的经历，经常是没...</div></div></div></a><a class="pagination-related" href="/2024/02/20/%E5%A6%82%E4%BD%95%E4%BB%8EXLog%E6%8F%90%E5%8F%96MIRA/" title="如何获取少量MATIC"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="info-item-2">如何获取少量MATIC</div></div><div class="info-2"><div class="info-item-1">如何获取少量MATIC背景：xlog创作者激励计划赠送了 14 MIRA，而在把 MIRA 提出的过程中，遇到了需要支付gas fee，即少量 MATIC 的情况，0.01～0.03不等，取决于人品（多刷几次），而如何获取这少量 MATIC，卡住了好久。 这里分享一下，昨天刚体验的可以成功获取少量 MATIC 的可行步骤，顺便分享一下遇到的诈骗。。。   一开始搜索没有足够的 matic fee，出来的结果，有些已经过期了，有些网站打不开。 昨天换了一个方式，搜索如何获取 MATIC fee，然后看到了这个How To Get FREE MATIC: Use a Faucet!，看到这里有如何获取 0.01 MATIC 的步骤，如下图，于是边想着尝试一下：  步骤翻译过来就是：  加入Polygon Discard 加入后，先认证，认证是点击start群组，然后按照步骤，选择自己感兴趣的，发送认证 认证通过后，可以看到support，然后找到matic-faucet频道，如下图： 然后发送faucet-send YourReceivingAddress，就会有机器人回复，发送 0...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

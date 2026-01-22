@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iOS 虚拟定位原理与预防 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="iOS 虚拟定位原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 虚拟定位原理与预防">
+<meta property="og:url" content="http://morganwang.cn/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="iOS 虚拟定位原理与预防背景说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2021-08-04T05:43:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iOS 虚拟定位原理与预防",
+  "url": "http://morganwang.cn/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2021-08-04T05:43:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iOS 虚拟定位原理与预防',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">iOS 虚拟定位原理与预防</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">iOS 虚拟定位原理与预防</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-04T05:43:00.000Z" title="发表于 2021-08-04 13:43:00">2021-08-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="iOS-虚拟定位原理与预防"><a href="#iOS-虚拟定位原理与预防" class="headerlink" title="iOS 虚拟定位原理与预防"></a>iOS 虚拟定位原理与预防</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说到虚拟定位，常有印象都是安卓上的分身软件甚至系统自带的位置穿越（笔者曾经使用过ZUK Z2系统自带的位置穿越），会认为iOS上虚拟定位比较困难。笔者没调研之前也是这么认为，之前已知的虚拟定位是使用Xcode添加GPX文件，编辑经纬度，从而实现虚拟定位。但是这种操作也只有熟悉iOS开发的人才能操作，而且需要mac电脑，故而笔者印象中也是iOS上虚拟定位比较困难。</p>
+<span id="more"></span>
+
+<p>然而经过调研之后，笔者发现，iOS的虚拟定位没有那么困难，甚至相比于安卓更简单。下面就来介绍一下iOS中几种虚拟定位的方法。</p>
+<h2 id="虚拟定位的几种办法及原理"><a href="#虚拟定位的几种办法及原理" class="headerlink" title="虚拟定位的几种办法及原理"></a>虚拟定位的几种办法及原理</h2><p>笔者调研后，发现iOS上面虚拟定位大致可有4中情况：</p>
+<ul>
+<li>使用Xcode通过GPX文件虚拟定位</li>
+<li>使用爱思助手中的虚拟定位功能直接虚拟定位</li>
+<li>通过外接设备，比如蓝牙和手机连接，发送虚拟定位数据来虚拟定位</li>
+<li>越狱设备中通过hook定位方法，来虚拟定位</li>
+</ul>
+<p>下面就来一个个分析实践：</p>
+<h3 id="使用Xcode通过GPX文件虚拟定位"><a href="#使用Xcode通过GPX文件虚拟定位" class="headerlink" title="使用Xcode通过GPX文件虚拟定位"></a>使用Xcode通过GPX文件虚拟定位</h3><p>使用Xcode通过GPX文件虚拟定位，iOS开发一般比较熟悉，操作步骤是：</p>
+<p>新创建一个iOS项目，然后添加文件，选择创建GPX文件</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13846925548/0.png" alt="wecom20210804-151237.png"></p>
+<p>编辑其中内容，把<code>lat</code>、<code>lon</code>改为要模拟的经纬度，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;wpt lat=&quot;31.2416&quot; lon=&quot;121.333&quot;&gt;</span><br><span class="line">         &lt;name&gt;Shanghai&lt;/name&gt;</span><br><span class="line">    &lt;/wpt&gt;</span><br><span class="line">&lt;/gpx&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后选择<code>Product</code> -&gt; <code>Scheme</code> -&gt; <code>Edit Scheme</code>，选中<code>Options</code> tab，勾选<code>Allow Location Simulation</code>，然后运行即可虚拟定位</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13846939343/0.png" alt="wecom20210804-152202.png"></p>
+<p><strong>注意：</strong> 通常情况下，使用Xcode运行虚拟定位，运行停止后，经纬度会恢复成原来的。但是当运行了项目，然后直接拔掉数据线(是运行状态下拔掉)，手机的经纬度就会一直是模拟的经纬度，想要恢复需要重启手机或者等待2～5天自动恢复。</p>
+<p><strong>原理：</strong> 调用iOS设备中的<code>com.apple.dt.simulatelocation</code>服务，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46572309"><code>com.apple.dt.simulatelocation</code>服务是苹果在Xcode 6、iOS 8.0之后提供的为设备模拟GPS位置的调试功能，原理是通过usb获取设备句柄后开启设备内的服务(“<code>com.apple.dt.simulatelocation</code>“)，再通过固定坐标或GPX文件进行位置模拟。</a></p>
+<h3 id="使用爱思助手中的虚拟定位功能直接虚拟定位"><a href="#使用爱思助手中的虚拟定位功能直接虚拟定位" class="headerlink" title="使用爱思助手中的虚拟定位功能直接虚拟定位"></a>使用爱思助手中的虚拟定位功能直接虚拟定位</h3><p>这个方法最是简单，笔者之前不知道有这种方法，下载一个爱思助手，打开，连接手机到电脑，选择<code>工具箱</code>tab下的<code>虚拟定位</code></p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13846970127/0.png" alt="wecom20210804-142320@2x.png"></p>
+<p>然后输入要定位的位置搜索，点击修改定位即可</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13846970132/0.png" alt="wecom20210804-142450@2x.png"></p>
+<p><strong>注意：</strong> 这种虚拟定位的方法，真的是简单。就目前而言，笔者尝试后发现<code>钉钉</code>、<code>企业微信</code>，均没有对此类方法检测处理。</p>
+<p><strong>原理：</strong> 通过<a target="_blank" rel="noopener" href="https://github.com/libimobiledevice/libimobiledevice">libimobiledevice</a>的service模块开启com.apple.dt.simulatelocation服务，然后实现脱离通过Xcode来模拟定位。<a target="_blank" rel="noopener" href="https://github.com/libimobiledevice/libimobiledevice">libimobiledevice</a>是开源的跨平台调用iOS协议的库。</p>
+<h3 id="通过外接设备，发送虚拟定位数据来虚拟定位"><a href="#通过外接设备，发送虚拟定位数据来虚拟定位" class="headerlink" title="通过外接设备，发送虚拟定位数据来虚拟定位"></a>通过外接设备，发送虚拟定位数据来虚拟定位</h3><p>通过外接设备，发送虚拟定位这个方法笔者之前完全都没了解到，不得不说，真的是双击666，人民智慧无限强大，其中代表是位移精灵。笔者没有购买外设，所以也没办法尝试，但是可以附上一个视频，供大家参考：</p>
+<p>视频链接：<a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=17675944846390412165">https://haokan.baidu.com/v?pd=wisenatural&amp;vid=17675944846390412165</a></p>
+<p><strong>原理：</strong> 通过MFi（Made For iOS）认证厂商，可以获得MFI Accessory Interface Specification文档，其中提供了很多隐藏功能，包含时间通讯、音乐数据通讯、定位功能等等。其中定位功能的使用只需要照着文档，按照协议格式发送对应位置数据，即可。<a target="_blank" rel="noopener" href="https://usermanual.wiki/Document/MFiAccessoryInterfaceSpecificationR18NoRestriction.1631705096.pdf">MFI Accessory Interface Specification</a>地址见：<a target="_blank" rel="noopener" href="https://usermanual.wiki/Document/MFiAccessoryInterfaceSpecificationR18NoRestriction.1631705096.pdf">https://usermanual.wiki/Document/MFiAccessoryInterfaceSpecificationR18NoRestriction.1631705096.pdf</a></p>
+<p>文档中搜索<code>Locaiton</code>即可看到定位相关信息，如下：</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13847282969/0.png" alt="wecom20210804-165553.png"></p>
+<h3 id="越狱设备中通过hook定位方法，来虚拟定位"><a href="#越狱设备中通过hook定位方法，来虚拟定位" class="headerlink" title="越狱设备中通过hook定位方法，来虚拟定位"></a>越狱设备中通过hook定位方法，来虚拟定位</h3><p>越狱设备虚拟定位，是越狱之后使用具备虚拟定位功能的越狱插件。在上帝模式下，越狱插件可以随意劫持系统函数。比如：<a target="_blank" rel="noopener" href="http://article.docway.net/details?id=60d5e03bcbb464046e3508b6">GPS定位管家，能够管理每个iOS应用的GPS位置。</a>。</p>
+<p><strong>原理：</strong> 越狱后，通过注入库，hook了CLLocationManager中的定位代理方法，从而篡改正常定位信息。</p>
+<p>总结如下：</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13847379681/0.png" alt="wecom20210804-171650.png"></p>
+<h2 id="虚拟定位几种方法的检测"><a href="#虚拟定位几种方法的检测" class="headerlink" title="虚拟定位几种方法的检测"></a>虚拟定位几种方法的检测</h2><p>作为开发，知道了有哪些虚拟定位的，还不够，还需要知道怎么这些虚拟定位的方法怎么解决。尤其是OA应用和游戏应用的开发，需要特别注意。下面就来一步步看下：</p>
+<h3 id="使用Xcode通过GPX文件虚拟定位的检测-和-使用爱思助手中的虚拟定位功能直接虚拟定位的检测"><a href="#使用Xcode通过GPX文件虚拟定位的检测-和-使用爱思助手中的虚拟定位功能直接虚拟定位的检测" class="headerlink" title="使用Xcode通过GPX文件虚拟定位的检测 和 使用爱思助手中的虚拟定位功能直接虚拟定位的检测"></a>使用Xcode通过GPX文件虚拟定位的检测 和 使用爱思助手中的虚拟定位功能直接虚拟定位的检测</h3><p>使用Xcode通过GPX虚拟定位和使用爱思助手虚拟定位的，其最终的原理是一样的，都是通过调用com.apple.simulatelocation服务，从而实现虚拟定位。</p>
+<p>笔者统计了一下，网上说的验证方式大致有两种：</p>
+<ul>
+<li>根据特征值判断<ul>
+<li>定位的精度：虚拟定位的经纬度的精度不如真实定位的精度高，所以可以通过定位经纬度的精度来判断</li>
+<li>定位的海拔值和海拔精度：虚拟定位的海拔值为0，海拔垂直精度为-1；所以可以通过这两个值来判断</li>
+<li>定位回调调用次数：虚拟定位的回调只会调用一次，而真实定位的会多次触发；所以可以通过触发次数来判断</li>
+<li>函数响应时间：虚拟定位的响应是立马返回，而真实的不会；所以可以通过响应时间判断</li>
+</ul>
+</li>
+<li>根据<code>CLLocation</code>的私有属性<code>_internal</code>中的type来判断</li>
+</ul>
+<p>上面是笔者总结的网上给出的检测方案，下面来实践，看事实是否如上所描述，下面笔者采用的是使用爱思助手虚拟经纬度的方法来模拟。<br><strong>强烈注意：</strong>使用第三方地图的定位和系统定位回对下面对方法也有影响！！！笔者这里吃了很大的亏，好家伙。</p>
+<h4 id="根据特征值判断"><a href="#根据特征值判断" class="headerlink" title="根据特征值判断"></a>根据特征值判断</h4><ol>
+<li><p>定位的精度<br> 获取经纬度的精度，不能使用”%f”来直接格式化，因为格式化字符串默认“%f”，默认保留到小数点后第6位，对比不出来差异。<br> 代码如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 定位经纬度的精度</span></span><br><span class="line"><span class="comment">/// @param location 定位Item</span></span><br><span class="line">- (<span class="keyword">void</span>)testLocationAccuracy:(<span class="built_in">CLLocation</span> *)location &#123;</span><br><span class="line">  <span class="built_in">NSString</span> *longitudeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%@&quot;</span>, </span><br><span class="line">  							@(location.coordinate.longitude)];</span><br><span class="line">  <span class="comment">// NSString *longitudeStr = [[NSDecimalNumber numberWithDouble:</span></span><br><span class="line">  	location.coordinate.longitude] stringValue]; <span class="comment">// 这种方法取到的是17位</span></span><br><span class="line">  <span class="built_in">NSString</span> *lastPartLongitudeStr = [[longitudeStr</span><br><span class="line">  				 	componentsSeparatedByString:<span class="string">@&quot;.&quot;</span>] lastObject];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">NSString</span> *latitudeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%@&quot;</span>, @(location.coordinate.latitude)];</span><br><span class="line">  <span class="built_in">NSString</span> *lastPartLatitudeStr = [[latitudeStr </span><br><span class="line">  					componentsSeparatedByString:<span class="string">@&quot;.&quot;</span>] lastObject];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@&quot;定位精度的 longitude位数：%d, latitude位数：%d&quot;</span>, </span><br><span class="line">  	lastPartLongitudeStr.length, lastPartLatitudeStr.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 使用正常定位时，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定位精度的 longitude位数：<span class="number">13</span>, latitude位数：<span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用爱思助手搜索<code>虹桥火车站地铁站</code>，自动定位到经纬度是6位，输入框中最多可输入小数点后8位，开启虚拟定位后，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定位精度的 longitude位数：<span class="number">13</span>, latitude位数：<span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<p> 笔者这里测试了很久，由于小数精度的问题，笔者换了好几种方式，最终结论是使用此方法无法判断。虽然爱思助手设置的经纬度有个数限制，但是最终定位出来的经纬度和定位出来的并不相同，且由于小数精度问题，无法准确判断。故而此方法行不通。</p>
+</li>
+<li><p>定位的海拔值和海拔精度<br> 通过altitude和verticalAccuracy来判断，CLLocation的altitude的属性表示海拔。verticalAccuracy的属性来判断海拔的精确度。海拔数值可能会有verticalAccuracy大小的误差，当verticalAccuracy为负值时，表示不能获取海拔高度。 </p>
+<p> 代码如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 定位海拔、海拔垂直精度</span></span><br><span class="line"><span class="comment">/// @param location 定位Item</span></span><br><span class="line">- (<span class="keyword">void</span>)testLocationAltitudeAccuracy:(<span class="built_in">CLLocation</span> *)location &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;海拔高度：%f&quot;</span>, location.altitude);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;海拔垂直精度：%f&quot;</span>, location.verticalAccuracy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 使用正常定位时，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">海拔高度：<span class="number">9.224902</span></span><br><span class="line">海拔垂直精度：<span class="number">16.078646</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用爱思助手开启定位后，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">海拔高度：<span class="number">0.000000</span></span><br><span class="line">海拔垂直精度：<span class="number">-1.000000</span></span><br></pre></td></tr></table></figure>
+
+<p> 从上面可以看出，正常定位和模拟定位的海拔和海拔垂直精度是不同的，故而可以用来区分。但是真正的海拔高度为0的地方会不会被误杀，需要纳入考虑，待测试验证。</p>
+</li>
+<li><p>定位回调调用次数<br> 笔者在定位类中，声明一个回调次数的属性，在调用开始定位的方法中赋值为0，回调成功的方法中每次都加1，且打印出结果。<br> 大致代码如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@TestLocationManager()</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">NSInteger</span> callbackCount;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TestLocationManager</span>()</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)startLocation &#123;</span><br><span class="line">    <span class="keyword">self</span>.callbackCount = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)BMKLocationManager:(BMKLocationManager * _Nonnull)manager </span><br><span class="line">		didUpdateLocation:(BMKLocation * _Nullable)location </span><br><span class="line">					orError:(<span class="built_in">NSError</span> * _Nullable)error</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">self</span>.callbackCount += <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@&quot;百度地图单次定位回调次数: %ld&quot;</span>, <span class="keyword">self</span>.callbackCount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)locationManager:(<span class="built_in">CLLocationManager</span> *)manager</span><br><span class="line">		didUpdateLocations:(<span class="built_in">NSArray</span>&lt;<span class="built_in">CLLocation</span> *&gt; *)locations &#123;</span><br><span class="line">  <span class="keyword">self</span>.callbackCount += <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@&quot;系统定位单次定位回调次数: %ld&quot;</span>, <span class="keyword">self</span>.callbackCount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> 使用正常定位时，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">百度地图单次定位回调次数: <span class="number">1</span></span><br><span class="line">系统定位单次定位回调次数: <span class="number">1</span></span><br><span class="line">系统定位单次定位回调次数: <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用爱思助手模拟定位时，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">百度地图单次定位回调次数: <span class="number">1</span></span><br><span class="line">系统定位单次定位回调次数: <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p> 笔者这边测试出来的结果，使用第三方地图定位时虚拟定位和正常定位的回调次数没有区别，故而，使用第三方地图定位时此方法也行不通。使用系统定位时，虚拟定位和正常定位的回调次数不同，<font color="red">故而理论上使用系统定位时可以用此方法区分；但是使用这个判断的准确度并不高，因为系统定位偶尔也会只回调一次，而且，假如使用回调来判断，如何区分回调结束，是一个问题，比如笔者写了一个延时0.5s后，来查看回调次数；所以建议可以用作参考，但是不建议作为判断依据</font></p>
+</li>
+<li><p>函数响应时间<br>笔者在定位类中，声明一个开始时间的属性，在开始调用定位的方法调用，然后定位结果的回调里取到结束时间，最后得出的时间差即是响应时间。<br>代码大致如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@TestLocationManager()</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSDate</span> *locateBeginDate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">TestLocationManager</span>()</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)startLocation &#123;</span><br><span class="line">    <span class="keyword">self</span>.locateBeginDate = [<span class="built_in">NSDate</span> date];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)BMKLocationManager:(BMKLocationManager * _Nonnull)manager </span><br><span class="line">			didUpdateLocation:(BMKLocation * _Nullable)location </span><br><span class="line">						orError:(<span class="built_in">NSError</span> * _Nullable)error</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">NSDate</span> *locateEndDate = [<span class="built_in">NSDate</span> date];</span><br><span class="line">  <span class="built_in">NSTimeInterval</span> gap = [locateEndDate timeIntervalSinceDate:</span><br><span class="line">  						<span class="keyword">self</span>.locateBeginDate];</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@&quot;单次定位时间：%lf&quot;</span>, gap);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> 使用正常定位时，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单次定位时间：<span class="number">0.332915</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用爱思助手模拟定位时，结果如下：</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单次定位时间：<span class="number">0.298709</span></span><br></pre></td></tr></table></figure>
+<p> 根据笔者测试出的结果，定位的间隔网络好的时候并没有明显差距，无法用固定的值区分，故而此方法也行不通。</p>
+</li>
+</ol>
+<h4 id="根据CLLocation的私有属性-internal中的type来判断"><a href="#根据CLLocation的私有属性-internal中的type来判断" class="headerlink" title="根据CLLocation的私有属性_internal中的type来判断"></a>根据<code>CLLocation</code>的私有属性<code>_internal</code>中的type来判断</h4><p>参考<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1800531">iOS防黑产虚假定位检测技术</a>，按照文章描述，定位对象<code>CLLocation</code>中有一个私有属性<code>type</code>，在不同定位来源的情况下，值是不同的。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>所表示的意义</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>unknown</td>
+<td>应用程序生成的定位数据，一般在越狱设备下，通过虚拟定位程序来生成。</td>
+</tr>
+<tr>
+<td>1</td>
+<td>gps</td>
+<td>GPS生成的定位数据</td>
+</tr>
+<tr>
+<td>2</td>
+<td>nmea</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>accessory</td>
+<td>蓝牙等外部设备模拟定位生成的定位数据</td>
+</tr>
+<tr>
+<td>4</td>
+<td>wifi</td>
+<td>WIFI定位生成的数据</td>
+</tr>
+<tr>
+<td>5</td>
+<td>skyhook</td>
+<td>WIFI定位生成的数据</td>
+</tr>
+<tr>
+<td>6</td>
+<td>cell</td>
+<td>手机基站定位生成的数据</td>
+</tr>
+<tr>
+<td>7</td>
+<td>lac</td>
+<td>LAC生成的定位数据</td>
+</tr>
+<tr>
+<td>8</td>
+<td>mcc</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>gpscoarse</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>pipeline</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>max</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>笔者验证步骤如下：<br>在定位成功的回调中，判断<code>CLLocation</code>的type属性。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)testLocationIntervalProperty:(<span class="built_in">CLLocation</span> *)location &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *type = [location valueForKey:<span class="string">@&quot;type&quot;</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;定位来源类型：%@&quot;</span>, type);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 如果想要看location的全部属性，可以通过下面的方法</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> intervalCount;</span><br><span class="line">    objc_property_t *properties = class_copyPropertyList([location <span class="keyword">class</span>],</span><br><span class="line">    											 &amp;intervalCount);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> y = <span class="number">0</span>; y &lt; intervalCount; y++) &#123;</span><br><span class="line">        objc_property_t property = properties[y];</span><br><span class="line">        <span class="built_in">NSString</span> *propertyName = [[<span class="built_in">NSString</span> alloc] initWithCString:</span><br><span class="line">        							property_getName(property)];</span><br><span class="line">        <span class="keyword">if</span> ([propertyName containsString:<span class="string">@&quot;type&quot;</span>]) &#123;</span><br><span class="line">            <span class="keyword">id</span> propetyValue = [location valueForKey:propertyName];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@&quot;属性名称：%@, 属性信息：%@&quot;</span>, propertyName, propetyValue);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//            NSLog(@&quot;属性名称：%@&quot;, propertyName);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>正常定位时，Wi-Fi打开时，结果为4；Wi-Fi关闭时，结果为6；结果如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Wi-Fi打开时，结果为4；Wi-Fi关闭时，结果为6；移动网络也关闭时，结果为6；</span></span><br><span class="line"><span class="comment">// 但是网络不好时，结果为1；</span></span><br><span class="line">定位来源类型：<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>使用虚拟定位时，结果如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定位来源类型：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，当使用第三方地图定位时，不论是虚拟定位，还是正常定位，结果如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定位来源类型：<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>笔者这边对比结果如下：使用系统定位时，正常网络下虚拟定位和正常定位结果不同，但是网络不好时，定位来源类型都是1，故而区分不准确；使用第三方系统定位时，虚拟定位和正常定位结果相同，无法区分。</p>
+<h3 id="通过外接设备，发送虚拟定位数据来虚拟定位的检测"><a href="#通过外接设备，发送虚拟定位数据来虚拟定位的检测" class="headerlink" title="通过外接设备，发送虚拟定位数据来虚拟定位的检测"></a>通过外接设备，发送虚拟定位数据来虚拟定位的检测</h3><p>这种虚拟定位的笔者没有设备实践，但通过网上的资料，可以看出外接设备是通过蓝牙和手机连接，故而笔者推测，也可以根据<code>CLLocation</code>的私有属性<code>_internal</code>中的type来判断。因为type=3的定义是蓝牙等外部设备模拟定位生成的定位数据，所以这种虚拟定位应该可以通过此type值区分。</p>
+<h3 id="越狱设备中通过hook定位方法，来虚拟定位的检测"><a href="#越狱设备中通过hook定位方法，来虚拟定位的检测" class="headerlink" title="越狱设备中通过hook定位方法，来虚拟定位的检测"></a>越狱设备中通过hook定位方法，来虚拟定位的检测</h3><p>这种方法，笔者目前调研到的有两种，一种是直接针对越狱设备，判断出iPhone已越狱，就提示，从而避免；另外一种是判断代理方法是否被hook，以及代理方法被hook的实现是否在APP中。</p>
+<p>方法一：判断设备是否已越狱，参考<a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/7c6b8027253c4a97196d359840f638d9.html">用代码判断iOS 系统是否越狱的方法</a></p>
+<p>判断设备已越狱有下面几种方法</p>
+<ol>
+<li><p>判断常见越狱文件，维护一份常见越狱文件，判断其中一个存在，则说明已越狱</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/// 根据白名单判断设备是否已越狱</span></span><br><span class="line"><span class="comment">/// - Returns: true-已越狱；false-未越狱</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">isJailedDevice</span>() -&gt; <span class="title">Bool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> jailPaths <span class="operator">=</span> [<span class="string">&quot;/Applications/Cydia.app&quot;</span>, </span><br><span class="line">    				<span class="string">&quot;/Library/MobileSubstrate/MobileSubstrate.dylib&quot;</span>, </span><br><span class="line">    				<span class="string">&quot;/bin/bash&quot;</span>, </span><br><span class="line">   				<span class="string">&quot;/usr/sbin/sshd&quot;</span>,</span><br><span class="line">     				<span class="string">&quot;/etc/apt&quot;</span>]</span><br><span class="line">    <span class="keyword">var</span> isJailDevice <span class="operator">=</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> jailPaths &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="type">FileManager</span>.default.fileExists(atPath: item) &#123;</span><br><span class="line">            isJailDevice <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> isJailDevice</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>判断cydia的URL Scheme，通过识别手机是否安装了Cydia.app，来判断是否已越狱。</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/// 根据cydia scheme能否打开判断是否已越狱</span></span><br><span class="line"><span class="comment">/// - Returns: true-已越狱；false-未越狱</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">isJailedDevice</span>() -&gt; <span class="title">Bool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cydiaSchemeStr <span class="operator">=</span> <span class="string">&quot;cydia://&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> url <span class="operator">=</span> <span class="type">URL</span>(string: cydiaSchemeStr),</span><br><span class="line">       <span class="type">UIApplication</span>.shared.canOpenURL(url) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>根据能否读取系统所有应用来判断，已越狱的设备可以读取，未越狱的设备不可以</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 根据能否获取到所有应用来判断是否越狱</span></span><br><span class="line"><span class="comment">/// - Returns: true-已越狱；false-未越狱</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">isJailedDevice</span>() -&gt; <span class="title">Bool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> appPathStr <span class="operator">=</span> <span class="string">&quot;/User/Applications&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="type">FileManager</span>.default.fileExists(atPath: appPathStr) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> appList <span class="operator">=</span> </span><br><span class="line">            <span class="keyword">try</span> <span class="type">FileManager</span>.default.contentsOfDirectory(atPath: </span><br><span class="line">            appPathStr)</span><br><span class="line">            <span class="keyword">if</span> appList.count <span class="operator">&gt;</span> <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>方法二判断代理方法是否被hook，以及hook的实现是否在app中，参考<a target="_blank" rel="noopener" href="http://devliubo.com/2016/2016-12-23-iOS%E4%B8%8A%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8E%A2%E7%A9%B6.html">iOS上虚拟定位检测的探究</a></p>
+<p>注入dylib方法的实现虚拟定位，大部分会利用MethodSwizzling去hook定位方法的目标函数，method被替换的新implemention所在的module，不会与原始implemention所在的module一致。越狱插件的方式新implemention所在的module通常是插件本身的dylib；对ipa砸壳做动态库注入的方式，新implemention所在的module通常是被注入 的dylib。——来自<a target="_blank" rel="noopener" href="http://devliubo.com/2016/2016-12-23-iOS%E4%B8%8A%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8E%A2%E7%A9%B6.html">http://devliubo.com/2016/2016-12-23-iOS%E4%B8%8A%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8E%A2%E7%A9%B6.html</a></p>
+<p>实践：</p>
+<p>代码如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;dlfcn.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> logMethodInfo(<span class="keyword">const</span> <span class="keyword">char</span> *className, <span class="keyword">const</span> <span class="keyword">char</span> *sel)</span><br><span class="line">&#123;</span><br><span class="line">    Dl_info info;</span><br><span class="line">    IMP imp = class_getMethodImplementation(objc_getClass(className),</span><br><span class="line">    											sel_registerName(sel));</span><br><span class="line">    <span class="keyword">if</span>(dladdr(imp,&amp;info)) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;method %s %s:&quot;</span>, className, sel);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;dli_fname:%s&quot;</span>,info.dli_fname);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;dli_sname:%s&quot;</span>,info.dli_sname);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;dli_fbase:%p&quot;</span>,info.dli_fbase);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;dli_saddr:%p&quot;</span>,info.dli_saddr);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;error: can&#x27;t find that symbol.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>比如，笔者这里验证使用如下，笔者的项目中对UIView的<code>layoutSubviews</code>做了<code>MethodSwizzling</code>，而<code>viewDidLayoutSubviews</code>方法没有，对比如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)testViewDidLayoutSubviews &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *className = object_getClassName([<span class="built_in">UIView</span> new]);</span><br><span class="line">    SEL selector = <span class="keyword">@selector</span>(viewDidLayoutSubviews);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *selName = sel_getName(selector);</span><br><span class="line">    logMethodInfo(className, selName);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)testLayoutSubviews &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *className = object_getClassName([<span class="built_in">UIView</span> new]);</span><br><span class="line">    SEL selector = <span class="keyword">@selector</span>(layoutSubviews);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *selName = sel_getName(selector);</span><br><span class="line">    logMethodInfo(className, selName);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果对比：</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13849141373/0.png" alt="wecom20210805-085332@2x.png"></p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13849414536/0.png" alt="wecom20210805-103558@2x.png"></p>
+<p>从上面的结果对比，发现未使用<code>MethodSwizzling</code>方法的<code>dli_fname</code>为<code>/usr/lib/libobjc.A.dylib</code>，<code>dli_sname</code><br>为<code>_objc_msgForward</code>；而使用了<code>MethodSwizzling</code>方法的<code>dli_fname</code>为<code>/private/var/containers/Bundle/Application/0106942C-7D3F-45A9-BB1B-2C0FBD994744/xxx.app/xxx</code>，<code>dli_sname</code>为<code>-[UIView(MSCorner)ms_layoutSubviews]</code>，可以看出，从<code>dli_sname</code>可以判断方法是否被hook过，从<code>dli_fname</code>可以知道方法的implemention是否在项目的module中。（笔者手头没有越狱的手机，也没有做过砸壳注入，大家如果有兴趣可以验证一下试试。）</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>笔者验证的结果，通过特征值中的海拔和海拔精度可以判断出使用爱思助手或者 Xcode 模拟定位，通过 type 可以区分不同定位来源。为了准确，笔者通过海拔、海拔精度、type 三个字段结合起来判断。</p>
+<p>笔者写了一个检测的代码，仓库地址如下：<a target="_blank" rel="noopener" href="https://github.com/mokong/DetectFakeLocation">https://github.com/mokong/DetectFakeLocation</a></p>
+<p>原理是：使用<code>swizzlemethod</code> hook了<code>CLLocationManager</code>的<code>startUpdatingLocation</code>方法，以及<code>CLLocationManagerDelegate</code>的<code>locationManager:didUpdateLocations:</code>方法，然后检测越狱、海拔和海拔精度、定位类型，根据这几个方面判断是否是虚拟定位。</p>
+<p><img src="https://inews.gtimg.com/newsapp_ls/0/13851091768/0.png" alt="ios_虚拟定位的方法.png"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://article.docway.net/details?id=60d5e03bcbb464046e3508b6">iOS 虚拟定位监测</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7c213781c4b8">苹果虚拟定位技术原理和检测</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46572309">免越狱虚拟定位外挂的调试小记与检测方案 | B1nGzL 著</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1800531">iOS防黑产虚假定位检测技术</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903975624376333">iOS实现虚拟定位的多种玩法</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6982907103631376420">iOS 识别虚拟定位调研</a></li>
+<li><a target="_blank" rel="noopener" href="http://devliubo.com/2016/2016-12-23-iOS%E4%B8%8A%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8E%A2%E7%A9%B6.html">iOS上虚拟定位检测的探究</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/">http://morganwang.cn/2021/08/04/iOS%E8%99%9A%E6%8B%9F%E4%BD%8D%E7%BD%AE%E8%B0%83%E7%A0%94%E4%B8%8E%E9%A2%84%E9%98%B2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/08/09/%E5%85%B3%E4%BA%8EVR%E7%9A%84%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95/" title="关于VR的一个想法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">关于VR的一个想法</div></div><div class="info-2"><div class="info-item-1">早上听书，突然有一个想法，把推理小说中的密室给做出来，做成真实的密室，亦或者做成玩具模型，考虑到太难实现，想到是否可以用VR来做，推理小说的密室，每个人选一个角色用来重现推理小说的过程，比如，   绫辻行人“馆系列”作品 再然后，想到，除了这些复杂的推理小说之外，把线下简单的密室场景，如果搬到VR中，在线联机，有人扮演凶手，有人扮演推理小说家，是不是会比线下的密室会吸引更多的人 或者把经典电影的片段做成可以体验的VR的形式，比如泰坦尼克号从沉船开始到结束的一段，Jack和Rose两个角色可供体验，是不是会有很多人愿意体验 参考小说：《绫辻行人-钟表馆事件》电视剧：《私家侦探第五季-第二集》里关于VR实验室的实现 </div></div></div></a><a class="pagination-related" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" title="iOS 启动时间优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS 启动时间优化</div></div><div class="info-2"><div class="info-item-1">iOS 启动时间优化——相关背景iOS的启动时间优化有很多相关的文章，本来不打算写，但是总归是自己整理一遍印象更深刻。这里打算从原理-实践-面试相关三个方面来入手。首先要理解APP启动的原理，启动做了什么？然后针对启动过程中的事件哪些是开发可以进行优化的，去实践？最后则是，面试相关，与启动优化相关的面试有很多，笔者打算列举一下，分别涉及到启动的哪些问题。   启动原理启动分为冷启动和热启动。冷启动指的是APP进程被杀掉后，从零打开；热启动指的是，APP进入后台，再切换到前台唤起到过程。这里通常说的启动优化，指的是冷启动优化。(Ps: 这里某些版本会出现，刚杀掉的APP，立即再次打开，会直接闪退的问题，是系统的Bug）。 冷启动的过程分为main函数之前（pre-main）和main函数之后两个阶段。 pre-main阶段就如很多文章说的： pre-main阶段的过程分为dylibs loading ——&gt; rebase/binding ——&gt; ObjC setup ——&gt; initializer四个部分。每个部分吧啦吧啦…但每次问到这个时候，死记硬背出来真的累人...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/03/29/%E5%9B%BE%E7%89%87%E4%B8%AD%E5%A4%9A%E4%B8%AA%E4%BA%8C%E7%BB%B4%E7%A0%81%E9%80%89%E6%8B%A9%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="图片中多个二维码选择的实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-29</div><div class="info-item-2">图片中多个二维码选择的实现</div></div><div class="info-2"><div class="info-item-1">背景买早餐的时候会遇到，支付宝和微信的二维码贴在一起，然后扫码的时候两个二维码一起被识别出来的情况。之前的处理可能是：APP内部判断 是自己的 Scheme 的时，自动跳转；后来发现变成了识别到多个二维码时，弹出二维码选择页，用户选择具体二维码后，再跳转。 公司的项目一直没有做这个功能，最近有时间，就来整理添加到项目中，这里分享记录一下实现的过程。   过程整个的过程是：  识别二维码 只有一个，则直接跳转； 有多个二维码信息，则跳转二维码选择页面； 二维码选择页面标记出每个二维码的位置； 点击对应位置的二维码，跳转对应的链接。      二维码识别二维码识别的逻辑，代码如下： 12345678910111213// UIImage + Category//识别二维码图片- (NSArray &lt;CIFeature*&gt; *)imageQRFeatures &#123;    CIImage *ciImage = [[CIImage alloc] initWithCGImage:self.CGImage options:nil];        CIContext *co...</div></div></div></a><a class="pagination-related no-desc" href="/2021/12/29/webview%20%E6%8E%A5%E5%85%A5%20HTTPDNS/" title="iOS webview 接入 HTTPDNS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="info-item-2">iOS webview 接入 HTTPDNS</div></div></div></a><a class="pagination-related" href="/2024/08/17/FirebaseFunctionError%E5%A4%84%E7%90%86/" title="FirebaseFunctionError 处理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-17</div><div class="info-item-2">FirebaseFunctionError 处理</div></div><div class="info-2"><div class="info-item-1">背景做一个 Firebase 相关的项目，其中创建用户的时候，用的是Cloud Functions，调用的时候一直报错，错误信息只有”INTERNAL”。 Deploying Function Error on Cloud Function with error code 13 and Message “INTERNAL”   排查步骤网上搜索之后，有说字段不对应的，有说调用方式不对的，但是尝试后把这两个原因都排除了。 然后去 Firebase 的 Console 中查看，找到 Function，再找到调用的函数名字，点击右侧的竖三角，查看详细信息，发现里面错误信息为空。不要急，点击顶部 Tab，切换到 日志 下，然后从日志中查看报错信息，就能看到调用这个函数哪里报错了。具体步骤的截图如下：  </div></div></div></a><a class="pagination-related" href="/2023/03/31/Xcode14.3Archive%E5%A4%B1%E8%B4%A5/" title="Xcode 14.3 Archive 失败"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="info-item-2">Xcode 14.3 Archive 失败</div></div><div class="info-2"><div class="info-item-1">背景由于手机升级了iOS 16.4，想要真机调试，Xcode 也要升级到 14.3， 于是就升级了一下。 升级Xcode 14.3之前，Debug 和 Archive 都没问题；升级 Xcode 14.3之后，Debug 没问题，Archive 就报错。错误信息如下：   123456789building file list ... rsync: link_stat &quot;/Users/xxx/.../AFNetworking.framework&quot; failed: No such file or directory (2)donesent 29 bytes  received 20 bytes  98.00 bytes/sectotal size is 0  speedup is 0.00rsync error: some files could not be transferred (code 23) at /AppleInternal/Library/BuildRoots/9e200cfa-7d96-11ed-886f-a23c4f261b56/Librar...</div></div></div></a><a class="pagination-related" href="/2021/09/10/gitignore%E6%B7%BB%E5%8A%A0%20Pod%E4%B8%89%E6%96%B9%E5%BA%93/" title="gitignore 添加 Pod 三方库"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-10</div><div class="info-item-2">gitignore 添加 Pod 三方库</div></div><div class="info-2"><div class="info-item-1">背景最近项目遇到了一个问题，排查了好久，最后发现是Pod 依赖的私有组件的代码有问题，导致了打包的时候线上包出现了问题。   笔者的项目按照功能抽象出了私有组件，使用 Pod 的方式导入项目，但是 Pod的内容是不提交到 git 的，即每次 Pod 修改，在 主项目的git变更中看不到。于是就遇到了这个问题。 先在主项目中调试的时候，修改了 Pod库的内容。然后把修改内容同步到了 Pod 库单独的项目。但是最后打包的时候 Pod 库的内容却是老的。因为项目里依赖的 Pod 库指定了版本，而更新 Pod库单独的项目时，只同步到了分支上，没有更新新的 Tag。于是再次更新主项目的库时，这个库的内容就又变回了老的。 Ps：理论上来说，放入 Pod 库的内容不应该被频繁修改，是抽出的基础库之类的。但是实际开发中，为了组件化，有些功能组件也会作为私有库使用 Pod 依赖，这些库可能是频繁变更的。 基于这点，笔者感觉还是把 Pod 中的内容，放入主项目的 .git 中比较好，方便看出修改，能够避免出现上面的问题。 修改笔者直接进入项目工程所在目录，编辑.gitignore文件，移出文件中 #...</div></div></div></a><a class="pagination-related" href="/2021/08/02/iOS%20%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4%E4%BC%98%E5%8C%96/" title="iOS 启动时间优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-02</div><div class="info-item-2">iOS 启动时间优化</div></div><div class="info-2"><div class="info-item-1">iOS 启动时间优化——相关背景iOS的启动时间优化有很多相关的文章，本来不打算写，但是总归是自己整理一遍印象更深刻。这里打算从原理-实践-面试相关三个方面来入手。首先要理解APP启动的原理，启动做了什么？然后针对启动过程中的事件哪些是开发可以进行优化的，去实践？最后则是，面试相关，与启动优化相关的面试有很多，笔者打算列举一下，分别涉及到启动的哪些问题。   启动原理启动分为冷启动和热启动。冷启动指的是APP进程被杀掉后，从零打开；热启动指的是，APP进入后台，再切换到前台唤起到过程。这里通常说的启动优化，指的是冷启动优化。(Ps: 这里某些版本会出现，刚杀掉的APP，立即再次打开，会直接闪退的问题，是系统的Bug）。 冷启动的过程分为main函数之前（pre-main）和main函数之后两个阶段。 pre-main阶段就如很多文章说的： pre-main阶段的过程分为dylibs loading ——&gt; rebase/binding ——&gt; ObjC setup ——&gt; initializer四个部分。每个部分吧啦吧啦…但每次问到这个时候，死记硬背出来真的累人...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS-%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86%E4%B8%8E%E9%A2%84%E9%98%B2"><span class="toc-number">1.</span> <span class="toc-text">iOS 虚拟定位原理与预防</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8A%9E%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">虚拟定位的几种办法及原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Xcode%E9%80%9A%E8%BF%87GPX%E6%96%87%E4%BB%B6%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.2.1.</span> <span class="toc-text">使用Xcode通过GPX文件虚拟定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%88%B1%E6%80%9D%E5%8A%A9%E6%89%8B%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.2.2.</span> <span class="toc-text">使用爱思助手中的虚拟定位功能直接虚拟定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%A4%96%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8F%91%E9%80%81%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E6%9D%A5%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.2.3.</span> <span class="toc-text">通过外接设备，发送虚拟定位数据来虚拟定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%8A%E7%8B%B1%E8%AE%BE%E5%A4%87%E4%B8%AD%E9%80%9A%E8%BF%87hook%E5%AE%9A%E4%BD%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E6%9D%A5%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.2.4.</span> <span class="toc-text">越狱设备中通过hook定位方法，来虚拟定位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">1.3.</span> <span class="toc-text">虚拟定位几种方法的检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Xcode%E9%80%9A%E8%BF%87GPX%E6%96%87%E4%BB%B6%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E7%9A%84%E6%A3%80%E6%B5%8B-%E5%92%8C-%E4%BD%BF%E7%94%A8%E7%88%B1%E6%80%9D%E5%8A%A9%E6%89%8B%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">使用Xcode通过GPX文件虚拟定位的检测 和 使用爱思助手中的虚拟定位功能直接虚拟定位的检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%A4%E6%96%AD"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">根据特征值判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AECLLocation%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7-internal%E4%B8%AD%E7%9A%84type%E6%9D%A5%E5%88%A4%E6%96%AD"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">根据CLLocation的私有属性_internal中的type来判断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%A4%96%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8F%91%E9%80%81%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E6%9D%A5%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">通过外接设备，发送虚拟定位数据来虚拟定位的检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%8A%E7%8B%B1%E8%AE%BE%E5%A4%87%E4%B8%AD%E9%80%9A%E8%BF%87hook%E5%AE%9A%E4%BD%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E6%9D%A5%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">越狱设备中通过hook定位方法，来虚拟定位的检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

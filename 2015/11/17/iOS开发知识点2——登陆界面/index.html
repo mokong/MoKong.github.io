@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iOS开发知识点2——登陆界面 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="iOS开发知识点2——登陆界面 按钮的实时响应：登陆的时候，需要当用户有输入时按钮才能响应（可点击），如果有一个输入框为空，则按钮不可响应。以前我以为用的是textfield的代理方法直接判断，后来发现那样不好。有另一种方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发知识点2——登陆界面">
+<meta property="og:url" content="http://morganwang.cn/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B92%E2%80%94%E2%80%94%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="iOS开发知识点2——登陆界面 按钮的实时响应：登陆的时候，需要当用户有输入时按钮才能响应（可点击），如果有一个输入框为空，则按钮不可响应。以前我以为用的是textfield的代理方法直接判断，后来发现那样不好。有另一种方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2015-11-17T13:49:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iOS开发知识点2——登陆界面",
+  "url": "http://morganwang.cn/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B92%E2%80%94%E2%80%94%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2015-11-17T13:49:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B92%E2%80%94%E2%80%94%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iOS开发知识点2——登陆界面',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">iOS开发知识点2——登陆界面</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">iOS开发知识点2——登陆界面</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2015-11-17T13:49:00.000Z" title="发表于 2015-11-17 21:49:00">2015-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="iOS开发知识点2——登陆界面"><a href="#iOS开发知识点2——登陆界面" class="headerlink" title="iOS开发知识点2——登陆界面"></a>iOS开发知识点2——登陆界面</h1><blockquote>
+<p>按钮的实时响应：登陆的时候，需要当用户有输入时按钮才能响应（可点击），如果有一个输入框为空，则按钮不可响应。以前我以为用的是textfield的代理方法直接判断，后来发现那样不好。有另一种方法</p>
+</blockquote>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 首先给textfield添加addTarget方法，注意最后的controlEvents是EditingChanged</span><br><span class="line">[self.accountTextField addTarget:self action:@selector(handleTextDidChange:) forControlEvents:UIControlEventEditingChanged];</span><br><span class="line">[self.passwordTextField addTarget:self action:@selector(handleTextDidChange:) forControlEvents:UIControlEventEditingChanged];</span><br><span class="line"></span><br><span class="line">// 然后实现这个方法</span><br><span class="line">- (void)handleTextDidChange:(id)sender</span><br><span class="line">&#123;</span><br><span class="line">    NSString * accountStr = self.accountTextField.text;</span><br><span class="line">    NSString * passwordStr = self.passwordTextField.text;</span><br><span class="line">    if (accountStr.length &gt; 0 &amp;&amp; passwordStr.length &gt; 0) &#123;</span><br><span class="line">        // 登录可响应</span><br><span class="line">        self.loginButton.userInteractionEnabled = YES;</span><br><span class="line">        [self.loginButton setTitleColor:btnEnabledColor forState:UIControlStateNormal];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 登录不可响应</span><br><span class="line">        self.loginButton.userInteractionEnabled = NO;</span><br><span class="line">        [self.loginButton setTitleColor:btnUnabledColor forState:UIControlStateNormal];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入框长度限制：当输入手机号或者验证码时，通常会有长度限制，我们想要的是，11位的手机号或者6位的验证码，所以最多只能输入这么多，当超出时，不能再显示，便于用户理解。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 这是通过textField的代理方法实现的</span><br><span class="line">_smsPhoneTextField.delegate = self;</span><br><span class="line">_smsCirtifyTextField.delegate = self;</span><br><span class="line"></span><br><span class="line">#pragma mark - 输入长度限制</span><br><span class="line">- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string</span><br><span class="line">&#123;</span><br><span class="line">    if ([string isEqual:@&quot;\n&quot;]) &#123;</span><br><span class="line">        return YES;</span><br><span class="line">    &#125;</span><br><span class="line">    NSString * aString = [textField.text stringByReplacingCharactersInRange:range withString:string];</span><br><span class="line">    if (textField == _smsCirtifyTextField) &#123;</span><br><span class="line">        if (aString.length &gt; 6) &#123;</span><br><span class="line">            aString = [aString substringToIndex:6];</span><br><span class="line">            return NO;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (textField == _smsPhoneTextField) &#123;</span><br><span class="line">        if (aString.length &gt; 11) &#123;</span><br><span class="line">            aString = [aString substringToIndex:11];</span><br><span class="line">            return NO;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>手机号的正则表达式:我收藏了一个常用的正则表达式的博客，很不错，只需要针对自己的需求在他的基础上改一下，就可以使用<br><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1390612242398.html">常用的正则表达式</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 手机号验证</span><br><span class="line">- (BOOL)validateMobile:(NSString *)mobile</span><br><span class="line">&#123;</span><br><span class="line">    // 手机号以13、15、18、17开头，八个 \d 数字字符</span><br><span class="line">    NSString * phoneRegex = @&quot;^((13[0-9])|(15[^4,\\D])|(18[0,0-9])|(17[0,0-9]))\\d&#123;8&#125;$&quot;;</span><br><span class="line">    NSPredicate * phoneTest = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, phoneRegex];</span><br><span class="line">    return [phoneTest evaluateWithObject:mobile];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B92%E2%80%94%E2%80%94%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/">http://morganwang.cn/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B92%E2%80%94%E2%80%94%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B93%E2%80%94%E2%80%94%E9%94%AE%E7%9B%98/" title="iOS开发知识点3——键盘"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">iOS开发知识点3——键盘</div></div><div class="info-2"><div class="info-item-1">iOS开发知识点3——键盘 点击屏幕回收键盘是很简单的，但是在scrollView上点击回收键盘，直接调用那个方法就不能实现了    123456789101112131415161718192021222324252627282930313233// 我的实现是这样的// 首先实现一个继承自UIScrollView的Category，.m文件的实现#import &quot;UIScrollView+UITouch.h&quot;@implementation UIScrollView (UITouch)- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event &#123;    [[self nextResponder] touchesBegan:touches withEvent:event];    [super touchesBegan:touches withEvent:event];&#125;- (void)touchesMoved:(NSSet *)touches withEvent:(UI...</div></div></div></a><a class="pagination-related" href="/2015/11/17/iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/" title="iOS开发知识点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS开发知识点</div></div><div class="info-2"><div class="info-item-1">iOS开发知识点今天整理项目，为项目添加注释，发现有些东西需要保存一下，将来好使用。   设置navBar的背景，去掉黑线，试了好长时间，查了好多，这个对我适用 设置navBar上item的颜色，以及nav Title的颜色和字体大小 替换系统返回按钮的图片，设计说自带的太丑，一开始是自定义返回的View，后来发现不用那么麻烦，直接有方法可以替换     123456789101112131415// 设置navBar背景，这样设置可去掉那个黑线[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@&quot;bg_bar&quot;] forBarMetrics:UIBarMetricsDefault];[[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];[[UINavigationBar appearance] setTranslucent:NO];    // 设置navBar的按钮的tintColor，...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/04/20/iOS_%E9%95%BF%E6%88%AA%E5%9B%BE/" title="iOS 长截图"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-20</div><div class="info-item-2">iOS 长截图</div></div><div class="info-2"><div class="info-item-1">iOS长截图背景Twitter 上看到TaioApp的作者说，iOS 系统有支持长截图的API——UIScreenshotService，从 iOS 13开始就可以使用，下午的时候就在自己的 APP 中体验了一下。   过程UIScreenshotService官方的说明如下：  When the user takes a screenshot of your app’s content, you work with a UIScreenshotService object to provide a PDF version of that screenshot. You do not create a UIScreenshotService object directly. Instead, you retrieve the object from the screenshotService property of your window scene and assign a delegate to it. When the user takes a screenshot, UI...</div></div></div></a><a class="pagination-related" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" title="Xcode14编译失败修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-14</div><div class="info-item-2">Xcode14编译失败修改</div></div><div class="info-2"><div class="info-item-1">背景升级Xcode 14后，项目编译失败修改，共修改了两种编译错误：  一种是bundle code sign error，Xcode 14 needs selected Development Team for Pod Bundles 一种是Module compiled with Swift 5.6.1 cannot be imported by the Swift 5.7 compiler    其中第一种比较容易解决，第二种稍微麻烦点，解决方案如下： 解决Xcode 14 bundle code sign error这个的解决方案，直接Google，第一个stackoverflow的链接是Xcode 14 needs selected Development Team for Pod Bundles，这里面给出的解决方法是，在Podfile里增加下面代码，然后运行Pod install，设置Pod库的DEVELOPMENT_TEAM是开发者账号的team。 笔者有两个项目，其中一个是Swift为主，用下面的设置方法试了，可以解决。要注意的是如果项目有多个target，ta...</div></div></div></a><a class="pagination-related" href="/2016/05/10/iOS%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/" title="开发中遇到的问题（二）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2016-05-10</div><div class="info-item-2">开发中遇到的问题（二）</div></div><div class="info-2"><div class="info-item-1">开发中遇到的问题，分享给大家，有则改之，无则加勉。1. UIScrollView加了category之后导致的手写输入时崩溃的问题—— [UIKBBlurredKeyView candidateList]上周更新的应用，这周上线了，然后昨天旁边的同事告诉我说，友盟上的崩溃信息，崩溃率1%点多了，赶紧查查吧。看了一下发现大部分的崩溃都是这个日志：[UIKBBlurredKeyView candidateList]: unrecognized selector sent to instance…，于是搜了一下   崩溃重现：切换到有输入的地方，点击输入，切换输入法到手写输入法（系统的，第三方的没事），然后输入，输入一个之后，第二个字就会崩溃。 原因：是因为给UIScrollView加了个category，是用于处理点击屏幕的事件的（触摸屏幕回收键盘），之前一直都是这么做的，也没问题，又或者又问题也没人反馈，😓，估计是投诉无门啊。。。。。而且我们测试的时候也没有测试手写输入法，因为没人会想到这还会有什么不同。苹果自己也没想到，所以我们就上线了，然后就有崩溃了。。。这坑爹的 解决：既然...</div></div></div></a><a class="pagination-related" href="/2015/12/30/%E5%AE%9E%E7%8E%B0Button%E6%96%87%E5%AD%97(titleLabel)%E5%92%8C%E5%9B%BE%E7%89%87(imageView)%E4%B8%8A%E4%B8%8B%E6%8E%92%E5%88%97/" title="实现Button文字(titleLabel)和图片(imageView)上下排列"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2015-12-30</div><div class="info-item-2">实现Button文字(titleLabel)和图片(imageView)上下排列</div></div><div class="info-2"><div class="info-item-1">实现Button文字(titleLabel)和图片(imageView)上下排列 1、我最开始实现这个采用的方法：重新自定义一个view，然后有两个属性label和imageView，然后设置位置布局，再添加单击手势，用代理回传点击方法。     2、第二种方法：自定义一个Button继承Button，有两个属性label和imageView，然后设置布局。这样就不用添加单击手势。   3、第三种方法：直接用Button自带的titleLabel和imageView，写个Category，用来设置label和image的排列方式，eg：上下、左右  明显前两种是很不好的，所以这里只说第三种：  Button有两个属性：titleEdgeInsets和imageEdgeInsets，通过设置这两个，就可以实现所有需要的Button的样式，如：image在上、image在下、image在左、image在右。  在设置这两个之前，我们先要理解Button上面的titleLabel和imageView的位置关系（想象Button默认的image和label的显示）：   titleEdg...</div></div></div></a><a class="pagination-related" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-22</div><div class="info-item-2">Google 的 Antigravity登录不了解决</div></div><div class="info-2"><div class="info-item-1">背景Google 的 Antigravity 登录一直提示不适用地区，切换账号也不行，账号申请更改了地区到加州还是不行，有佬推荐用Antigravity Tools，终于流畅解决了。。。这里记录分享下      实现 打开Antigravity Tools按照步骤安装，使用 brew 或者下载 Release 包安装都可以； 安装之后打开，如果提示损坏，去系统设置-隐私与安全里，点允许打开； 打开后切换到账号管理，点击添加账号，有几个添加几个即可； 最后记得想要用哪个账号登录，就点击对应账号后面的切换按钮，如下图所示，然后打开 Antigravity 就丝滑的使用了。。。  ![[2eb593109676c884a0b10794f686b696.png]] 参考Antigravity Tools </div></div></div></a><a class="pagination-related" href="/2024/06/20/%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%E3%80%81%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84%E3%80%81%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97%E3%80%81%E7%A7%BB%E5%8A%A8%E9%9B%B6/" title="算法——两数之和、字母异位词分组、最长连续序列、移动零"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-20</div><div class="info-item-2">算法——两数之和、字母异位词分组、最长连续序列、移动零</div></div><div class="info-2"><div class="info-item-1">算法——两数之和、字母异位词分组、最长连续序列、移动零的实现   两数之和 给指定的数，找到数组中两数之和为给定数的 index  思路： 使用字典 dict 存储，key 为数组中 index 对应的值, value 为 index。然后遍历数组，  如果 target - value在数组中存在，则返回target-value 对应的字典的 value 即 index和当前 value 对应的 index； 如果不存在，则把当前 value 和 index 存入数组中。  解法： 123456789101112131415161718192021/**index, value 遍历数组如果 target - value 在字典中，则返回字典中的index和当前index如果不存在，则存储当前值和 index，dict[value] = index*/func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;	var dict = [Int: Int]()	for (index, value) in nums.enu...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B92%E2%80%94%E2%80%94%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">iOS开发知识点2——登陆界面</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

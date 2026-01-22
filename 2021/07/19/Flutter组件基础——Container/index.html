@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Flutter组件基础——Container | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Flutter组件基础——ContainerContainer是容器组件，类似于H5中的标签，亦或者iOS中的UIView，是布局的基础控件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter组件基础——Container">
+<meta property="og:url" content="http://morganwang.cn/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="Flutter组件基础——ContainerContainer是容器组件，类似于H5中的标签，亦或者iOS中的UIView，是布局的基础控件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2021-07-19T09:21:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Flutter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Flutter组件基础——Container",
+  "url": "http://morganwang.cn/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2021-07-19T09:21:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Flutter组件基础——Container',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Flutter组件基础——Container</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Flutter组件基础——Container</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-19T09:21:00.000Z" title="发表于 2021-07-19 17:21:00">2021-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Flutter组件基础——Container"><a href="#Flutter组件基础——Container" class="headerlink" title="Flutter组件基础——Container"></a>Flutter组件基础——Container</h1><p>Container是容器组件，类似于H5中的<div>标签，亦或者iOS中的UIView，是布局的基础控件。</p>
+<span id="more"></span>
+
+
+<h2 id="Container包含属性"><a href="#Container包含属性" class="headerlink" title="Container包含属性"></a>Container包含属性</h2><p>Container常用属性如下：</p>
+<ul>
+<li>Container<ul>
+<li>child：子视图</li>
+<li>alignment：子视图的对齐方式<ul>
+<li>topLeft：顶部左对齐</li>
+<li>topCenter：顶部居中对齐</li>
+<li>topRight：顶部右对齐</li>
+<li>centerLeft：中间左对齐</li>
+<li>center：中间对齐</li>
+<li>centerRight：中间右对齐</li>
+<li>bottomLeft：底部左对齐</li>
+<li>bottomCenter：底部居中对齐</li>
+<li>bottomRight：底部右对齐</li>
+</ul>
+</li>
+<li>color：背景颜色</li>
+<li>width：宽度</li>
+<li>height：高度</li>
+<li>padding：子视图距Container的边距</li>
+<li>margin：Container距父视图的边距</li>
+<li>decoration：装饰</li>
+</ul>
+</li>
+</ul>
+<h3 id="子视图对齐方式-alignment"><a href="#子视图对齐方式-alignment" class="headerlink" title="子视图对齐方式-alignment"></a>子视图对齐方式-alignment</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&#x27;Container Learn&#x27;</span>,</span><br><span class="line">      <span class="attr">home</span>: Scaffold(</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Container(</span><br><span class="line">            child: Text(</span><br><span class="line">              <span class="string">&#x27;Alignment center&#x27;</span>,</span><br><span class="line">              <span class="attr">style</span>: TextStyle(fontSize: <span class="number">40.0</span>),</span><br><span class="line">            ),</span><br><span class="line">            <span class="attr">alignment</span>: Alignment.center,</span><br><span class="line">            <span class="attr">width</span>: <span class="number">500.0</span>,</span><br><span class="line">            <span class="attr">height</span>: <span class="number">400.0</span>,</span><br><span class="line">            <span class="attr">color</span>: Colors.lightBlue,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果图如下：</p>
+<center>
+<figure>
+
+<img src="https://inews.gtimg.com/newsapp_ls/0/13784407980/0.png"  style="width:200px" />
+<img src="https://inews.gtimg.com/newsapp_ls/0/13784409192/0.png"  style="width:200px" />
+<img src="https://inews.gtimg.com/newsapp_ls/0/13784409177/0.png"  style="width:200px" />
+
+</figure>
+</center>
+
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-19 at 17.50.36.png](https://inews.gtimg.com/newsapp_ls/0/13784407980/0.png)
+
+![simulator screen shot - iphone 12 pro max - 2021-07-19 at 17.51.21.png](https://inews.gtimg.com/newsapp_ls/0/13784409177/0.png)
+
+![simulator screen shot - iphone 12 pro max - 2021-07-19 at 17.50.22.png](https://inews.gtimg.com/newsapp_ls/0/13784409192/0.png) -->
+
+
+<h3 id="Container宽、高"><a href="#Container宽、高" class="headerlink" title="Container宽、高"></a>Container宽、高</h3><p>width和height的设置，直接是固定的值。</p>
+<p>没有类似H5那种’100%’的设置。所以如果想要设置Container为屏幕宽高时，可以用以下的方法：</p>
+<p>方法一：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;dart:ui&#x27;</span>;</span><br><span class="line"></span><br><span class="line">final width = <span class="built_in">window</span>.physicalSize.width;</span><br><span class="line">final height = <span class="built_in">window</span>.physicalSize.height;</span><br><span class="line"></span><br><span class="line">Container(</span><br><span class="line">  color: Colors.red,</span><br><span class="line">  <span class="attr">width</span>: width,</span><br><span class="line">  <span class="attr">child</span>: Text(<span class="string">&quot;宽度有多宽&quot;</span>),</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Container(</span><br><span class="line">  color: Colors.red,</span><br><span class="line">  <span class="attr">width</span>: double.infinity,</span><br><span class="line">  <span class="attr">child</span>: Text(<span class="string">&quot;宽度有多宽&quot;</span>),</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="子视图距Container的边距-padding"><a href="#子视图距Container的边距-padding" class="headerlink" title="子视图距Container的边距-padding"></a>子视图距Container的边距-padding</h3><p>padding设置的是子视图，距Container的边距，两种设置方式，通常有两种设置方式，<code>EdgeInsets.all</code>常用于设置所有边距都一致；<code>EdgeInsets.fromLTRB</code>用于设置指定边距（LTRB对应的Left、Top、Right、Bottom）。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&#x27;Container Learn&#x27;</span>,</span><br><span class="line">      <span class="attr">home</span>: Scaffold(</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Container(</span><br><span class="line">            child: Text(</span><br><span class="line">              <span class="string">&#x27;padding left: 10, top: 20&#x27;</span>,</span><br><span class="line">              <span class="attr">style</span>: TextStyle(fontSize: <span class="number">40.0</span>),</span><br><span class="line">            ),</span><br><span class="line">            <span class="attr">alignment</span>: Alignment.topLeft,</span><br><span class="line">            <span class="attr">width</span>: <span class="number">500.0</span>,</span><br><span class="line">            <span class="attr">height</span>: <span class="number">400.0</span>,</span><br><span class="line">            <span class="attr">color</span>: Colors.lightBlue,</span><br><span class="line">            <span class="attr">padding</span>: <span class="keyword">const</span> EdgeInsets.fromLTRB(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>),</span><br><span class="line">            <span class="comment">// padding: const EdgeInsets.all(20),</span></span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>显示效果如下：</p>
+<img src="https://inews.gtimg.com/newsapp_ls/0/13786616617/0.png"  style="width:200px" />
+
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-20 at 10.06.51.png](https://inews.gtimg.com/newsapp_ls/0/13786616617/0.png) -->
+
+
+<h3 id="contianer距离父视图的边距-margin"><a href="#contianer距离父视图的边距-margin" class="headerlink" title="contianer距离父视图的边距-margin"></a>contianer距离父视图的边距-margin</h3><p>margin的设置和padding相同，效果对比，可以先注释width和height，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&#x27;Container Learn&#x27;</span>,</span><br><span class="line">      <span class="attr">home</span>: Scaffold(</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Container(</span><br><span class="line">            child: Text(</span><br><span class="line">              <span class="string">&#x27;margin all 30&#x27;</span>,</span><br><span class="line">              <span class="attr">style</span>: TextStyle(fontSize: <span class="number">40.0</span>),</span><br><span class="line">            ),</span><br><span class="line">            <span class="attr">alignment</span>: Alignment.topLeft,</span><br><span class="line">            <span class="comment">// width: 500.0,</span></span><br><span class="line">            <span class="comment">// height: 400.0,</span></span><br><span class="line">            <span class="attr">color</span>: Colors.lightBlue,</span><br><span class="line">            <span class="comment">// padding: const EdgeInsets.fromLTRB(10.0, 20.0, 0.0, 0.0),</span></span><br><span class="line">            <span class="comment">// padding: const EdgeInsets.all(20),</span></span><br><span class="line">            <span class="attr">margin</span>: <span class="keyword">const</span> EdgeInsets.all(<span class="number">30.0</span>),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<img src="https://inews.gtimg.com/newsapp_ls/0/13786645730/0.png"  style="width:200px" />
+
+
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-20 at 10.16.39.png](https://inews.gtimg.com/newsapp_ls/0/13786645730/0.png) -->
+
+
+<h3 id="container的decoration"><a href="#container的decoration" class="headerlink" title="container的decoration"></a>container的decoration</h3><p>decoration可用于设置背景色、背景渐变效果、边框效果等，需要注意decoration和color不能同时设置，如果需要设置，可以通过在decoration中设置color来实现，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&#x27;Container Learn&#x27;</span>,</span><br><span class="line">      <span class="attr">home</span>: Scaffold(</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Container(</span><br><span class="line">              child: Text(</span><br><span class="line">                <span class="string">&#x27;margin all 30&#x27;</span>,</span><br><span class="line">                <span class="attr">style</span>: TextStyle(fontSize: <span class="number">40.0</span>),</span><br><span class="line">              ),</span><br><span class="line">              <span class="attr">alignment</span>: Alignment.topLeft,</span><br><span class="line">              <span class="attr">width</span>: <span class="number">500.0</span>,</span><br><span class="line">              <span class="attr">height</span>: <span class="number">400</span>,</span><br><span class="line">              <span class="comment">// color: Colors.lightBlue,</span></span><br><span class="line">              <span class="comment">// padding: const EdgeInsets.fromLTRB(10.0, 20.0, 0.0, 0.0),</span></span><br><span class="line">              <span class="comment">// padding: const EdgeInsets.all(20),</span></span><br><span class="line">              <span class="comment">// margin: const EdgeInsets.all(30.0),</span></span><br><span class="line">              <span class="attr">decoration</span>: BoxDecoration(</span><br><span class="line">                  gradient: <span class="keyword">const</span> LinearGradient(colors: [</span><br><span class="line">                    Colors.lightBlue,</span><br><span class="line">                    Colors.greenAccent,</span><br><span class="line">                    Colors.purple,</span><br><span class="line">                  ]),</span><br><span class="line">                  <span class="attr">border</span>: Border.all(width: <span class="number">10.0</span>, <span class="attr">color</span>: Colors.red),</span><br><span class="line">                  <span class="attr">color</span>: Colors.lightBlue)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<img src="https://inews.gtimg.com/newsapp_ls/0/13786743071/0.png"  style="width:200px" />
+
+<!-- ![simulator screen shot - iphone 12 pro max - 2021-07-20 at 10.40.43.png](https://inews.gtimg.com/newsapp_ls/0/13786743071/0.png) -->
+
+
+<h3 id="报错："><a href="#报错：" class="headerlink" title="报错："></a>报错：</h3><p>The following assertion was thrown building MyApp(dirty):<br>Cannot provide both a color and a decoration<br>To provide both, use “decoration: BoxDecoration(color: color)”.<br>‘package:flutter/src/widgets/container.dart’:<br>Failed assertion: line 274 pos 15: ‘color == null || decoration == null’</p>
+<p>报错代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  @override</span><br><span class="line">  Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&#x27;Container Learn&#x27;</span>,</span><br><span class="line">      <span class="attr">home</span>: Scaffold(</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Container(</span><br><span class="line">            child: Text(</span><br><span class="line">              <span class="string">&#x27;Container Text&#x27;</span>,</span><br><span class="line">              <span class="attr">style</span>: TextStyle(fontSize: <span class="number">40.0</span>),</span><br><span class="line">            ),</span><br><span class="line">            <span class="attr">alignment</span>: Alignment.topLeft,</span><br><span class="line">            <span class="attr">color</span>: Colors.lightBlue,</span><br><span class="line">            <span class="attr">padding</span>: <span class="keyword">const</span> EdgeInsets.fromLTRB(<span class="number">10.0</span>, <span class="number">30.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>),</span><br><span class="line">            <span class="attr">margin</span>: <span class="keyword">const</span> EdgeInsets.all(<span class="number">30.0</span>),</span><br><span class="line">            <span class="attr">decoration</span>: BoxDecoration(</span><br><span class="line">                gradient: <span class="keyword">const</span> LinearGradient(colors: [</span><br><span class="line">                  Colors.lightBlue,</span><br><span class="line">                  Colors.greenAccent,</span><br><span class="line">                  Colors.purple,</span><br><span class="line">                ]),</span><br><span class="line">                <span class="attr">border</span>: Border.all(width: <span class="number">10.0</span>, <span class="attr">color</span>: Colors.red)),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>原因：Container的color和decoration不能同时设置，如果需要设置这两个，可以通过设置<code>BoxDecoration(color: color)</code>来实现</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Container-class.html">Flutter Conatiner Doc</a><br><a target="_blank" rel="noopener" href="https://jspang.com/detailed?id=42#toc21">Flutter免费视频第二季-常用组件</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/">http://morganwang.cn/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/Flutter/">Flutter</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/07/20/iOS%20%E9%94%AE%E7%9B%98%E5%88%A0%E9%99%A4%E9%94%AE%E5%93%8D%E5%BA%94/" title="iOS 键盘删除键响应"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">iOS 键盘删除键响应</div></div><div class="info-2"><div class="info-item-1">iOS 键盘删除键响应背景背景是，实现一个分享到微信，多选加输入框，点击键盘删除键，删除多选选中对象的东西。    实现由于UITextField没有删除键的代理，所以笔者最开始的想法是，通过textField:shouldChangeCharactersInRange:replacementString:来实现监听，当当前字符串为空且要替换字符串为空时，说明是点击的删除按钮，通过Block方法回掉出去，代码如下： 12345678910- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string &#123;    if ((textField.text.length == 0) &amp;&amp; (string.length == 0)) &#123;        if (self.deleteBackwardBlock) &#123;            self.deleteBa...</div></div></div></a><a class="pagination-related" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/" title="Flutter组件基础——Text"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Flutter组件基础——Text</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——Text组件文本组件：Text WidgetText是文本组件，类似于iOS中UILabel，用于文本的展示，是布局的基础控件之一。   文本对齐方式：TextAlign TextAlign center：Align the text in the center of the cotainer left：Align the text on the left edge of the container right：Align the text on the right edge of the container start：Align the text on the leading edge of the container. For left-to-right text(TextDirection.ltr), this is the left edge. For the right-to-left text(TextDirection.rtl), this is the right edge. end：Align the text on the trai...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/" title="Flutter组件基础——Text"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-19</div><div class="info-item-2">Flutter组件基础——Text</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——Text组件文本组件：Text WidgetText是文本组件，类似于iOS中UILabel，用于文本的展示，是布局的基础控件之一。   文本对齐方式：TextAlign TextAlign center：Align the text in the center of the cotainer left：Align the text on the left edge of the container right：Align the text on the right edge of the container start：Align the text on the leading edge of the container. For left-to-right text(TextDirection.ltr), this is the left edge. For the right-to-left text(TextDirection.rtl), this is the right edge. end：Align the text on the trai...</div></div></div></a><a class="pagination-related" href="/2021/07/30/Flutter%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E2%80%94%E2%80%94%E4%B8%80%E8%88%AC%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA%E5%92%8C%E8%BF%94%E5%9B%9E/" title="Flutter布局基础——页面导航和返回"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-30</div><div class="info-item-2">Flutter布局基础——页面导航和返回</div></div><div class="info-2"><div class="info-item-1">Flutter布局基础——页面导航和传值说到导航，最常见就是类似于iOS中导航控制器的push和pop效果，同样Flutter中也有类似的效果，使用的就是Navigator组件。   下面，来看一下在Flutter中，导航效果Navigator.push和Navigator.pop的使用。 简单使用代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849class MyApp extends StatelessWidget &#123;  @override  Widget build(BuildContext context) &#123;    return MaterialApp(      title: &#x27;导航演示1&#x27;,      home: new FirstScreen(),    );  &#125;&#125;class FirstScreen extends StatelessWidget &#123;  @o...</div></div></div></a><a class="pagination-related" href="/2021/08/18/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94%E8%87%AA%E5%AE%9A%E4%B9%89%20BottomNavigationBar/" title="Flutter布局基础——自定义BottomNavigationBar"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-18</div><div class="info-item-2">Flutter布局基础——自定义BottomNavigationBar</div></div><div class="info-2"><div class="info-item-1">Flutter布局基础——自定义BottomNavigationBar背景这里我们来尝试实现一个不规则的 BottomNavigationBar，首先了解两个系统组件: floatingActionButton和BottomAppBar   floatingActionButtonfloatingActionButton用于创建一个浮动的按钮，有两种样式：一种是圆形的纯图标的；一种是椭圆的带有图标或文案的。 示例如下： 123456789101112131415161718192021222324252627282930313233343536373839404142void main() =&gt; runApp(const MyApp());/// This is the main application widget.class MyApp extends StatelessWidget &#123;  const MyApp(&#123;Key? key&#125;) : super(key: key);  static const String _title = &#x...</div></div></div></a><a class="pagination-related" href="/2021/07/23/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94GridView/" title="Flutter组件基础——GridView"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-23</div><div class="info-item-2">Flutter组件基础——GridView</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——GridViewGridView是网格布局，类似于iOS中的UICollectionView，可设置每行多少个、单个对象的宽高比、对象水平方向的间距、垂直方向的间距等等。   GridView的常用属性 GridView scrollDirection: 滑动方向 Axis.horizontal: 水平方向滑动 Axis.vertical: 垂直方向滑动，默认为这个。   padding: GridView相对于父视图的边距 crossAxisCount: 每行多少个 mainAxisSpacing: 与滑动方向垂直的方向的间距，eg: 当横向滑动时，这个代表垂直方向对象之间的间距； crossAxisSpacing: 与滑动方向平行的方向的间距，eg: 当横向滑动时，这个代表水平方向对象之间的间距； childAspectRatio：单个元素的宽高比(或者高宽比)，当scrollDirection为vertical时，代表宽高比；当scrollDirection为horizontal时，代表高宽比。    简单使用代码如下： 1234567891011...</div></div></div></a><a class="pagination-related" href="/2023/06/29/meiju_Flutter/" title="Flutter版本的海外剧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-29</div><div class="info-item-2">Flutter版本的海外剧</div></div><div class="info-2"><div class="info-item-1">背景前阵子抓包，有两个海外剧的接口，最近有时间，打算温习一下 Flutter，就用来写了一个简单的 APP，包含轮播图、下拉刷新、上拉加载以及播放功能。   效果如下：                 运行时需要注意 Flutter 版本的问题，可能需要修改 播放器的 package 中的代码，直接Google 搜索，修改即可，如有疑问可以联系我。 代码放在 Github 上，地址是：meiju_flutter </div></div></div></a><a class="pagination-related" href="/2021/07/27/Flutter%E5%B8%83%E5%B1%80%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Card/" title="Flutter布局基础——Card"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="info-item-2">Flutter布局基础——Card</div></div><div class="info-2"><div class="info-item-1">Flutter布局基础——CardCard，卡片式布局，带有一点圆角和阴影。通常用于关联信息的展示，比如：相册信息、经纬度、联系人信息等等。   Card的使用来看一下，如何做一个，常见的列表元素的控件，左侧是个Icon，上面是title，然后是desc，最下面是按钮，常见于订单列表。 要实现的效果如下：  然后看如何实现： ListTile这里需要介绍一下ListTile，Flutter提供的固定高度的，左侧或右侧带有Icon以及文案的控件。 可实现效果如下：  代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768class MyApp extends StatelessWidget &#123;  @override  Widget build(BuildContext context) &#123;    return MaterialApp(      home...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container"><span class="toc-number">1.</span> <span class="toc-text">Flutter组件基础——Container</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Container%E5%8C%85%E5%90%AB%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">Container包含属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E8%A7%86%E5%9B%BE%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F-alignment"><span class="toc-number">1.1.1.</span> <span class="toc-text">子视图对齐方式-alignment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Container%E5%AE%BD%E3%80%81%E9%AB%98"><span class="toc-number">1.1.2.</span> <span class="toc-text">Container宽、高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E8%A7%86%E5%9B%BE%E8%B7%9DContainer%E7%9A%84%E8%BE%B9%E8%B7%9D-padding"><span class="toc-number">1.1.3.</span> <span class="toc-text">子视图距Container的边距-padding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contianer%E8%B7%9D%E7%A6%BB%E7%88%B6%E8%A7%86%E5%9B%BE%E7%9A%84%E8%BE%B9%E8%B7%9D-margin"><span class="toc-number">1.1.4.</span> <span class="toc-text">contianer距离父视图的边距-margin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#container%E7%9A%84decoration"><span class="toc-number">1.1.5.</span> <span class="toc-text">container的decoration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%EF%BC%9A"><span class="toc-number">1.1.6.</span> <span class="toc-text">报错：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.2.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

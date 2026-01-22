@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iOS 自动打包 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="iOS 自动打包使用脚本实现自动打包，网上搜了好多，但是偶比较笨，一直发现不知道怎么使用，看了好久，终于改了个可以使用的，但是最后发现不能用xcrun导出；宝宝心里苦，但宝宝不说😂；接着改，最后终于被我捣鼓成功了，分享给大家一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 自动打包">
+<meta property="og:url" content="http://morganwang.cn/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="iOS 自动打包使用脚本实现自动打包，网上搜了好多，但是偶比较笨，一直发现不知道怎么使用，看了好久，终于改了个可以使用的，但是最后发现不能用xcrun导出；宝宝心里苦，但宝宝不说😂；接着改，最后终于被我捣鼓成功了，分享给大家一下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2017-02-20T07:59:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS自动打包">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iOS 自动打包",
+  "url": "http://morganwang.cn/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2017-02-20T07:59:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iOS 自动打包',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">iOS 自动打包</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">iOS 自动打包</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-02-20T07:59:00.000Z" title="发表于 2017-02-20 15:59:00">2017-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="iOS-自动打包"><a href="#iOS-自动打包" class="headerlink" title="iOS 自动打包"></a>iOS 自动打包</h1><p>使用脚本实现自动打包，网上搜了好多，但是偶比较笨，一直发现不知道怎么使用，看了好久，<br>终于改了个可以使用的，但是最后发现不能用xcrun导出；宝宝心里苦，但宝宝不说😂；接着改，最后终于被我捣鼓成功了，分享给大家一下</p>
+<span id="more"></span>
+
+<p>Note: 只是简单的基础版本的，这个支持的是没有使用Cocoapods的工程，，脚本见<a target="_blank" rel="noopener" href="https://github.com/mokong/iOS_AutoBuild">iOS自动打包_shell脚本</a>；如果是使用Cocoapods工程的，可以稍微修改一下，鼓励大家自己试试，试好了顺便分享给我，😉</p>
+<p>使用方法：</p>
+<blockquote>
+<p>iOS自动打包-sh的使用：下载压缩包后，解压，里面有后缀为.sh的文件和.plist的文件，将这两个文件放到<br>.xcodeproj所在的文件夹下，然后ProjectName和SchemeName，打开terminal，运行这个.sh文件即可。</p>
+</blockquote>
+<p>然后来说一下调试中遇到的问题：</p>
+<ol>
+<li>文件路径的问题</li>
+<li>Scheme的问题，我不知道自己的sheme是什么？或者我的sheme明明就是这个但是提示我找不到</li>
+<li>脚本运行完，发现所有的文件都变成Modified状态，整个人顿时就不好了。。。</li>
+</ol>
+<h2 id="问题一：路径的问题"><a href="#问题一：路径的问题" class="headerlink" title="问题一：路径的问题"></a>问题一：路径的问题</h2><p>因为是shell脚本，偶会的本来就不多，周五那天智商爆表，居然啃懂了其中几句，然后还知道去找度娘，所以被我改成功了，<br>这个脚本路径被设置为.xcodeproj所在的文件夹，<br>打包的.xcarchive文件放在这个文件夹下的.build文件夹下，<br>导出的ipa文件在桌面</p>
+<h2 id="问题二：Scheme的问题"><a href="#问题二：Scheme的问题" class="headerlink" title="问题二：Scheme的问题"></a>问题二：Scheme的问题</h2><p>不知道自己的Scheme是什么的，可以去Product-&gt;Scheme-&gt;Edit Scheme下查看<br><img src="https://ooo.0o0.ooo/2017/02/20/58aa93bb6da09.png" alt="Scheme 查看1"></p>
+<p>或者直接运行脚本会打印出来<br><img src="https://ooo.0o0.ooo/2017/02/20/58aa955cbc561.png" alt="Scheme 查看2"></p>
+<p>写了自己的Scheme但是运行脚本后报这个错的<br><img src="https://ooo.0o0.ooo/2017/02/20/58aa9312cd66a.png" alt="No Schemes img"></p>
+<p>要注意一下Edit Scheme界面的shared要勾选<br><img src="https://ooo.0o0.ooo/2017/02/20/58aa965241867.png" alt="Fixed No Schemes"></p>
+<h2 id="脚本运行完，所有文件变为Modified状态"><a href="#脚本运行完，所有文件变为Modified状态" class="headerlink" title="脚本运行完，所有文件变为Modified状态"></a>脚本运行完，所有文件变为Modified状态</h2><p>使用git diff查看了之后，发现是filemode的变化</p>
+<blockquote>
+<p>文件chmod后其文件某些位发生了变化，如果严格比较原文件和chmod后的文件，两者是不一样的，但是源代码通常只关心文本内容，因此chmod产生的变化应该忽略</p>
+</blockquote>
+<p>上面的是找度娘之后，找到的博客里介绍的，请原谅，忘记当时怎么搜的了，所有找不到出处，文字是当时截图。。。。。<br>输入 <code>git config core.filemode false</code>，之后就好了</p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><ul>
+<li>变量声明</li>
+</ul>
+<blockquote>
+<p><img src="https://ooo.0o0.ooo/2017/02/20/58aa99c4776a9.png" alt="Implement Var"><br>project_path 是获取此脚本文件所在的目录，百度搜出来的<a target="_blank" rel="noopener" href="http://www.cnblogs.com/JohnABC/p/5855535.html">Linux-获取当前正在执行脚本的绝对路径</a><br>project_name 是.xcodeproj前面的文字<br>scheme_name 是前面说的那个<br>build_path 是当前路径下build文件夹<br>exportOptionsPlistPath 是plist文件的路径<br>exportFilePath 是导出.ipa包的路径</p>
+</blockquote>
+<ul>
+<li>打印scheme、清理工程、编译工程、打包</li>
+</ul>
+<blockquote>
+<p><img src="https://ooo.0o0.ooo/2017/02/20/58aa9b9f7b738.png" alt="Run Code"></p>
+</blockquote>
+<ol>
+<li>打印scheme，如果不知道怎么获取scheme_name，可以先填上上面的project_name，注释掉下面所有的代码，运行，就会打印出来当前project的scheme  </li>
+<li>清理工程，编译之前先clean一下。。。。  </li>
+<li>编译工程，编译并生成.xcarchive文件，放在build_path下，名字是project_name.xcarchive，这一步最为耗时  </li>
+<li>打包，将生成的.xcarchive文件导出.ipa包到桌面  <blockquote>
+<p>这里面每一步都可以单独执行，例如想获取shceme就注释掉其他几段代码；想测试编译通过没，就只保留清理、编译这段；编译成功，导出失败，就只保留导出这一段，修改测试</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>判断导出是否成功</li>
+</ul>
+<blockquote>
+<p><img src="https://ooo.0o0.ooo/2017/02/20/58aa9d3e2ac48.png" alt="Is Export Success"><br>判断桌面是否有scheme_name.ipa文件，有的话，就视为打包成功，打开这个文件夹；</p>
+</blockquote>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>a. 如果是workspace工程，可按照这里这个链接，修改清理工程、编译工程、打包这几步  </p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html/man.1.html">xcodebuild-developer.apple</a>  </p>
+<p>这就是上面链接里的内容，xcodebuild的使用都在这里<br><img src="https://ooo.0o0.ooo/2017/02/20/58aa9eb88e322.png" alt="xcodebuild"></p>
+<p>b. .plist文件里的内容可参照这个链接，需要翻墙<br><a target="_blank" rel="noopener" href="http://www.matrixprojects.net/p/xcodebuild-export-options-plist/#tldr">xcodebuild’s new exportOptionsPlist flag</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/">http://morganwang.cn/2017/02/20/iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/">iOS自动打包</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2017/02/21/%E9%93%83%E9%93%9B%E5%AD%90%E7%AE%80%E7%AC%94%E7%94%BB%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%BA%8C%E6%9C%9F+%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A/" title="铃铛子简笔画训练营"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">铃铛子简笔画训练营</div></div><div class="info-2"><div class="info-item-1">绘画 2017.02.21上周脑袋一热，感觉自己平时没什么兴趣爱好，然后又看了一大段鸡汤文，然后一冲动，就报了简笔画训练营。。。。   没上课之前，以为会很简单，说不定我是绘画天才，以后出去，刷刷几下，画出来一个美女；上了课之后，发现纯粹是想多了😂 周四上的课，然后周末的时候，看着这工具，我到底是画呢，还是画呢，还是画呢，然后周末就没了。。。。。 周一突然发现我去，周末怎么没了？都周一了，周三前要交作业，赶紧画，话说，周四讲的什么？怎么不记得了，我的内心是这样的 然后赶紧翻记录，回顾一下，嗯嗯，就是这个，想起来了，是要先画个色卡哎，然后趴到桌子上，自己给笔写上标号，然后老老实实的涂色卡好不容易涂完了，想起来，还要把颜色标识出来，额，好吧，一个个来，这个是什么颜色，不认识，过！这个呢，也不认识，下一个！再来一个，黄色，好，写上，等等，后面有个看起来更像黄色，再后面还有，到底哪个是呢？我好方。。。。。 老师，其实我是色盲，[捂脸] 老实说，有了色卡却是很方便，尤其在临摹的时候，不知道老师用的颜色是哪个，对比色卡，找到最接近的对应编号的笔，然后上色，方便快捷 然后临摹一碗面，用铅笔画...</div></div></div></a><a class="pagination-related" href="/2016/12/29/%E5%9D%91/" title="iOS开发之坑1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS开发之坑1</div></div><div class="info-2"><div class="info-item-1">iOS开发之坑1iOS 10 之后，switch的setOn方法调用之后，并没有按照文档上说的不发送action   https://stackoverflow.com/questions/39566361/uiswitch-seton-animated-does-not-work-as-document 遇到个诡异的问题，同样的创建view，然而在偶数列显示模糊，在奇数列正常 </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/07/16/Flutter%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%20&&%20%E8%BF%90%E8%A1%8C/" title="Flutter环境安装 &amp;&amp; 运行"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-16</div><div class="info-item-2">Flutter环境安装 &amp;&amp; 运行</div></div><div class="info-2"><div class="info-item-1">Flutter环境安装 &amp;&amp; 运行背景Flutter环境配置到运行，问题备忘记录。比如遇到Android sdkmanager tool not found和Running Gradle task &#39;assembleDebug&#39;...   Flutter安装超级精简版通过homebrew直接安装，可能需要外网 brew install flutter 手动，Flutter环境搭建 首先下载Flutter安装包，下载地址：https://flutter.dev/docs/development/tools/sdk/releases?tab=macos  其次，解压已下载文件，把文件放入指定目录中，注意：建议放入可以放入用户根目录下，因为后续需要指定bin文件地址，这个目录最好不会经常变动  然后，配置环境变量  打开terminal，如果是zsh，输入open .zshrc；（如果是bash，则输入open .baseprofile）在文件末尾添加如下代码，其中pwd为刚刚解压的flutter/bin文件地址，   1export PATH=&quo...</div></div></div></a><a class="pagination-related" href="/2024/04/19/Mac%E6%89%AB%E6%8F%8FiOS%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6/" title="Python实现提醒iOS描述文件有效期"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-19</div><div class="info-item-2">Python实现提醒iOS描述文件有效期</div></div><div class="info-2"><div class="info-item-1">Python实现提醒iOS描述文件有效期背景公司企业APP描述文件过期，没有提醒，导致当天出现不可用的问题。 为了避免再发生类似的问题，笔者想要写一个Python脚本，读取描述文件，获取有效期，设置提醒，且自动运行。    实现首先再来理一下思路，所有的描述文件都在~/Library/MobileDevice/Provisioning Profiles/目录下，但是里面的内容通常不会自动删除，过期的或者重复的都在这个目录中，而且这个目录下的文件名是uuid命名的和Xcode中的文件名字也不能直接对应，所以一眼看去，只能用一个字形容：乱。 如果账号是管理员，直接登录在电脑上，项目中用的自动管理描述文件的，还好一些，现在会自动续期。但是如果账号是开发者，发布的描述文件没有权限用自动管理的，就需要注意这个描述文件有效期的问题。 再来理一下思路，想要的是一个读取描述文件夹下所有描述文件，获取描述文件中的内容，根据有效期，设置提醒，且自动运行的脚本。 那这里面最重要的是什么？是获取描述文件的内容，这关系到这个思路是否可行。 获取描述文件的内容首先，来看下，描述文件的格式是uuid.mobi...</div></div></div></a><a class="pagination-related" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" title="Xcode14编译失败修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-14</div><div class="info-item-2">Xcode14编译失败修改</div></div><div class="info-2"><div class="info-item-1">背景升级Xcode 14后，项目编译失败修改，共修改了两种编译错误：  一种是bundle code sign error，Xcode 14 needs selected Development Team for Pod Bundles 一种是Module compiled with Swift 5.6.1 cannot be imported by the Swift 5.7 compiler    其中第一种比较容易解决，第二种稍微麻烦点，解决方案如下： 解决Xcode 14 bundle code sign error这个的解决方案，直接Google，第一个stackoverflow的链接是Xcode 14 needs selected Development Team for Pod Bundles，这里面给出的解决方法是，在Podfile里增加下面代码，然后运行Pod install，设置Pod库的DEVELOPMENT_TEAM是开发者账号的team。 笔者有两个项目，其中一个是Swift为主，用下面的设置方法试了，可以解决。要注意的是如果项目有多个target，ta...</div></div></div></a><a class="pagination-related" href="/2019/09/08/CocoaPods%E7%A7%81%E6%9C%89%E5%BA%93%E7%94%9F%E6%88%90/" title="CocoaPods私有库生成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-08</div><div class="info-item-2">CocoaPods私有库生成</div></div><div class="info-2"><div class="info-item-1">CocoaPods私有库生成</div></div></div></a><a class="pagination-related" href="/2023/04/06/Xcode%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E9%BB%98%E8%AE%A4%E6%96%87%E6%A1%88%E4%BF%AE%E6%94%B9/" title="Xcode 创建项目默认文案修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-06</div><div class="info-item-2">Xcode 创建项目默认文案修改</div></div><div class="info-2"><div class="info-item-1">背景最近需要修改Xcode创建项目默认文案修改，就是每次创建最上面默认生成的注释说明。想起来之前看原Raywenderlich（现在是Kodeco）网站下载的代码时，每个已存在的文件里都有一长串自定义的说明，而且新建文件的时候也是带有同样的自定义的说明，有过疑惑，但是没有仔细研究，今天研究下怎么实现的：   Kodeco文件自定义的说明如下：  实现通过Customize text macros和Text macros reference 可以看出，Xcode默认头部文字注释默认定义如下： 12345678//  ___FILENAME___//  ___PACKAGENAME___////  Created by ___FULLUSERNAME___ on ___DATE___.//  ___COPYRIGHT___//  然后参考Customizing the file header comment and other text macros in Xcode 9 可以确定修改的步骤是:  创建IDETemplateMacros.plist 添加或修改Root对应的type为...</div></div></div></a><a class="pagination-related" href="/2022/04/19/Algorithem_DepthFirstSearch/" title="Algorithem_Depth-First Search"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="info-item-2">Algorithem_Depth-First Search</div></div><div class="info-2"><div class="info-item-1">Algorithem_Depth-First Search3. Longest Substring Without Repeating CharactersGiven a string s, find the length of the longest substring without repeating characters.   Example 1: 123Input: s = &quot;abcabcbb&quot;Output: 3Explanation: The answer is &quot;abc&quot;, with the length of 3.  Example 2: 123Input: s = &quot;bbbbb&quot;Output: 1Explanation: The answer is &quot;b&quot;, with the length of 1.  Example 3: 1234Input: s = &quot;pwwkew&quot;Output: 3Explanation: The answer is &quot;wke&q...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85"><span class="toc-number">1.</span> <span class="toc-text">iOS 自动打包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">问题一：路径的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9AScheme%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">问题二：Scheme的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E5%AE%8C%EF%BC%8C%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%98%E4%B8%BAModified%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">脚本运行完，所有文件变为Modified状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">1.4.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">1.5.</span> <span class="toc-text">后记</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

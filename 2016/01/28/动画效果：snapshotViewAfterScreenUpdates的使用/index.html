@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>动画效果：snapshotViewAfterScreenUpdates的使用 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="动画动画：复杂动画的实现：首先要拆分，明确你自己要实现的效果是什么，然后开始拆分，第一步实现什么，然后实现什么…，怎么样链接起来。把复杂的动画拆分成一个个小步骤，然后一步步实现就可以了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动画效果：snapshotViewAfterScreenUpdates的使用">
+<meta property="og:url" content="http://morganwang.cn/2016/01/28/%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9AsnapshotViewAfterScreenUpdates%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="动画动画：复杂动画的实现：首先要拆分，明确你自己要实现的效果是什么，然后开始拆分，第一步实现什么，然后实现什么…，怎么样链接起来。把复杂的动画拆分成一个个小步骤，然后一步步实现就可以了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2016-01-28T02:36:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "动画效果：snapshotViewAfterScreenUpdates的使用",
+  "url": "http://morganwang.cn/2016/01/28/%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9AsnapshotViewAfterScreenUpdates%E7%9A%84%E4%BD%BF%E7%94%A8/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2016-01-28T02:36:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2016/01/28/%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9AsnapshotViewAfterScreenUpdates%E7%9A%84%E4%BD%BF%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '动画效果：snapshotViewAfterScreenUpdates的使用',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">动画效果：snapshotViewAfterScreenUpdates的使用</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">动画效果：snapshotViewAfterScreenUpdates的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2016-01-28T02:36:00.000Z" title="发表于 2016-01-28 10:36:00">2016-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p>动画：<br>复杂动画的实现：首先要拆分，明确你自己要实现的效果是什么，然后开始拆分，第一步实现什么，然后实现什么…，怎么样链接起来。把复杂的动画拆分成一个个小步骤，然后一步步实现就可以了。</p>
+<span id="more"></span>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/1208479-91edb45fa874da7c.gif?imageMogr2/auto-orient/strip" alt="gif1"></p>
+<blockquote>
+<p>snapshotViewAfterScreenUpdates(_:) 这个方法我在做拖拽tableView的item的时候(eg: <a target="_blank" rel="noopener" href="https://github.com/mokong/systemPreference">SystemPreference</a>)看到的，感觉用来做动画很好用。相当于截个图，然后拿着这个截图，实现各种动画效果。<br>eg:</p>
+</blockquote>
+<ol>
+<li>如果你是一个电商项目，将商品加入购物车，这个动画就可以用这个来实现（Ps：我记得京东还是淘宝久有这个效果，但是我却又找不到了），点击加入购物车，然后对商品生成一个快照，然后缩小移动到购物车（还可以加入旋转的动画），到购物车的位置，移除。Perfect！  </li>
+<li>我做的这个项目，读信的过程就是用这个效果实现，点击信封，然后生成快照，然后快照位移到屏幕中间，消失，然后信封详情出现。</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1208479-c4bfbecedfbd18a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image1"></p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><blockquote>
+<p>首先，定义动画效果的实现：</p>
+</blockquote>
+<ol>
+<li>查看信件：a. 点击信件，然后生成信件快照; b.信件快照位移到屏幕中央；同时信件详情出现，信件快照消失；</li>
+<li>关闭详情：a. 点击空白处，生成信件详情快照和信件快照；信件快照起始状态隐藏；b.信件详情快照慢慢变小到和信件快照同样大小；然后消失，信件快照显示；c:信件快照位移到信件的位置，然后消失；</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="Objective-C">/**
+ *  @brief 返回对应view的snapshot
+ *
+ *  @param inputView 输入的view
+ *
+ *  @return 返回的snapshot
+ */
+- (UIView *)customSnapshotFromView:(UIView *)inputView &#123;
+    UIView *snapshot = [inputView snapshotViewAfterScreenUpdates:YES];
+    snapshot.layer.masksToBounds = YES;
+    snapshot.layer.cornerRadius = 0.0;
+    snapshot.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
+    snapshot.layer.shadowRadius = 5.0;
+    snapshot.layer.shadowOpacity = 0.4;
+    return snapshot;
+&#125;```
+
+&gt; 关闭详情
+
+```Objective-C
+
+/**
+ *  动画 关闭详情
+ *
+ *  @param sourceView      起始位置的view
+ *  @param destinationView 终点位置的view
+ *  @param animateFinished 动画结束的回调
+ */
+- (void)animateView:(UIView *)sourceView
+             toView:(UIView *)destinationView
+           finished:(AnimateFinished)animatedFinished
+&#123;
+    /**
+     *  逻辑：1. 得到两个view的snapshot, sourcesnapshot/destinationsnapshot
+     *       2. 然后，设置destinationsnapshot的中心为整个view的中心，设置为透明（即不显示）
+     *       3. 隐藏当前sourceView，第一个动画实现，sourceViewsnapshot大小变为destinationsnapshot的大小，然后隐藏，同时显示destinationsnapshot
+     *       4. 第二个动画实现：destinationsnapshot移动回对应位置，然后隐藏
+     */
+    
+    // 1
+    UIView *sourceSnapshot = [self customSnapshotFromView:sourceView];
+    UIView *destinationSnapshot = [self customSnapshotFromView:destinationView];
+    
+    // 2
+    CGPoint viewCenter = self.view.center;
+    CGPoint destinationCenter = destinationView.center;
+    destinationSnapshot.center = viewCenter;
+    destinationSnapshot.alpha = 1.0;
+    [self.view addSubview:sourceSnapshot];
+    [self.view addSubview:destinationSnapshot];
+    
+    // 3
+    sourceView.hidden = YES;
+    [UIView animateWithDuration:0.5
+                     animations:^&#123;
+                         sourceSnapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+                         sourceSnapshot.alpha = 0.98;
+                         sourceSnapshot.frame = destinationSnapshot.frame;
+                     &#125; completion:^(BOOL finished) &#123;
+                         
+                         self.alphaView.hidden = YES;
+                         destinationSnapshot.alpha = 0.98;
+                         [sourceSnapshot removeFromSuperview];
+                         
+                         // 4
+                         [UIView animateWithDuration:0.5
+                                          animations:^&#123;
+                                              destinationSnapshot.center = destinationCenter;
+                                              destinationSnapshot.transform = CGAffineTransformIdentity;
+                                          &#125; completion:^(BOOL finished) &#123;
+                                              [destinationSnapshot removeFromSuperview];
+                                              animatedFinished();
+                                          &#125;];
+                     &#125;];
+    
+&#125;```
+
+&gt; 查看详情
+
+```Objective-C
+
+/**
+ *  动画 查看详情
+ *
+ *  @param viewToshow      要展示的view
+ *  @param currentView     起始的view
+ *  @param animateFinished 动画结束的回调
+ */
+- (void)showView:(UIView *)viewToshow
+        withView:(UIView *)currentView
+        finished:(Finished)animateFinished
+&#123;
+    // Taking a snapshot of the selected row using helper method
+    UIView *snapShot = [self customSnapshotFromView:currentView];
+    
+    // Add the snapshot as a subview, centered cell&#39;s center
+    CGPoint viewCenter = self.view.window.center;
+    CGPoint cellCenter = currentView.center;
+    snapShot.center = cellCenter;
+    snapShot.alpha = 0.0;
+    snapShot.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:snapShot];
+    [UIView animateWithDuration:0.5 animations:^&#123;
+        snapShot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+        snapShot.alpha = 0.98;
+    &#125; completion:^(BOOL finished) &#123;
+        [UIView animateWithDuration:0.5 animations:^&#123;
+            snapShot.center = viewCenter;
+            snapShot.transform = CGAffineTransformIdentity;
+        &#125; completion:^(BOOL finished) &#123;
+            self.alphaView.hidden = NO;
+            viewToshow.hidden = NO;
+            [snapShot removeFromSuperview];
+            animateFinished();
+        &#125;];
+    &#125;];
+&#125;```
+
+&gt; Ps: 也许会好奇，为什么查看和关闭会是两个不同的部分？可以再回头查看一下分割的动画，发现过程其实是不一样的，查看详情比关闭少了一个步骤。
+代码：[AnimateSnapshotView](https://github.com/mokong/AnimateSnapShotView)
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2016/01/28/%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9AsnapshotViewAfterScreenUpdates%E7%9A%84%E4%BD%BF%E7%94%A8/">http://morganwang.cn/2016/01/28/%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9AsnapshotViewAfterScreenUpdates%E7%9A%84%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2016/02/02/Autolayout%E8%87%AA%E9%80%82%E5%BA%94label%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="AutoLayout自适应label出现的问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">AutoLayout自适应label出现的问题</div></div><div class="info-2"><div class="info-item-1">我在做最近一个项目，自适应label的时候，总是出现一个问题：     这让我很是郁闷，而且只有在6和6p上出现，开始我以为是我自适应的方式不对，但是重写了几遍之后，发现我没写错。。。。问题在哪，始终找不到.   今天在群里看到一小伙伴发关于自适应label的代码，求教了一下，然后找到了这个VerticallyAlignedLabel，然后兴高采烈的尝试，以为终于要解决了，结果发现，确实是向上对齐了，但是多余的部分还在； 那么问题是在哪？然后我就找啊找啊，然后我发现了这个Multiline UILabel height with Autolayout higher in landscape, stackoverflow上的问题，之前我一直搜中文，但是，搜不出来，换英文之后，终于有相似的问题出现了，我就说，肯定不止我一个人遇到（这么蠢😢），然后还有这个objc.io也出现了Intrinsic Content Size of Multi-Line Text, 然后我打算照着他们的方法修改； 他大爷的，我都没办法直接用他们的方法，因为我把view摘出来了，而且还是tableViewc...</div></div></div></a><a class="pagination-related" href="/2016/01/07/lib(a)%E5%AF%BC%E8%87%B4%E7%9A%84duplicate-symbol%E7%9A%84%E9%97%AE%E9%A2%98/" title="lib(a)导致的duplicate-symbol的问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">lib(a)导致的duplicate-symbol的问题</div></div><div class="info-2"><div class="info-item-1">lib(a)导致的duplicate-symbol的问题链接：  iOS lib(.a)库冲突解决办法 iOS 两个静态库存在同名文件冲突解决方案 说明  首先你要确定是这个类型的错误 然后开始，可以按照第一个链接进行修改，也可以看下面  在引入第三方lib(.a)库时，经常会由于第三方lib库中又引入同你现有工程相同的开源代码而造成.o冲突  依次查看lib库所支持的框架类型。i386：模拟器；armv7：iphone4；armv7s：iphone5,iphone5s；arm64：iphone6,iphone6p。  首先，将冲突的那个.a文件单独拷贝到一个文件夹，然后用命令行进入到那个文件夹  查看lib库支持的框架类型，注意下面的lib.a或者libRyFitLibrary.a是我出错的.a文件   12admin-imac:testlib admin$ lipo -info lib.a 2 Architectures in the fat file: lib.a are: armv7armv7s arm64 3 admin-imac:testlib admin$   fa...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/08/30/iOS%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BF%E9%97%AEDocument%20Directory/" title="iOS 在文件中访问 Document Directory"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-30</div><div class="info-item-2">iOS 在文件中访问 Document Directory</div></div><div class="info-2"><div class="info-item-1">iOS 在文件中访问 Document DirectoryiOS 11之后，在 Plist 中设置LSSupportsOpeningDocumentsInPlace为 YES，且UIFileSharingEnabled为 YES，可以从系统的Files应用中访问应用的 Documents 目录。   如下： 从系统的文件打开，查看我的 iPhone如下，开启了此功能的应用可以从这里面看到      注意：此目录是 APP 的Documents目录，所以 APP 删除后，目录就消失了。 参考： iOS文件共享  </div></div></div></a><a class="pagination-related" href="/2022/09/05/Carthage%E4%BD%BF%E7%94%A8/" title="Carthage使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-05</div><div class="info-item-2">Carthage使用</div></div><div class="info-2"><div class="info-item-1">背景之前一直用CocoaPods，这次做编译时间优化时，把某些Pod依赖的库改为了Carthage依赖的，这里记录一下Carthage的使用。   使用安装使用brew安装，简单方便 1brew install carthage  使用在项目所在文件夹，即.xcodeproj所在的文件夹下，创建Cartfile 1touch Cartfile  然后打开Cartfile 1open Cartfile -a Xcode  添加要依赖的第三方库，注意依赖版本的指定，指定版本和指定范围的写法，如下： 1234567891011github &quot;krzyzanowskim/CryptoSwift&quot; ~&gt; 1.4.0github &quot;evgenyneu/keychain-swift&quot; ~&gt; 19.0github &quot;ibireme/YYKit&quot;github &quot;ReactiveX/RxSwift&quot; &quot;6.5.0&quot;github &quot;onevcat/Kingfisher&quot; ...</div></div></div></a><a class="pagination-related" href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/" title="Flutter组件——Tabbar"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-23</div><div class="info-item-2">Flutter组件——Tabbar</div></div><div class="info-2"><div class="info-item-1">[Flutter组件——Tabbar]使用Tabar使用，设置indicator的样式，长短，设置tab选中和未选中的样式，根据数组创建Tabbar。    代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677import &#x27;package:flutter/material.dart&#x27;;class TabbarDemo extends StatefulWidget &#123;  TabbarDemo(&#123;Key? key&#125;) : super(key: key);  _TabbarDemoState createState() =&gt; _TabbarDemoState();&#125;class _TabbarDemoState extends State&lt;TabbarDemo&gt; ...</div></div></div></a><a class="pagination-related" href="/2023/04/14/iOS%2016.4Webview%E4%B8%8D%E8%83%BD%E7%94%A8%20Safari%20%E6%9F%A5%E7%9C%8B/" title="iOS16.4 Webview 不能用Safari调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-14</div><div class="info-item-2">iOS16.4 Webview 不能用Safari调试</div></div><div class="info-2"><div class="info-item-1">背景Xcode 升级到 14.3后，模拟器是iOS 16.4 的，想通过Safari -&gt; Developer -&gt; Web Inspector查看，结果发现查看不了   修改一开始以为是设置 Safari 中 Advanced没开启，去查看后，发现开关已开启。 搜索后发现，从 iOS16.4 之后，如果想要通过Web Inspector查看，需要设置如下代码： 12345if #available(iOS 16.4, *) &#123;    webView.isInspectable = true&#125; else &#123;    // Fallback on earlier versions&#125;  设置之后，重新运行，再通过 Safari 查看，就可以看到了。 参考 Mark the webview as inspectable in iOS 16.4   </div></div></div></a><a class="pagination-related" href="/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/" title="Xcode 26 接入QWen"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-25</div><div class="info-item-2">Xcode 26 接入QWen</div></div><div class="info-2"><div class="info-item-1">第一步，注册阿里云百炼账号首先需要一个阿里云百炼的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。   第二步，添加Provider到Xcode 26然后打开Xcode 26，打开设置，选中”Intelligence”，点击添加，如下图  然后会进入输入信息界面，共有4个信息需要输入，URL、API Key、API Key Header、Description，如下图：  URL：https://dashscope.aliyuncs.com/compatible-mode/API Key：==Bear 你自己的APIKey==API KeyHeader: ==Authorization==Description: 这个名字自己定义 这里需要注意的是，如果按照阿里云百炼上提示的，URL配置为 https://dashscope.aliyuncs.com/compatible-mode/v1，点击Save的时候就保存不了，所以需要去掉v1。  点击Save之后，能看到自己开通的所有Models列表，说明成功，如下图。  第三步，使用...</div></div></div></a><a class="pagination-related" href="/2023/03/27/%E5%AF%BC%E5%87%BAiPhone%E6%89%80%E6%9C%89%E7%9F%AD%E4%BF%A1%E5%88%B0Excel/" title="导出iPhone所有短信到Excel"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-27</div><div class="info-item-2">导出iPhone所有短信到Excel</div></div><div class="info-2"><div class="info-item-1">导出iPhone所有短信到Excel打算找一些短信，用于作为样本训练识别。 一开始打算网上找到垃圾短信样本，但找了好久没找到，于是就想到用自己和家人手机里的短信，毕竟手机里短信一般不删除，也有小几千条，而且垃圾短信、推销、广告之类的应有尽有。   所以问题就变成了，如何导出 iPhone 短信？ 这里笔者也查了好久，找到的第三方软件基本都是需要收费，最终发现了一个免费导出的方案。 首先不加密备份手机到电脑，如下图，选中Back up all the data on your iPhone to this Mac，点击Back Up Now，等待备份完成，备份完成后，再点击Manage Backups  Manage Backups点击后，界面如下，可以看到已备份的记录，右键选择Show In Finder，在文件夹中打开  然后可以看到备份所在目录已打开，这时候需要找到文件名为3d0d7e5fb2ce288813306e4d4636395e047a3d28的文件，这个文件就是短信备份的数据库文件。然后问题来了，怎么找呢？看到备份目录一个个文件夹是不是懵，这怎么找，很简单，搜索，点...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-number">1.</span> <span class="toc-text">动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

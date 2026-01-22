@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>今是昨非的博客 - 悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="技术分享、生活感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="今是昨非的博客">
+<meta property="og:url" content="http://morganwang.cn/page/14/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:author" content="今是昨非">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/page/14/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '今是昨非的博客',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">今是昨非的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/" title="Flutter组件基础——Container">Flutter组件基础——Container</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-19T09:21:00.000Z" title="发表于 2021-07-19 17:21:00">2021-07-19</time></span></div><div class="content">Flutter组件基础——ContainerContainer是容器组件，类似于H5中的标签，亦或者iOS中的UIView，是布局的基础控件。    Container包含属性Container常用属性如下：  Container child：子视图 alignment：子视图的对齐方式 topLeft：顶部左对齐 topCenter：顶部居中对齐 topRight：顶部右对齐 centerLeft：中间左对齐 center：中间对齐 centerRight：中间右对齐 bottomLeft：底部左对齐 bottomCenter：底部居中对齐 bottomRight：底部右对齐   color：背景颜色 width：宽度 height：高度 padding：子视图距Container的边距 margin：Container距父视图的边距 decoration：装饰    子视图对齐方式-alignment123456789101112131415161718192021222324class MyApp extends StatelessWidget &#123;  @overr...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/" title="Flutter组件基础——Text">Flutter组件基础——Text</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-19T05:53:00.000Z" title="发表于 2021-07-19 13:53:00">2021-07-19</time></span></div><div class="content">Flutter组件基础——Text组件文本组件：Text WidgetText是文本组件，类似于iOS中UILabel，用于文本的展示，是布局的基础控件之一。   文本对齐方式：TextAlign TextAlign center：Align the text in the center of the cotainer left：Align the text on the left edge of the container right：Align the text on the right edge of the container start：Align the text on the leading edge of the container. For left-to-right text(TextDirection.ltr), this is the left edge. For the right-to-left text(TextDirection.rtl), this is the right edge. end：Align the text on the trai...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/16/Flutter%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%20&amp;&amp;%20%E8%BF%90%E8%A1%8C/" title="Flutter环境安装 &amp;&amp; 运行">Flutter环境安装 &amp;&amp; 运行</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-16T05:53:00.000Z" title="发表于 2021-07-16 13:53:00">2021-07-16</time></span></div><div class="content">Flutter环境安装 &amp;&amp; 运行背景Flutter环境配置到运行，问题备忘记录。比如遇到Android sdkmanager tool not found和Running Gradle task &#39;assembleDebug&#39;...   Flutter安装超级精简版通过homebrew直接安装，可能需要外网 brew install flutter 手动，Flutter环境搭建 首先下载Flutter安装包，下载地址：https://flutter.dev/docs/development/tools/sdk/releases?tab=macos  其次，解压已下载文件，把文件放入指定目录中，注意：建议放入可以放入用户根目录下，因为后续需要指定bin文件地址，这个目录最好不会经常变动  然后，配置环境变量  打开terminal，如果是zsh，输入open .zshrc；（如果是bash，则输入open .baseprofile）在文件末尾添加如下代码，其中pwd为刚刚解压的flutter/bin文件地址，   1export PATH=&quo...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/15/weak%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" title="weak的实现原理">weak的实现原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-15T10:20:00.000Z" title="发表于 2021-07-15 18:20:00">2021-07-15</time></span></div><div class="content">weak的实现原理</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/" title="Xcode 12.x添加iOS 10.x模拟器">Xcode 12.x添加iOS 10.x模拟器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-15T07:44:00.000Z" title="发表于 2021-07-15 15:44:00">2021-07-15</time></span></div><div class="content">Xcode 12.x添加iOS 10.x模拟器背景笔者昨天遇到个问题，有用户反馈在iOS 10.3.1的手机上，有个网页打开白屏。但是问题是笔者手头都没有10.x版本的手机，所以想安装模拟器来尝试复现。 然而，笔者发现电脑上的Xcode版本是12.5.1，已经不支持iOS 10.3.1的模拟器下载了。   步骤下载iOS 10.3.1模拟器然后笔者搜索后发现，Xcode 12.4还是支持下载iOS 10.3.1的模拟器的，于是去Xcode 下载网站，下载了Xcode 12.4，然后CMD + ,打开Xcode的偏好设置，在Components选项卡中，找到iOS 10.3.1 Simulator并下载，如下图。  添加iOS 10.3.1模拟器通常添加模拟器，是选中Xcode，通过顶部菜单的Window -&gt; Device and Simulators，选中Simulators，点击左下角的+，添加模拟器，如下图  会发现，即使下载了iOS 10.3.1模拟器，依旧不能添加，下载了却不能添加。  于是笔者接着查找，终于仅有的一篇真理文章在 Xcode 12 執行低版本的 i...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/06/30/iOS%20StatusBar%E8%AE%BE%E7%BD%AE/" title="iOS StatusBar 设置">iOS StatusBar 设置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-30T07:36:00.000Z" title="发表于 2021-06-30 15:36:00">2021-06-30</time></span></div><div class="content">iOS StatusBar 设置背景最近遇到设置StatusBar的问题，在NavigationController出来的界面设置StatusBar后一直不生效，印象中遇到过此类的问题，但是没有记录总结，还是花费了一点时间来找到原因，所以赶紧记录一下。   全局设置StatusBar的全局设置，需要首先在info.plist中设置View controller-based status bar appearance为NO，关掉按界面设置status bar 显示。 显示/隐藏方法一：在Target下的Deployment Info中不勾选/勾选Hide status bar  方法二：代码设置 1[UIApplication sharedApplication].statusBarHidden = YES;   设置方法一：在Target下的Deployment Info中设置Status Bar Style  方法二：代码设置 1[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightCon...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/06/07/CocoaPod%20%E7%A7%81%E6%9C%89%E5%BA%93Spec%E7%BC%96%E8%BE%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="CocoaPod 私有库Spec依赖.a写法">CocoaPod 私有库Spec依赖.a写法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-07T02:33:00.000Z" title="发表于 2021-06-07 10:33:00">2021-06-07</time></span></div><div class="content">CocoaPod 私有库Spec编辑注意事项CocoaPod 私有库Spec依赖.a写法 PodSpec详细描述如下，    123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869Pod::Spec.new do |s|  # 库名称  s.name             = &#x27;AudioRecorder&#x27;    # 库的版本  s.version          = &#x27;0.1.0&#x27;    # 库摘要  s.summary          = &#x27;AudioRecorder提供iOS录音和录音播放功能&#x27;  # 库描述  s.description      = &lt;&lt;-DESC						AudioRecorder提供iOS录音和录音播放功能                       DESC  # 远程...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/05/27/iOS%20%E5%8C%85%E5%A4%A7%E5%B0%8F%E4%BC%98%E5%8C%96/" title="正经分析iOS包大小优化">正经分析iOS包大小优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-27T05:43:00.000Z" title="发表于 2021-05-27 13:43:00">2021-05-27</time></span></div><div class="content">本文发表在《搜狐技术产品》公众号正经分析iOS包大小优化 iOS 包大小分析优化背景包大小优化是项目开发中不可避免会遇到的，网上关于包大小优化的文章很多，每篇文章说的都不尽相同，笔者曾经根据网上的文章做过包大小优化，但效果不尽人意；因此笔者想根据已有的文章、知识结合自己的理解、实践，做一份总结梳理，整理自己的包大小优化逻辑，不光要知道怎么做可以让包大小变化，还要知道为什么这么做能产生效果，所以就有了这篇文章。   分析想要优化安装包大小，首先需要弄清楚影响安装包大小的因素有哪些？之前笔者优化包大小直接闷着头就去瘦身，瘦来瘦去也没瘦出个名堂，而且还跟别人说不清楚自己做了什么，为什么这么做？ 后来总结出来，做事之前要先思考、分析、最后再去做，要思考的是影响这件事的因素有哪些，一一列举出来，查漏补缺；然后针对这些因素进行分析，分析哪些因素是人为可控的，哪些因素是不能改变的，针对可控的部分要怎么优化，不可控的部分是否能避免，最好可以使用思维导图工具，一一记录；然后按照思维导图的整理出来的数据，按步骤去执行。 回过头来，针对安装包大小，首先分析影响安装包大小的因素，有：Xcode的设置、资...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/05/14/iOS%20%E5%B7%A5%E4%BD%9C%E6%97%A5%E2%80%94%E2%80%94%E8%BF%87%E6%BB%A4%E6%B3%95%E5%AE%9A%E8%8A%82%E5%81%87%E6%97%A5%E6%97%A5%E5%8E%86%E6%8F%90%E9%86%92%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="iOS 工作日——过滤法定节假日日历提醒的实现">iOS 工作日——过滤法定节假日日历提醒的实现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-14T08:54:00.000Z" title="发表于 2021-05-14 16:54:00">2021-05-14</time></span></div><div class="content">iOS 工作日——过滤法定节假日日历提醒的实现背景笔者五一之前补班的时候，闹钟没响，早上差点迟到了。笔者闹钟设置的是周一到周五，iPhone没有法定节假日的设置，也没有补休的设置。。。。笔者就想要解决这个痛点，梦想着，要是做出来了，发布到商店，从此走上人生巅峰，赢取白。。。。   YY过后，回过头来，接着调研，法定节假日闹钟的实现，笔者查找了很多资料，发现不用做梦了。首先iOS程序添加闹钟到时钟APP是不允许的。。。其次，iOS也没有法定节假日的判断。。。。所以不用YY了。但是笔者还真找到了iOS自定义闹钟 —— 中国法定节假日(升级版）这个，通过快捷指令自定义闹钟，可以实现过滤法定节假日。原理是：设置闹钟，然后通过快捷指令的自动执行，每天在闹钟时间前，通过订阅的别人维护的日历或者自己本地维护日历，判断当天是否是节假日，然后决定当天的闹钟是否打开、关闭。笔者不得不赞一个，真的优秀。 虽然笔者的发财梦夭折了。。。但笔者想到了另一个，虽然iOS程序不能直接添加闹钟，但是iOS程序可以直接添加日历提醒啊，比如预约直播或者预约抢购的，其实都是添加事件到日历中，然后在指定的时间，弹出来日历...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/05/13/%E5%A6%82%E4%BD%95%E8%AE%A9iOS%E6%8E%A8%E9%80%81%E6%92%AD%E6%94%BE%E8%AF%AD%E9%9F%B3/" title="如何让iOS推送播放语音">如何让iOS推送播放语音</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-13T04:43:00.000Z" title="发表于 2021-05-13 12:43:00">2021-05-13</time></span></div><div class="content">本文发表在《搜狐技术产品》公众号如何让iOS推送播放语音 iOS 推送播放语音一：背景iOS 推送播放语音的需求调研，即收到推送后，播放推送的文案，文案的内容不固定。类似于支付宝和微信的收款到账语音。  只有iOS10以上才支持app被唤醒后在后台/锁屏状态下播放音频。所以iOS10以下的设备，在收到VoIP Push后只能在local push上设定一段固定铃声，这也是为什么iOS10以下只有“微信支付收款到账”。 iOS 12.0之前，后台播放音频未被限制，直接使用Notification Service Extension (iOS 10.0以后才支持) 功能使用系统提供的功能AVSpeechSynthesizer即可。 iOS 12.0之后，Notification Service Extension后台播放音频功能被限制，所以播放实现起来比较困难。 如果要上架商店，只有播放固定的音频，或固定拼接的音频，通过设置通知的声音或者发送本地通知设置本地通知的声音来播放 如果无需上架商店，可以手动打开Notification Service Extension的后台播放，    ...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/13/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#content-inner">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/#content-inner">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/#content-inner">19</a><a class="extend next" rel="next" href="/page/15/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Algorithem/" style="font-size: 1.39em; color: #99a4b4">Algorithem</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">算法</a> <a href="/tags/learning/" style="font-size: 1.16em; color: #999b9e">learning</a> <a href="/tags/ReactNative/" style="font-size: 1.1em; color: #999">ReactNative</a> <a href="/tags/%E5%88%86%E4%BA%AB/" style="font-size: 1.33em; color: #99a2af">分享</a> <a href="/tags/iOS%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/" style="font-size: 1.1em; color: #999">iOS自动打包</a> <a href="/tags/books/" style="font-size: 1.1em; color: #999">books</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.39em; color: #99a4b4">生活</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 1.5em; color: #99a9bf">技术</a> <a href="/tags/movies/" style="font-size: 1.1em; color: #999">movies</a> <a href="/tags/iOS/" style="font-size: 1.44em; color: #99a7ba">iOS</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.27em; color: #99a0a9">随笔</a> <a href="/tags/Flutter/" style="font-size: 1.39em; color: #99a4b4">Flutter</a> <a href="/tags/ideas/" style="font-size: 1.21em; color: #999ea4">ideas</a> <a href="/tags/iOS%E8%93%9D%E7%89%99/" style="font-size: 1.1em; color: #999">iOS蓝牙</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              十二月 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              十一月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/08/">
+            <span class="card-archive-list-date">
+              八月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              七月 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">188</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-22T02:58:43.012Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."])
+}
+typedJSFn.run(subtitleType)</script></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

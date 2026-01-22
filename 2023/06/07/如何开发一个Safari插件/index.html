@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何开发一个 Safari 插件 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景由于常用浏览器是Safari，而 Safari 浏览器的插件比不上 Chrome，所以就有了自己开发常用的 Safari 插件的想法。 打算开发当前页面生成二维码的 Extension，因为网络原因，AirDrop 有时候搜不到手机，所以有了这个需求，而且打算这个也比较简单，所以从这个开始。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何开发一个 Safari 插件">
+<meta property="og:url" content="http://morganwang.cn/2023/06/07/%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASafari%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="背景由于常用浏览器是Safari，而 Safari 浏览器的插件比不上 Chrome，所以就有了自己开发常用的 Safari 插件的想法。 打算开发当前页面生成二维码的 Extension，因为网络原因，AirDrop 有时候搜不到手机，所以有了这个需求，而且打算这个也比较简单，所以从这个开始。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2023-06-07T07:05:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "如何开发一个 Safari 插件",
+  "url": "http://morganwang.cn/2023/06/07/%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASafari%E6%8F%92%E4%BB%B6/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2023-06-07T07:05:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2023/06/07/%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASafari%E6%8F%92%E4%BB%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何开发一个 Safari 插件',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">如何开发一个 Safari 插件</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">如何开发一个 Safari 插件</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:05:00.000Z" title="发表于 2023-06-07 15:05:00">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于常用浏览器是Safari，而 Safari 浏览器的插件比不上 Chrome，所以就有了自己开发常用的 Safari 插件的想法。</p>
+<p>打算开发当前页面生成二维码的 Extension，因为网络原因，AirDrop 有时候搜不到手机，所以有了这个需求，而且打算这个也比较简单，所以从这个开始。</p>
+<span id="more"></span>
+
+
+<h2 id="调研"><a href="#调研" class="headerlink" title="调研"></a>调研</h2><p>苹果的官方文档<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/safariservices/safari_web_extensions">safari_web_extensions</a>给出了步骤，看了好几遍，还是不知道如何下手。虽然新建项目的时候苹果帮忙把框架已经都建好了，但是还是有疑惑，疑惑的点在于：</p>
+<ul>
+<li>主APP的作用是什么？</li>
+<li>Extension的作用是什么？</li>
+<li>代码应该写在哪里？</li>
+<li>manifest.json支持的配置项有哪些，哪里可以看到，应该设置哪些？</li>
+<li>content.js、background.js分别是干什么用的，什么时候用？</li>
+<li>popup.html、popup.css、popup.js 又是指的哪部分？</li>
+<li>content.js、background.js、popup.js中操作 tab 的方法有哪些？哪里可以看到？</li>
+</ul>
+<p>这些疑惑一度导致开发计划搁浅，因为没有文章来解释这些问题。于是转而去 Github 上找有没有SafariExtension 的代码，看其他人是如何实现的？搜到了<a target="_blank" rel="noopener" href="https://github.com/AdguardTeam/AdGuardForSafari">ADGuardForSafari</a>、<a target="_blank" rel="noopener" href="https://github.com/quoid/userscripts">userscripts</a>等等很优秀的 Extension，但是项目太大了，对于还没入门的笔者来说，解答不了上面的疑惑。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>直到偶然看到<a target="_blank" rel="noopener" href="https://github.com/NiklasGabriel/QR-Code">QR Code Extension</a>这个，下载对比官方文档各个文件的解释，笔者终于对上面的疑惑有了答案，终于能动手开发自己的 Extension 了。</p>
+<ul>
+<li>主APP的作用是定义 Extension 的设置(配置项)，如果开发简单的 Extension，比如二维码生成、json格式化等不需要自定义设置的，主APP不需要修改。</li>
+<li>Extension的是实现插件的实际地方，代码应该写在这里，这里面的代码是 html 和 js 的内容和原生开发没太大关系。</li>
+<li>manifest.json支持的配置项可以看<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/safariservices/safari_web_extensions/assessing_your_safari_web_extension_s_browser_compatibility">Assessing your Safari web extension’s browser compatibility</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_compatibility_for_manifest.json">Browser compatibility for manifest.json</a>，有初步印象即可，然后可以参照其他项目，再根据实际情况决定 manifest.json 里设置哪些。</li>
+<li>content.js可以理解为注入到当前打开Tab页面的js，background.js则是Tab不活跃时的，如果不涉及不活跃Tab，则background.js中无需实现。</li>
+<li>popup.html、popup.css、popup.js 指的是点击 Extension 按钮时，出现的下拉界面。</li>
+<li>操作 tab 的方法可以参考<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/getstarted/tut-tabs-manager/">Manage tabs</a>，把里面 <code>chrome.tabs</code> 改为 <code>browser.tabs</code>来调用即可。</li>
+</ul>
+<h2 id="手把手开发一个当前页面链接生成二维码的插件"><a href="#手把手开发一个当前页面链接生成二维码的插件" class="headerlink" title="手把手开发一个当前页面链接生成二维码的插件"></a>手把手开发一个当前页面链接生成二维码的插件</h2><p>选中 Xcode -&gt; File -&gt; New -&gt; Project, 然后选中 Multiplaform -&gt; Safari Extension App，选中 Multiplaform代表同时支持iPhone和Mac，如下图：</p>
+<img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230628-171721.png" width="40%">
+
+<p>下一步，输入项目名称，选择语言，如下图：</p>
+<img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230628-172143.png" width="40%">
+
+<p>然后选择存储地方，保存，项目会自动打开，结构如下，可以看出，分为几个部分：</p>
+<ul>
+<li>Shared (App)<ul>
+<li>ViewController.swift：Mac/iOS APP的主界面，其中是一个 webview 加载 Resources 下的 Main.html；这个类可以不修改；如果有从 APP 中自定义Extension设置选项的功能，则需要修改。</li>
+<li>Assests.xcassets：Mac/iOS APP 的图标，可以用<a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/appicongenerator/id6450360507?mt=12">AppIconGenerator</a>来一键生成。Ps: 开发了两个ExtensionAPP，生成图标有点麻烦，所以干脆开发了一个，欢迎使用。</li>
+<li>Resources<ul>
+<li>Main.html</li>
+<li>Icon.png</li>
+<li>Style.css</li>
+<li>Script.js</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Shared (Extension)<ul>
+<li>_locales</li>
+<li>images</li>
+<li>manifest.json</li>
+<li>background.js</li>
+<li>content.js</li>
+<li>popup.html</li>
+<li>popup.css</li>
+<li>popup.js</li>
+</ul>
+</li>
+<li>iOS (App)</li>
+<li>macOS (App)</li>
+<li>iOS (Extension)</li>
+<li>macOS (Extension)</li>
+</ul>
+<img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230628-185816.png" width="50%">
+
+<p>再来考虑一下要做的界面: 初步设想是一个最简单的，点击 Tab 栏的 Icon，展开生成一个当前页面链接的二维码。</p>
+<p>然后来看下如何实现：</p>
+<p>首先配置 manifest.json 中的设置项，因为插件的功能是对所有网页都生效，所以修改<code>content_scripts</code>中的 matches为所有网页，且配置<code>host_permissions</code>所有网页；另外需要获取当前活跃的Tab，所以在<code>permissions</code>中添加配置，最终要修改的配置项如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">&quot;content_scripts&quot;</span>: [&#123;</span><br><span class="line">        <span class="attr">&quot;js&quot;</span>: [ <span class="string">&quot;content.js&quot;</span> ],</span><br><span class="line">        <span class="attr">&quot;matches&quot;</span>: [ <span class="string">&quot;http://*/*&quot;</span>, <span class="string">&quot;https://*/*&quot;</span>, <span class="string">&quot;&lt;all_urls&gt;&quot;</span> ]</span><br><span class="line">    &#125;],</span><br><span class="line">    <span class="attr">&quot;host_permissions&quot;</span>: [<span class="string">&quot;http://*/*&quot;</span>, <span class="string">&quot;https://*/*&quot;</span>],</span><br><span class="line">    <span class="attr">&quot;permissions&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;activeTab&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tabs&quot;</span>,</span><br><span class="line">        <span class="string">&quot;scripting&quot;</span>,</span><br><span class="line">        <span class="string">&quot;messaging&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后来考虑界面，用接口生成二维码图片然后加载显示的方式，需要有一个 loading，然后一个放置图片的地方；所以在<code>popup.html</code>中修改如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;popup.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;popup.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;loader&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;img_back&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;qrcode&quot;</span> <span class="attr">src</span>=<span class="string">&quot; &quot;</span> <span class="attr">alt</span>=<span class="string">&quot;QR Code&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后<code>popup.css</code>中设置 loading 动画和界面布局，代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>-scheme: light dark;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">360px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">360px</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: system-ui;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#loader</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: -<span class="number">76px</span> <span class="number">0</span> <span class="number">0</span> -<span class="number">76px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">16px</span> solid <span class="number">#f3f3f3</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">16px</span> solid <span class="number">#3498db</span>;</span><br><span class="line">    -webkit-<span class="attribute">animation</span>: spin <span class="number">2s</span> linear infinite;</span><br><span class="line">    <span class="attribute">animation</span>: spin <span class="number">2s</span> linear infinite;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> spin &#123;</span><br><span class="line">    <span class="number">0%</span> &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">0deg</span>); &#125;</span><br><span class="line">    <span class="number">100%</span> &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#img_back</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">320px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">320px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: -<span class="number">160px</span> <span class="number">0</span> <span class="number">0</span> -<span class="number">160px</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#qrcode</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">9px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后来考虑 js 的实现，点击 Tab 栏的Icon，直接触发生成二维码的方法，具体步骤如下：</p>
+<ol>
+<li>查询所有 Tab</li>
+<li>获取正在显示的 Tab</li>
+<li>获取正在显示 Tab 的链接</li>
+<li>用链接发起生成二维码的请求，然后显示在 img 上</li>
+</ol>
+<p>这里需要注意的是第三步，获取正在显示的 Tab 的链接，需要在 <code>content.js</code> 中获取，所以就需要通过方法通信，触发 <code>content.js</code> 获取当前的链接，然后再从 <code>content.js</code> 中回传给 <code>popup.js</code> 中，因为最终显示是在 <code>popup.html</code> 中，所以需要通过 <code>popup.js</code> 来发起请求。<code>popup.js</code>中代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> kQRAPI = <span class="string">&quot;https://qrcode.tec-it.com/API/QRCode?data=&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateQRCode</span>(<span class="params">methodName, message</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 查询所有 Tab</span></span><br><span class="line">    browser.tabs.query(&#123; <span class="attr">active</span>: <span class="literal">true</span>, <span class="attr">currentWindow</span>: <span class="literal">true</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">tabs</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 获取当前正显示的 Tab</span></span><br><span class="line">        <span class="keyword">var</span> activeTab = tabs[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 发消息给 content.js，告诉它获取当前链接</span></span><br><span class="line">        browser.tabs.sendMessage(activeTab.id, &#123; <span class="attr">title</span>: methodName, <span class="attr">message</span>: message&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// content.js 获取后回调到这里</span></span><br><span class="line">            <span class="keyword">if</span> (res.title == <span class="string">&quot;targetURL&quot;</span>) &#123;</span><br><span class="line">                <span class="keyword">const</span> activeTabURL = res.urlStr;</span><br><span class="line">                <span class="keyword">const</span> encodedTabURL = <span class="built_in">encodeURIComponent</span>(activeTabURL);</span><br><span class="line">                <span class="comment">// 获取popup.html 中 img</span></span><br><span class="line">                <span class="keyword">var</span> qrcodeImg = <span class="built_in">document</span>.getElementById(<span class="string">&quot;qrcode&quot;</span>);</span><br><span class="line">                qrcodeImg.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="comment">// 图片加载完成，loading 消失</span></span><br><span class="line">                    <span class="built_in">document</span>.getElementById(<span class="string">&quot;loader&quot;</span>).style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="comment">// 通过请求获取二维码照片</span></span><br><span class="line">                qrcodeImg.src = kQRAPI + encodedTabURL + <span class="string">&quot;&amp;istransparent=true&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接触发生成二维码的方法</span></span><br><span class="line">generateQRCode(<span class="string">&quot;getPageURL&quot;</span>, <span class="string">&quot;generate current page URL&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>content.js</code>中代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">browser.runtime.onMessage.addListener(<span class="function">(<span class="params">request, sender, sendResponse</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Received request: &quot;</span>, request);</span><br><span class="line">    <span class="comment">// 接收 popup.js 中发送的消息，并回调结果</span></span><br><span class="line">    <span class="keyword">if</span> (request.title == <span class="string">&quot;getPageURL&quot;</span>) &#123;</span><br><span class="line">        sendResponse(&#123; <span class="attr">title</span>: <span class="string">&quot;targetURL&quot;</span>, <span class="attr">urlStr</span>: <span class="built_in">window</span>.location.href &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>然后选择 macOS 运行，如下图</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/screenshot-20230705-173635.png" alt="选择 macOS"></p>
+<p>效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/demo.gif" alt="loading生成二维码"></p>
+<p>然后来考虑优化，通过请求生成二维码依赖网络环境，如果网络环境不好，可能 loading 时间过长，甚至失败，那么能不能不通过请求，直接生成二维码？</p>
+<p>答案是可以的，参考Chrome上的<code>QR Code Generate</code>，点击后马上就生成二维码，如下：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/demo2.gif" alt="Chrome QR Code Generate"></p>
+<p>所以是可以优化的，通过 js 直接生成二维码，而不需要依赖网络。最终效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/demo3.gif" alt="GenerateQR-Extension"></p>
+<p>插件已上架到商店，名字为[GenerateQR-Extension]，欢迎体验。希望大家通过上面的介绍都能开发自己常用的Safari-Extension。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/safariservices/safari_web_extensions">safari_web_extensions</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/getstarted/extensions-101/">chrome_web_exrensions</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/safariservices/safari_web_extensions/assessing_your_safari_web_extension_s_browser_compatibility">Assessing your Safari web extension’s browser compatibility</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_compatibility_for_manifest.json">Browser compatibility for manifest.json</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/NiklasGabriel/QR-Code">QR Code Extension</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/bundleresources/information_property_list/lsapplicationcategorytype">LSApplicationCategoryType</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2023/06/07/%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASafari%E6%8F%92%E4%BB%B6/">http://morganwang.cn/2023/06/07/%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASafari%E6%8F%92%E4%BB%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/06/28/Xcode15%E5%B0%8F%E7%BB%84%E4%BB%B6%E5%85%BC%E5%AE%B9/" title="Xcode15 小组件兼容"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Xcode15 小组件兼容</div></div><div class="info-2"><div class="info-item-1">背景 升级到 Xcode15 后，运行小组件，会出现WIDGET_BACKGROUND_API_ADOPTION_PROMPT的提示，如下图:       解决创建View_Extensions.swift，代码如下： 12345678910111213import SwiftUIextension View &#123;    @ViewBuilder func adoptableWidgetBackground(_ color: Color) -&gt; some View &#123;        if #available(iOS 17.0, *) &#123;            containerBackground(for: .widget) &#123; color &#125;        &#125; else &#123;            background(color)        &#125;    &#125;&#125;  然后在XXXLineProvider中，找到 ZZZ_WidgetEntryView: View，修改如下： 1...</div></div></div></a><a class="pagination-related" href="/2023/04/14/iOS%2016.4Webview%E4%B8%8D%E8%83%BD%E7%94%A8%20Safari%20%E6%9F%A5%E7%9C%8B/" title="iOS16.4 Webview 不能用Safari调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS16.4 Webview 不能用Safari调试</div></div><div class="info-2"><div class="info-item-1">背景Xcode 升级到 14.3后，模拟器是iOS 16.4 的，想通过Safari -&gt; Developer -&gt; Web Inspector查看，结果发现查看不了   修改一开始以为是设置 Safari 中 Advanced没开启，去查看后，发现开关已开启。 搜索后发现，从 iOS16.4 之后，如果想要通过Web Inspector查看，需要设置如下代码： 12345if #available(iOS 16.4, *) &#123;    webView.isInspectable = true&#125; else &#123;    // Fallback on earlier versions&#125;  设置之后，重新运行，再通过 Safari 查看，就可以看到了。 参考 Mark the webview as inspectable in iOS 16.4   </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/08/26/%E5%BD%95%E9%9F%B3%E5%B4%A9%E6%BA%83%E6%8E%92%E6%9F%A5/" title="一次诡异的录音崩溃排查"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="info-item-2">一次诡异的录音崩溃排查</div></div><div class="info-2"><div class="info-item-1">背景上午突然有用户反馈，使用录音功能崩溃。起初以为是最近更新的APP新版本有问题，赶紧去排查。   排查首先在测试手机上，测试环境调试，发现并没有崩溃，长出了一口气，说明不是所有用户都有，不是新版本改出来的问题。 然后去听云后台看日志，发现崩溃的地方是初始化AVAudioRecorder的方法——[[AVAudioRecorder alloc] initWithURL:url settings:recordSettings error:&amp;error];。很费解，只是简单的初始化方法，为什么会导致崩溃呢？ 一开始猜测会不会是用户录音权限没开，导致开始录音的时候崩溃。尝试后发现如果权限关闭，在进入录音页面前就会提示权限未开启，去开启权限，并不能进入到录音步骤。 然后怀疑会不会是初始化的url为空，又或者机型不支持设置recordSettings中的某些参数？搜索后，发现有url为空崩溃的条目，所以这里大概率也是初始化的url为空。 继续排查，发现初始化的url，是本地的缓存文件夹中Audio文件夹，并且文件名字是取日期+时分秒用于避免重复，格式为yyyyMMdd_HHmmss...</div></div></div></a><a class="pagination-related" href="/2024/03/16/APP%20%E9%9A%90%E7%A7%81%E6%B8%85%E5%8D%95%E6%B7%BB%E5%8A%A0/" title="APP 隐私清单添加"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-16</div><div class="info-item-2">APP 隐私清单添加</div></div><div class="info-2"><div class="info-item-1">​# APP 隐私清单添加 背景今天送审 APP，提交审核后，邮箱收到了ITMS-91053: Missing API declaration的提示，查看后，发现是缺少隐私清单的提醒。如下图：   记得年初的时候，曾经看到过苹果发布这个的通知（List of APIs that require declared reasons now available），但是当时没有在意，也不知道如何实现，所以就没有管。现在既然提醒了，就说明强制了需要修改。 网上查阅了之后，发现，只有腾讯的这篇苹果隐私策略：PrivacyInfo.xcprivacy，比较合用，再结合下面的图片，就可以看出用法，和对应 key 的意义。  实现具体使用，选中项目，CMD + N，搜索privacy，然后选择类型App Privacy，输入名称PrivacyInfo.xcprivacy，如下图，选择要添加的Target，然后点击完成。  然后选中PrivacyInfo.xcprivacy，右键选择Open As -&gt; Source Code，如下图：  然后参考腾讯的这篇苹果隐私策略：PrivacyInfo...</div></div></div></a><a class="pagination-related" href="/2021/05/12/iOS%20mach-o%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%BD%99%E7%9A%84%E7%B1%BB%E5%92%8C%E6%96%B9%E6%B3%95/" title="iOS mach-o文件分析多余的类和方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-12</div><div class="info-item-2">iOS mach-o文件分析多余的类和方法</div></div><div class="info-2"><div class="info-item-1">mach-o文件分析多余的类和方法.md背景最近做包大小优化，在做项目代码优化时，其中有一个过程是分析Mach-O文件，看网上很多文章都说通过otool分析Mach-O，获取__objc_classrefs、__objc_classlist等，然后找出无用类和无用方法。   比如：无用类通过 otool 逆向Mach-O文件 __DATA.__objc_classlist段和__DATA.__objc_classrefs 段获取所有 OC 类和被引用的类，两个集合差值为无用类集合，结合 nm -nm 得到地址和对应类名符号化无用类类名来自干货！京东商城iOS App瘦身实践 又或者结合LinkMap文件的__TEXT.__text，通过正则表达式([+|-][.+\s(.+)])，我们可以提取当前可执行文件里所有objc类方法和实例方法（SelectorsAll）。再使用otool命令otool -v -s __DATA __objc_selrefs逆向__DATA.__objc_selrefs段，提取可执行文件里引用到的方法名（UsedSelectorsAll），我们可以大致分...</div></div></div></a><a class="pagination-related" href="/2023/04/06/Xcode%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E9%BB%98%E8%AE%A4%E6%96%87%E6%A1%88%E4%BF%AE%E6%94%B9/" title="Xcode 创建项目默认文案修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-06</div><div class="info-item-2">Xcode 创建项目默认文案修改</div></div><div class="info-2"><div class="info-item-1">背景最近需要修改Xcode创建项目默认文案修改，就是每次创建最上面默认生成的注释说明。想起来之前看原Raywenderlich（现在是Kodeco）网站下载的代码时，每个已存在的文件里都有一长串自定义的说明，而且新建文件的时候也是带有同样的自定义的说明，有过疑惑，但是没有仔细研究，今天研究下怎么实现的：   Kodeco文件自定义的说明如下：  实现通过Customize text macros和Text macros reference 可以看出，Xcode默认头部文字注释默认定义如下： 12345678//  ___FILENAME___//  ___PACKAGENAME___////  Created by ___FULLUSERNAME___ on ___DATE___.//  ___COPYRIGHT___//  然后参考Customizing the file header comment and other text macros in Xcode 9 可以确定修改的步骤是:  创建IDETemplateMacros.plist 添加或修改Root对应的type为...</div></div></div></a><a class="pagination-related" href="/2022/08/16/iOS%E7%94%BB%E4%B8%AD%E7%94%BB%E6%B5%AE%E7%AA%97%E8%87%AA%E5%AE%9A%E4%B9%89/" title="一文学会iOS画中画浮窗"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-16</div><div class="info-item-2">一文学会iOS画中画浮窗</div></div><div class="info-2"><div class="info-item-1">背景之前有看到有人用画中画实现时分秒的计时，顺手收藏了，一直没来及看。最近使用《每日英语听力》，突然发现它用画中画实现了听力语句的显示，顿时来了兴趣，所以来研究一下是怎么实现的？顺便也研究下画中画时分秒计时的实现——每次遇到某些平台每天固定时间开抢的时候，我都希望iPhone能够显示具体到秒的计时，这样就能知道什么时候开始点击合适，而不是每次都提前一分钟在那里不停的点点点却什么都抢不到。。。    实现画中画一般是用来浮窗播放视频的，那如何让画中画播放自定义的界面而不是视频？下面分为5步具体来看下：  实现画中画功能，需要设置哪些开关，实现哪些方法； 基本的使用系统播放器时，画中画的实现； 自定义播放器时，画中画功能的实现又需要如何设置，有哪些不同； 如何通过画中画实现时分秒计时功能； 《每日英语听力》通过画中画播放英语听力语句时怎么实现的？  APP支持画中画功能如何让APP支持画中画功能？首先需要设置App支持BackgroundModes，然后勾选BackgroundModes中的Audio, Airplay, and Picture in Picture。 操作如下：  ...</div></div></div></a><a class="pagination-related" href="/2021/07/15/Xcode%2012.x%E6%B7%BB%E5%8A%A0iOS%2010.x%E6%A8%A1%E6%8B%9F%E5%99%A8/" title="Xcode 12.x添加iOS 10.x模拟器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-15</div><div class="info-item-2">Xcode 12.x添加iOS 10.x模拟器</div></div><div class="info-2"><div class="info-item-1">Xcode 12.x添加iOS 10.x模拟器背景笔者昨天遇到个问题，有用户反馈在iOS 10.3.1的手机上，有个网页打开白屏。但是问题是笔者手头都没有10.x版本的手机，所以想安装模拟器来尝试复现。 然而，笔者发现电脑上的Xcode版本是12.5.1，已经不支持iOS 10.3.1的模拟器下载了。   步骤下载iOS 10.3.1模拟器然后笔者搜索后发现，Xcode 12.4还是支持下载iOS 10.3.1的模拟器的，于是去Xcode 下载网站，下载了Xcode 12.4，然后CMD + ,打开Xcode的偏好设置，在Components选项卡中，找到iOS 10.3.1 Simulator并下载，如下图。  添加iOS 10.3.1模拟器通常添加模拟器，是选中Xcode，通过顶部菜单的Window -&gt; Device and Simulators，选中Simulators，点击左下角的+，添加模拟器，如下图  会发现，即使下载了iOS 10.3.1模拟器，依旧不能添加，下载了却不能添加。  于是笔者接着查找，终于仅有的一篇真理文章在 Xcode 12 執行低版本的 i...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%A0%94"><span class="toc-number">2.</span> <span class="toc-text">调研</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">3.</span> <span class="toc-text">解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E6%8A%8A%E6%89%8B%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">手把手开发一个当前页面链接生成二维码的插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

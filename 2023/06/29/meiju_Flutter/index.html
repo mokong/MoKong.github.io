@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Flutter版本的海外剧 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景前阵子抓包，有两个海外剧的接口，最近有时间，打算温习一下 Flutter，就用来写了一个简单的 APP，包含轮播图、下拉刷新、上拉加载以及播放功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter版本的海外剧">
+<meta property="og:url" content="http://morganwang.cn/2023/06/29/meiju_Flutter/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="背景前阵子抓包，有两个海外剧的接口，最近有时间，打算温习一下 Flutter，就用来写了一个简单的 APP，包含轮播图、下拉刷新、上拉加载以及播放功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2023-06-29T01:16:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Flutter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Flutter版本的海外剧",
+  "url": "http://morganwang.cn/2023/06/29/meiju_Flutter/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2023-06-29T01:16:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2023/06/29/meiju_Flutter/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Flutter版本的海外剧',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Flutter版本的海外剧</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Flutter版本的海外剧</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-29T01:16:00.000Z" title="发表于 2023-06-29 09:16:00">2023-06-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前阵子抓包，有两个海外剧的接口，最近有时间，打算温习一下 Flutter，就用来写了一个简单的 APP，包含轮播图、下拉刷新、上拉加载以及播放功能。</p>
+<span id="more"></span>
+
+<p>效果如下：</p>
+<p align="left">
+  <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/IMG_3779.PNG" width="25%">
+  <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/IMG_3780.PNG" width="25%">
+  <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/IMG_3781.PNG" width="25%">
+</p>
+  <img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/IMG_3782.PNG" width="75%">
+
+
+<p>运行时需要注意 Flutter 版本的问题，可能需要修改 播放器的 package 中的代码，直接Google 搜索，修改即可，如有疑问可以联系我。</p>
+<p>代码放在 Github 上，地址是：<a target="_blank" rel="noopener" href="https://github.com/mokong/meiju_flutter">meiju_flutter</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2023/06/29/meiju_Flutter/">http://morganwang.cn/2023/06/29/meiju_Flutter/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/Flutter/">Flutter</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/" title="iPA重签名 + 香色闺阁、微信重签名实战"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">iPA重签名 + 香色闺阁、微信重签名实战</div></div><div class="info-2"><div class="info-item-1">背景换手机之后，原来的香色闺阁不能下载，转移的时候就丢失了。又最近看到有人截屏iPhone上装了两个微信，一个是自己重签名的；想到自己有开发者账号，但是还没试过重签名APP，是不是可以通过重签名来安装香色闺阁，以及实现多开微信？   步骤说干就干，首先从简单的开始，先来尝试重签名香色闺阁，再尝试微信，因为香色闺阁的包内容比微信的少很多，文件容易找，相对简单，步骤如下： 重签名香色闺阁首先从网上搜素下载香色闺阁的 ipa 包，没有的可以从这里yuedu.ipa下载。 然后将 ipa 改为 zip，然后解压，会出现一个 Payload 文件夹，里面有一个StandarReader.app的文件。选中StandarReader.app，右键显示包内容，可以看到APP包中的所有内容，如下图：    重签名就是用自己的账号新建一个APP（bundleID自己定义），运行到手机上，找到运行的包(xxx/DriveData/xxx/Build/Products/Debug-iphoneos/xxx.app)或者通过打包的方式，使用AdHoc方式生成一个iPA（用于获取到描述文件和Entitle...</div></div></div></a><a class="pagination-related" href="/2023/06/28/Xcode15%E5%B0%8F%E7%BB%84%E4%BB%B6%E5%85%BC%E5%AE%B9/" title="Xcode15 小组件兼容"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Xcode15 小组件兼容</div></div><div class="info-2"><div class="info-item-1">背景 升级到 Xcode15 后，运行小组件，会出现WIDGET_BACKGROUND_API_ADOPTION_PROMPT的提示，如下图:       解决创建View_Extensions.swift，代码如下： 12345678910111213import SwiftUIextension View &#123;    @ViewBuilder func adoptableWidgetBackground(_ color: Color) -&gt; some View &#123;        if #available(iOS 17.0, *) &#123;            containerBackground(for: .widget) &#123; color &#125;        &#125; else &#123;            background(color)        &#125;    &#125;&#125;  然后在XXXLineProvider中，找到 ZZZ_WidgetEntryView: View，修改如下： 1...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/08/18/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94%E8%87%AA%E5%AE%9A%E4%B9%89%20BottomNavigationBar/" title="Flutter布局基础——自定义BottomNavigationBar"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-18</div><div class="info-item-2">Flutter布局基础——自定义BottomNavigationBar</div></div><div class="info-2"><div class="info-item-1">Flutter布局基础——自定义BottomNavigationBar背景这里我们来尝试实现一个不规则的 BottomNavigationBar，首先了解两个系统组件: floatingActionButton和BottomAppBar   floatingActionButtonfloatingActionButton用于创建一个浮动的按钮，有两种样式：一种是圆形的纯图标的；一种是椭圆的带有图标或文案的。 示例如下： 123456789101112131415161718192021222324252627282930313233343536373839404142void main() =&gt; runApp(const MyApp());/// This is the main application widget.class MyApp extends StatelessWidget &#123;  const MyApp(&#123;Key? key&#125;) : super(key: key);  static const String _title = &#x...</div></div></div></a><a class="pagination-related" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Container/" title="Flutter组件基础——Container"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-19</div><div class="info-item-2">Flutter组件基础——Container</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——ContainerContainer是容器组件，类似于H5中的标签，亦或者iOS中的UIView，是布局的基础控件。    Container包含属性Container常用属性如下：  Container child：子视图 alignment：子视图的对齐方式 topLeft：顶部左对齐 topCenter：顶部居中对齐 topRight：顶部右对齐 centerLeft：中间左对齐 center：中间对齐 centerRight：中间右对齐 bottomLeft：底部左对齐 bottomCenter：底部居中对齐 bottomRight：底部右对齐   color：背景颜色 width：宽度 height：高度 padding：子视图距Container的边距 margin：Container距父视图的边距 decoration：装饰    子视图对齐方式-alignment123456789101112131415161718192021222324class MyApp extends StatelessWidget &#123;  @overr...</div></div></div></a><a class="pagination-related" href="/2021/07/19/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Text/" title="Flutter组件基础——Text"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-19</div><div class="info-item-2">Flutter组件基础——Text</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——Text组件文本组件：Text WidgetText是文本组件，类似于iOS中UILabel，用于文本的展示，是布局的基础控件之一。   文本对齐方式：TextAlign TextAlign center：Align the text in the center of the cotainer left：Align the text on the left edge of the container right：Align the text on the right edge of the container start：Align the text on the leading edge of the container. For left-to-right text(TextDirection.ltr), this is the left edge. For the right-to-left text(TextDirection.rtl), this is the right edge. end：Align the text on the trai...</div></div></div></a><a class="pagination-related" href="/2022/09/23/Flutter%20%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94Tabbar/" title="Flutter组件——Tabbar"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-23</div><div class="info-item-2">Flutter组件——Tabbar</div></div><div class="info-2"><div class="info-item-1">[Flutter组件——Tabbar]使用Tabar使用，设置indicator的样式，长短，设置tab选中和未选中的样式，根据数组创建Tabbar。    代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677import &#x27;package:flutter/material.dart&#x27;;class TabbarDemo extends StatefulWidget &#123;  TabbarDemo(&#123;Key? key&#125;) : super(key: key);  _TabbarDemoState createState() =&gt; _TabbarDemoState();&#125;class _TabbarDemoState extends State&lt;TabbarDemo&gt; ...</div></div></div></a><a class="pagination-related" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Image/" title="Flutter组件基础——Image"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-22</div><div class="info-item-2">Flutter组件基础——Image</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——ImageImage是Flutter中的图片组件，类似于iOS中的UIImageView，可加载资源图片、网络图片、本地图片等，可设置拉伸方式，重复模式等。   Image加载方法Image的加载方法有以下几种：  Image.asset，加载本地图片，比如打包到项目中的图片 Image.file，加载设备中的图片，比如存储到本地的图片 Image.memory，加载内存中的图片 Image.network，加载网络图片  使用方式各有不同，如下：  Image.asset(name)是Image(image: AssetImage(name)) Image.file(path)是Image(image: FileImage(File(path))) Image.network(url)是Image(image: NetworkImage(url)) Image.memory(list)是Image(image: MemoryImage(list))  而且：  使用asset images时，图片打包在apk或ipa中，会导致包变大加载时间对比：Net...</div></div></div></a><a class="pagination-related" href="/2021/07/22/Flutter%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94ListView/" title="Flutter组件基础——ListView"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-22</div><div class="info-item-2">Flutter组件基础——ListView</div></div><div class="info-2"><div class="info-item-1">Flutter组件基础——ListViewListView是滚动列表，类似于iOS中ScrollView，可横向、纵向滚动，内容不限。    ListView的使用ListView的使用很简单，但是需要多多练习； ListView的使用，通过设置children来实现，children中的Item为Widget对象。 纵向滚动代码如下： 123456789101112131415161718192021222324252627282930313233343536373839class MyApp extends StatelessWidget &#123;    @override    Widget build(BuildContext context) &#123;        return MaterialApp(            title: &#x27;ListView Learn&#x27;,            home: Scaffold(                appBar: new AppBar(                    tit...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

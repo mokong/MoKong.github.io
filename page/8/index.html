@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>今是昨非的博客 - 悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="技术分享、生活感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="今是昨非的博客">
+<meta property="og:url" content="http://morganwang.cn/page/8/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:author" content="今是昨非">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/page/8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '今是昨非的博客',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">今是昨非的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/08/20/iOS%E8%BE%93%E5%85%A5%E6%A1%86%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6/" title="iOS输入框字符限制">iOS输入框字符限制</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-20T02:56:00.000Z" title="发表于 2022-08-20 10:56:00">2022-08-20</time></span></div><div class="content">背景小知识点记录，textField的markedTextRange的使用，如果你已经知道了，就不需要再看了。 iOS输入框字符限制，不同实现方式的对比：  方法1，通过监听textField的UIControl.Event.editingChanged，在对应的方法里做长度拦截判断 方法2，通过textField的代理方法，textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -&gt; Bool判断。    对比假设产品要求这个输入框限制输入6个字，怎么判断？下面来看下 方法1声明一个自定义的MWCustomTF，然后监听editingChanged事件，在事件里判断输入字符是否超出最大输入长度，代码如下： 123456789101112131415161718192021222324252627282930313233343536class MWCustomTF: UITextField &#123;    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/08/16/iOS%E7%94%BB%E4%B8%AD%E7%94%BB%E6%B5%AE%E7%AA%97%E8%87%AA%E5%AE%9A%E4%B9%89/" title="一文学会iOS画中画浮窗">一文学会iOS画中画浮窗</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-16T02:07:00.000Z" title="发表于 2022-08-16 10:07:00">2022-08-16</time></span></div><div class="content">背景之前有看到有人用画中画实现时分秒的计时，顺手收藏了，一直没来及看。最近使用《每日英语听力》，突然发现它用画中画实现了听力语句的显示，顿时来了兴趣，所以来研究一下是怎么实现的？顺便也研究下画中画时分秒计时的实现——每次遇到某些平台每天固定时间开抢的时候，我都希望iPhone能够显示具体到秒的计时，这样就能知道什么时候开始点击合适，而不是每次都提前一分钟在那里不停的点点点却什么都抢不到。。。    实现画中画一般是用来浮窗播放视频的，那如何让画中画播放自定义的界面而不是视频？下面分为5步具体来看下：  实现画中画功能，需要设置哪些开关，实现哪些方法； 基本的使用系统播放器时，画中画的实现； 自定义播放器时，画中画功能的实现又需要如何设置，有哪些不同； 如何通过画中画实现时分秒计时功能； 《每日英语听力》通过画中画播放英语听力语句时怎么实现的？  APP支持画中画功能如何让APP支持画中画功能？首先需要设置App支持BackgroundModes，然后勾选BackgroundModes中的Audio, Airplay, and Picture in Picture。 操作如下：  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/06/11/iOS%20The%20'Pods-App'%20target%20has%20transitive%20dependencies%20that%20include%20static%20binaries/" title="The 'Pods-App' target has transitive dependencies that include static binaries">The 'Pods-App' target has transitive dependencies that include static binaries</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-11T03:59:00.000Z" title="发表于 2022-06-11 11:59:00">2022-06-11</time></span></div><div class="content">The ‘Pods-App’ target has transitive dependencies that include static binaries:修改背景最近遇到了两次次这个问题，都是Swift项目Pod添加库开启了use_frameworks!，安装某些OC库时报错；花了好久时间解决，突然想起来之前OC项目安装Swift库也遇到了这个问题，但是之前没有记录，所以这次遇到时没有印象；这次记录下来，分享给大家：   解决方案之前遇到的是OC代码安装ZLPhotoBrowser的Swift库，开启了use_frameworks!，和其他第三方库一起安装时，可以理解为，除了ZLPhotoBrowser是动态库，其他的第三方库默认都使用static_framework或者static_library。 Pod文件末尾添加下面代码： 12345678910111213141516171819use_frameworks!...dynamic_frameworks = [&#x27;ZLPhotoBrowser&#x27;]pre_install do |installer|  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/05/23/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9mac%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA/" title="图片压缩 mac 应用开发">图片压缩 mac 应用开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-23T05:38:00.000Z" title="发表于 2022-05-23 13:38:00">2022-05-23</time></span></div><div class="content">图片压缩 mac 应用开发背景3年前有个项目BatchProssImage，使用 Python 写的批量压缩图片的，最新再次使用时，发现忘记了怎么使用，所以就有了把这个Python 实现的工具，做成一个简单的 mac app 的想法。   过程想法很简单：印象中当时这个工具是使用 tinypng 的 api 压缩的，所以开发一个 mac客户端，调用压缩的接口，导出照片就可以。开始动工。 首先 mac 客户端的 UI 从哪里来？之前有个项目OtoolAnalyse——分析Mach-O文件中无用的类和方法，是借LinkMapUI 来实现的。这里想了想，嗯，还可以用这个方法。打开项目一看，OC 的，还是用 Swift 写一遍吧。 UI 实现想一下大致需要哪些功能，  选择文件 || 目录 选择导出目录 开始压缩 压缩进度显示 噢噢，还有一个，tinypng apikey 输入  再考虑一下，选择导出目录是否必要？之前笔者自己使用其他 APP 选择导出时，打断先有的操作且不说，对于选择困难来说，每次考虑要导出到哪里都是一个问题，要不要新建一个文件夹，还选择同目录会是什么效果等等。 改为 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/05/06/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BA%E6%94%AF%E4%BB%98%E5%AE%9D%20Widget/" title="iOS Widget">iOS Widget</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-06T06:00:00.000Z" title="发表于 2022-05-06 14:00:00">2022-05-06</time></span></div><div class="content">iOS Widget背景一开始是发现支付宝的 Widget 做的很好看，打算仿作一个，做的过程中才发现，原来 Widget 有这么多好玩的地方。所以，在这里记录分享一下：   你知道如何创建类似于 QQ 同步助手的 Widget 吗？         你知道类似于东方财富的不同组 Widget 效果是怎么实现的吗？                   你知道下图中支付宝Widget功能是怎么实现的吗？                        或者这么问，对于这几个的概念：supportedFamilies、WidgetBundle以及Configurable Widget是否知晓，如果都知道，那就不需要看本篇文章了。  QQ 同步助手的Widget只显示一个Widget的效果，是设置了 Widget 的supportedFamilies只有systemMedium 样式； 东方财富的多组 Widget，是通过WidgetBundle实现的，可以设置多个Widget，每个 Widget 都可以设置自己的大中小；区分是否使用了 WidgetBundle，可以通过滑动时，Widg...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/26/24%E7%82%B9%E7%AE%97%E6%B3%95Swift%20%E5%AE%9E%E7%8E%B0/" title="《24点》APP——提示功能的实现">《24点》APP——提示功能的实现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-26T04:30:00.000Z" title="发表于 2022-04-26 12:30:00">2022-04-26</time></span></div><div class="content">更新：《24点》APP——提示功能实现背景商店里所有24点 APP 的一个付费功能是提示的获取，会通过限制提示次数，超出次数后观看广告或者购买来解锁额外次数。比如：     这里就来分享一下，类似24点的提示功能是怎么实现的，其实现步骤如下： 步骤一：判断结果能不能等于24； 步骤二：如果能等于24，显示出能得到24的表达式。 下面详细记录一下实现的过程： 解法原理步骤一，判断能不能等于24有[a, b, c, d] 四个数字，任取两个数字，通过遍历运算符得到运算结果 e，然后把运算结果和剩余的数字放入新的数组中，重复上面的计算过程，直到数组中有一个元素为止；最后判断数组中唯一的数字是否等于24即可。 这里需要注意几点，一是遍历运算符的时候，加和乘符合交换律，所以不需要重复计算；二是除法会有小数，所以最终判断是否等于24的时候，需要通过设置误差范围来判断；再有就是除法的除数不能为零。 所以最终解法描述如下：  定义误差范围，定义要对比的值，定义运算符数组； 定义判断是否相等的判断方法，传入值和要对比的值的绝对值小于误差范围，即视作相等； 数据转换，由于传入的数字是Int，所以通过...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/24/Algorithem_%20Matrix/" title="Algorithem_Matrix">Algorithem_Matrix</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-24T07:12:00.000Z" title="发表于 2022-04-24 15:12:00">2022-04-24</time></span></div><div class="content">Algorithem_Matrix题目Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1.    Example 1:  12Input: mat = [[0,0,0],[0,1,0],[0,0,0]]Output: [[0,0,0],[0,1,0],[0,0,0]]  Example 2:  12Input: mat = [[0,0,0],[0,1,0],[1,1,1]]Output: [[0,0,0],[0,1,0],[1,2,1]]  解法</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/24/Algorithem_PermutationInString/" title="Algorithem_PermutationInString">Algorithem_PermutationInString</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-24T03:03:00.000Z" title="发表于 2022-04-24 11:03:00">2022-04-24</time></span></div><div class="content">Algorithem_PermutationInStringGiven two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise. In other words, return true if one of s1’s permutations is the substring of s2.    Example 1: 1234Input: s1 = &quot;ab&quot;, s2 = &quot;eidbaooo&quot;Output: trueExplanation: s2 contains one permutation of s1 (&quot;ba&quot;).  Example 2: 12Input: s1 = &quot;ab&quot;, s2 = &quot;eidboaoo&quot;Output: false  解法首先理解 Permutation的意思，题目需要的是 s2包含 s1中字符串的任意一种排列，就返回 true，否则返...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/22/Algorithem_ReverseLinkedList/" title="Algorithem_ReverseLinkedList">Algorithem_ReverseLinkedList</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-22T01:28:00.000Z" title="发表于 2022-04-22 09:28:00">2022-04-22</time></span></div><div class="content">Algorithem_ReverseLinkedListGiven the head of a singly linked list, reverse the list, and return the reversed list.   Given the head of a singly linked list, reverse the list, and return the reversed list. Example 1:  12Input: head = [1,2,3,4,5]Output: [5,4,3,2,1]  Example 2:  12Input: head = [1,2]Output: [2,1]  Example 3: 12Input: head = []Output: []  Constraints: The number of nodes in the list is the range [0, 5000].-5000 &lt;= Node.val &lt;= 5000 Follow up: A linked list can be reversed e...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/22/Algorithem_MergeTwoSortedLists/" title="Algorithem_MergeTwoSortedLists">Algorithem_MergeTwoSortedLists</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-22T00:46:00.000Z" title="发表于 2022-04-22 08:46:00">2022-04-22</time></span></div><div class="content">Algorithem_MergeTwoSortedListsYou are given the heads of two sorted linked lists list1 and list2. Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists. Return the head of the merged linked list.   Example 1:  12Input: list1 = [1,2,4], list2 = [1,3,4]Output: [1,1,2,3,4,4]  Example 2: 12Input: list1 = [], list2 = []Output: []  Example 3: 12Input: list1 = [], list2 = [0]Output: [0]  解法需求是合并两个有序的LinkList，所以解法是  判断 list1.val 和 list...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/#content-inner">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/#content-inner">19</a><a class="extend next" rel="next" href="/page/9/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Algorithem/" style="font-size: 1.39em; color: #99a4b4">Algorithem</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">算法</a> <a href="/tags/learning/" style="font-size: 1.16em; color: #999b9e">learning</a> <a href="/tags/ReactNative/" style="font-size: 1.1em; color: #999">ReactNative</a> <a href="/tags/%E5%88%86%E4%BA%AB/" style="font-size: 1.33em; color: #99a2af">分享</a> <a href="/tags/iOS%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85/" style="font-size: 1.1em; color: #999">iOS自动打包</a> <a href="/tags/books/" style="font-size: 1.1em; color: #999">books</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.39em; color: #99a4b4">生活</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 1.5em; color: #99a9bf">技术</a> <a href="/tags/movies/" style="font-size: 1.1em; color: #999">movies</a> <a href="/tags/iOS/" style="font-size: 1.44em; color: #99a7ba">iOS</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.27em; color: #99a0a9">随笔</a> <a href="/tags/Flutter/" style="font-size: 1.39em; color: #99a4b4">Flutter</a> <a href="/tags/ideas/" style="font-size: 1.21em; color: #999ea4">ideas</a> <a href="/tags/iOS%E8%93%9D%E7%89%99/" style="font-size: 1.1em; color: #999">iOS蓝牙</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              十二月 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              十一月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/08/">
+            <span class="card-archive-list-date">
+              八月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              七月 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">188</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-22T02:58:43.012Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。","Life is short, enjoy it."])
+}
+typedJSFn.run(subtitleType)</script></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

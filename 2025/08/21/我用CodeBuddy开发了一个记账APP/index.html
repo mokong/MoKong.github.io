@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于我用CodeBuddy开发了几个APP的体验 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景一直想写，但是太忙了，用CodeBuddy新开发iOSAPP，又同时想做鸿蒙APP，好家伙，是真的忙不过来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于我用CodeBuddy开发了几个APP的体验">
+<meta property="og:url" content="http://morganwang.cn/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="背景一直想写，但是太忙了，用CodeBuddy新开发iOSAPP，又同时想做鸿蒙APP，好家伙，是真的忙不过来。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2025-08-21T03:04:00.000Z">
+<meta property="article:modified_time" content="2025-08-26T09:27:47.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "关于我用CodeBuddy开发了几个APP的体验",
+  "url": "http://morganwang.cn/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2025-08-21T03:04:00.000Z",
+  "dateModified": "2025-08-26T09:27:47.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于我用CodeBuddy开发了几个APP的体验',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">关于我用CodeBuddy开发了几个APP的体验</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">关于我用CodeBuddy开发了几个APP的体验</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-21T03:04:00.000Z" title="发表于 2025-08-21 11:04:00">2025-08-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-26T09:27:47.000Z" title="更新于 2025-08-26 17:27:47">2025-08-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一直想写，但是太忙了，用CodeBuddy新开发iOSAPP，又同时想做鸿蒙APP，好家伙，是真的忙不过来。</p>
+<span id="more"></span>
+
+<p>先说体验：我觉得CodeBuddy是最厉害的，（在座的谁赞成，谁反对），🤪，就这么说吧，我用过Trae，Cursor, Windsurf，还申请了Kiro，综合下来，我觉得目前CodeBuddy对于我来说是最厉害的。</p>
+<p>我最早用的是Trae，一开始国际版我就用了，使用期间开发了一个app吧，用着用着就智障了，就是本来好好沟通着，突然就感觉对方变傻了，还把项目修改坏了，辛辛苦苦干了好几天，一下子回到解放前了……如果是用量达标，我倒是宁可他提醒我用量达标，也不希望换成一个傻子，就像你跟一个人聊得正投缘，觉得是知己，突然间她流着口水变成了傻子，这换谁也接受不了啊🤣</p>
+<p>噢噢，忘了说背景，我是用这些工具做app开发，从头开始开发。所以上面的体验仅供参考。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>先说优点：</p>
+<ul>
+<li>开发快速，只需要说一句话，就能快速搭建一个APP的框架，实现基本功能。</li>
+<li>不依赖语言，通过类似的工具，模糊了开发语言的鸿沟，不必说必须学会了某个开发语言，才能开发某种APP或网站，初步能实现”任何人只要有想法，都可以开发任何东西”（Ps: 这点后面会有补充）。</li>
+<li>代码质量有保证，告诉它实现时需要注意什么，遵循什么原则，它实现的时候就能自动完成。</li>
+<li>报错容易解决，只需要把错误信息丢给它，它就能告诉自己解决。</li>
+</ul>
+<p>比如，一个简单的想法就可以开工。比如：开发《哈哈狗记账》的时候，脑子里只有一个想法，就是按照吃穿住行分类，做一个记账APP，数据能够同步到iCloud，界面没有设计，只有一个大致想法。如果没有CodeBuddy，我可能要先想好有哪些界面，界面都设计好，然后才开始做。但是依靠CodeBuddy，我把我的想法告诉它，然后让它自己实现，要求UI符合常见视觉效果，然后我只需要修改下逻辑，就完成了。</p>
+<p>再比如，开发<a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E5%93%88%E5%93%88%E7%AE%80%E7%AC%94%E7%94%BB-%E5%83%8F%E8%B6%85%E5%B8%82%E7%BB%98%E7%94%BB%E6%9C%BA%E4%B8%80%E6%A0%B7%E8%BD%BB%E6%9D%BE%E7%94%BB%E7%94%BB/id6751320997?l=zh-Hans-CN">《哈哈简笔画》</a>，是因为每次去盒马，我家小孩喜欢门口的投币绘画机，每次绘画三个币，然后每次都是买几十个币，当时是真的不感觉心疼，但是又觉得每次都买那么多，有点浪费，所以就想着做一个APP，可以自己选择绘画内容，然后自己投币，这样在手机上在Pad都可以画，就方便很多。但是构思简笔画的逻辑，和金币的逻辑，还是有点麻烦，但是CodeBuddy可以帮我实现，我只需要修改下逻辑，就完成了。</p>
+<h3 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h3><p>然后说不足，这些AI编码工具很厉害，但是有些东西还是需要人工来，比如下面类似的场景：</p>
+<ul>
+<li>需要配置的地方，比如鸿蒙的打包、权限申请、iCloud的CloudKit的创建和配置；<br>比如让它开发一个鸿蒙app没问题，但是实现的权限配置里，少了几个字段，导致编译失败，它自己检查不出来，就很尴尬了😅，最后还是要去浏览器里搜索手动解决<br>再比如做《哈哈狗记账》的时候，需要同步数据到iCloud，它可以在本地把所有字段都定义好，逻辑都写好，但是它不能帮人打开CloudKit去配置里面的东西，就是如果你不懂iOS开发，你会发现，它写的项目看起来没问题但是iCloud同步就是不生效。Ps:（吐槽一下，前几天看到有人说“所有个人开发者的app他都不用，因为都能从后台看到数据”……哥们，你说个人开发者容易跑路我认，但是能看到数据，这锅不背，辟谣一下：CloudKit同步数据有两种一种是public database，一种是private database，public database里的数据是能看到的，private database 里的数据是看不到的，基本上开发都是用的private database。</li>
+<li>修改具体代码逻辑的地方，还是人直接上手简单快速。<br>比如改下颜色、间距，或者让它自由发挥从零开始做一个新东西，是绝对没问题。但是做出来后，你让它微调一下逻辑，就需要特别注意了，比如：做《哈哈狗记账的时候》让它从外层界面把选中的分类带入到记录界面，它把原来已有的可用的属性删掉，新定义了属性，导致了外层所有调用的地方都需要修改，吭哧吭哧改了一大堆，编译后咔报错了，还得接着改。有人说是不是你prompt写的不好，是，但是你能保证每次prompt都写的完美吗？</li>
+<li>修改编译报错的时候，哈哈哈，上面说了有点是修改编译报错方便，直接粘贴报错给Codebuddy修改就可了。没问题但是也有问题，如果你真的什么都不知道，那只有把报错给他修改。但是如果能懂这方面的知识，最好自己过一遍错误，从而决定是自己修改，还是让Codebuddy修改。<br>比如做鸿蒙版<a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E5%93%88%E5%93%88%E7%AE%80%E7%AC%94%E7%94%BB-%E5%83%8F%E8%B6%85%E5%B8%82%E7%BB%98%E7%94%BB%E6%9C%BA%E4%B8%80%E6%A0%B7%E8%BD%BB%E6%9D%BE%E7%94%BB%E7%94%BB/id6751320997?l=zh-Hans-CN">《哈哈简笔画》</a>的时候，让Codebuddy实现一个保存图片到本地的功能，第一次没有实现成功，然后第二次还没有实现成功，第三次再让它实现，就发现它又变回来第一次的逻辑。<br>再比如：因为plist重复报错，我让它改了几次以后，它生气了，觉得这个项目没救了，干脆新建了一个文件夹，正把把这个项目里所有的东西都拷贝过去，被我发现了，好家伙，是我给你自由过了火，赶紧停掉，丢掉所有改动，手动删掉plist，重新修改下Infoplist就可以。</li>
+<li>还有这样的，就是替换不完全的问题，我遇到了很多次，比如修改某个类的功能，正常的是它直接在当前类修改，但是总是是不是会出现它从头写了一遍这个类，然后替换的时候又没从头替换，替换了一部分，导致这个类报错特别多，一开始没注意到，直接把编译报错丢过去，结果它又替换了一半，然后就会发现报错更多了，仔细看了以后才发现出现了这个问题……</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于我来说，有了CodeBuddy之后，其他几个类似APP都卸载了，只保留了这一个，我用它开发了《哈哈狗记账》、<a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E5%93%88%E5%93%88%E7%AE%80%E7%AC%94%E7%94%BB-%E5%83%8F%E8%B6%85%E5%B8%82%E7%BB%98%E7%94%BB%E6%9C%BA%E4%B8%80%E6%A0%B7%E8%BD%BB%E6%9D%BE%E7%94%BB%E7%94%BB/id6751320997?l=zh-Hans-CN">《哈哈简笔画》</a>和《一点想法》鸿蒙版、<a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E5%93%88%E5%93%88%E7%AE%80%E7%AC%94%E7%94%BB-%E5%83%8F%E8%B6%85%E5%B8%82%E7%BB%98%E7%94%BB%E6%9C%BA%E4%B8%80%E6%A0%B7%E8%BD%BB%E6%9D%BE%E7%94%BB%E7%94%BB/id6751320997?l=zh-Hans-CN">《哈哈简笔画》</a>鸿蒙版。真的很厉害，但是不足之处也有上面也已经说过了，这里还想补充一点，是想更正一点，一开始说的，不依赖语言，任何人都可以开发任何东西的说法，不不全对，因为就像上面不足之处里说的，如果不了解对应开发的知识，可能会遇到很多的问题，而且所有的类似的工具，都有一个致命的问题，就是当你重复跟他沟通同一个问题多遍之后，它必然会出错。。。所以首先是有对应的开发知识背景，然后加上工具，才是如虎添翼，真正实现“任何人只要有想法，都可以开发任何东西”。</p>
+<p>最后：</p>
+<p>建议所有用Codebuddy修改前，都先把上次你觉得可接受的程度，提交下Git，然后再让它修改，这样你就知道它修改了什么。</p>
+<h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E5%93%88%E5%93%88%E7%AE%80%E7%AC%94%E7%94%BB-%E5%83%8F%E8%B6%85%E5%B8%82%E7%BB%98%E7%94%BB%E6%9C%BA%E4%B8%80%E6%A0%B7%E8%BD%BB%E6%9D%BE%E7%94%BB%E7%94%BB/id6751320997?l=zh-Hans-CN">《哈哈简笔画》</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E5%93%88%E5%93%88%E7%8B%97%E8%AE%B0%E8%B4%A6/id6749525924?l=zh-Hans-CN">《哈哈狗记账》</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/%E4%B8%80%E7%82%B9%E6%83%B3%E6%B3%95/id6455787727?l=zh-Hans-CN">《一点想法》</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/">http://morganwang.cn/2025/08/21/%E6%88%91%E7%94%A8CodeBuddy%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6APP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/12/%E5%85%B3%E4%BA%8E%E5%BC%80%E5%8F%91%E9%B8%BF%E8%92%99APP%E7%9A%84%E5%BB%BA%E8%AE%AE/" title="关于开发鸿蒙APP的建议"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">关于开发鸿蒙APP的建议</div></div><div class="info-2"><div class="info-item-1">背景     实现参考</div></div></div></a><a class="pagination-related" href="/2025/08/20/Xcode26%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" title="Xcode 26编译失败修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Xcode 26编译失败修改</div></div><div class="info-2"><div class="info-item-1">背景电脑升级MacOS 26.0，新增了一个SDK后，Xcode26 Beta5和Beta6，编译项都报错，提示：Assertion failed: (it != _dylibToOrdinal.end()), function dylibToOrdinal, file OutputFile.cpp, line 5196.   排查过程 在StackOverFlow上有看到说ENABLE_DEBUG_DYLIB=NO，尝试后无效果 在Xcode 26 Link Error中看到，Apple官方人员的回复，要添加-Xlinker -dead_strip -Xlinker -allow_dead_duplicates.  解决办法通过 Other Linker Flags 修改进入 Target 的 Build Settings 标签：选中 Target → Build Settings → 搜索 Other Linker Flags。手动修改链接参数：点击 Other Linker Flags，首先移除 12-ld64 -ld_classic  然后添加 1234-Xlinker ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/07/14/ipa%E9%87%8D%E7%AD%BE%E5%90%8D/" title="iPA重签名 + 香色闺阁、微信重签名实战"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-14</div><div class="info-item-2">iPA重签名 + 香色闺阁、微信重签名实战</div></div><div class="info-2"><div class="info-item-1">背景换手机之后，原来的香色闺阁不能下载，转移的时候就丢失了。又最近看到有人截屏iPhone上装了两个微信，一个是自己重签名的；想到自己有开发者账号，但是还没试过重签名APP，是不是可以通过重签名来安装香色闺阁，以及实现多开微信？   步骤说干就干，首先从简单的开始，先来尝试重签名香色闺阁，再尝试微信，因为香色闺阁的包内容比微信的少很多，文件容易找，相对简单，步骤如下： 重签名香色闺阁首先从网上搜素下载香色闺阁的 ipa 包，没有的可以从这里yuedu.ipa下载。 然后将 ipa 改为 zip，然后解压，会出现一个 Payload 文件夹，里面有一个StandarReader.app的文件。选中StandarReader.app，右键显示包内容，可以看到APP包中的所有内容，如下图：    重签名就是用自己的账号新建一个APP（bundleID自己定义），运行到手机上，找到运行的包(xxx/DriveData/xxx/Build/Products/Debug-iphoneos/xxx.app)或者通过打包的方式，使用AdHoc方式生成一个iPA（用于获取到描述文件和Entitle...</div></div></div></a><a class="pagination-related" href="/2023/04/14/iOS%2016.4Webview%E4%B8%8D%E8%83%BD%E7%94%A8%20Safari%20%E6%9F%A5%E7%9C%8B/" title="iOS16.4 Webview 不能用Safari调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-14</div><div class="info-item-2">iOS16.4 Webview 不能用Safari调试</div></div><div class="info-2"><div class="info-item-1">背景Xcode 升级到 14.3后，模拟器是iOS 16.4 的，想通过Safari -&gt; Developer -&gt; Web Inspector查看，结果发现查看不了   修改一开始以为是设置 Safari 中 Advanced没开启，去查看后，发现开关已开启。 搜索后发现，从 iOS16.4 之后，如果想要通过Web Inspector查看，需要设置如下代码： 12345if #available(iOS 16.4, *) &#123;    webView.isInspectable = true&#125; else &#123;    // Fallback on earlier versions&#125;  设置之后，重新运行，再通过 Safari 查看，就可以看到了。 参考 Mark the webview as inspectable in iOS 16.4   </div></div></div></a><a class="pagination-related" href="/2025/08/11/Xcode26%E5%B4%A9%E6%BA%83%E4%BF%AE%E6%94%B9/" title="Xcode 26崩溃修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-11</div><div class="info-item-2">Xcode 26崩溃修改</div></div><div class="info-2"><div class="info-item-1">背景电脑升级MacOS 26.0，之后旧版Xcode不支持了，下载Xcode26 Beta5，运行项目后崩溃，提示：dyld[xxx]: Symbol not found: _NSUserActivityTypeBrowsingWeb   排查过程 在StackOverFlow上有看到说移除 CoreServices 后可以解决，但是排查后发现项目主工程并没有引用这个库 又有说把宏重定义NSUserActivityTypeBrowsingWeb改为字符串&quot;NSUserActivityTypeBrowsingWeb&quot;可以解决，但是搜索后，项目工程中没有使用这个字符串 怀疑是项目Pods中三方库使用了这个宏，通过grep搜索后发现太多了，促使三方库开发者更新不限时。 最后发现，有说把Foundation.framework在链接参数中位置提到CoreServices的前面可以解决，经过尝试确认方法有效。  解决办法解决办法就是：把 Foundation 的在链接参数中的位置往前面提到 CoreServices 之前 方法 1：通过 Build Phases 调整框...</div></div></div></a><a class="pagination-related" href="/2024/06/18/%E6%8F%90%E9%86%92%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6%E6%9C%89%E6%95%88%E6%9C%9F%E7%9A%84%20Mac%20APP%20%E5%BC%80%E5%8F%91/" title="提醒描述文件有效期的 Mac APP 开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-18</div><div class="info-item-2">提醒描述文件有效期的 Mac APP 开发</div></div><div class="info-2"><div class="info-item-1">背景之前有写过使用Python实现提醒iOS描述文件有效期，这篇文章介绍一下使用SwiftUI通过Mac APP实现提醒描述文件有效期。     实现原理是： 打开描述文件所在的文件夹，遍历读取文件内容，过滤掉后缀不为.mobileprovision的文件，然后读取文件内容（这里不需要再存储为其他格式，因为可以直接读取内容），从文件中读取指定的字段，然后根据ExpirationDate字段判断是否过期。 想要实现的功能：  不同有效期期显示不同颜色——已完成 筛选过期的、临近过期的、正常的描述文件——已完成 添加到期提醒到日历——已完成 筛选同一个 BundleID 重复的描述文件——未完成 一键删除所有过期的描述文件——已完成  代码放在了ScanProfileInfo，感兴趣的下载运行即可。 样式如下： </div></div></div></a><a class="pagination-related" href="/2025/09/12/%E5%85%B3%E4%BA%8E%E5%BC%80%E5%8F%91%E9%B8%BF%E8%92%99APP%E7%9A%84%E5%BB%BA%E8%AE%AE/" title="关于开发鸿蒙APP的建议"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-12</div><div class="info-item-2">关于开发鸿蒙APP的建议</div></div><div class="info-2"><div class="info-item-1">背景     实现参考</div></div></div></a><a class="pagination-related" href="/2021/12/27/iOS%20SDK%20%E4%B8%8D%E6%94%AF%E6%8C%81%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="iOS SDK 不支持模拟器解决办法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="info-item-2">iOS SDK 不支持模拟器解决办法</div></div><div class="info-2"><div class="info-item-1">背景iOS 第三方 SDK 不支持模拟器，报错提示: building for ios simulator, but the linked framework ‘’xxx(比如: IDLFaceSDK.framework)” was built for ios 解决办法.。   解决办法首先，在Target -&gt; BuildSettings -&gt; Excluded Source FileNames -&gt; Debug 中添加一行，注意，key选择 Any iOS Simulator SDK，value 中添加报错中提示的 SDK的目录，示例如下：  然后，在项目中，引用对应 SDK 头文件，以及使用 SDK 方法的地方添加如下代码判断 1234567891011121314#if !(TARGET_IPHONE_SIMULATOR)#import &lt;xxx/xxx.h&gt;#endif#if !(TARGET_IPHONE_SIMULATOR)[xxx share].yyy = xxx;#endif </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%B6%B3"><span class="toc-number">1.2.</span> <span class="toc-text">不足</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E4%BA%AB"><span class="toc-number">3.</span> <span class="toc-text">分享</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>集成腾讯短视频SDK记录 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="集成腾讯短视频SDK记录有需求是录制一段视频并上传，服务端可见。最后才用集成腾讯SDK的方式，走了一些弯路，这里记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集成腾讯短视频SDK记录">
+<meta property="og:url" content="http://morganwang.cn/2023/11/22/%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E7%9F%AD%E8%A7%86%E9%A2%91SDK%E5%86%B2%E7%AA%81%E4%BF%AE%E6%94%B9/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="集成腾讯短视频SDK记录有需求是录制一段视频并上传，服务端可见。最后才用集成腾讯SDK的方式，走了一些弯路，这里记录一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2023-11-22T08:27:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "集成腾讯短视频SDK记录",
+  "url": "http://morganwang.cn/2023/11/22/%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E7%9F%AD%E8%A7%86%E9%A2%91SDK%E5%86%B2%E7%AA%81%E4%BF%AE%E6%94%B9/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2023-11-22T08:27:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2023/11/22/%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E7%9F%AD%E8%A7%86%E9%A2%91SDK%E5%86%B2%E7%AA%81%E4%BF%AE%E6%94%B9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '集成腾讯短视频SDK记录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">集成腾讯短视频SDK记录</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">集成腾讯短视频SDK记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-22T08:27:00.000Z" title="发表于 2023-11-22 16:27:00">2023-11-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="集成腾讯短视频SDK记录"><a href="#集成腾讯短视频SDK记录" class="headerlink" title="集成腾讯短视频SDK记录"></a>集成腾讯短视频SDK记录</h1><p>有需求是录制一段视频并上传，服务端可见。最后才用集成腾讯SDK的方式，走了一些弯路，这里记录一下。</p>
+<span id="more"></span>
+
+<h2 id="SDK-选择"><a href="#SDK-选择" class="headerlink" title="SDK 选择"></a>SDK 选择</h2><p>首先是SDK选择，对于iOS来说是腾讯的<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/584/11638">短视频SDK</a></p>
+<h2 id="SDK集成"><a href="#SDK集成" class="headerlink" title="SDK集成"></a>SDK集成</h2><p>然后是，SDK集成，按照上面链接步骤，把<code>TXLiteAVSDK_UGC.framework</code>和依赖的系统库集成到项目中，然后添加plist权限，再添加UGCKit模块，发现编译失败。<br>对于我的项目来说，是因为 WCDB 库冲突，项目中使用的私有库封装了 WCDB，使用的是静态库的方式。和上面 SDK中冲突了，所以需要单独设置。修改了好久，编译通过之后，运行后发现，WCDB 初始化失败，又排查了好久，最终解决方法是：</p>
+<p>在 Build Settings 中的 Other Linker Flags，设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-force_load</span><br><span class="line">&quot;$&#123;PODS_CONFIGURATION_BUILD_DIR&#125;/WCDBOptimizedSQLCipher/libWCDBOptimizedSQLCipher.a&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如下：</p>
+<p><img src="../assets/img/image-1.png" alt="Alt text"></p>
+<p>然后是，发现按照上面步骤集成后，安装包大小从 27M到 156M。。。再次排查后，发现，整个 UGCKit 模块不需要添加，因为我们的录制并没有用 UGCKit 封装好的类，而是自定义的类，用的是<code>TXLiteAVSDK_UGC.framework</code> 的功能，整个 UGCKit 模块移除后，就又变为 27M左右 的大小。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/584/11638">文档中心 &gt; 短视频 SDK &gt; 不含 UI 集成方案 &gt; SDK 集成 &gt; SDK 集成(XCode)</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2023/11/22/%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E7%9F%AD%E8%A7%86%E9%A2%91SDK%E5%86%B2%E7%AA%81%E4%BF%AE%E6%94%B9/">http://morganwang.cn/2023/11/22/%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E7%9F%AD%E8%A7%86%E9%A2%91SDK%E5%86%B2%E7%AA%81%E4%BF%AE%E6%94%B9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/01/07/iOS%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/" title="一文学会iOS蓝牙开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">一文学会iOS蓝牙开发</div></div><div class="info-2"><div class="info-item-1">一文学会iOS蓝牙开发背景最近做APP对接蓝牙设备开发，这里分享一下iOS对接蓝牙设备中需要注意的东西，大致包含下面这些方面：    Xcode蓝牙权限 如何扫描蓝牙设备、获取Mac地址 不同蓝牙设备切换 写入蓝牙命令 data转16进制字符串 16进制转String crc算法 数据异或计算，字符串异或 负数异或计算     依次写入多个命令  蓝牙开发的大致流程首先来了解一下蓝牙开发的流程，总结如下： Xcode配置蓝牙权限 -&gt; 启动蓝牙 -&gt; 扫描周围蓝牙 -&gt; 连接指定蓝牙 -&gt; 校验是否连接成功 -&gt; 蓝牙读/写 -&gt; 断开连接 流程图如下：  具体步骤1. 配置Xcode蓝牙权限 General Tab下，Frameworks,Libraries, and Embedded Content中添加 CoreBluetooth.framework，如下图：  Signing &amp; Capabilities Tab下，Background Modes中，勾选Uses Bluetooth LE accessories，如下图：   ...</div></div></div></a><a class="pagination-related" href="/2023/11/22/ArkTS%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5/" title="Mac安装ArkTS失败"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Mac安装ArkTS失败</div></div><div class="info-2"><div class="info-item-1">Mac安装ArkTS失败错误提示： 1234567Installing ArkTS dependencies...Running &#x27;npm install&#x27;...npm ERR! code ETARGET   参考：ArkTS 安装失败求助，是node版本太高的原因，需要降级node。 查看node版本： 1node -v  通过brew安装的node，降级node时，先安装nvm 123brew install nvm  然后通过nvm安装低版本的node 1nvm install v14.21.3  安装完成后，再次查看node版本，如果node版本还不对，再运行下面命令 1nvm use v14.21.3  node降级之后，需要清理npm 缓存， 1npm cache clean -f  然后重启DevEco-Studio，再次尝试安装，即可安装成功。 补充如果其他地方使用有高版本的node，可以安装两个版本的 node，然后使用 nvm 命令切换，或者 node 的安装不安装到全局也可。 参考 ArkTS 安装失败求助 HarmonyOS Devel...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/09/14/Xcode14%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BF%AE%E6%94%B9/" title="Xcode14编译失败修改"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-14</div><div class="info-item-2">Xcode14编译失败修改</div></div><div class="info-2"><div class="info-item-1">背景升级Xcode 14后，项目编译失败修改，共修改了两种编译错误：  一种是bundle code sign error，Xcode 14 needs selected Development Team for Pod Bundles 一种是Module compiled with Swift 5.6.1 cannot be imported by the Swift 5.7 compiler    其中第一种比较容易解决，第二种稍微麻烦点，解决方案如下： 解决Xcode 14 bundle code sign error这个的解决方案，直接Google，第一个stackoverflow的链接是Xcode 14 needs selected Development Team for Pod Bundles，这里面给出的解决方法是，在Podfile里增加下面代码，然后运行Pod install，设置Pod库的DEVELOPMENT_TEAM是开发者账号的team。 笔者有两个项目，其中一个是Swift为主，用下面的设置方法试了，可以解决。要注意的是如果项目有多个target，ta...</div></div></div></a><a class="pagination-related" href="/2021/06/07/CocoaPod%20%E7%A7%81%E6%9C%89%E5%BA%93Spec%E7%BC%96%E8%BE%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="CocoaPod 私有库Spec依赖.a写法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-07</div><div class="info-item-2">CocoaPod 私有库Spec依赖.a写法</div></div><div class="info-2"><div class="info-item-1">CocoaPod 私有库Spec编辑注意事项CocoaPod 私有库Spec依赖.a写法 PodSpec详细描述如下，    123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869Pod::Spec.new do |s|  # 库名称  s.name             = &#x27;AudioRecorder&#x27;    # 库的版本  s.version          = &#x27;0.1.0&#x27;    # 库摘要  s.summary          = &#x27;AudioRecorder提供iOS录音和录音播放功能&#x27;  # 库描述  s.description      = &lt;&lt;-DESC						AudioRecorder提供iOS录音和录音播放功能                       DESC  # 远程...</div></div></div></a><a class="pagination-related" href="/2016/12/29/%E5%9D%91/" title="iOS开发之坑1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2016-12-29</div><div class="info-item-2">iOS开发之坑1</div></div><div class="info-2"><div class="info-item-1">iOS开发之坑1iOS 10 之后，switch的setOn方法调用之后，并没有按照文档上说的不发送action   https://stackoverflow.com/questions/39566361/uiswitch-seton-animated-does-not-work-as-document 遇到个诡异的问题，同样的创建view，然而在偶数列显示模糊，在奇数列正常 </div></div></div></a><a class="pagination-related" href="/2019/09/28/Mapping%20architecture%20armv7%20to%20i386/" title="Mapping architecture armv7 to i386"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-28</div><div class="info-item-2">Mapping architecture armv7 to i386</div></div><div class="info-2"><div class="info-item-1">最近项目里升级后，编译警告多了起来，看起来好碍眼，就想着改掉，先从Debug warning: Mapping architecture armv7 to i386.这个开始。   看了警告之后，知道是对应target下的Build Settings里architecture的问题，然后去检查对应target下，发现today widget、iwatch widget里Valid Architectures的Release跟Debug不一致，然后就手动修改为 $(ARCHS_STANDARD)，编译，done，完美解决。 </div></div></div></a><a class="pagination-related" href="/2016/02/02/Autolayout%E8%87%AA%E9%80%82%E5%BA%94label%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="AutoLayout自适应label出现的问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2016-02-02</div><div class="info-item-2">AutoLayout自适应label出现的问题</div></div><div class="info-2"><div class="info-item-1">我在做最近一个项目，自适应label的时候，总是出现一个问题：     这让我很是郁闷，而且只有在6和6p上出现，开始我以为是我自适应的方式不对，但是重写了几遍之后，发现我没写错。。。。问题在哪，始终找不到.   今天在群里看到一小伙伴发关于自适应label的代码，求教了一下，然后找到了这个VerticallyAlignedLabel，然后兴高采烈的尝试，以为终于要解决了，结果发现，确实是向上对齐了，但是多余的部分还在； 那么问题是在哪？然后我就找啊找啊，然后我发现了这个Multiline UILabel height with Autolayout higher in landscape, stackoverflow上的问题，之前我一直搜中文，但是，搜不出来，换英文之后，终于有相似的问题出现了，我就说，肯定不止我一个人遇到（这么蠢😢），然后还有这个objc.io也出现了Intrinsic Content Size of Multi-Line Text, 然后我打算照着他们的方法修改； 他大爷的，我都没办法直接用他们的方法，因为我把view摘出来了，而且还是tableViewc...</div></div></div></a><a class="pagination-related" href="/2016/05/13/%E6%8E%A8%E9%80%81%E5%A4%84%E7%90%86/" title="推送处理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2016-05-13</div><div class="info-item-2">推送处理</div></div><div class="info-2"><div class="info-item-1">我这两天都在改这么个东西： 需要根据推送消息，在下方的tabbar上显示提示红点。即：接收到推送消息，当点击推送消息时，跳转对应界面；点击程序图标进入程序时，显示提示的小红点。    前记我记得我之前做的推送处理，分为三种情况，这个我记得很清楚，因为我第一次面试在北京的车库咖啡，被人问到了这个问题，但是我没答出来，因为那时候我确实都没做过推送处理；后来进了第一家公司，有个好的产品，然后刚好有这个需求，然后就get了这个技能。  a. 程序在后台，接收到推送消息，点击推送消息，走的是  1234567// 程序在运行时接收到通知- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo&#123;    ...    [self receivePush:self.userInfo];&#125;   b. 程序在前台，接收到推送消息，弹窗提示／直接处理，对应的方法还是  1234567// 程序在运行时接收到通知- (void)appli...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%85%BE%E8%AE%AF%E7%9F%AD%E8%A7%86%E9%A2%91SDK%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">集成腾讯短视频SDK记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SDK-%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.</span> <span class="toc-text">SDK 选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SDK%E9%9B%86%E6%88%90"><span class="toc-number">1.2.</span> <span class="toc-text">SDK集成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

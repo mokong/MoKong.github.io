@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iOS webview 接入 HTTPDNS | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="技术分享、生活感悟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS webview 接入 HTTPDNS">
+<meta property="og:url" content="http://morganwang.cn/2021/12/29/webview%20%E6%8E%A5%E5%85%A5%20HTTPDNS/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="技术分享、生活感悟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2021-12-29T01:26:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iOS webview 接入 HTTPDNS",
+  "url": "http://morganwang.cn/2021/12/29/webview%20%E6%8E%A5%E5%85%A5%20HTTPDNS/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2021-12-29T01:26:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2021/12/29/webview%20%E6%8E%A5%E5%85%A5%20HTTPDNS/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iOS webview 接入 HTTPDNS',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">iOS webview 接入 HTTPDNS</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">iOS webview 接入 HTTPDNS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-29T01:26:00.000Z" title="发表于 2021-12-29 09:26:00">2021-12-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2021/12/29/webview%20%E6%8E%A5%E5%85%A5%20HTTPDNS/">http://morganwang.cn/2021/12/29/webview%20%E6%8E%A5%E5%85%A5%20HTTPDNS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/12/30/iOS%20%E7%B1%BB%E4%BC%BC%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E9%94%81%E5%B1%8F%E5%B0%81%E9%9D%A2%E6%98%BE%E7%A4%BA/" title="iOS 音频后台播放 &amp;&amp; 锁屏显示及控制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">iOS 音频后台播放 && 锁屏显示及控制</div></div><div class="info-2"><div class="info-item-1">播放锁屏通知栏显示背景播放音频时，希望通知界面能显示，且能控制音频播放。由于之前需求是进入后台时播放暂停，所以每次打开通知界面时，播放就暂停，看不到类似于音乐播放器那样的效果。后来发现，去除进入后台暂停代码后，通知界面就可以显示播放器，但是不能控制、且没有进度。   实现支持后台播放首先需要 APP 支持后台播放，即，一方面去除进入后台播放暂停的代码逻辑；另一方面，设置 Target -&gt; Signing &amp; Capabilities 中，添加 Backgroud Modes，打开 Audio, AirPlay, and Picture in Picture。图片如下：  注意设置AVAudioSession，播放前根据实际需要设置，播放后关闭 AVAudioSessionCategory类型    Category类型 当按”静音”或者锁屏时是否静音 是否可以和其他支持混音的 APP 混合播放 是否支持后台 场景举例描述    AVAudioSessionCategoryAmbient 是 是 否 常用于 APP 的背景音，比如玩游戏时还可以听音乐   AVAud...</div></div></div></a><a class="pagination-related" href="/2021/12/27/iOS%20SDK%20%E4%B8%8D%E6%94%AF%E6%8C%81%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="iOS SDK 不支持模拟器解决办法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS SDK 不支持模拟器解决办法</div></div><div class="info-2"><div class="info-item-1">背景iOS 第三方 SDK 不支持模拟器，报错提示: building for ios simulator, but the linked framework ‘’xxx(比如: IDLFaceSDK.framework)” was built for ios 解决办法.。   解决办法首先，在Target -&gt; BuildSettings -&gt; Excluded Source FileNames -&gt; Debug 中添加一行，注意，key选择 Any iOS Simulator SDK，value 中添加报错中提示的 SDK的目录，示例如下：  然后，在项目中，引用对应 SDK 头文件，以及使用 SDK 方法的地方添加如下代码判断 1234567891011121314#if !(TARGET_IPHONE_SIMULATOR)#import &lt;xxx/xxx.h&gt;#endif#if !(TARGET_IPHONE_SIMULATOR)[xxx share].yyy = xxx;#endif </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/09/28/CreateML%E4%BD%BF%E7%94%A8/" title="iOS CreateML的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-28</div><div class="info-item-2">iOS CreateML的使用</div></div><div class="info-2"><div class="info-item-1">CreateML使用背景业务需求，想要通过拍照识别照片中指定物体的数量或者物体的种类。而这种物体的模型网上没有训练好的，需要从头开始。所以调研了苹果的createML的实现方案，具体操作如下：   需求是：通过拍照识别照片中指定物体的数量，实现方案大致有几种：  通过第三方平台，训练数据，生成模型，提供前端使用 自己搭建平台，训练数据，生成模型，提供前端使用 通过苹果的CreateML工具，训练数据，生成模型，供iOS使用或转换成其他模型使用  对比可以发现，通过苹果的CreateML工具，可以省去搭建平台的过程。下面来看看怎么使用CreateML。 使用CreateML的整体流程是：  有大量的样本 标注所有的样本 用这些样本训练生成模型 验证模型的识别率 测试模型效果 导出模型供使用    需求是通过拍照识别照片中指定物体的数量，所以对我来说样本就是照片，下面就来看下怎么生成CreateML训练需求的标注信息。 使用样本照片标注首先要有大量的样本照片，这里由于是调研测试，所以选取20张照片，照片来源是百度图片。。。麻烦的是照片标注，由于苹果CreateML训练需要指定格式的J...</div></div></div></a><a class="pagination-related" href="/2022/05/23/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9mac%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA/" title="图片压缩 mac 应用开发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-23</div><div class="info-item-2">图片压缩 mac 应用开发</div></div><div class="info-2"><div class="info-item-1">图片压缩 mac 应用开发背景3年前有个项目BatchProssImage，使用 Python 写的批量压缩图片的，最新再次使用时，发现忘记了怎么使用，所以就有了把这个Python 实现的工具，做成一个简单的 mac app 的想法。   过程想法很简单：印象中当时这个工具是使用 tinypng 的 api 压缩的，所以开发一个 mac客户端，调用压缩的接口，导出照片就可以。开始动工。 首先 mac 客户端的 UI 从哪里来？之前有个项目OtoolAnalyse——分析Mach-O文件中无用的类和方法，是借LinkMapUI 来实现的。这里想了想，嗯，还可以用这个方法。打开项目一看，OC 的，还是用 Swift 写一遍吧。 UI 实现想一下大致需要哪些功能，  选择文件 || 目录 选择导出目录 开始压缩 压缩进度显示 噢噢，还有一个，tinypng apikey 输入  再考虑一下，选择导出目录是否必要？之前笔者自己使用其他 APP 选择导出时，打断先有的操作且不说，对于选择困难来说，每次考虑要导出到哪里都是一个问题，要不要新建一个文件夹，还选择同目录会是什么效果等等。 改为 ...</div></div></div></a><a class="pagination-related" href="/2024/07/09/Flutter%20%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/" title="Flutter 状态管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-09</div><div class="info-item-2">Flutter 状态管理</div></div><div class="info-2"><div class="info-item-1">背景我之前对 Flutter 的状态管理一直比较头大，最近看到了一篇Flutter state management for minimalists | by Suragch | Medium文章，感觉文章真的很好，把为什么要进行状态管理以及什么是状态管理说的很通透，推荐大家看原文，这里是自己总结一下。      什么是状态管理老实说，之前看 Flutter 相关的文章和视频的时候，有些上来就推荐用 Bloc 的就很懵，没有前因后果，就告诉我要用这个东西，这东西用了有什么好处？这东西上手难度如何，这东西是必备的吗？和其他的状态管理库（比如GetX）对比有什么优点，等等之类的都不清楚，所以一直很难深入学习。 来看下图： 我本人是 iOS APP 开发，所以对于 MVVM 很熟悉，对比上图，UI Layer 是 View，Service Layer是 Model，所以 State Management Layer 就是 ViewModel，这样解释对比，我就对状态管理有了直观的理解，只是换了个名称，其实就是 ViewModel。 为什么要状态管理那为什么要状态管理呢？其实理解了上面，...</div></div></div></a><a class="pagination-related" href="/2022/11/22/WidgetKit%E5%B4%A9%E6%BA%83/" title="使用WidgetKit打包出的APP低版本崩溃"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-22</div><div class="info-item-2">使用WidgetKit打包出的APP低版本崩溃</div></div><div class="info-2"><div class="info-item-1">背景APP添加了WidgetKit功能，APP最低版本是10.0，用户反馈安装后，打开就闪退，这里记录一下原因：   解决排查后发现用户手机系统版本较老，低于iOS 14，由于手头没有低版本的设备，通过Xcode 12.x添加iOS 10.x模拟器添加了iOS12.0的模拟器，Debug模式下没有问题，但是Release不行，控制台报错类似如下： dyld: Library not loaded: /System/Library/Frameworks/WidgetKit.framework/WidgetKit   Referenced from: /private/var/containers/Bundle/Application 搜索后，发现解决方案如下：  Select your target Build Phases Link binary with libraries Add WidgetKit and set its Status to “Optional”   参考 Error running app with widgetKit on iOS 13  </div></div></div></a><a class="pagination-related" href="/2022/04/20/iOS_%E9%95%BF%E6%88%AA%E5%9B%BE/" title="iOS 长截图"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-20</div><div class="info-item-2">iOS 长截图</div></div><div class="info-2"><div class="info-item-1">iOS长截图背景Twitter 上看到TaioApp的作者说，iOS 系统有支持长截图的API——UIScreenshotService，从 iOS 13开始就可以使用，下午的时候就在自己的 APP 中体验了一下。   过程UIScreenshotService官方的说明如下：  When the user takes a screenshot of your app’s content, you work with a UIScreenshotService object to provide a PDF version of that screenshot. You do not create a UIScreenshotService object directly. Instead, you retrieve the object from the screenshotService property of your window scene and assign a delegate to it. When the user takes a screenshot, UI...</div></div></div></a><a class="pagination-related" href="/2023/06/07/%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASafari%E6%8F%92%E4%BB%B6/" title="如何开发一个 Safari 插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-07</div><div class="info-item-2">如何开发一个 Safari 插件</div></div><div class="info-2"><div class="info-item-1">背景由于常用浏览器是Safari，而 Safari 浏览器的插件比不上 Chrome，所以就有了自己开发常用的 Safari 插件的想法。 打算开发当前页面生成二维码的 Extension，因为网络原因，AirDrop 有时候搜不到手机，所以有了这个需求，而且打算这个也比较简单，所以从这个开始。    调研苹果的官方文档safari_web_extensions给出了步骤，看了好几遍，还是不知道如何下手。虽然新建项目的时候苹果帮忙把框架已经都建好了，但是还是有疑惑，疑惑的点在于：  主APP的作用是什么？ Extension的作用是什么？ 代码应该写在哪里？ manifest.json支持的配置项有哪些，哪里可以看到，应该设置哪些？ content.js、background.js分别是干什么用的，什么时候用？ popup.html、popup.css、popup.js 又是指的哪部分？ content.js、background.js、popup.js中操作 tab 的方法有哪些？哪里可以看到？  这些疑惑一度导致开发计划搁浅，因为没有文章来解释这些问题。于是转而去 Githu...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

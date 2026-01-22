@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Safari中使用NewBing | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="NewBing 的权限已经有了，但是想在 Safari 中使用 NewBing，因为不想日常开三个浏览器，Safari、Chrome、Edge，电脑内存不允许。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Safari中使用NewBing">
+<meta property="og:url" content="http://morganwang.cn/2023/03/23/Safari%E4%B8%AD%E4%BD%BF%E7%94%A8NewBing/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="NewBing 的权限已经有了，但是想在 Safari 中使用 NewBing，因为不想日常开三个浏览器，Safari、Chrome、Edge，电脑内存不允许。。。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2023-03-23T01:09:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T11:04:42.000Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Safari中使用NewBing",
+  "url": "http://morganwang.cn/2023/03/23/Safari%E4%B8%AD%E4%BD%BF%E7%94%A8NewBing/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2023-03-23T01:09:00.000Z",
+  "dateModified": "2024-01-22T11:04:42.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2023/03/23/Safari%E4%B8%AD%E4%BD%BF%E7%94%A8NewBing/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Safari中使用NewBing',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Safari中使用NewBing</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Safari中使用NewBing</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-23T01:09:00.000Z" title="发表于 2023-03-23 09:09:00">2023-03-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-22T11:04:42.000Z" title="更新于 2024-01-22 19:04:42">2024-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>NewBing 的权限已经有了，但是想在 Safari 中使用 NewBing，因为不想日常开三个浏览器，Safari、Chrome、Edge，电脑内存不允许。。。</p>
+<span id="more"></span>
+
+<p>首先说步骤：</p>
+<ol>
+<li>Safari 安装 Microsoft Bing for Safari插件，并登录，能使用NewBing的账号</li>
+<li>修改 Safari 的 UserAgent 为 Edge 的 UserAgent</li>
+<li>修改默认搜索引擎为Bing</li>
+</ol>
+<p>第一步很简单，就打开商店搜索安装即可，安装完成后，打开 bing并登录有NewBing权限的账号；</p>
+<p>麻烦的是第二步，网上搜索到大部分是，打开Safari -&gt; Develop -&gt; User Agent -&gt; Microsoft Edge，如下图：<br><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/202303230916720.png" alt="Safari修改 UserAgent"></p>
+<p>但是这种方法只能在当前Tab页生效，打开新的页面后，就失败了，每个新 Tab 都单独设置一次，想想就不可能。所以有没有一种可以永久设置Safari的 UserAgent的方法？</p>
+<p>当然有了，设置方法如下，设置之后，每次打开新的页面，UserAgent也会一直保持；</p>
+<p>永久设置 Safari 的 UserAgent</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.Safari CustomUserAgent &quot;\&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78\&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要恢复回Safari原来的UserAgent，则可以通过下面的方法设置。<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults delete com.apple.Safari CustomUserAgent</span><br></pre></td></tr></table></figure></p>
+<p>最后把默认的搜索引擎改为Bing，就可以在 Safari 中愉快的使用NewBing了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2023/03/23/Safari%E4%B8%AD%E4%BD%BF%E7%94%A8NewBing/">http://morganwang.cn/2023/03/23/Safari%E4%B8%AD%E4%BD%BF%E7%94%A8NewBing/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/03/27/%E5%AF%BC%E5%87%BAiPhone%E6%89%80%E6%9C%89%E7%9F%AD%E4%BF%A1%E5%88%B0Excel/" title="导出iPhone所有短信到Excel"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">导出iPhone所有短信到Excel</div></div><div class="info-2"><div class="info-item-1">导出iPhone所有短信到Excel打算找一些短信，用于作为样本训练识别。 一开始打算网上找到垃圾短信样本，但找了好久没找到，于是就想到用自己和家人手机里的短信，毕竟手机里短信一般不删除，也有小几千条，而且垃圾短信、推销、广告之类的应有尽有。   所以问题就变成了，如何导出 iPhone 短信？ 这里笔者也查了好久，找到的第三方软件基本都是需要收费，最终发现了一个免费导出的方案。 首先不加密备份手机到电脑，如下图，选中Back up all the data on your iPhone to this Mac，点击Back Up Now，等待备份完成，备份完成后，再点击Manage Backups  Manage Backups点击后，界面如下，可以看到已备份的记录，右键选择Show In Finder，在文件夹中打开  然后可以看到备份所在目录已打开，这时候需要找到文件名为3d0d7e5fb2ce288813306e4d4636395e047a3d28的文件，这个文件就是短信备份的数据库文件。然后问题来了，怎么找呢？看到备份目录一个个文件夹是不是懵，这怎么找，很简单，搜索，点...</div></div></div></a><a class="pagination-related" href="/2023/03/22/iOS%E6%8E%A8%E9%80%81%E8%AF%AD%E9%9F%B3%E6%92%AD%E6%8A%A5%E6%9B%B4%E6%96%B0/" title="iOS推送播放语音播报更新"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS推送播放语音播报更新</div></div><div class="info-2"><div class="info-item-1">iOS推送播放语音播报更新接上篇如何让iOS推送播放语音，之前的结论是iOS如果需要送审商店只能播放本地的mp3文件，这里更新一下：   更新语音的播放，最终调用的方法是UNNotificationSound(named: xxx)，而这个方法官方文档注释如下： 12// The sound file to be played for the notification. The sound must be in the Library/Sounds folder of the app&#x27;s data container or the Library/Sounds folder of an app group data container. If the file is not found in a container, the system will look in the app&#x27;s bundle.    public convenience init(named name: UNNotificationSoundName)  注释里说，语音文件会从这三个地方...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2016/04/20/iOS%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8D%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="开发中遇到的问题（一）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2016-04-20</div><div class="info-item-2">开发中遇到的问题（一）</div></div><div class="info-2"><div class="info-item-1">刚入职新公司，遇到了几个问题，感觉需要记录一下，顺便分享。问题1 界面和代码对应由于刚入职，所以不知道哪个界面对应的代码是哪里，又加上项目比较老，比较大，如何才能快速找准界面和代码之间对应，这是第一个难题。    做法：   最开始，我是先走一遍app的所有界面，大概知道都有哪些，然后开始看代码命名，根据名字猜测可能是哪个界面，然后验证是否正确。但是随后发现这样很累，而且因为代码比较老，有些类重写了，老的都没有删除，命名又很像，所以有些根本没办法对应；而且这样效率很低，如果项目不大还好，但是项目大，时间又紧，那这样根本就行不通。 然后晚上下班，走在路上的时候，突然想起来之前看到的一篇博客，Method Swizzling 和 AOP 实践，这里面介绍用Method Swizzling来实现给每个界面加统计，然后我就想，既然都能给每个界面加统计了，那肯定也能打印每个界面的信息。所以，我就用Method Swizzling实现替换ViewWillAppear:方法，然后每次界面出现的时候都会打印当前类名。这样我只需要运行app，然后点击界面，然后就会打印当前类。很轻松就能找到界面对应...</div></div></div></a><a class="pagination-related" href="/2022/03/29/Xcode13.3%20Archive%E5%A4%B1%E8%B4%A5/" title="Xcode 13.3 Archive 失败"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-29</div><div class="info-item-2">Xcode 13.3 Archive 失败</div></div><div class="info-2"><div class="info-item-1">背景升级Xcode 13.3之前，Debug 和 Archive 都没问题；升级 Xcode 13.3之后，Debug 没问题，Archive 就报错。错误信息是error: Abort trap: 6 (in target &#39;ZLPhotoBrowser&#39; from project &#39;Pods&#39;)，于是提了个 issue，目前已解决。   解决方案是： 123&quot;You can work around this issue by replacing UI_USER_INTERFACE_IDIOM() with UIDevice.current.userInterfaceIdiom.  这里记录分享一下，如果遇到同样问题的，可以搜一下，看是否同样是因为UI_USER_INTERFACE_IDIOM()。 </div></div></div></a><a class="pagination-related" href="/2015/12/07/iOS%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%AB%E7%A0%81%E7%95%8C%E9%9D%A2%E5%AE%9E%E7%8E%B0/" title="iOS开发——扫码界面实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2015-12-07</div><div class="info-item-2">iOS开发——扫码界面实现</div></div><div class="info-2"><div class="info-item-1">类似下面这样一个收款界面的实现   界面分析 黑色半透明背景 navgationBar下面绿色的那个headerView 扫码框，及绿色动态扫码线的实现 扫码框下面的提示文字  黑色背景的实现，可能跟想象的不同，见下图（图中的1/2/3只是标识不同部分，不是顺序），先是需要放一个backView，然后是放中间的扫码框3，再然后上下左右四个1，最后放headerView和提示文字2;  实现</div></div></div></a><a class="pagination-related" href="/2022/04/20/Algorithem_MaxAreaOfIsland/" title="Algorithem_Max Area of Island"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-20</div><div class="info-item-2">Algorithem_Max Area of Island</div></div><div class="info-2"><div class="info-item-1">733. Algorithem_Max Area of IslandYou are given an m x n binary matrix grid. An island is a group of 1’s (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.   The area of an island is the number of cells with a value 1 in the island. Return the maximum area of an island in grid. If there is no island, return 0. Example 1:  123Input: grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,...</div></div></div></a><a class="pagination-related" href="/2021/07/15/weak%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" title="weak的实现原理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-15</div><div class="info-item-2">weak的实现原理</div></div><div class="info-2"><div class="info-item-1">weak的实现原理</div></div></div></a><a class="pagination-related" href="/2023/03/02/openai%E5%92%8CchatGpt%E7%9A%84%E4%BD%BF%E7%94%A8/" title="玩转OpenAI和ChatGpt"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-02</div><div class="info-item-2">玩转OpenAI和ChatGpt</div></div><div class="info-2"><div class="info-item-1">背景之前在其他平台就看到有大佬分享自己的ChatGPT的使用, 比如: 自力hzlzh, 但一直也没弄. 昨天突然看到 OpenAI 在商店有很多应用, 下载了一个发现里面接口都是失败的, 但是界面和方向感觉很有意思, 打算自己做一个自用的.    注册 OpenAI注册过程参考超详细注册OpenAI接口账号的教程, 很详细, 按照步骤一步步来即可, 要注意的国内的手机号收不到验证码, 所以需要国外的手机号或者通过接码平台(需付费), 验证码的接收我选用的US的手机号,  花费了 7.1元, 一次就成功了. 简单的说:  首先要能打开openAI的注册页面, 然后注册, 到接收验证码界面 如果有国外的手机号, 直接输入, 接收验证码; 如果没有, 再去注册一个接码平台, 选择语言为中文, 然后就都能看懂了, 然后充值 1 美元, 可以用支付宝支付, 然后搜索openai的接码, 选择一个, 耐心等待, 收到分配的号码之后 再去openAI的验证码界面, 输入分配的号码, 发送验证码, 然后等待, 在接码平台就会显示收到的验证码, 输入就可以注册成功.  如何使用OpenAI注册完...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">188</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google 的 Antigravity登录不了解决">Google 的 Antigravity登录不了解决</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/22/%E5%85%B3%E4%BA%8E%20AI%20%E4%B8%8E%E5%BC%80%E5%8F%91/" title="关于 AI 与开发">关于 AI 与开发</a><time datetime="2026-01-22T02:48:00.000Z" title="发表于 2026-01-22 10:48:00">2026-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具">连夜开发了一个 Mac 上久坐提醒工具</a><time datetime="2026-01-21T09:22:00.000Z" title="发表于 2026-01-21 17:22:00">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="无标题">无标题</a><time datetime="2025-10-13T07:24:22.000Z" title="发表于 2025-10-13 15:24:22">2025-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/28/%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0OpenConnect%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91/" title="无标题">无标题</a><time datetime="2025-09-28T07:28:52.000Z" title="发表于 2025-09-28 15:28:52">2025-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
