@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何构建自己的知识库——第一步 | 今是昨非的博客</title><meta name="author" content="今是昨非"><meta name="copyright" content="今是昨非"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="如何构建自己的知识库——第一步背景我在研究 ima.copilot 时，萌生了几个问题？  ima.copilot是什么，是用来做什么的？ 知识库里应该存储哪些内容？ 问知识库和问AI（比如豆包、元宝）的区别是什么？ 知识库能做自动化操作吗？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何构建自己的知识库——第一步">
+<meta property="og:url" content="http://morganwang.cn/2026/03/03/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%9F%A5%E8%AF%86%E5%BA%93%E8%AE%B0%E5%BD%95%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
+<meta property="og:site_name" content="今是昨非的博客">
+<meta property="og:description" content="如何构建自己的知识库——第一步背景我在研究 ima.copilot 时，萌生了几个问题？  ima.copilot是什么，是用来做什么的？ 知识库里应该存储哪些内容？ 问知识库和问AI（比如豆包、元宝）的区别是什么？ 知识库能做自动化操作吗？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://morganwang.cn/assets/img/avatar.jpeg">
+<meta property="article:published_time" content="2026-03-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-03T09:41:59.636Z">
+<meta property="article:author" content="今是昨非">
+<meta property="article:tag" content="分享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morganwang.cn/assets/img/avatar.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "如何构建自己的知识库——第一步",
+  "url": "http://morganwang.cn/2026/03/03/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%9F%A5%E8%AF%86%E5%BA%93%E8%AE%B0%E5%BD%95%E5%86%B3%E7%AD%96%E6%A0%91/",
+  "image": "http://morganwang.cn/assets/img/avatar.jpeg",
+  "datePublished": "2026-03-02T16:00:00.000Z",
+  "dateModified": "2026-03-03T09:41:59.636Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "今是昨非",
+      "url": "http://morganwang.cn"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://morganwang.cn/2026/03/03/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%9F%A5%E8%AF%86%E5%BA%93%E8%AE%B0%E5%BD%95%E5%86%B3%E7%AD%96%E6%A0%91/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何构建自己的知识库——第一步',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">197</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">今是昨非的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">如何构建自己的知识库——第一步</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">如何构建自己的知识库——第一步</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-02T16:00:00.000Z" title="发表于 2026-03-03 00:00:00">2026-03-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-03T09:41:59.636Z" title="更新于 2026-03-03 17:41:59">2026-03-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="如何构建自己的知识库——第一步"><a href="#如何构建自己的知识库——第一步" class="headerlink" title="如何构建自己的知识库——第一步"></a>如何构建自己的知识库——第一步</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我在研究 ima.copilot 时，萌生了几个问题？</p>
+<ul>
+<li>ima.copilot是什么，是用来做什么的？</li>
+<li>知识库里应该存储哪些内容？</li>
+<li>问知识库和问AI（比如豆包、元宝）的区别是什么？</li>
+<li>知识库能做自动化操作吗？</li>
+</ul>
+<span id="more"></span>
+
+<p>其实重要的问题只有两个：</p>
+<ol>
+<li>有了 AI 为什么还要知识库？</li>
+<li>知识库里应该存储哪些内容？</li>
+</ol>
+<p>先来看第一个问题，有了 AI 为什么还要知识库？</p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>问知识库 (如 ima.copilot)​</th>
+<th>问AI (如 豆包、元宝)​</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心逻辑​</td>
+<td>检索：在你上传的资料里找答案</td>
+<td>生成：基于AI训练的通用知识来编答案</td>
+</tr>
+<tr>
+<td>信息来源​</td>
+<td>你上传的文档、网页、笔记（私有、可控）</td>
+<td>互联网公开数据（公开、不可控）</td>
+</tr>
+<tr>
+<td>答案特点​</td>
+<td>精准、可溯源：答案来自原文，会标注出处</td>
+<td>通用、流畅：语言通顺，但可能“一本正经胡说八道”</td>
+</tr>
+<tr>
+<td>适用场景​</td>
+<td>查合同条款、找项目资料、分析私有数据</td>
+<td>写文案、学新知识、头脑风暴、闲聊</td>
+</tr>
+</tbody></table>
+<ul>
+<li>AI（大模型）：它像是一个博学但健忘的教授。它的大脑里装满了训练时学到的海量知识，但它无法记住你给它的具体文件。你问它问题，它只能凭记忆和逻辑“编造”一个答案，所以有时会出错（幻觉）。</li>
+<li>知识库：它像是一个超级精准的档案管理员。它本身没有知识，但你把文件（博客、合同、PDF）交给它保管。当你提问时，它立刻去翻箱倒柜，找到最相关的那一页，把原文原封不动地指给你看。</li>
+</ul>
+<p>结合自己最近遇到的问题，我觉得有必要构建自己的知识库，并且希望是可成长型的知识库。</p>
+<p>接下来的问题就是，什么样的问题要放入知识库？或者更准确的说，是什么样的知识要放入知识库？</p>
+<p>我首先想到的就是自己遇到的线上问题的反思和总结，但是如果只放这个，内容太少了。所以问题还是：什么样的知识要放入知识库。</p>
+<p>我带着这个问题去问 ChatGPT，我描述了我的日常，然后让他帮忙给出一个判断标准，下面是它的回答：</p>
+<p>你以后只要 10 秒按这个流程判断即可。</p>
+<h2 id="🌳-第一层判断：有没有“认知变化”？"><a href="#🌳-第一层判断：有没有“认知变化”？" class="headerlink" title="🌳 第一层判断：有没有“认知变化”？"></a>🌳 第一层判断：有没有“认知变化”？</h2><p>问自己：</p>
+<blockquote>
+<p>这件事有没有改变我的看法、判断方式或工作方式？</p>
+</blockquote>
+<ul>
+<li>❌ 没有 → 不记录（纯操作层）</li>
+<li>✅ 有 → 进入第二层</li>
+</ul>
+<h2 id="🌳-第二层判断：改变发生在哪一层？"><a href="#🌳-第二层判断：改变发生在哪一层？" class="headerlink" title="🌳 第二层判断：改变发生在哪一层？"></a>🌳 第二层判断：改变发生在哪一层？</h2><p>分三层：</p>
+<h3 id="🟢-Level-1：操作层（通常不记录）"><a href="#🟢-Level-1：操作层（通常不记录）" class="headerlink" title="🟢 Level 1：操作层（通常不记录）"></a>🟢 Level 1：操作层（通常不记录）</h3><ul>
+<li>调整一个 prompt 表达</li>
+<li>改一个参数</li>
+<li>语法优化</li>
+<li>单次修复小 bug</li>
+<li>单点 API 使用技巧</li>
+</ul>
+<p>👉 这些属于“技能熟练度”，不是成长轨迹。</p>
+<h3 id="🟡-Level-2：策略层（选择性记录）"><a href="#🟡-Level-2：策略层（选择性记录）" class="headerlink" title="🟡 Level 2：策略层（选择性记录）"></a>🟡 Level 2：策略层（选择性记录）</h3><p>发生了以下变化：</p>
+<ul>
+<li>工作流调整</li>
+<li>Prompt 结构升级</li>
+<li>Skill 组织方式改变</li>
+<li>开始用 checklist</li>
+<li>开始延迟提交</li>
+</ul>
+<p>问自己：</p>
+<blockquote>
+<p>这个改变会长期影响我未来的做法吗？</p>
+</blockquote>
+<ul>
+<li>❌ 只影响一次 → 不记录</li>
+<li>✅ 会改变以后行为 → 记录</li>
+</ul>
+<h3 id="🔴-Level-3：认知层（必须记录）"><a href="#🔴-Level-3：认知层（必须记录）" class="headerlink" title="🔴 Level 3：认知层（必须记录）"></a>🔴 Level 3：认知层（必须记录）</h3><p>出现以下任意情况，直接记录：</p>
+<ul>
+<li>我误判了系统结构</li>
+<li>我低估了复杂度</li>
+<li>我忽略了入口差异</li>
+<li>我对生命周期理解有误</li>
+<li>我过度信任 AI</li>
+<li>我因为情绪跳过验证</li>
+<li>我发现重复模式</li>
+</ul>
+<p>这些属于：</p>
+<blockquote>
+<p>思维模型升级</p>
+</blockquote>
+<p>必须记录。</p>
+<h2 id="🌳-第三层判断：是否满足“长期价值条件”？"><a href="#🌳-第三层判断：是否满足“长期价值条件”？" class="headerlink" title="🌳 第三层判断：是否满足“长期价值条件”？"></a>🌳 第三层判断：是否满足“长期价值条件”？</h2><p>问：</p>
+<h3 id="1️⃣-这个问题可能再次发生吗？"><a href="#1️⃣-这个问题可能再次发生吗？" class="headerlink" title="1️⃣ 这个问题可能再次发生吗？"></a>1️⃣ 这个问题可能再次发生吗？</h3><p>如果会 → 记录</p>
+<h3 id="2️⃣-它暴露了我的某种模式吗？"><a href="#2️⃣-它暴露了我的某种模式吗？" class="headerlink" title="2️⃣ 它暴露了我的某种模式吗？"></a>2️⃣ 它暴露了我的某种模式吗？</h3><p>如果是 → 记录</p>
+<h3 id="3️⃣-它影响的是结构或状态，而不是单点逻辑吗？"><a href="#3️⃣-它影响的是结构或状态，而不是单点逻辑吗？" class="headerlink" title="3️⃣ 它影响的是结构或状态，而不是单点逻辑吗？"></a>3️⃣ 它影响的是结构或状态，而不是单点逻辑吗？</h3><p>如果是 → 记录</p>
+<h3 id="4️⃣-它让我建立了新原则吗？"><a href="#4️⃣-它让我建立了新原则吗？" class="headerlink" title="4️⃣ 它让我建立了新原则吗？"></a>4️⃣ 它让我建立了新原则吗？</h3><p>如果是 → 记录</p>
+<p>满足任一条 → 写。</p>
+<h2 id="🧠-快速版本（10秒判断法）"><a href="#🧠-快速版本（10秒判断法）" class="headerlink" title="🧠 快速版本（10秒判断法）"></a>🧠 快速版本（10秒判断法）</h2><p>出现以下情况，直接写：</p>
+<ul>
+<li>“原来我一直理解错了”</li>
+<li>“这个结构其实不是我想的那样”</li>
+<li>“我又犯了类似错误”</li>
+<li>“这个以后一定要注意”</li>
+<li>“AI 在这里不可靠”</li>
+<li>“这个地方风险比我想象大”</li>
+</ul>
+<p>只要脑子里出现这些想法，就写。</p>
+<h2 id="🚫-不必记录的内容"><a href="#🚫-不必记录的内容" class="headerlink" title="🚫 不必记录的内容"></a>🚫 不必记录的内容</h2><ul>
+<li>一次普通 bug 修复</li>
+<li>单次接口字段错误</li>
+<li>简单 UI 偏差</li>
+<li>纯熟练度提升</li>
+<li>无认知变化的重复工作</li>
+</ul>
+<h2 id="🎯-一个更高级的判断方式"><a href="#🎯-一个更高级的判断方式" class="headerlink" title="🎯 一个更高级的判断方式"></a>🎯 一个更高级的判断方式</h2><p>问自己：</p>
+<blockquote>
+<p>如果半年后回看，我会感谢现在记录这件事吗？</p>
+</blockquote>
+<ul>
+<li>如果答案是“会”</li>
+<li>那一定写</li>
+</ul>
+<h2 id="🔥-最重要的一句话"><a href="#🔥-最重要的一句话" class="headerlink" title="🔥 最重要的一句话"></a>🔥 最重要的一句话</h2><p>不要记录“发生了什么”。</p>
+<p>记录：</p>
+<blockquote>
+<p>我是如何改变看问题方式的。</p>
+</blockquote>
+<h2 id="🧠-一个升级版思维模型"><a href="#🧠-一个升级版思维模型" class="headerlink" title="🧠 一个升级版思维模型"></a>🧠 一个升级版思维模型</h2><p>以后不要问：</p>
+<p>“要不要记录？”</p>
+<p>改成问：</p>
+<p>“如果半年后回看，我会感谢现在记录这件事吗？”<br>“会长期影响我未来的做法吗？”<br>“可能再次发生吗”<br>“暴露了我的某种模式吗”<br>“影响的是结构或状态，而不是单点逻辑吗”<br>“让我建立了新原则吗？”</p>
+<p>只记录后两层。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://morganwang.cn">今是昨非</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://morganwang.cn/2026/03/03/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%9F%A5%E8%AF%86%E5%BA%93%E8%AE%B0%E5%BD%95%E5%86%B3%E7%AD%96%E6%A0%91/">http://morganwang.cn/2026/03/03/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%9F%A5%E8%AF%86%E5%BA%93%E8%AE%B0%E5%BD%95%E5%86%B3%E7%AD%96%E6%A0%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://morganwang.cn" target="_blank">今是昨非的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%88%86%E4%BA%AB/">分享</a></div><div class="post-share"><div class="social-share" data-image="/assets/img/avatar.jpeg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/28/iOS%20%E5%85%A8%E5%B1%80%E9%98%B2%E6%88%AA%E5%B1%8F%E5%8E%9F%E7%90%86/" title="iOS 全局防截屏原理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">iOS 全局防截屏原理</div></div><div class="info-2"><div class="info-item-1"> 一、系统背景 iOS 对「安全输入」相关视图（例如开启安全输入的文本框及其内部系统私有子视图）在截屏与录屏时会自动排除，这些视图不会出现在截图或录屏画面中。 项目利用这一机制，将整屏应用内容放入系统认定的「安全视图」层级内，从而实现防截屏/防录屏下的内容保护。     二、实现原理概览2.1 安全容器从何而来 使用一个透明的、开启安全输入的文本框（系统会为其创建内部私有子视图用于安全渲染）。 取该文本框的第一个子视图（即系统为安全输入创建的内容视图）作为「安全容器」。 将该安全容器从文本框上移除并清空其原有子视图，再作为窗口的唯一直接子视图添加到窗口上，设全屏 frame 与自动布局，使窗口的直接子视图只有一个：安全容器本身。  示意代码（Swift）： 12345678910111213// 安全窗口内：构建安全容器并挂到窗口上private func setupSecureContainer() &#123;    let textField = SecureOverlayTextField(frame: .zero)  // 透明、isSecureTextEntry = ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/22/Google%20Antigravity%20%E7%99%BB%E5%BD%95%E4%B8%8D%E4%BA%86%E8%A7%A3%E5%86%B3/" title="Google Antigravity 登录不了解决"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-22</div><div class="info-item-2">Google Antigravity 登录不了解决</div></div><div class="info-2"><div class="info-item-1">背景Google 的 Antigravity 登录一直提示(Sorry, this account is ineligible to use Antigravity)，切换账号也不行，账号申请更改了地区到加州还是不行，有佬推荐用Antigravity Tools，终于流畅解决了。。。这里记录分享下      实现 打开Antigravity Tools按照步骤安装，使用 brew 或者下载 Release 包安装都可以； 安装之后打开，如果提示损坏，去系统设置-隐私与安全里，点允许打开； 打开后切换到账号管理，点击添加账号，有几个添加几个即可； 最后记得想要用哪个账号登录，就点击对应账号后面的切换按钮，如下图所示，然后打开 Antigravity 就丝滑的使用了。。。   参考Antigravity Tools </div></div></div></a><a class="pagination-related" href="/2024/06/07/Safari%20%E8%8E%B7%E5%8F%96%20Bing%20Rewards%20%E6%8F%92%E4%BB%B6/" title="Safari 获取 Bing Rewards 插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-07</div><div class="info-item-2">Safari 获取 Bing Rewards 插件</div></div><div class="info-2"><div class="info-item-1">背景Bing Rewards 可以兑换天猫礼品卡、中国石化礼品卡、肯德基电子券、盒马礼品卡、苹果礼品卡等。level 1 的时候每天至多获取 30 积分，level 2 的可以电脑端 90积分、手机端60 积分。每天150 积分点着太累了，就想着有没有一键的便捷操作。    找到了一个通过 Chrome 插件Rewards-Search-Automator: Chrome / Edge extension for automatic Bing Search，来实现的，除去其中的 Mobile 不生效，外加搜索完成跳转开发者的网站，别的还好，可以自己下载代码，修改去掉跳转开发者网站的逻辑。 但是就是还有个问题，在 iPhone 上用不了，所以手机端的 60 积分还是不能一键获取，所以就想到了，借鉴这个做个 Safari 插件，然后就可以在iPhone上用了。 实现逻辑很简单，iPhone 使用 Bing 搜索，然后抓包出请求，然后提取出关键的form，再封装到 Safari Extension 中，当 popup 出来的时候，触发搜索。添加生成随机字符串的逻辑，每隔 6 秒，重新搜...</div></div></div></a><a class="pagination-related" href="/2025/10/13/%E9%B8%BF%E8%92%99%E6%88%AA%E5%9B%BE%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" title="鸿蒙截图生成工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-13</div><div class="info-item-2">鸿蒙截图生成工具</div></div><div class="info-2"><div class="info-item-1">背景开发鸿蒙APP，没有鸿蒙手机，使用鸿蒙模拟器截图出来的，却不符合9:16，不能直接上传商店，所以开发了一个工具，用于把不符合的截图转为自定义比例的截图。    使用下载GitHub - mokong/HMScreenShopHelper，直接下载，打开index.html即可使用。可以自定义比例或像素，不会压缩图片，而是在周边添加对应背景色然后生成新的图片。 截图如下:  </div></div></div></a><a class="pagination-related" href="/2024/07/11/SafariFreeMedium%E6%8F%92%E4%BB%B6/" title="SafariFreeMedium插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-11</div><div class="info-item-2">SafariFreeMedium插件</div></div><div class="info-2"><div class="info-item-1">背景在阅读上篇 Flutter状态管理中，引用的几篇文章都需要是Medium 会员才能查看的。没有付费的每个月免费只能查看几次，所以就想有没有不付费查看这个的方法，就去搜索了一下。     实现搜索之后，找到了这篇Freedium · GitHub，查看后发现里面有个简单的方法，就是把 host 替换为````freedium.cfd然后重定向。 刚好自己有账号，为了在 Safari 中便于使用，就自己写了一个插件，效果如下：  参考 Freedium · GitHub  </div></div></div></a><a class="pagination-related" href="/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5%E6%B7%B7%E5%85%83/" title="Xcode 26接入混元"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-25</div><div class="info-item-2">Xcode 26接入混元</div></div><div class="info-2"><div class="info-item-1">背景上篇写了Xcode接入通义千问，发到腾讯云开发者社区提示引流，所以就再试试接入混元，顺便说一下，接入混元要比接入通义千问简单。      实现注册混元，得到免费资源包打开腾讯混元大模型_大语言模型_自然语言大模型- 腾讯云，点击产品控制台，注册并开通，会自动送体验的资源包。  然后选择接入管理，在里面使用OpenAI SDK方式接入，点击创建API KEY，如下图：  然后点击查看文档，接下来就可以在Xcode中添加了 Xcode添加混元的Provider打开Xcode 26，打开设置，选中”Intelligence”，点击添加，如下图  然后会进入输入信息界面，共有4个信息需要输入，URL、API Key、API Key Header、Description，如下图：  URL：https://api.hunyuan.cloud.tencent.com/API Key：==你自己的APIKey==API KeyHeader: ==Authorization==Description: 这个名字自己定义 点击Save后，出现下面的界面说明成功了：  然后就选中对应的模型，可以...</div></div></div></a><a class="pagination-related" href="/2026/01/21/%E8%BF%9E%E5%A4%9C%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%20Mac%20%E4%B8%8A%E4%B9%85%E5%9D%90%E6%8F%90%E9%86%92%E5%B7%A5%E5%85%B7/" title="连夜开发了一个 Mac 上久坐提醒工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-21</div><div class="info-item-2">连夜开发了一个 Mac 上久坐提醒工具</div></div><div class="info-2"><div class="info-item-1">背景看到# Mac 端，定时提醒休息，求安利想到自己也需要一个类似的提醒，所以连夜让AI开发了一个，哈哈哈，附加了喝水和提肛提醒（被指到的要提肛10下）。。。      实现界面如下，目前还在审核中。。。    参考</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">今是昨非</div><div class="author-info-description">技术分享、生活感悟</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">197</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mokong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mokong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/morgan2015_wang" target="_blank" title="Twitter"><i class="fab fa-X"></i></a><a class="social-icon" href="mailto:mokong.2015.1992@email.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-number">1.</span> <span class="toc-text">如何构建自己的知识库——第一步</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%B3-%E7%AC%AC%E4%B8%80%E5%B1%82%E5%88%A4%E6%96%AD%EF%BC%9A%E6%9C%89%E6%B2%A1%E6%9C%89%E2%80%9C%E8%AE%A4%E7%9F%A5%E5%8F%98%E5%8C%96%E2%80%9D%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">🌳 第一层判断：有没有“认知变化”？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%B3-%E7%AC%AC%E4%BA%8C%E5%B1%82%E5%88%A4%E6%96%AD%EF%BC%9A%E6%94%B9%E5%8F%98%E5%8F%91%E7%94%9F%E5%9C%A8%E5%93%AA%E4%B8%80%E5%B1%82%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">🌳 第二层判断：改变发生在哪一层？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%9F%A2-Level-1%EF%BC%9A%E6%93%8D%E4%BD%9C%E5%B1%82%EF%BC%88%E9%80%9A%E5%B8%B8%E4%B8%8D%E8%AE%B0%E5%BD%95%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">🟢 Level 1：操作层（通常不记录）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%9F%A1-Level-2%EF%BC%9A%E7%AD%96%E7%95%A5%E5%B1%82%EF%BC%88%E9%80%89%E6%8B%A9%E6%80%A7%E8%AE%B0%E5%BD%95%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">🟡 Level 2：策略层（选择性记录）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%B4-Level-3%EF%BC%9A%E8%AE%A4%E7%9F%A5%E5%B1%82%EF%BC%88%E5%BF%85%E9%A1%BB%E8%AE%B0%E5%BD%95%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">🔴 Level 3：认知层（必须记录）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%B3-%E7%AC%AC%E4%B8%89%E5%B1%82%E5%88%A4%E6%96%AD%EF%BC%9A%E6%98%AF%E5%90%A6%E6%BB%A1%E8%B6%B3%E2%80%9C%E9%95%BF%E6%9C%9F%E4%BB%B7%E5%80%BC%E6%9D%A1%E4%BB%B6%E2%80%9D%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">🌳 第三层判断：是否满足“长期价值条件”？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%86%8D%E6%AC%A1%E5%8F%91%E7%94%9F%E5%90%97%EF%BC%9F"><span class="toc-number">1.4.1.</span> <span class="toc-text">1️⃣ 这个问题可能再次发生吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E5%AE%83%E6%9A%B4%E9%9C%B2%E4%BA%86%E6%88%91%E7%9A%84%E6%9F%90%E7%A7%8D%E6%A8%A1%E5%BC%8F%E5%90%97%EF%BC%9F"><span class="toc-number">1.4.2.</span> <span class="toc-text">2️⃣ 它暴露了我的某种模式吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E5%AE%83%E5%BD%B1%E5%93%8D%E7%9A%84%E6%98%AF%E7%BB%93%E6%9E%84%E6%88%96%E7%8A%B6%E6%80%81%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8D%95%E7%82%B9%E9%80%BB%E8%BE%91%E5%90%97%EF%BC%9F"><span class="toc-number">1.4.3.</span> <span class="toc-text">3️⃣ 它影响的是结构或状态，而不是单点逻辑吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%B8%8F%E2%83%A3-%E5%AE%83%E8%AE%A9%E6%88%91%E5%BB%BA%E7%AB%8B%E4%BA%86%E6%96%B0%E5%8E%9F%E5%88%99%E5%90%97%EF%BC%9F"><span class="toc-number">1.4.4.</span> <span class="toc-text">4️⃣ 它让我建立了新原则吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%E5%BF%AB%E9%80%9F%E7%89%88%E6%9C%AC%EF%BC%8810%E7%A7%92%E5%88%A4%E6%96%AD%E6%B3%95%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">🧠 快速版本（10秒判断法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%AB-%E4%B8%8D%E5%BF%85%E8%AE%B0%E5%BD%95%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">1.6.</span> <span class="toc-text">🚫 不必记录的内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E4%B8%80%E4%B8%AA%E6%9B%B4%E9%AB%98%E7%BA%A7%E7%9A%84%E5%88%A4%E6%96%AD%E6%96%B9%E5%BC%8F"><span class="toc-number">1.7.</span> <span class="toc-text">🎯 一个更高级的判断方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A5-%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-number">1.8.</span> <span class="toc-text">🔥 最重要的一句话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%E4%B8%80%E4%B8%AA%E5%8D%87%E7%BA%A7%E7%89%88%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.9.</span> <span class="toc-text">🧠 一个升级版思维模型</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/03/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%9F%A5%E8%AF%86%E5%BA%93%E8%AE%B0%E5%BD%95%E5%86%B3%E7%AD%96%E6%A0%91/" title="如何构建自己的知识库——第一步">如何构建自己的知识库——第一步</a><time datetime="2026-03-02T16:00:00.000Z" title="发表于 2026-03-03 00:00:00">2026-03-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/28/iOS%20%E5%85%A8%E5%B1%80%E9%98%B2%E6%88%AA%E5%B1%8F%E5%8E%9F%E7%90%86/" title="iOS 全局防截屏原理">iOS 全局防截屏原理</a><time datetime="2026-02-27T16:00:00.000Z" title="发表于 2026-02-28 00:00:00">2026-02-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/07/%E8%85%BE%E8%AE%AFopenClaw%20%E5%AE%9E%E8%B7%B5/" title="腾讯轻量服务器 OpenClaw 实践">腾讯轻量服务器 OpenClaw 实践</a><time datetime="2026-02-06T16:00:00.000Z" title="发表于 2026-02-07 00:00:00">2026-02-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/05/%E7%94%A8%20AI%20%E5%AE%9E%E7%8E%B0%E6%8D%A2%E4%B8%80%E4%B8%AA%E5%B9%BF%E5%91%8A%20SDK/" title="半天通过 AI 实现切换APP中广告 SDK">半天通过 AI 实现切换APP中广告 SDK</a><time datetime="2026-02-04T16:00:00.000Z" title="发表于 2026-02-05 00:00:00">2026-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/31/AI%20%E5%BA%94%E7%94%A8/" title="用 AI 实现了一个小需求">用 AI 实现了一个小需求</a><time datetime="2026-01-30T16:00:00.000Z" title="发表于 2026-01-31 00:00:00">2026-01-31</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 今是昨非</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><span>日出江花红胜火，春来江水绿如蓝，能不忆江南</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
