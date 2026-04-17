@@ -10,7 +10,41 @@
   <rights>All rights reserved 2026, 今是昨非</rights>
   <subtitle>悟已往之不谏，知来者之可追。实迷途其未远，觉今是而昨非。</subtitle>
   <title>今是昨非的博客</title>
-  <updated>2026-03-10T13:51:01.163Z</updated>
+  <updated>2026-04-17T09:19:09.415Z</updated>
+  <entry>
+    <author>
+      <name>今是昨非</name>
+    </author>
+    <category term="技术" scheme="http://morganwang.cn/tags/%E6%8A%80%E6%9C%AF/"/>
+    <content>
+      <![CDATA[<p>CodeBuddy 支持通过 <code>models.json</code> 配置自定义模型，这让我们可以接入 OpenAI Compatible 接口、代理服务、本地模型或其他第三方模型服务。</p><span id="more"></span><p>但手写 JSON 有几个明显的问题：字段多、容易写错、API Key 不适合频繁复制粘贴、<code>availableModels</code> 的语义也容易误解。于是我做了一个小工具：<strong>CodeBuddy Models Manager</strong>，用一个本地可视化界面来管理 CodeBuddy 的模型配置。</p><p><img src="https://github.com/mokong/CodebuddyModelHelper/blob/main/screenshot/Xnip2026-04-17_16-58-56.png" alt="CodeBuddy Models Manager 主界面"></p><h2 id="它解决什么问题"><a href="#它解决什么问题" class="headerlink" title="它解决什么问题"></a>它解决什么问题</h2><p>如果你已经在本地配置了：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.codebuddy/models.json</span><br></pre></td></tr></table></figure><p>工具启动后会直接读取这个文件，并把已有模型展示到列表里。它不会在启动时覆盖你的配置，也不会在刷新页面时改写文件。只有你点击“保存配置”时，才会写回 <code>models.json</code>。</p><p>写回之前，工具还会自动创建备份，避免误操作导致配置丢失。</p><h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ul><li>查看现有模型列表</li><li>搜索模型 ID、名称或供应商</li><li>添加新模型</li><li>删除模型</li><li>修改模型字段</li><li>刷新并重新读取本地配置</li><li>管理 <code>availableModels</code></li><li>API Key 默认掩码显示</li><li>未修改 API Key 时自动保留原密钥</li><li>保存前做基础校验</li><li>保存前自动备份</li><li>支持 Docker 一键部署</li></ul><h2 id="为什么要特别处理-API-Key"><a href="#为什么要特别处理-API-Key" class="headerlink" title="为什么要特别处理 API Key"></a>为什么要特别处理 API Key</h2><p>模型配置里通常会包含真实 API Key。这个工具的设计原则是：<strong>尽量不让密钥出现在界面和日志里</strong>。</p><p>列表里只会显示“已配置密钥”，编辑表单里也只展示掩码，例如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sk-a************1234</span><br></pre></td></tr></table></figure><p>如果你不填写新的 API Key，保存时会继续保留原文件里的密钥。只有当你主动输入新值时，工具才会替换它。</p><p>这让日常修改模型名称、URL、token 数量或能力开关时，不需要反复复制密钥。</p><h2 id="关于-availableModels"><a href="#关于-availableModels" class="headerlink" title="关于 availableModels"></a>关于 availableModels</h2><p>CodeBuddy 的 <code>availableModels</code> 有一个容易误解的地方：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;availableModels&quot;</span>: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这不是“没有可用模型”，而是“显示全部模型”。</p><p>所以工具没有让用户直接手写数组，而是提供了更直观的开关：</p><ul><li>勾选“显示全部模型”：保存为空数组</li><li>取消“显示全部模型”：只保存选中的模型 ID</li></ul><p><img src="https://github.com/mokong/CodebuddyModelHelper/blob/main/screenshot/Xnip2026-04-17_16-59-07.png" alt="可见模型管理"></p><h2 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h2><p>项目不依赖数据库，直接启动 Node 服务即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure><p>然后打开：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:4310/</span><br></pre></td></tr></table></figure><p>默认读取：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.codebuddy/models.json</span><br></pre></td></tr></table></figure><p>如果你想指定其他配置文件，可以使用环境变量：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CODEBUDDY_MODELS_PATH=/path/to/models.json npm start</span><br></pre></td></tr></table></figure><p>也可以用命令参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node server.js --config=/path/to/models.json</span><br></pre></td></tr></table></figure><h2 id="Docker-部署"><a href="#Docker-部署" class="headerlink" title="Docker 部署"></a>Docker 部署</h2><p>Docker 模式下，容器不能直接访问宿主机的 <code>~/.codebuddy</code>，所以需要挂载 volume：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm \</span><br><span class="line">  -p 4310:4310 \</span><br><span class="line">  -v ~/.codebuddy:/data \</span><br><span class="line">  -e CODEBUDDY_MODELS_PATH=/data/models.json \</span><br><span class="line">  codebuddy-models-manager</span><br></pre></td></tr></table></figure><p>也可以使用 <code>docker compose</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up --build</span><br></pre></td></tr></table></figure><h2 id="安全边界"><a href="#安全边界" class="headerlink" title="安全边界"></a>安全边界</h2><p>默认情况下，服务只监听本机：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:4310</span><br></pre></td></tr></table></figure><p>这意味着它更适合作为本地工具使用，而不是直接暴露到公网。</p><p>如果只是想查看配置，可以开启只读模式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">READONLY=<span class="literal">true</span> npm start</span><br></pre></td></tr></table></figure><p>只读模式下，页面可以展示和刷新配置，但不能保存。</p><h2 id="CodeBuddy-配置语义"><a href="#CodeBuddy-配置语义" class="headerlink" title="CodeBuddy 配置语义"></a>CodeBuddy 配置语义</h2><p>这个工具遵循 CodeBuddy 官方的模型配置规则：</p><ul><li>用户级配置路径：<code>~/.codebuddy/models.json</code></li><li>项目级配置路径：<code>&lt;workspace&gt;/.codebuddy/models.json</code></li><li>项目级配置优先于用户级配置</li><li><code>models</code> 会按 <code>id</code> 合并，同 <code>id</code> 覆盖</li><li><code>availableModels</code> 不合并，会整体覆盖</li><li><code>availableModels</code> 为空数组时表示显示全部模型</li></ul><p>这些规则如果完全手写 JSON，需要经常回头查文档；做成界面后，常用操作就自然很多。</p><h2 id="后续计划"><a href="#后续计划" class="headerlink" title="后续计划"></a>后续计划</h2><p>目前第一版重点是把最常用的 CRUD 跑通，并保证不会覆盖已有配置。后面可以继续补充：</p><ul><li>模型连通性测试</li><li>常见供应商模板</li><li>多配置文件 Profile</li><li>项目级 <code>.codebuddy/models.json</code> 管理</li><li>配置导入、导出和 Diff</li><li>更完整的 JSON Schema 校验</li></ul><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>CodeBuddy 的 <code>models.json</code> 很灵活，但手写维护并不舒服。CodeBuddy Models Manager 的目标不是替代配置文件，而是给它加一个更安全、更直观的管理界面。</p><p>它启动时只读取配置，不会覆盖已有内容；保存前自动备份；API Key 默认不明文展示。对于经常切换模型、维护多个 OpenAI Compatible 服务的人来说，这个小工具能省掉不少重复劳动。</p><h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>已开源在<a href="https://github.com/mokong/CodebuddyModelHelper">CodebuddyModelHelper</a></p>]]>
+    </content>
+    <id>http://morganwang.cn/2026/04/17/CodebuddyModelsHelper/</id>
+    <link href="http://morganwang.cn/2026/04/17/CodebuddyModelsHelper/"/>
+    <published>2026-04-16T16:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>CodeBuddy 支持通过 <code>models.json</code> 配置自定义模型，这让我们可以接入 OpenAI Compatible 接口、代理服务、本地模型或其他第三方模型服务。</p>]]>
+    </summary>
+    <title>CodeBuddy Models Manager：用可视化界面管理 CodeBuddy 自定义模型</title>
+    <updated>2026-04-17T09:19:09.415Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>今是昨非</name>
+    </author>
+    <category term="技术" scheme="http://morganwang.cn/tags/%E6%8A%80%E6%9C%AF/"/>
+    <content>
+      <![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>期望是，AI 开发完一个功能，这个需求完成的很好；但是事实是，Ai 开发完一个功能，需要运行检测，然后修改，功能完成后，先提交（保证功能没问题）。然后再手动触发 CodeReview，优化代码；然后再确认功能没问题。然后再触发 边界和影响范围分析的 Skill，生成分析报告。<br>在 AI 开发完一个功能之后，自动触发 CodeView 和 边界和影响范围分析的 Skill。</p><span id="more"></span><p>维护 两个 APP的感受：<br>理想情况是：实现了一个之后，另一个 Prompt 直接复用即可。在一个遇到的问题，第二个上面完全能避免。<br>实际情况是：由于代码实现的不同（比如组件封装、颜色、类名、方法名），必须微调 Prompt 才能使用；确实第一个上面的问题都避免了，但是难免会遇到不一样的问题。</p><p>理想情况是：1+1 = 1<br>实际情况是：1+1 = 1.5；减少了写代码的时间，但是验证效果，调试，修改问题的时间还必不可少。并且会出现 AI 排查不到问题的情况，这时候就必须人工排查，分析原因，然后把思路告诉它，让 AI 顺着这个思路分析才能解决（比如排查播放器界面返回后性能埋点统计时长不对的问题，现象很明显，但是AI 定位的原因和思路不对，所以耗费再多的 token 也解决不了）。</p><p>使用技巧：<br>遇到问题，先自己排查，确认代码逻辑的同时，定位问题原因，然后再让 AI 确认并修改。（比如，Task 界面改分组时，AI 做了分组和不分组两个逻辑，但是在广告的地方更新的逻辑是不分组的 UI，如果直接让他修改广告为什么没有刷新的问题，它的处理方法是添加分组 UI 的刷新；但是会有问题，不确定其他地方有没有类似刷新问题的存在，不能保证新增加 Cell 时是否会自动处理两种样式的逻辑；正确的处理是，删除不分组的逻辑，修改只刷新不分组逻辑的地方为刷新分组UI 的逻辑，但是像这样的情况，就需要自己分析，然后明确告诉AI 怎么处理。）</p><p>在使用中不断完善 Skill 和 Rule，比如（生成界面时，APP 端文案需要用多语言的方式显示，没有完善之前，每次需要查找并手动修改；补充之后，遇到APP 端文案时，自动在多语言中添加 key，并在使用的地方直接使用）</p><!--more--><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>]]>
+    </content>
+    <id>http://morganwang.cn/2026/03/13/AI%20%E5%BC%80%E5%8F%91%E7%9A%84%E6%84%9F%E6%82%9F/</id>
+    <link href="http://morganwang.cn/2026/03/13/AI%20%E5%BC%80%E5%8F%91%E7%9A%84%E6%84%9F%E6%82%9F/"/>
+    <published>2026-03-12T16:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>期望是，AI 开发完一个功能，这个需求完成的很好；但是事实是，Ai 开发完一个功能，需要运行检测，然后修改，功能完成后，先提交（保证功能没问题）。然后再手动触发 CodeReview，优化代码；然后再确认功能没问题。然后再触发 边界和影响范围分析的 Skill，生成分析报告。<br>在 AI 开发完一个功能之后，自动触发 CodeView 和 边界和影响范围分析的 Skill。</p>]]>
+    </summary>
+    <title>AI 开发的感悟</title>
+    <updated>2026-04-17T09:19:01.790Z</updated>
+  </entry>
   <entry>
     <author>
       <name>今是昨非</name>
@@ -356,42 +390,5 @@
     </summary>
     <title>Xcode 26接入混元</title>
     <updated>2025-09-25T06:45:55.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>今是昨非</name>
-    </author>
-    <category term="技术" scheme="http://morganwang.cn/tags/%E6%8A%80%E6%9C%AF/"/>
-    <category term="iOS" scheme="http://morganwang.cn/tags/iOS/"/>
-    <category term="分享" scheme="http://morganwang.cn/tags/%E5%88%86%E4%BA%AB/"/>
-    <content>
-      <![CDATA[<h2 id="第一步，注册阿里云百炼账号"><a href="#第一步，注册阿里云百炼账号" class="headerlink" title="第一步，注册阿里云百炼账号"></a>第一步，注册阿里云百炼账号</h2><p>首先需要一个<a href="https://bailian.console.aliyun.com/?spm=5176.29597918.J_SEsSjsNv72yRuRFS2VknO.2.5aa67b085LwSAg&tab=api#/api">阿里云百炼</a>的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。</p><span id="more"></span><h2 id="第二步，添加Provider到Xcode-26"><a href="#第二步，添加Provider到Xcode-26" class="headerlink" title="第二步，添加Provider到Xcode 26"></a>第二步，添加Provider到Xcode 26</h2><p>然后打开Xcode 26，打开设置，选中”Intelligence”，点击添加，如下图</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110333.png" alt="image.png"></p><p>然后会进入输入信息界面，共有4个信息需要输入，URL、API Key、API Key Header、Description，如下图：</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110458.png" alt="image.png"></p><p>URL：<code>https://dashscope.aliyuncs.com/compatible-mode/</code><br>API Key：==Bear 你自己的APIKey==<br>API KeyHeader: ==Authorization==<br>Description: 这个名字自己定义</p><p>这里需要注意的是，如果按照阿里云百炼上提示的，URL配置为 <code>https://dashscope.aliyuncs.com/compatible-mode/v1</code>，点击Save的时候就保存不了，<strong>所以需要去掉v1。</strong></p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925110752.png" alt="image.png"></p><p>点击Save之后，能看到自己开通的所有Models列表，说明成功，如下图。</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111141.png" alt="image.png"></p><h2 id="第三步，使用抓包修改请求"><a href="#第三步，使用抓包修改请求" class="headerlink" title="第三步，使用抓包修改请求"></a>第三步，使用抓包修改请求</h2><p>此时切换左侧的导航到New Conversaion界面，如下图，需要选择一个模型</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111404.png" alt="image.png"></p><p>选择后，直接聊天，会发现提示报错，如下图：</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111508.png" alt="image.png"></p><p>此时通过抓包工具可以看到：</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111633.png" alt="image.png"></p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925111620.png" alt="image.png"></p><p>报错提示是tools相关的，所以直接把tools改为null即可。通过<code>ProxyMan</code>或者<code>Surge</code>都可以实现。</p><p>比如使用<code>Surge</code>的步骤是，找到Scripts，然后添加文件内容如下，链接:<a href="https://github.com/mokong/Xcode_QWen_modify/blob/main/Surge/Xcode-AliYun.js">Xcode_QWen_modify/Surge/Xcode-AliYun.js at main · mokong/Xcode_QWen_modify · GitHub</a></p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112305.png" alt="image.png"></p><p>使用<code>ProxyMan</code>的步骤也是，找到Scripts，然后修改内容，如下图，链接：<a href="https://github.com/mokong/Xcode_QWen_modify/blob/main/ProxyMan/Xcode_AliYun.js">Xcode_QWen_modify/ProxyMan/Xcode_AliYun.js at main · mokong/Xcode_QWen_modify · GitHub</a></p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112557.png" alt="image.png"></p><p>替换tools为null后，再次切换到Xcode 26，在Conversation下输入内容，就看到可以正常使用了，如下图</p><p><img src="https://raw.githubusercontent.com/mokong/BlogImages/main/img/20250925112943.png" alt="image.png"></p>]]>
-    </content>
-    <id>http://morganwang.cn/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/</id>
-    <link href="http://morganwang.cn/2025/09/25/Xcode%2026%E6%8E%A5%E5%85%A5QWen/"/>
-    <published>2025-09-25T02:06:00.000Z</published>
-    <summary>
-      <![CDATA[<h2 id="第一步，注册阿里云百炼账号"><a href="#第一步，注册阿里云百炼账号" class="headerlink" title="第一步，注册阿里云百炼账号"></a>第一步，注册阿里云百炼账号</h2><p>首先需要一个<a href="https://bailian.console.aliyun.com/?spm=5176.29597918.J_SEsSjsNv72yRuRFS2VknO.2.5aa67b085LwSAg&tab=api#/api">阿里云百炼</a>的账号，打开后，切换到API参考，按照上面获取API Key的步骤，操作开通，并获取到API Key。</p>]]>
-    </summary>
-    <title>Xcode 26 接入QWen</title>
-    <updated>2025-09-25T03:33:26.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>今是昨非</name>
-    </author>
-    <category term="技术" scheme="http://morganwang.cn/tags/%E6%8A%80%E6%9C%AF/"/>
-    <category term="iOS" scheme="http://morganwang.cn/tags/iOS/"/>
-    <content>
-      <![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>]]>
-    </content>
-    <id>http://morganwang.cn/2025/09/12/%E5%85%B3%E4%BA%8E%E5%BC%80%E5%8F%91%E9%B8%BF%E8%92%99APP%E7%9A%84%E5%BB%BA%E8%AE%AE/</id>
-    <link href="http://morganwang.cn/2025/09/12/%E5%85%B3%E4%BA%8E%E5%BC%80%E5%8F%91%E9%B8%BF%E8%92%99APP%E7%9A%84%E5%BB%BA%E8%AE%AE/"/>
-    <published>2025-09-12T06:03:00.000Z</published>
-    <summary>
-      <![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2>]]>
-    </summary>
-    <title>关于开发鸿蒙APP的建议</title>
-    <updated>2026-01-22T03:37:45.496Z</updated>
   </entry>
 </feed>
